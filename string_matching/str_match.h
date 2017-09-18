@@ -17,7 +17,7 @@ typedef struct MatchList {
  */
 int match(char *str1, char *str2);
 void pushMatch(struct MatchList** head, unsigned int index);
-MatchList *naiveFindPattern(char *str, char *pattern, int unique);
+MatchList *naiveFindPattern(char *str, char *pattern, int repeatedChar);
 MatchList *rabinKarpFindPattern(char *str, char *pattern);
 MatchList *fsaFindPattern(char *str, char *pattern);
 MatchList *kmpFindPattern(char *str, char *pattern);

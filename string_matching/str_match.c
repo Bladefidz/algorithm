@@ -40,18 +40,18 @@ void pushMatch(struct MatchList** head, unsigned int index)
  * m = strlen(pattern)
  * Preprocessing time   : 0
  * Processing time      : %OMICRON((n - m + 1) m)
- * Processing time if pattern constructed by unique character: %OMICRON(n)
- * @param  str     string
- * @param  pattern Pattern to be matched to string
- * @param  unique  Indicate that pattern constructed by unique character
- * @return         MatchList (List of matched shift)
+ * Processing time of non repeated character: %OMICRON(n)
+ * @param  str          string
+ * @param  pattern      Pattern to be matched to string
+ * @param  repeatedChar Indicate that pattern constructed by repeated character
+ * @return              MatchList (List of matched shift)
  */
-MatchList *naiveFindPattern(char *str, char *pattern, int unique)
+MatchList *naiveFindPattern(char *str, char *pattern, int repeatedChar)
 {
     unsigned int i; unsigned int j; unsigned int k;
     unsigned int n = strlen(str); unsigned int m = strlen(pattern);
     MatchList *ml = NULL; MatchList *mlc = NULL;
-    if (!unique)
+    if (repeatedChar)
     {
         k = n - m;
         for (i = 0; i < n; i++)
