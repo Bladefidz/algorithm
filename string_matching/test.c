@@ -5,7 +5,7 @@
 int main(int argc, char const *argv[])
 {
     MatchList *ml;
-    char string[] = "abccdeefghhiiiccdeghlabc";
+    char string[] = "aabccdeefghhiiiccdeghlabc";
     char pattern[] = "ccde";
     ml = naiveFindPattern(string, pattern, 0);
     printf("Naive matched shift: ");

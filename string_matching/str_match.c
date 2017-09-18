@@ -53,20 +53,24 @@ MatchList *naiveFindPattern(char *str, char *pattern, int unique)
     MatchList *ml = NULL; MatchList *mlc = NULL;
     if (!unique)
     {
+        k = n - m;
         for (i = 0; i < n; i++)
         {
-            for (j = 0; j < m; j++)
+            if (i < k)
             {
-                if (str[i+j] != pattern[j]) {
-                    break;
+                for (j = 0; j < m; j++)
+                {
+                    if (str[i+j] != pattern[j]) {
+                        break;
+                    }
                 }
-            }
-            if (j == m) {
-                if (ml == NULL) {
-                    pushMatch(&ml, i);
-                    mlc = ml;
-                } else {
-                    pushMatch(&mlc, i);
+                if (j == m) {
+                    if (ml == NULL) {
+                        pushMatch(&ml, i);
+                        mlc = ml;
+                    } else {
+                        pushMatch(&mlc, i);
+                    }
                 }
             }
         }
