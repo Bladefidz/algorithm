@@ -119,11 +119,15 @@ unit64_t var_calc(unit64_t *inputs, int size)
         return -EINVAL;
 }
 
+/**
+ * Initialize kernel module
+ * @return  integer
+ */
 static int __init hello_start(void)
 {
     int i = 0, j = 0, spurious = 0, k = 0;
     unit64_t **times;
-    unit64_t **variances;
+    unit64_t *variances;
     unit64_t *min_values;
     unit64_t max_dev = 0, min_time = 0, max_time = 0, prev_min = 0, tot_var = 0, max_dev_all = 0, var_of_vars = 0, var_of_mins = 0;
 
