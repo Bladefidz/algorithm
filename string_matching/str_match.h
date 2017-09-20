@@ -1,8 +1,6 @@
 #ifndef STR_MATCH_H_
 #define STR_MATCH_H_
 
-#include <stdio.h>
-
 /**
  * Data type declarations
  */
@@ -17,9 +15,11 @@ typedef struct MatchList {
  */
 int match(char *str1, char *str2);
 void pushMatch(struct MatchList** head, unsigned int index);
-MatchList *naiveFindPattern(char *str, char *pattern, int repeatedChar);
-MatchList *rabinKarpFindPattern(char *str, char *pattern);
-MatchList *fsaFindPattern(char *str, char *pattern);
-MatchList *kmpFindPattern(char *str, char *pattern);
+MatchList *naiveFindPattern(char *pattern, char *str);
+MatchList *optimizedNaiveFindPattern(char *pattern, char *str);
+MatchList *rabinKarpFindPattern(char *pattern, char *str, int sigma);
+MatchList *optimizedRabinKarpFindPattern(char *pattern, char *str, int sigma, int prime);
+MatchList *fsaFindPattern(char *pattern, char *str);
+MatchList *kmpFindPattern(char *pattern, char *str);
 
 #endif
