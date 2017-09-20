@@ -13,7 +13,6 @@ typedef struct MatchList {
 /**
  * Prototype declarations
  */
-int match(char *str1, char *str2);
 void pushMatch(struct MatchList** head, unsigned int index);
 MatchList *naiveFindPattern(char *pattern, char *str);
 MatchList *optimizedNaiveFindPattern(char *pattern, char *str);

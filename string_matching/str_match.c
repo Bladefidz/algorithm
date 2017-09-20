@@ -5,25 +5,6 @@
 #include "str_match.h"
 
 /**
- * Check if str1 exactly match with str2
- * @param  str1 Target string to be matched
- * @param  str2 Given string
- * @return      integer
- */
-int match(char *str1, char *str2)
-{
-    unsigned int i = 0; unsigned int m = 1;
-    while (str2[i] != '\0' && str2[i] != '\0') {
-        if (str2[i] != str1[i]) {
-            m = 0;
-            break;
-        }
-        i++;
-    }
-    return m;
-}
-
-/**
  * Push matched index in list
  * @param head  Head of matched list
  * @param index Matched index
@@ -130,7 +111,6 @@ MatchList *optimizedNaiveFindPattern(char *pattern, char *str)
  * @param  pattern Pattern to find
  * @param  str     String
  * @param  sigma   Number of possible atom. ex: sigma of "abbbc" is 3, "abc..z" is 26, "02..9" is 10
- * @param  prime   Prime number
  * @return         MatchList (List of matched shift)
  */
 MatchList *rabinKarpFindPattern(char *pattern, char *str, int sigma)
