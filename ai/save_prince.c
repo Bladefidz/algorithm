@@ -39,6 +39,19 @@ void displayPathtoPrincess(int n, char grid[101][101]) {
     }
 }
 
+/**
+ * Princess Peach is trapped in one of the four corners of a square grid. You are in the center of the grid and can move one step at a time in any of the four directions. Can you rescue the princess?
+ * Print out the moves you will take to rescue the princess in one go. The moves must be separated by '\n', a newline. The valid moves are LEFT or RIGHT or UP or DOWN.
+ * Example input:
+ *     3
+ *     ---
+ *     -m-
+ *     p--
+ * Example output:
+ * DOWN
+ * LEFT
+ * @return  int
+ */
 int main(void) {
     int m;
     scanf("%d", &m);
