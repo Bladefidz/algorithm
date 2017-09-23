@@ -11,7 +11,7 @@
  * Expected prince Position = p = [0, n-1, (n*n)+n-2, (n*n)-1]
  * delta = d = position transition
  */
-void displayPathtoPrincess1(int n, char grid[101][101]) {
+void deterministicFindPrince(int n, char grid[101][101]) {
     char *m[] = {"LEFT", "RIGHT", "UP", "DOWN"};
     int x;
     int p[4] = {0, n-1, (n*n)+n-2, (n*n)-1};
@@ -47,7 +47,7 @@ void displayPathtoPrincess1(int n, char grid[101][101]) {
  * Expected prince Position = p = [0, n-1, (n*n)+n-2, (n*n)-1]
  * delta = d = position transition
  */
-void displayPathtoPrincess(int n, char grid[101][101]) {
+void deterministicShortestPathFindPrince(int n, char grid[101][101]) {
     char *m[] = {"LEFT", "RIGHT", "UP", "DOWN"};
     int x, i, j;
     int p[4] = {0, n-1, (n*n)+n-2, (n*n)-1};
@@ -76,6 +76,7 @@ void displayPathtoPrincess(int n, char grid[101][101]) {
 }
 
 /**
+ * https://www.hackerrank.com/challenges/saveprincess
  * Princess Peach is trapped in one of the four corners of a square grid. You are in the center of the grid and can move one step at a time in any of the four directions. Can you rescue the princess?
  * Print out the moves you will take to rescue the princess in one go. The moves must be separated by '\n', a newline. The valid moves are LEFT or RIGHT or UP or DOWN.
  * Example input:
