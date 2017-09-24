@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 
     p = &x;  // p is now 4
     y = *p;  // y is now 4
-    *p = 0;  // p is now 0
+    *p = 0;  // x is now 0
     p = &z[0];  // p is now point to z[0]
     p = z;  // equivalent to p = &z[0]
     p++;  // Access next address
