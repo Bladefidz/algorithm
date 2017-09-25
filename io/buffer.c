@@ -28,11 +28,10 @@ char *allocate(unsigned int n)
 }
 
 /**
- * Clear storage that used by string or char of p.
- * Or in short, remove addresses pointed by p.
+ * Track free address
  * @param p Remove allocated space in buffer
  */
-void freeSpace(char *p)
+void setFreeAddress(char *p)
 {
     if (p >= buffer && p < (buffer + BUFFER_SIZE))
     {
