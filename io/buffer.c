@@ -1,3 +1,5 @@
+#include "buffer.h"
+
 #define BUFFER_SIZE 1024
 
 /**
@@ -6,12 +8,12 @@
 
 /* use static to make variable private */
 static buffer[BUFFER_SIZE];  // Declare a 1024 bytes chunk
-static char *allocated = buffer;  // Track last allocated address of buffer, in this case track first address or &address[0]
+static char *allocated = buffer;  // Track last allocated address of buffer
 
 /**
  * Return free space which can used to store new character or string
  * @param  n BUFFER_SIZE of bytes
- * @return   [description]
+ * @return   if success: buffer length, else: 0
  */
 char *allocate(unsigned int n)
 {
@@ -28,7 +30,7 @@ char *allocate(unsigned int n)
 /**
  * Clear storage that used by string or char of p.
  * Or in short, remove addresses pointed by p.
- * @param p [description]
+ * @param p Remove allocated space in buffer
  */
 void freeSpace(char *p)
 {
@@ -36,17 +38,4 @@ void freeSpace(char *p)
     {
         allocated = p;
     }
-}
-
-/**
- * Pointer or array arithmetic can be used to count allocated chars in memory
- * @param  s [description]
- * @return   [description]
- */
-int strlen(char *s)
-{
-    char *p = s;
-    while (*p != '\0')
-        p++;
-    return p - s;
 }
