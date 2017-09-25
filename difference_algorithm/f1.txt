@@ -1,0 +1,23 @@
+#ifndef IO_FILE_H_
+#define IO_FILE_H_
+#include <stdio.h>
+
+/* Struct declarations */
+typedef struct Buffer {
+    char *string;
+    struct Buffer *next;
+} Buffer;
+typedef struct Stream {
+    unsigned int size;
+    unsigned int bufferSize;
+    struct Buffer *buffers;
+} Stream;
+typedef struct Line {
+    unsigned int size;
+    char *val;
+    struct Line *next;
+} Line;
+typedef struct FileLines {
+    unsigned int size;
+    Line *lines;
+} FileLines;
