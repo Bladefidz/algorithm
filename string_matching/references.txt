@@ -1,1 +1,2 @@
 Cormen, Thomas H. Introduction to algorithms. MIT press, 2009.
+Kernighan, Brian W., and Dennis M. Ritchie. The C programming language. 2006.
