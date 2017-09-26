@@ -4,4 +4,4 @@
 void printAdjMatrix(int *matrix, unsigned int vertex);
 int *transposeAdjMatrix(int *matrix, unsigned int vertex);
 
-#endif ADJ_MATRIX_H_
+#endif
