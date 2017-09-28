@@ -1,0 +1,10 @@
+[A]-C-D-E
+[B]-F-E
+[C]-A-D
+[D]-A-C
+[E]-A-F-B
+[F]-C-E-B
+[G]-H-J
+[H]-G-I
+[I]-H-J
+[J]-G-I
