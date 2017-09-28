@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 
 /**
@@ -15,7 +16,7 @@
  * @param  s string
  * @return   ('\0' address) - (first address)
  */
-int strlen(char *s)
+int myStrlen(char *s)
 {
     char *p = s;
     while (*p != '\0')
@@ -58,10 +59,53 @@ int main(int argc, char const *argv[])
     f1(z+2);
     f2(z+2);
 
-    char amsg[] = "Array of character";
+    // Array
+    char amsg[] = "Array of character";  // Allocate as array
     amsg[1] = 'B';  // This is allowed
-    char *pmsg = "Pointer to an array of character";
+
+    // Pointer of Array
+    char *pmsg = "Pointer to an array of character";  // Pointer to fixed size array
     // *(pmsg + 1) = "B";  // This is not allowed
+
+    // Pointer of Pointer of array
+    char *ss[] = {"aku", "kamu", "dia", "dan", "mereka"};
+    char **ps;
+    ps = malloc(sizeof(char) * 2);  // Allocate Pointer
+    ps[0] = "aku";  // First pointer pointed to array "aku"
+    ps[1] = "kamu"; // First pointer pointed to array "kamu"
+
+    // Self reference structure
+    struct A {
+        unsigned int value;
+        struct A *next;  // Pointer of self
+    } A;
+
+    // Pointer to structure
+    struct A *a = malloc(sizeof(A));
+    (*a).value = 112;
+
+    // Array of structure
+    struct B {
+        unsigned int count;
+        struct A **child;  // This is array of structure
+    } B;
+    struct B *b = malloc(sizeof(B));
+    (*b).child = malloc(sizeof(A) * 2);
+
+    // Allocate each index of array of structure
+    *((*b).child) = malloc(sizeof(A));
+    (*(*((*b).child))).value = 113;
+    (*(*((*b).child))).next = NULL;
+    *(*((*b).child) + 1) = malloc(sizeof(A));
+    (*(*((*b).child) + 1)).value = 114;
+    (*(*((*b).child) + 1)).next = NULL;
+
+    // Above equivalent to this:
+    // b->child[0] = malloc(sizeof(A));
+    // (b->child[0])->value = 113;
+
+    printf("%d\n", (*(*((*b).child))).value);
+    free(a); free(b);
 
     return 0;
 }
