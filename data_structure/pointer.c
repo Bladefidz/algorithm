@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 /**
  * The main power of C programming language is "Address Arithmetic".
@@ -10,6 +11,11 @@
  * others keeps using bizarre size of arrays because their goal more important
  * than efficiency issues.
  */
+
+
+// Dummy function used to test pointer as argument
+void f1(int arr[]){}
+void f2(int *arr){}
 
 /**
  * Pointer or array arithmetic can be used to count allocated chars in memory
@@ -24,8 +30,42 @@ int myStrlen(char *s)
     return p - s;
 }
 
-void f1(int arr[]){}
-void f2(int *arr){}
+/**
+ * Implementing pointer to copy string "t" to string "s"
+ * @param s Copy destination
+ * @param t String to be copied
+ */
+void myStrcpy(char *s, char *t)
+{
+    while ((*s++ = *t++) != '\0');
+}
+void myStrcpy1(char *s, char *t)
+{
+    while (*s++ = *t++);
+}
+
+/**
+ * Compare string s to string t
+ * @return   0 if s<t, 0 if s==t, >0 if s>t
+ */
+int myStrcmp(char *s, char *t)
+{
+    for ( ; *s == *t; s++, t++)
+        if (*s == '\0')
+            return 0;
+    return *s - *t;
+}
+
+/**
+ * Get specific index in array of pointer
+ * @param  i [description]
+ * @return   [description]
+ */
+char *getTerm(unsigned int i)
+{
+    char *arrStr[] = {"pointer", "is", "beautiful!"};
+    return arrStr[i];
+}
 
 /**
  * Main testing program
@@ -72,40 +112,58 @@ int main(int argc, char const *argv[])
     char **ps;
     ps = malloc(sizeof(char) * 2);  // Allocate Pointer
     ps[0] = "aku";  // First pointer pointed to array "aku"
-    ps[1] = "kamu"; // First pointer pointed to array "kamu"
+    ps[1] = malloc(sizeof(char) * 5);
+    for (int i = 0; i < 5; ++i)
+    {
+        ps[1][i] = 'a'+i;
+    }
 
     // Self reference structure
     struct A {
-        unsigned int value;
+        char *value;
         struct A *next;  // Pointer of self
     } A;
 
     // Pointer to structure
     struct A *a = malloc(sizeof(A));
-    (*a).value = 112;
+    (*a).value = "aku";
 
-    // Array of structure
+    // Pointer of pointer to structure
     struct B {
         unsigned int count;
-        struct A **child;  // This is array of structure
+        struct A **child;  // or array of structure
     } B;
     struct B *b = malloc(sizeof(B));
     (*b).child = malloc(sizeof(A) * 2);
 
     // Allocate each index of array of structure
     *((*b).child) = malloc(sizeof(A));
-    (*(*((*b).child))).value = 113;
+    (*(*((*b).child))).value = malloc(sizeof(char) * 4);
+    for (int i = 0; i < 4; ++i)
+    {
+        *((*(*((*b).child))).value + i) = 'a'+i;
+    }
     (*(*((*b).child))).next = NULL;
-    *(*((*b).child) + 1) = malloc(sizeof(A));
-    (*(*((*b).child) + 1)).value = 114;
-    (*(*((*b).child) + 1)).next = NULL;
+    b->child[1] = malloc(sizeof(A));
+    b->child[1]->value = malloc(sizeof(char) * 5);
+    for (int i = 0; i < 4; ++i)
+    {
+        b->child[1]->value[i] = 'f'+i;
+    }
+    b->child[1]->next = NULL;
 
-    // Above equivalent to this:
-    // b->child[0] = malloc(sizeof(A));
-    // (b->child[0])->value = 113;
-
-    printf("%d\n", (*(*((*b).child))).value);
     free(a); free(b);
+
+    // Working on string using pointer is more portable than using array
+    char *s1 = "aku";
+    char *s2 = NULL;  // Set destination pointer to NULL to allocate latter
+    s2 = malloc(sizeof(s1) * strlen(s1));  // Allocate string length
+    strcpy(s2, s1);
+    s2[1] = 'l';  // Update the copied string
+
+    // We can not update 'not allocated' string
+    s1 = "kamu";
+    //s1[0] = "j";  // Because the address is not owned by pointer nor anything
 
     return 0;
 }
