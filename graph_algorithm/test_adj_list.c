@@ -1,18 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "adj_matrix.h"
-#include "adj_list.h"
+#include "adjacency_list/adj_list.h"
 
 int main(int argc, char const *argv[])
 {
-    // Test adjacency matrix transpose
-    int m[3][3] = {{0, 1, 0}, {1, 0, 1}, {0, 1, 0}};
-    printAdjMatrix(&m[0][0], 3);
-    printf("Transpose:\n");
-    printAdjMatrix(transposeAdjMatrix(&m[0][0], 3), 3);
-    printf("\n");
-
-    // Test adjacency list transpose
+	// Test adjacency list transpose
     Node *nodes = (Node *) malloc(3 * sizeof(Node));
     initAdjList(nodes, 3);
     enqueueEdgeAdjList(&nodes[0], 2);  // 1 -> 2
@@ -25,6 +17,5 @@ int main(int argc, char const *argv[])
     printAdjList(nodes, 3);
 
     free(nodes);
-
-    return 0;
+	return 0;
 }
