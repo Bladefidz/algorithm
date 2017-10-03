@@ -5,7 +5,10 @@
 int main(int argc, char const *argv[])
 {
 	initGraphFromFile("dummy_path.txt");
-	printAllVertex();
+	printf("Vertex\n");
+	printVertex();
+	printf("Graph\n");
+	printGraph();
 
 	return 0;
 }

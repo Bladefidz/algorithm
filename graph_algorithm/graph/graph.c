@@ -8,9 +8,6 @@
 static char *LAST_ERROR_MESSAGE = NULL;
 static char **VERTEX_NAMES;
 static char *FILE_PATH;
-static unsigned int VERTEX_SET = 0;
-static VertexChild *VC;
-static Vertex *V;
 static Graph *G = NULL;
 
 /* Function Declarations */
@@ -45,8 +42,6 @@ void allocateGrap(unsigned int n)
     VERTEX_NAMES = malloc(sizeof(VERTEX_NAMES) * n);
     if (VERTEX_NAMES)
     {
-        VERTEX_SET = 1;
-
         G = malloc(sizeof(Graph));
         G->vertexCount = n;
         G->edgeCount = 0;
@@ -69,27 +64,50 @@ char *getVertex(unsigned int id)
     return NULL;
 }
 
-unsigned int getVertexId(char *name);
+/**
+ * Get vertex id by name
+ * @param  name vertex name
+ * @return      id
+ */
+int getVertexId(char *name)
+{
+    if (G != NULL)
+    {
+        unsigned int i;
+        for (i = 0; i < G->vertexCount; i++) {
+            if (strcmp(name, VERTEX_NAMES[i]) == 0)
+            {
+                break;
+            }
+        }
+        if (i < G->vertexCount)
+        {
+            return i;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+    else
+    {
+        return -1;
+    }
+}
 
 /**
  * Print all Vertex names
  */
-void printAllVertex()
+void printVertex()
 {
     if (G != NULL)
     {
         for (int i = 0; i < G->vertexCount; i++)
         {
-            printf("%s\n", *(VERTEX_NAMES + i));
+            printf("%d: %s\n", i, *(VERTEX_NAMES + i));
         }
     }
     printf("\n");
-}
-
-
-int addEdge(unsigned int parentId, unsigned int childId)
-{
-
 }
 
 /**
@@ -163,7 +181,7 @@ int initGraphFromFile(char *f)
         // Set pointer to read at first line of file
         if ( fseek(file, 0L, SEEK_SET) == 0 )
         {  // Scan for edge
-            VertexChild *curV, *newVC;
+            VertexChild *curV, *newV;
             for (int i = 0; i < LC->lines; i++)
             {
                 fgets(buffer, LC->maxStrLen + 2, file);
@@ -172,47 +190,44 @@ int initGraphFromFile(char *f)
                 {
                     i0 = i1 = 0;
 
-                    while(buffer[i1] != EOF)
+                    while(i1 < LC->maxStrLen)
                     {  // Parse buffered string
-                        if (i0 == 0)
-                        {
-                            if (buffer[i1] == '-')
-                            { // First edge detected
-                                i0 = i1 + 1;
+                        if (buffer[i1] == '-')
+                        { // Get edges
+                            i1 += 1;
+                            i0 = i1;
+
+                            // Get next - or newline
+                            while (buffer[i1] != '-' && buffer[i1] != '\n') {
+                                i1++;
                             }
-                        }
-                        else
-                        {
-                            if (buffer[i1] == '-')
-                            { // Save first and next edges
-                                if (G->vertex[i]->child == NULL)
-                                {
-                                    G->vertex[i]->child = malloc(sizeof(VertexChild));
-                                    G->vertex[i]->child->next = NULL;
-                                    curV = G->vertex[i]->child;
-                                }
-                                else
-                                {
-                                    curV = curV->next;
-                                    curV = malloc(sizeof(VertexChild));
-                                }
 
-                                tmp = malloc(sizeof(char) * (i1 - i0));
-                                for (int j = 0; j < (i1 - i0); j++)
-                                {// Get name
-                                    tmp[j] = buffer[i0 + j];
-                                }
-
-                                // Get id
-                                // curCV->id = getVertexId();
-                                // curCV->weight = 1;
-                                // curCV->next = NULL;
-
-                                G->vertex[i]->childCount += 1;
-                                free(tmp);
-
-                                i0 = i1 + 1;
+                            tmp = malloc(sizeof(char) * (i1 - i0));
+                            for (int j = 0; j < (i1 - i0); j++)
+                            { // Get vertex's name
+                                tmp[j] = buffer[i0 + j];
                             }
+
+                            // push edge
+                            newV = malloc(sizeof(VertexChild));
+                            newV->id = getVertexId(tmp);
+                            newV->weight = 1;
+                            newV->next = NULL;
+                            if (G->vertex[i]->child == NULL)
+                            {
+                                G->vertex[i]->child = newV;
+                                curV = G->vertex[i]->child;
+                            }
+                            else
+                            {
+                                curV->next = newV;
+                                curV = newV;
+                            }
+
+                            G->vertex[i]->childCount += 1;
+
+                            free(tmp);
+                            i1 -= 1;
                         }
                         i1++;
                     }
@@ -247,11 +262,18 @@ int initGraphFromFile(char *f)
  */
 void printGraph()
 {
-    if (G != NULL && VERTEX_NAMES != NULL)
+    if (G != NULL)
     {
+        VertexChild *vc;
         for (int i = 0; i < G->vertexCount; i++)
         {
-            printf("%s ", VERTEX_NAMES[i]);
+            printf("|%d|", G->vertex[i]->id);
+            vc = G->vertex[i]->child;
+            for (int j = 0; j < G->vertex[i]->childCount; j++) {
+                printf(" -> %d", vc->id);
+                vc = vc->next;
+            }
+            printf("\n");
         }
     }
 }
