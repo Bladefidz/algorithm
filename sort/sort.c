@@ -292,11 +292,10 @@ int partitionDescending(int *array, int low, int high)
  * Let A is array.
  * Let n is length of array.
  * Let pv is pivot.
- * Let par is partition.
- * Divide A into two part, greater than and lesser than A_pv.
+ * Divide A into two partitions: greater than and lesser than pv.
  * For each partition:
  *     Choose a pivot and divide.
- * Do that recursively until nothing can be divided.
+ * Do that recursively until we found a pivot that can not devide A into two partition.
  *
  * @param arr  Array
  * @param low  Lowest index
@@ -418,6 +417,8 @@ void splitAndMerge(int *tmp, int *array, int begin, int end, int asc)
 
 /**
  * Merge sort
+ * This sort is stable and simple.
+ * Implementing devide and conquer strategy that described in splitAndMerge()
  *
  * @param arr   Array
  * @param left  Start index
