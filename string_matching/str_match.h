@@ -14,11 +14,13 @@ typedef struct MatchList {
  * Prototype declarations
  */
 void pushMatch(struct MatchList** head, unsigned int index);
-MatchList *naiveFindPattern(char *pattern, char *str);
-MatchList *optimizedNaiveFindPattern(char *pattern, char *str);
-MatchList *rabinKarpFindPattern(char *pattern, char *str, int sigma);
-MatchList *optimizedRabinKarpFindPattern(char *pattern, char *str, int sigma, int prime);
-MatchList *fsaFindPattern(char *pattern, char *str);
-MatchList *kmpFindPattern(char *pattern, char *str);
+MatchList *naiveStrMatch(char *pattern, char *str);
+MatchList *optimizedNaiveStrMatch(char *pattern, char *str);
+MatchList *rabinKarpStrMatch(char *pattern, char *str, int sigma);
+MatchList *optimizedRabinKarpStrMatch(char *pattern, char *str, int sigma, int prime);
+MatchList *dfaStrMatch(char *pattern, char *str);
+MatchList *ndfaStrMatch(char *pattern, char *str);
+MatchList *regexStrMatch(char *pattern, char *str);
+MatchList *kmpStrMatch(char *pattern, char *str);
 
 #endif
