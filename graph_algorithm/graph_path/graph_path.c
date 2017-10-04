@@ -100,12 +100,14 @@ int *dfs(Graph *G, unsigned int from)
 	_prepareVisitList(G);
     _preparePath(G);
     _dfs(G, from);
-    _PATH[_PC + 1] = -1;
+    _PATH[_PC] = -1;
     return _PATH;
 }
 
 /**
  * Recursive Depth First Search
+ * Search on each Vertex of child first, until all neighbor visited.
+ * Running time: %OMICRON(V + E)
  * @param G    Graph object
  * @param from Vertex or node
  */
@@ -195,6 +197,8 @@ static unsigned int _dequeueVertex()
 
 /**
  * Breath First Search Interface
+ * Search on each child of Vertex, until all neighbor visited.
+ * Running time: %OMICRON(V + E)
  * @param  G    Graph object
  * @param  from Start of vertex id or node
  * @return      Array of int
