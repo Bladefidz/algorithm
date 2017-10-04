@@ -1,6 +1,6 @@
 [A]-C-D-E
 [B]-F-E
-[C]-A-D
+[C]-A-D-F
 [D]-A-C
 [E]-A-F-B
 [F]-C-E-B

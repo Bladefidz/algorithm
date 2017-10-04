@@ -50,16 +50,15 @@ void allocateGrap(unsigned int n)
 }
 
 /**
- * Get specific Vertex by id
+ * Get specific Vertex Name by id
  * @param  id Id of a vertex
  * @return    string
  */
-char *getVertex(unsigned int id)
+char *getVertexName(unsigned int id)
 {
-    if (G != NULL)
+    if (G != NULL && id < G->vertexCount)
     {
-        if (id < G->vertexCount)
-            return VERTEX_NAMES[id];
+        return VERTEX_NAMES[id];
     }
     return NULL;
 }
@@ -145,7 +144,7 @@ int initGraphFromFile(char *f)
                 {
                     i0 = i1 = 0;
 
-                    while(buffer[i1] != EOF)
+                    while(i1 < LC->maxStrLen)
                     {  // Parse buffered string
                         if (buffer[i1] == '[')
                         {
@@ -275,5 +274,17 @@ void printGraph()
             }
             printf("\n");
         }
+    }
+}
+
+Graph *getGraph()
+{
+    if (G != NULL)
+    {
+        return G;
+    }
+    else
+    {
+        return NULL;
     }
 }

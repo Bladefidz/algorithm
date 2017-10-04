@@ -60,7 +60,7 @@ void enqueueEdgeAdjList(Node *node, unsigned int vertex)
 
                     (*current).next = new;
                 }
-                current = (*current).next;
+                current = (*current).next; // Only to make sure to stop loop
             }
         }
     }
