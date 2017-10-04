@@ -106,7 +106,7 @@ int *dfs(Graph *G, unsigned int from)
 
 /**
  * Recursive Depth First Search
- * Search on each Vertex of child first, until all neighbor visited.
+ * Search on each Vertex of child first, until all connected vertex visited.
  * Running time: %OMICRON(V + E)
  * @param G    Graph object
  * @param from Vertex or node
@@ -235,4 +235,17 @@ int *bfs(Graph *G, unsigned int from)
     }
     _PATH[_PC] = -1;
     return _PATH;
+}
+
+/**
+ * Depth Limited Search
+ * Search on each child of Vertex, until all neighbor visited.
+ * Running time: %OMICRON(V + E)
+ * @param  G    Graph object
+ * @param  from Start of vertex id or node
+ * @return      Array of int
+ */
+int *dls(Graph *G, unsigned int from)
+{
+
 }
