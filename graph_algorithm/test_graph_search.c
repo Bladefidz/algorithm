@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "graph/graph.h"
-#include "graph_path/graph_path.h"
+#include "graph_search/graph_search.h"
 
 int main(int argc, char const *argv[])
 {

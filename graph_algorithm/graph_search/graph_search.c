@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "graph_path.h"
+#include "graph_search.h"
 #include "../graph/graph.h"
 
 /* Typed definitions */

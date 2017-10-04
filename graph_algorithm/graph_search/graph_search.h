@@ -1,5 +1,5 @@
-#ifndef GRAPH_PATH_H_
-#define GRAPH_PATH_H_
+#ifndef GRAPH_SEARCH_H_
+#define GRAPH_SEARCH_H_
 #include "../graph/graph.h"
 
 /* Type definitions */
