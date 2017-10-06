@@ -1,0 +1,5 @@
+# course site
+https://www.coursera.org/learn/algorithms-part1
+
+## Run Check Style
+java -jar checkstyle-8.2-all.jar -c checkstyle-coursera.xml MyClass.java
