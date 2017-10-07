@@ -6,7 +6,6 @@
  *  A simple program aimed to find and analyze percolation. Used as client of PercolationVisualizer.
  *----------------------------------------------------------------*/
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import edu.princeton.cs.algs4.StdOut;
 
 public class Percolation {
     private WeightedQuickUnionUF grid;
@@ -40,10 +39,15 @@ public class Percolation {
 
     private boolean isRowColValid(int row, int col)
     {
-        if (row > 0 && col > 0 && row <= size && col <= size) {
-            return true;
+        int limit = this.size + 1;
+        if (row >= 1 && col >= 1) {
+            if (limit == 2 || (row < limit && col < limit)) {
+                return true;
+            } else {
+                throw new java.lang.IllegalArgumentException("Value of row or coloumn must be greater than 0 and less than "+ limit +" !");
+            }
         } else {
-            throw new java.lang.IllegalArgumentException("Value of row or coloumn must be greater than 0 and less than "+ (this.size+1) +" !");
+            throw new java.lang.IllegalArgumentException("Value of row or coloumn must be greater than 0 and less than "+ limit +" !");
         }
     }
 
@@ -117,10 +121,14 @@ public class Percolation {
     public boolean percolates()
     {
         boolean perc = false;
-        for (int i = 0; i < this.btmRowOpenCnt; i++) {
-            if (grid.connected(0, this.btmRowOpens[i])) {
-                perc = true;
-                break;
+        if (this.size <= 1) {
+            perc = true;
+        } else {
+            for (int i = 0; i < this.btmRowOpenCnt; i++) {
+                if (grid.connected(0, this.btmRowOpens[i])) {
+                    perc = true;
+                    break;
+                }
             }
         }
         return perc;
