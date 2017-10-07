@@ -66,6 +66,10 @@ public class Percolation {
                     if (isOpen(row + 1, col)) {
                         grid.union(id, xyTo1D(row + 1, col));
                     }
+                    if (this.size == 1) { // If matrux consisted only 1 row
+                        this.btmRowOpens[this.btmRowOpenCnt] = id;
+                        this.btmRowOpenCnt += 1;
+                    }
                 } else {
                     if (isOpen(row - 1, col)) {
                         grid.union(id, xyTo1D(row - 1, col));
@@ -121,14 +125,10 @@ public class Percolation {
     public boolean percolates()
     {
         boolean perc = false;
-        if (this.size <= 1) {
-            perc = true;
-        } else {
-            for (int i = 0; i < this.btmRowOpenCnt; i++) {
-                if (grid.connected(0, this.btmRowOpens[i])) {
-                    perc = true;
-                    break;
-                }
+        for (int i = 0; i < this.btmRowOpenCnt; i++) {
+            if (grid.connected(0, this.btmRowOpens[i])) {
+                perc = true;
+                break;
             }
         }
         return perc;
