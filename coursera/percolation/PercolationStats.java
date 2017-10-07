@@ -9,14 +9,14 @@
  *  Implementing monte carlo algorithm to compute percolation threshold.
  *----------------------------------------------------------------*/
 
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
+    private static final double CONFIDENCE_95 = 1.96;
     private int trials;
-    private double percThreshold[];
+    private double[] percThreshold;
 
     /**
      * Perform trials independent experiments on an n-by-n grid
@@ -24,10 +24,10 @@ public class PercolationStats {
     public PercolationStats(int n, int trials)
     {
         if (n > 0 && trials > 0) {
+            int row;
+            int col;
             this.trials = trials;
             this.percThreshold = new double[trials];
-
-            int row; int col;
             for (int i = 0; i < trials; i++) {
                 Percolation percObj = new Percolation(n);
                 while (!percObj.percolates()) {
@@ -68,7 +68,7 @@ public class PercolationStats {
      */
     public double confidenceLo()
     {
-        return mean() - (1.96 * stddev() / Math.sqrt(this.trials));
+        return mean() - (CONFIDENCE_95 * stddev() / Math.sqrt(this.trials));
     }
 
     /**
@@ -76,7 +76,7 @@ public class PercolationStats {
      */
     public double confidenceHi()
     {
-        return mean() + (1.96 * stddev() / Math.sqrt(this.trials));
+        return mean() + (CONFIDENCE_95 * stddev() / Math.sqrt(this.trials));
     }
 
     /**

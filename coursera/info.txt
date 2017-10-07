@@ -2,4 +2,15 @@
 https://www.coursera.org/learn/algorithms-part1
 
 ## Run Check Style
+```
 java -jar checkstyle-8.2-all.jar -c checkstyle-coursera.xml MyClass.java
+```
+
+## Compile and Run Program
+Any program source code and binary stored in separated folder. For example, Percolation.java stored in folder "percolation".
+
+### Percolation
+```
+javac-algs4 PercolationVisualizer.java
+java-algs4 PercolationVisualizer.java
+```

@@ -11,17 +11,21 @@ import edu.princeton.cs.algs4.StdOut;
 public class Percolation {
     private WeightedQuickUnionUF grid;
     private int size;
-    private int[] sites;
+    private boolean[] sites;
     private int opened;
+    private int[] btmRowOpens;
+    private int btmRowOpenCnt;
 
-    //Create n-by-n grid, with all sites blocked.
+    // Create n-by-n grid, with all sites blocked.
     public Percolation(int n)
     {
         if (n > 0) {
             size = n;
             grid = new WeightedQuickUnionUF(n * n + 2); // 0 for vistual top node, last index for virtual bottom node
-            sites = new int[n * n + 2];
-            for (int i = 0; i < (n * n + 2); i++) sites[i] = 0;
+            btmRowOpens = new int[n];  // Track bottom row
+            btmRowOpenCnt = 0;
+            sites = new boolean[n * n + 2];
+            for (int i = 0; i < (n * n + 2); i++) sites[i] = false;
             opened = 0;
         } else {
             throw new java.lang.IllegalArgumentException("Value of n must be greater than 0!");
@@ -34,61 +38,73 @@ public class Percolation {
         return (size * row) - (size - col);
     }
 
+    private boolean isRowColValid(int row, int col)
+    {
+        if (row > 0 && col > 0 && row <= size && col <= size) {
+            return true;
+        } else {
+            throw new java.lang.IllegalArgumentException("Value of row or coloumn must be greater than 0 and less than "+ (this.size+1) +" !");
+        }
+    }
+
     // Open site (row, col) if it is not open already.
     public void open(int row, int col)
     {
         int id;
-        if (row <= size && col <= size) {
+        if (isRowColValid(row, col)) {
             id = xyTo1D(row, col);
             if (!isOpen(row, col)) {
-                sites[id] = 1;
+                sites[id] = true;
                 opened += 1;
-                if (row == 1) { // connected to virtual top node
+
+                if (row <= 1) { // connected to virtual top node
                     grid.union(id, 0);
+                    if (isOpen(row + 1, col)) {
+                        grid.union(id, xyTo1D(row + 1, col));
+                    }
+                } else {
+                    if (isOpen(row - 1, col)) {
+                        grid.union(id, xyTo1D(row - 1, col));
+                    }
+                    if (row < this.size) {
+                        if (isOpen(row + 1, col)) {
+                            grid.union(id, xyTo1D(row + 1, col));
+                        }
+                    } else {
+                        this.btmRowOpens[this.btmRowOpenCnt] = id;
+                        this.btmRowOpenCnt += 1;
+                    }
                 }
-                if (row == size) { // Coneected to virtual bottom node
-                    grid.union(id, size * size + 1);
-                }
-                if (row > 1 && isOpen(row - 1, col)) {
-                    grid.union(id, xyTo1D(row - 1, col));
-                }
-                if (row < size && isOpen(row + 1, col)) {
-                    grid.union(id, xyTo1D(row + 1, col));
-                }
-                if (col > 1 && isOpen(row, col - 1)) {
-                    grid.union(id, xyTo1D(row, col - 1));
-                }
-                if (col < size && isOpen(row, col + 1)) {
-                    grid.union(id, xyTo1D(row, col + 1));
+                if (col > 1) {
+                    if (isOpen(row, col - 1)) {
+                        grid.union(id, xyTo1D(row, col - 1));
+                    }
+                    if (col < size) {
+                        if (isOpen(row, col + 1)) {
+                            grid.union(id, xyTo1D(row, col + 1));
+                        }
+                    }
+                } else {
+                    if (isOpen(row, col + 1)) {
+                        grid.union(id, xyTo1D(row, col + 1));
+                    }
                 }
             }
-        } else {
-            throw new java.lang.IndexOutOfBoundsException("Row or column index out of bound!");
         }
     }
 
     // Is site (row, col) open?
     public boolean isOpen(int row, int col)
     {
-        if (row <= size && col <= size) {
-            if (sites[xyTo1D(row, col)] == 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            throw new java.lang.IndexOutOfBoundsException("Row or column index out of bound!");
-        }
+        isRowColValid(row, col);
+        return sites[xyTo1D(row, col)];
     }
 
     // is site (row, col) full?
     public boolean isFull(int row, int col)
     {
-        if (row <= size && col <= size) {
-            return grid.connected(xyTo1D(row, col), 0);
-        } else {
-            throw new java.lang.IndexOutOfBoundsException("Row or column index out of bound!");
-        }
+        isRowColValid(row, col);
+        return grid.connected(xyTo1D(row, col), 0);
     }
 
     // get number of open sites.
@@ -100,6 +116,13 @@ public class Percolation {
     // Does the system percolate?
     public boolean percolates()
     {
-        return grid.connected(0, size * size + 1);
+        boolean perc = false;
+        for (int i = 0; i < this.btmRowOpenCnt; i++) {
+            if (grid.connected(0, this.btmRowOpens[i])) {
+                perc = true;
+                break;
+            }
+        }
+        return perc;
     }
 }
