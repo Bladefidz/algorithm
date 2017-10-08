@@ -16,7 +16,8 @@ import edu.princeton.cs.algs4.StdStats;
 public class PercolationStats {
     private static final double CONFIDENCE_95 = 1.96;
     private int trials;
-    private double[] percThreshold;
+    private double mean;
+    private double stddev;
 
     /**
      * Perform trials independent experiments on an n-by-n grid
@@ -26,8 +27,8 @@ public class PercolationStats {
         if (n > 0 && trials > 0) {
             int row;
             int col;
+            double[] percThreshold = new double[trials];
             this.trials = trials;
-            this.percThreshold = new double[trials];
             for (int i = 0; i < trials; i++) {
                 Percolation percObj = new Percolation(n);
                 while (!percObj.percolates()) {
@@ -35,8 +36,10 @@ public class PercolationStats {
                     col = StdRandom.uniform(1, n + 1);
                     percObj.open(row, col);
                 }
-                this.percThreshold[i] = (double) percObj.numberOfOpenSites() / (n * n);
+                percThreshold[i] = (double) percObj.numberOfOpenSites() / (n * n);
             }
+            this.mean = StdStats.mean(percThreshold);
+            this.stddev = StdStats.stddev(percThreshold);
         } else {
             throw new java.lang.IllegalArgumentException("Value of n and trials must be greater than 0!");
         }
@@ -47,7 +50,7 @@ public class PercolationStats {
      */
     public double mean()
     {
-        return StdStats.mean(percThreshold);
+        return this.mean;
     }
 
     /**
@@ -55,7 +58,7 @@ public class PercolationStats {
      */
     public double stddev()
     {
-        double sd = StdStats.stddev(percThreshold);
+        double sd = this.stddev;
         if (sd < 1) {
             return sd;
         } else {
@@ -68,7 +71,7 @@ public class PercolationStats {
      */
     public double confidenceLo()
     {
-        return mean() - (CONFIDENCE_95 * stddev() / Math.sqrt(this.trials));
+        return this.mean - (CONFIDENCE_95 * this.stddev / Math.sqrt(this.trials));
     }
 
     /**
@@ -76,7 +79,7 @@ public class PercolationStats {
      */
     public double confidenceHi()
     {
-        return mean() + (CONFIDENCE_95 * stddev() / Math.sqrt(this.trials));
+        return this.mean + (CONFIDENCE_95 * this.stddev / Math.sqrt(this.trials));
     }
 
     /**

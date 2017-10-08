@@ -14,6 +14,7 @@ public class Percolation {
     private int opened;
     private int[] btmRowOpens;
     private int btmRowOpenCnt;
+    private boolean havePercolated = false;
 
     // Create n-by-n grid, with all sites blocked.
     public Percolation(int n)
@@ -66,7 +67,7 @@ public class Percolation {
                     if (isOpen(row + 1, col)) {
                         grid.union(id, xyTo1D(row + 1, col));
                     }
-                    if (this.size == 1) { // If matrux consisted only 1 row
+                    if (this.size == 1) { // If matrix consisted only 1 row
                         this.btmRowOpens[this.btmRowOpenCnt] = id;
                         this.btmRowOpenCnt += 1;
                     }
@@ -124,13 +125,14 @@ public class Percolation {
     // Does the system percolate?
     public boolean percolates()
     {
-        boolean perc = false;
-        for (int i = 0; i < this.btmRowOpenCnt; i++) {
-            if (grid.connected(0, this.btmRowOpens[i])) {
-                perc = true;
-                break;
+        if (!this.havePercolated) {
+            for (int i = 0; i < this.btmRowOpenCnt; i++) {
+                if (grid.connected(0, this.btmRowOpens[i])) {
+                    this.havePercolated = true;
+                    break;
+                }
             }
         }
-        return perc;
+        return this.havePercolated;
     }
 }
