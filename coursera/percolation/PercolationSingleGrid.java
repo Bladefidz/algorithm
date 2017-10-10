@@ -8,11 +8,12 @@
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    private WeightedQuickUnionUF gridForFullCheck;
-    private WeightedQuickUnionUF gridForPercolation;
+    private WeightedQuickUnionUF grid;
     private int size;
     private boolean[] sites;
     private int opened;
+    private int[] btmRowOpens;
+    private int btmRowOpenCnt;
     private boolean havePercolated = false;
 
     // Create n-by-n grid, with all sites blocked.
@@ -20,11 +21,9 @@ public class Percolation {
     {
         if (n > 0) {
             size = n;
-
-            // 0 for vistual top node, last index for virtual bottom node
-            gridForFullCheck = new WeightedQuickUnionUF(n * n + 2);
-            gridForPercolation = new WeightedQuickUnionUF(n * n + 2);
-
+            grid = new WeightedQuickUnionUF(n * n + 2); // 0 for vistual top node, last index for virtual bottom node
+            btmRowOpens = new int[n];  // Track bottom row
+            btmRowOpenCnt = 0;
             sites = new boolean[n * n + 2];
             for (int i = 0; i < (n * n + 2); i++) sites[i] = false;
             opened = 0;
@@ -63,45 +62,40 @@ public class Percolation {
                 sites[id] = true;
                 opened += 1;
 
-                if (row <= 1) { // connect to virtual top node
-                    gridForFullCheck.union(id, 0);
-                    gridForPercolation.union(id, 0);
+                if (row <= 1) { // connected to virtual top node
+                    grid.union(id, 0);
                     if (isOpen(row + 1, col)) {
-                        gridForFullCheck.union(id, xyTo1D(row + 1, col));
-                        gridForPercolation.union(id, xyTo1D(row + 1, col));
+                        grid.union(id, xyTo1D(row + 1, col));
                     }
-                    if (this.size == 1) { // connect to virtual bottom note
-                        gridForPercolation.union(id, this.size * this.size + 1);
+                    if (this.size == 1) { // If matrix consisted only 1 row
+                        this.btmRowOpens[this.btmRowOpenCnt] = id;
+                        this.btmRowOpenCnt += 1;
                     }
                 } else {
                     if (isOpen(row - 1, col)) {
-                        gridForFullCheck.union(id, xyTo1D(row - 1, col));
-                        gridForPercolation.union(id, xyTo1D(row - 1, col));
+                        grid.union(id, xyTo1D(row - 1, col));
                     }
                     if (row < this.size) {
                         if (isOpen(row + 1, col)) {
-                            gridForFullCheck.union(id, xyTo1D(row + 1, col));
-                            gridForPercolation.union(id, xyTo1D(row + 1, col));
+                            grid.union(id, xyTo1D(row + 1, col));
                         }
-                    } else { // connect to virtual bottom note
-                        gridForPercolation.union(id, this.size * this.size + 1);
+                    } else {
+                        this.btmRowOpens[this.btmRowOpenCnt] = id;
+                        this.btmRowOpenCnt += 1;
                     }
                 }
                 if (col > 1) {
                     if (isOpen(row, col - 1)) {
-                        gridForFullCheck.union(id, xyTo1D(row, col - 1));
-                        gridForPercolation.union(id, xyTo1D(row, col - 1));
+                        grid.union(id, xyTo1D(row, col - 1));
                     }
                     if (col < size) {
                         if (isOpen(row, col + 1)) {
-                            gridForFullCheck.union(id, xyTo1D(row, col + 1));
-                            gridForPercolation.union(id, xyTo1D(row, col + 1));
+                            grid.union(id, xyTo1D(row, col + 1));
                         }
                     }
                 } else {
                     if (isOpen(row, col + 1)) {
-                        gridForFullCheck.union(id, xyTo1D(row, col + 1));
-                        gridForPercolation.union(id, xyTo1D(row, col + 1));
+                        grid.union(id, xyTo1D(row, col + 1));
                     }
                 }
             }
@@ -119,7 +113,7 @@ public class Percolation {
     public boolean isFull(int row, int col)
     {
         isRowColValid(row, col);
-        return gridForFullCheck.connected(xyTo1D(row, col), 0);
+        return grid.connected(xyTo1D(row, col), 0);
     }
 
     // get number of open sites.
@@ -132,7 +126,12 @@ public class Percolation {
     public boolean percolates()
     {
         if (!this.havePercolated) {
-            this.havePercolated = gridForPercolation.connected(0, this.size * this.size + 1);
+            for (int i = 0; i < this.btmRowOpenCnt; i++) {
+                if (grid.connected(0, this.btmRowOpens[i])) {
+                    this.havePercolated = true;
+                    break;
+                }
+            }
         }
         return this.havePercolated;
     }
