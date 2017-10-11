@@ -2,9 +2,9 @@
  * Compilation:  javac-algs4 BitonicSearch.java
  * Execution:    java-algs4 BitonicSearch file int
  *
- * Find an Integer in Bitonic Array of Distinc Integers.
- * Greedy algorithm gives 3*ln(N)
- * Optimal algorithm gives 2*ln(N)
+ * Find an Integer in Bitonic Array of Distinct Integers.
+ * Greedy algorithm gives 3*ln(N): Need to find maximum value first.
+ * Optimal algorithm gives 2*ln(N): Does not need to find maximum value.
  */
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
