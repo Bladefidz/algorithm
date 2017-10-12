@@ -15,8 +15,8 @@ Case 4: 2 eggs and ≤c*sqrt(T) tosses for some fixed constant c.
 
 Case 0: sequential search.
 Case 1: binary search.
-Case 2: find an interval containing T of size ≤2T, then do binary search.
-Case 3: find an interval of size n, then do sequential search. Note: can be improved to ∼2n tosses.
+Case 2: find an interval containing T of size ≤2sqrt(T), then do binary search.
+Case 3: find an interval of size n, then do sequential search. Note: can be improved to ∼2*sqrt(n) tosses.
 Case 4: 1+2+3+…+t∼12t2. Aim for c=22.
 
 # Case 0
