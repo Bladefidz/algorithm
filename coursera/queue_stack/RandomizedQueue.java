@@ -4,12 +4,14 @@ import java.lang.UnsupportedOperationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 /**
  * Randomized queue.
  * A randomized queue is similar to a stack or queue,
- * except that the item removed is chosen uniformly
- * at random from items in the data structure
+ * except that the item removed is chosen uniformly at random
+ * from items in the data structure
  *
  * Requirements
  * Non-iterator operations  : Constant amortized time
@@ -20,7 +22,7 @@ import edu.princeton.cs.algs4.StdRandom;
  */
 public class RandomizedQueue<Item> implements Iterable<Item>
 {
-    private Item first;
+    private Item[] storage;
     private int count;
 
     /**
@@ -29,7 +31,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public RandomizedQueue()
     {
-        this.first = null;
+        this.storage = (Item[]) new Object[2];
         this.count = 0;
     }
 
@@ -39,7 +41,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public boolean isEmpty()
     {
-        return this.first == null;
+        return this.count == 0;
     }
 
     /**
@@ -48,7 +50,17 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public int size()
     {
-        return this.size;
+        return this.count;
+    }
+
+    private void resize(int capacity)
+    {
+        Item[] copy = (Item[]) new Object[capacity];
+        for (int i = 0; i < this.count; i++)
+        {
+            copy[i] = this.storage[i];
+        }
+        this.storage = copy;
     }
 
     /**
@@ -57,7 +69,11 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public void enqueue(Item item)
     {
-
+        if (this.count == this.storage.length)
+        {
+            resize(2 * this.storage.length);
+        }
+        this.storage[this.count++] = item;
     }
 
     /**
@@ -66,7 +82,21 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public Item dequeue()
     {
-
+        if (!isEmpty())
+        {
+            Item item = this.storage[this.count - 1];
+            this.storage[this.count - 1] = null;
+            this.count--;
+            if (this.count > 0 && this.count == this.storage.length / 4)
+            {
+                resize(this.storage.length / 2);
+            }
+            return item;
+        }
+        else
+        {
+            throw new NoSuchElementException();
+        }
     }
 
     /**
@@ -75,7 +105,14 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public Item sample()
     {
-
+        if (!isEmpty())
+        {
+            return this.storage[StdRandom.uniform(0, this.count)];
+        }
+        else
+        {
+            throw new NoSuchElementException();
+        }
     }
 
     /**
@@ -84,7 +121,49 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public Iterator<Item> iterator()
     {
+        return new ShuffledArrayIterator();
+    }
 
+    /**
+     * Random Array Iterator class
+     */
+    private class ShuffledArrayIterator implements Iterator<Item>
+    {
+        private Item[] suflStorage;
+        private int suflCount;
+        private int out;
+
+        public ShuffledArrayIterator()
+        {
+            this.suflStorage = storage;
+            this.suflCount = count;
+            StdRandom.shuffle(this.suflStorage, 0, count);
+            this.out = 0;
+        }
+
+        public boolean hasNext()
+        {
+            return this.out < this.suflCount;
+        }
+
+        public void remove()
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        public Item next()
+        {
+            if (hasNext())
+            {
+                Item it = this.suflStorage[this.out];
+                this.out++;
+                return it;
+            }
+            else
+            {
+                throw new NoSuchElementException();
+            }
+        }
     }
 
     /**
@@ -93,6 +172,35 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public static void main(String[] args)
     {
+        int num = Integer.parseInt(args[0]);
+        if (num > 0)
+        {
+            RandomizedQueue<Integer> rq = new RandomizedQueue<>();
 
+            // Testing enqueue and dequeue
+            StdOut.print("enqueue() then dequeue(): ");
+            for (int i = 1; i <= num; i++)
+            {
+                Integer item = i;
+                rq.enqueue(i);
+            }
+            while(!rq.isEmpty())
+            {
+                StdOut.print(rq.dequeue() + " ");
+            }
+            StdOut.print('\n');
+
+            // Testing iterator
+            StdOut.print("enqueue() then foreach: ");
+            for (int i = 1; i <= num; i++)
+            {
+                Integer item = i;
+                rq.enqueue(i);
+            }
+            for (Integer i : rq) {
+                StdOut.print(i + " ");
+            }
+            StdOut.print('\n');
+        }
     }
 }

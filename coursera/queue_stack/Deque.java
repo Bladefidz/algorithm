@@ -187,7 +187,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     /**
-     * Iterator class
+     * List Iterator class
      */
     private class ListIterator implements Iterator<Item>
     {
@@ -228,6 +228,8 @@ public class Deque<Item> implements Iterable<Item> {
         if (num > 0)
         {
             Deque<Integer> dq = new Deque<>();
+
+            // Testing queue operations
             StdOut.print("addFirst() then removeLast(): ");
             for (int i = 1; i <= num; i++)
             {
@@ -280,6 +282,28 @@ public class Deque<Item> implements Iterable<Item> {
             StdOut.print('\n');
             StdOut.println("empty? " + dq.isEmpty());
             StdOut.println("size? " + dq.size());
+
+            // Testing iterator
+            StdOut.print("addFirst() then foreach: ");
+            for (int i = 1; i <= num; i++)
+            {
+                Integer item = i;
+                dq.addFirst(i);
+            }
+            for (Integer i : dq) {
+                StdOut.print(i + " ");
+            }
+            StdOut.print('\n');
+            StdOut.print("addLast() then foreach: ");
+            for (int i = 1; i <= num; i++)
+            {
+                Integer item = i;
+                dq.addLast(i);
+            }
+            for (Integer i : dq) {
+                StdOut.print(i + " ");
+            }
+            StdOut.print('\n');
         }
     }
 }
