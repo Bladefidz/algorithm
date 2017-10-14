@@ -1,0 +1,95 @@
+# Test on RandomizedQueue
+Test 9: create two nested iterators over the same randomized queue
+  * n = 10
+    - outer iterator failed to return one (or more) of the 10 items
+    - outer iterator returned the same item more than once
+
+  * n = 50
+    - outer iterator failed to return one (or more) of the 50 items
+    - outer iterator returned the same item more than once
+
+==> FAILED
+Test 10: create two parallel iterators over the same randomized queue
+  * n = 10
+    - two iterators return the same sequence of values
+    - they should return the same set of values but in a
+      different order
+
+  * n = 50
+    - two iterators return the same sequence of values
+    - they should return the same set of values but in a
+      different order
+
+==> FAILED
+
+Test 14: check randomness of dequeue() by enqueueing n items, dequeueing n items,
+         and seeing whether each of the n! permutations is equally likely
+  * n = 2, trials = 12000
+
+            value  observed  expected   2*O*ln(O/E)
+        -------------------------------------------
+               AB         0    6000.0          0.00
+               BA     12000    6000.0      16635.53
+        -------------------------------------------
+                      12000   12000.0      16635.53
+
+    G-statistic = 16635.53 (p-value = 0.000000, reject if p-value <= 0.0001)
+    Note: a correct solution will fail this test by bad luck 1 time in 10,000.
+
+  * n = 3, trials = 12000
+
+            value  observed  expected   2*O*ln(O/E)
+        -------------------------------------------
+              ABC         0    2000.0          0.00
+              ACB         0    2000.0          0.00
+              BAC         0    2000.0          0.00
+              BCA         0    2000.0          0.00
+              CAB         0    2000.0          0.00
+              CBA     12000    2000.0      43002.23
+        -------------------------------------------
+                      12000   12000.0      43002.23
+
+    G-statistic = 43002.23 (p-value = 0.000000, reject if p-value <= 0.0001)
+    Note: a correct solution will fail this test by bad luck 1 time in 10,000.
+
+  * n = 4, trials = 12000
+
+            value  observed  expected   2*O*ln(O/E)
+        -------------------------------------------
+             ABCD         0     500.0          0.00
+             ABDC         0     500.0          0.00
+             ACBD         0     500.0          0.00
+             ACDB         0     500.0          0.00
+             ADBC         0     500.0          0.00
+             ADCB         0     500.0          0.00
+             BACD         0     500.0          0.00
+             BADC         0     500.0          0.00
+             BCAD         0     500.0          0.00
+             BCDA         0     500.0          0.00
+             BDAC         0     500.0          0.00
+             BDCA         0     500.0          0.00
+             CABD         0     500.0          0.00
+             CADB         0     500.0          0.00
+             CBAD         0     500.0          0.00
+             CBDA         0     500.0          0.00
+             CDAB         0     500.0          0.00
+             CDBA         0     500.0          0.00
+             DABC         0     500.0          0.00
+             DACB         0     500.0          0.00
+             DBAC         0     500.0          0.00
+             DBCA         0     500.0          0.00
+             DCAB         0     500.0          0.00
+             DCBA     12000     500.0      76273.29
+        -------------------------------------------
+                      12000   12000.0      76273.29
+
+    G-statistic = 76273.29 (p-value = 0.000000, reject if p-value <= 0.0001)
+    Note: a correct solution will fail this test by bad luck 1 time in 10,000.
+
+  * n = 5, trials = 12000
+
+==> FAILED
+Test 16: call enqueue() with a null argument
+    - fails to throw an exception when calling enqueue() with a null argument
+
+==> FAILED
