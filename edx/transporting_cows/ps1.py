@@ -32,7 +32,7 @@ def load_cows(filename):
 
 
 # Problem 1
-def greedy_cow_transport(cows,limit=10):
+def greedy_cow_transport(cows, limit=10):
     """
     Uses a greedy heuristic to determine an allocation of cows that attempts to
     minimize the number of spaceship trips needed to transport all the cows. The
@@ -54,8 +54,31 @@ def greedy_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
-    pass
+    scw = sorted(cows, key=cows.__getitem__)  # Sorted cow by weight
+    cowGroups = []
+    picked = []     # Boolean list of picked cow in scw
+    cow = None      # Popped cow
+    cowGroup = []   # Group of cows to be transported
+    curWei = 0      # Weight of current cow group
+    for i in range(len(scw)):
+        picked.append(False)
+    for i in range(len(scw) - 1, -1, -1):
+        if (picked[i] == False):
+            picked[i] = True
+            cow = scw[i]
+            curWei = cows.pop(cow)  # Set current group weight
+            if (curWei <= limit):
+                cowGroup.append(cow)
+                for j in range(len(scw) - 1, -1, -1):
+                    if (picked[j] == False):
+                        cow = scw[j]
+                        if (curWei + cows[cow] <= limit):
+                            picked[j] = True
+                            curWei += cows[cow]
+                            cowGroup.append(cow)
+                cowGroups.append(cowGroup)
+                cowGroup = []
+    return cowGroups
 
 
 # Problem 2
