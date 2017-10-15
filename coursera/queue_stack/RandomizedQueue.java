@@ -69,11 +69,18 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public void enqueue(Item item)
     {
-        if (this.count == this.storage.length)
+        if (item != null)
         {
-            resize(2 * this.storage.length);
+            if (this.count == this.storage.length)
+            {
+                resize(2 * this.storage.length);
+            }
+            this.storage[this.count++] = item;
         }
-        this.storage[this.count++] = item;
+        else
+        {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -84,7 +91,9 @@ public class RandomizedQueue<Item> implements Iterable<Item>
     {
         if (!isEmpty())
         {
-            Item item = this.storage[this.count - 1];
+            int r = StdRandom.uniform(this.count);
+            Item item = this.storage[r];
+            this.storage[r] = this.storage[this.count - 1];
             this.storage[this.count - 1] = null;
             this.count--;
             if (this.count > 0 && this.count == this.storage.length / 4)
@@ -121,7 +130,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
      */
     public Iterator<Item> iterator()
     {
-        return new ShuffledArrayIterator();
+        return new ShuffledArrayIterator(this.storage, this.count);
     }
 
     /**
@@ -133,10 +142,14 @@ public class RandomizedQueue<Item> implements Iterable<Item>
         private int suflCount;
         private int out;
 
-        public ShuffledArrayIterator()
+        public ShuffledArrayIterator(Item[] rq, int size)
         {
-            this.suflStorage = storage;
-            this.suflCount = count;
+            this.suflStorage = (Item[]) new Object[size];
+            this.suflCount = size;
+            for (int i = 0; i < size; i++)
+            {
+                this.suflStorage[i] = rq[i];
+            }
             StdRandom.shuffle(this.suflStorage, 0, count);
             this.out = 0;
         }
@@ -178,7 +191,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
             RandomizedQueue<Integer> rq = new RandomizedQueue<>();
 
             // Testing enqueue and dequeue
-            StdOut.print("enqueue() then dequeue(): ");
+            StdOut.println("enqueue() then dequeue()");
             for (int i = 1; i <= num; i++)
             {
                 Integer item = i;
@@ -191,13 +204,31 @@ public class RandomizedQueue<Item> implements Iterable<Item>
             StdOut.print('\n');
 
             // Testing iterator
-            StdOut.print("enqueue() then foreach: ");
+            StdOut.println("enqueue() then random iterator");
             for (int i = 1; i <= num; i++)
             {
                 Integer item = i;
                 rq.enqueue(i);
             }
-            for (Integer i : rq) {
+            for (Integer i : rq)
+            {
+                StdOut.print(i + " ");
+            }
+            StdOut.print('\n');
+
+            // Testing nested iterator
+            StdOut.println("nested random iterator");
+            Iterator<Integer> it1 = rq.iterator();
+            Iterator<Integer> it2 = rq.iterator();
+            while(it1.hasNext())
+            {
+                Integer i = it1.next();
+                StdOut.print(i + " ");
+            }
+            StdOut.print('\n');
+            while(it2.hasNext())
+            {
+                Integer i = it2.next();
                 StdOut.print(i + " ");
             }
             StdOut.print('\n');
