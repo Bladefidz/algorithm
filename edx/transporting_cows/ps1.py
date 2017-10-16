@@ -102,8 +102,40 @@ def brute_force_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
-    pass
+    pCow = []
+    accept = True
+    w = 0
+    w1 = []
+    w2 = []
+    for item in get_partitions(cows):
+        for it in item:
+            w = 0
+            for j in it:
+                w += cows[j]
+                if w > limit:
+                    accept = False
+                    break
+            if accept:
+                w1.append(w)
+            else:
+                break
+        if accept:
+            if len(pCow) < 1:
+                pCow.append(item)
+                w2 = w1
+            else:
+                if len(w1) <= len(w2):
+                    for i in range(len(w1)):
+                        if w1[i] < w2[i]:
+                            accept = False
+                            break
+                    if accept:
+                        pCow.pop()
+                        pCow.append(item)
+                        w2 = w1
+        accept = True
+        w1 = []
+    return pCow
 
 
 # Problem 3
@@ -120,8 +152,16 @@ def compare_cow_transport_algorithms():
     Returns:
     Does not return anything.
     """
-    # TODO: Your code here
-    pass
+    print("Greedy algorithms")
+    start = time.time()
+    greedy_cow_transport(load_cows("ps1_cow_data.txt"), 10)
+    end = time.time()
+    print(end - start)
+    print("Brute algorithms")
+    start = time.time()
+    brute_force_cow_transport(load_cows("ps1_cow_data.txt"), 10)
+    end = time.time()
+    print(end - start)
 
 
 """
@@ -130,9 +170,15 @@ Do not submit this along with any of your answers. Uncomment the last two
 lines to print the result of your problem.
 """
 
-cows = load_cows("ps1_cow_data.txt")
-limit=10
-print(cows)
+# cows = load_cows("ps1_cow_data.txt")
+# limit=10
+# print(cows)
+# print()
 
-print(greedy_cow_transport(cows, limit))
-print(brute_force_cow_transport(cows, limit))
+# print("Gready")
+# print(greedy_cow_transport(cows, limit))
+# print()
+# print("Brute Force")
+# print(brute_force_cow_transport(cows, limit))
+
+compare_cow_transport_algorithms()
