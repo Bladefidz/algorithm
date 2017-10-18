@@ -6,7 +6,7 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 
 ## Notes
 * [Graph](notes/graph.pdf)
-* [String Mathcing](notes/string_matching.pdf)
+* [String Matching](notes/string_matching.pdf)
 * [Union Find](notes/union_find.pdf)
 
 ## Researches
