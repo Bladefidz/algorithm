@@ -2,7 +2,7 @@
 
 Implementation of useful algorithms into runnable and tested computer codes. Designed using imperative knowledge to understand and correctly solve problems. Analyzed using declarative knowledge to do optimizations and discover better solutions.
 
-Imperative knowledge needs practice and experience, so i code. Declarative knowledge needs string understanding in mathematical abstraction and rigor, so never i never satisfied if designed algorithm do not reach logarithmic time.
+Imperative knowledge needs practice and experience, so i code. Declarative knowledge needs strong understanding in mathematical abstraction and rigor, so i never satisfied if designed algorithm do not reach logarithmic time.
 
 ## Notes
 * [Graph](notes/graph.pdf)
