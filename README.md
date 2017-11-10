@@ -7,7 +7,7 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 ## Notes
 * [Graph](notes/Introduction%20to%20Algorithms%20Ch%206%20Graph%20Algorithm.pdf)
 * [String Matching](notes/Introduction%20to%20Algorithms%20Ch%2032%20String%20Matching.pdf)
-* [Union Find](notes/Algorithm%201.%205%20Union-Find.pdf)
+* [Union Find](notes/Algorithm%20Ch.%201.5%20Union-Find.pdf)
 
 ## Researches
 * [Sort Experiment](researches/sort_experiment.pdf)
