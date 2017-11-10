@@ -5,9 +5,9 @@ Implementation of useful algorithms into runnable and tested computer codes. Des
 Imperative knowledge needs practice and experience, so i code. Declarative knowledge needs strong understanding in mathematical abstraction and rigor, so i never satisfied if designed algorithm do not reach logarithmic time.
 
 ## Notes
-* [Graph](notes/graph.pdf)
-* [String Matching](notes/string_matching.pdf)
-* [Union Find](notes/union_find.pdf)
+* [Graph](notes/Introduction%20to%20Algorithms%20Ch%206%20Graph%20Algorithm.pdf)
+* [String Matching](notes/Introduction%20to%20Algorithms%20Ch%2032%20String%20Matching.pdf)
+* [Union Find](notes/Algorithm%201.%205%20Union-Find.pdf)
 
 ## Researches
 * [Sort Experiment](researches/sort_experiment.pdf)
