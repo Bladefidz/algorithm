@@ -1,0 +1,1212 @@
+See the Assessment Guide for information on how to interpret this report.
+
+ASSESSMENT SUMMARY
+
+Compilation:  PASSED
+API:          PASSED
+
+Findbugs:     FAILED (10 warnings)
+PMD:          PASSED
+Checkstyle:   FAILED (0 errors, 33 warnings)
+
+Correctness:  35/35 tests passed
+Memory:       4/4 tests passed
+Timing:       27/27 tests passed
+
+Aggregate score: 100.00%
+[Compilation: 5%, API: 5%, Findbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
+
+ASSESSMENT DETAILS
+
+The following files were submitted:
+----------------------------------
+1.8K Dec  4 01:34 Outcast.java
+6.7K Dec  4 01:34 SAP.java
+5.9K Dec  4 01:34 WordNet.java
+
+
+********************************************************************************
+*  COMPILING                                                                    
+********************************************************************************
+
+
+% javac SAP.java
+*-----------------------------------------------------------
+
+% javac WordNet.java
+*-----------------------------------------------------------
+
+% javac Outcast.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+Checking the APIs of your programs.
+*-----------------------------------------------------------
+SAP:
+
+WordNet:
+
+Outcast:
+
+================================================================
+
+
+********************************************************************************
+*  CHECKING STYLE AND COMMON BUG PATTERNS                                       
+********************************************************************************
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+M D DLS_DEAD_LOCAL_STORE DLS: Assigns a value to the local variable 'sapV' but that value is never used.  At SAP.java:[line 153]
+M D DLS_DEAD_LOCAL_STORE DLS: Assigns a value to the local variable 'sapW' but that value is never used.  At SAP.java:[line 166]
+L D DLS_DEAD_LOCAL_STORE_OF_NULL DLS: Assigns the value null to the local variable 'tmp' but never reads the variable.  At SAP.java:[line 123]
+M P NAB_NEEDLESS_BOXING_VALUEOF NAB: Method new WordNet(String, String) converts String to boxed primitive using excessive boxing  At WordNet.java:[line 60]
+M P NAB_NEEDLESS_BOXING_VALUEOF NAB: Method new WordNet(String, String) converts String to boxed primitive using excessive boxing  At WordNet.java:[line 103]
+M P NAB_NEEDLESS_BOXING_VALUEOF NAB: Method new WordNet(String, String) converts String to boxed primitive using excessive boxing  At WordNet.java:[line 107]
+M D NP_LOAD_OF_KNOWN_NULL_VALUE NP: The variable 'nounA' is known to be null at this point due to an earlier check against null.  At WordNet.java:[line 139]
+M D NP_LOAD_OF_KNOWN_NULL_VALUE NP: The variable 'nounB' is known to be null at this point due to an earlier check against null.  At WordNet.java:[line 141]
+M D NP_LOAD_OF_KNOWN_NULL_VALUE NP: The variable 'nounB' is known to be null at this point due to an earlier check against null.  At WordNet.java:[line 155]
+M D NP_LOAD_OF_KNOWN_NULL_VALUE NP: The variable 'nounA' is known to be null at this point due to an earlier check against null.  At WordNet.java:[line 153]
+Warnings generated: 10
+
+
+================================================================
+
+
+% pmd .
+*-----------------------------------------------------------
+SAP.java:86: All instance (and static) variables must be 'private'. [OnlyPrivateInstanceVariables]
+SAP.java:87: All instance (and static) variables must be 'private'. [OnlyPrivateInstanceVariables]
+SAP.java:94: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+SAP.java:95: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+SAP.java:119: Avoid unused local variables, such as 'tmp'. [UnusedLocalVariable]
+WordNet.java:88: Avoid unused local variables, such as 'foundRootVertex'. [UnusedLocalVariable]
+PMD ends with 6 warnings.
+
+
+================================================================
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[WARN] Outcast.java:2:8: Unused import statement for 'edu.princeton.cs.algs4.StdIn'. [UnusedImports]
+[WARN] Outcast.java:4:1: Unnecessary import statement for 'java.lang.IllegalArgumentException' because it is from the package 'java.lang'. [RedundantImport]
+[WARN] Outcast.java:4:8: Unused import statement for 'java.lang.IllegalArgumentException'. [UnusedImports]
+[WARN] Outcast.java:11:4: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[WARN] SAP.java:6:1: Unnecessary import statement for 'java.lang.IllegalArgumentException' because it is from the package 'java.lang'. [RedundantImport]
+[WARN] SAP.java:6:8: Unused import statement for 'java.lang.IllegalArgumentException'. [UnusedImports]
+[WARN] SAP.java:7:1: Unnecessary import statement for 'java.lang.IndexOutOfBoundsException' because it is from the package 'java.lang'. [RedundantImport]
+[WARN] SAP.java:7:8: Unused import statement for 'java.lang.IndexOutOfBoundsException'. [UnusedImports]
+[WARN] SAP.java:8:8: Unused import statement for 'java.util.NoSuchElementException'. [UnusedImports]
+[WARN] SAP.java:9:8: Unused import statement for 'java.util.Comparator'. [UnusedImports]
+[WARN] SAP.java:10:8: Unused import statement for 'java.util.Iterator'. [UnusedImports]
+[WARN] SAP.java:63:12: 'while' is not followed by whitespace. [WhitespaceAfter]
+[WARN] SAP.java:71:20: Do not use the letter 'l' as a local variable name. It is hard to distinguish from the number '1'. [LocalVariableName]
+[WARN] SAP.java:201:9: 'if' is not followed by whitespace. [WhitespaceAfter]
+[WARN] SAP.java:202:9: 'if' is not followed by whitespace. [WhitespaceAfter]
+[WARN] SAP.java:215:9: 'if' is not followed by whitespace. [WhitespaceAfter]
+[WARN] SAP.java:216:9: 'if' is not followed by whitespace. [WhitespaceAfter]
+[WARN] SAP.java:224:9: 'if' is not followed by whitespace. [WhitespaceAfter]
+[WARN] SAP.java:225:9: 'if' is not followed by whitespace. [WhitespaceAfter]
+[WARN] WordNet.java:6:8: Unused import statement for 'edu.princeton.cs.algs4.SET'. [UnusedImports]
+[WARN] WordNet.java:8:1: Unnecessary import statement for 'java.lang.IllegalArgumentException' because it is from the package 'java.lang'. [RedundantImport]
+[WARN] WordNet.java:8:8: Unused import statement for 'java.lang.IllegalArgumentException'. [UnusedImports]
+[WARN] WordNet.java:10:8: Unused import statement for 'java.util.Comparator'. [UnusedImports]
+[WARN] WordNet.java:11:8: Unused import statement for 'java.util.Iterator'. [UnusedImports]
+[WARN] WordNet.java:27:34: The parameter variable 'D' must start with a lowercase letter and use camelCase. [ParameterName]
+[WARN] WordNet.java:38:4: Define constructors after static and instance variables but before methods. [DeclarationOrder]
+[WARN] WordNet.java:60:13: Use the primitive type instead of the corresponding wrapper type. For example, use 'boolean' instead of 'Boolean'. [WrapperType]
+[WARN] WordNet.java:82:12: 'catch' is not followed by whitespace. [WhitespaceAround]
+[WARN] WordNet.java:103:13: Use the primitive type instead of the corresponding wrapper type. For example, use 'boolean' instead of 'Boolean'. [WrapperType]
+[WARN] WordNet.java:107:16: Use the primitive type instead of the corresponding wrapper type. For example, use 'boolean' instead of 'Boolean'. [WrapperType]
+[WARN] WordNet.java:112:12: 'catch' is not followed by whitespace. [WhitespaceAround]
+Checkstyle ends with 0 errors and 31 warning.
+
+% custom checkstyle checks for SAP.java
+*-----------------------------------------------------------
+[WARN] SAP.java:19:1: You should not need to define multiple nested classes in this program. [Design]
+Checkstyle ends with 0 errors and 1 warning.
+
+% custom checkstyle checks for WordNet.java
+*-----------------------------------------------------------
+[INFO] WordNet.java:1: The program uses neither 'DirectedCycle' nor 'Topological' to check whether the digraph is a DAG. [Design]
+
+% custom checkstyle checks for Outcast.java
+*-----------------------------------------------------------
+[WARN] Outcast.java:50:47: Do not print to standard output in 'outcast()'. [SideEffect]
+Checkstyle ends with 0 errors and 1 warning.
+
+
+================================================================
+
+
+********************************************************************************
+*  TESTING CORRECTNESS
+********************************************************************************
+
+Testing correctness of SAP
+*-----------------------------------------------------------
+Running 19 total tests.
+
+Test 1: check length() and ancestor() on fixed digraphs
+  * digraph1.txt
+  * digraph2.txt
+  * digraph3.txt
+  * digraph4.txt
+  * digraph5.txt
+  * digraph6.txt
+  * digraph9.txt
+==> passed
+
+Test 2: check length() and ancestor() on WordNet digraph
+  * 100 random vertex pairs in digraph-wordnet.txt
+==> passed
+
+Test 3: check length() and ancestor() on directed paths
+  * 5
+  * 10
+  * 20
+  * 50
+  * 100
+==> passed
+
+Test 4: check length() and ancestor() on directed cycles
+  * 5
+  * 10
+  * 20
+  * 50
+  * 100
+==> passed
+
+Test 5: check length() and ancestor() on complete graphs
+  * 5
+  * 10
+  * 20
+  * 50
+==> passed
+
+Test 6: check length() and ancestor() on tournament digraphs
+  * 5
+  * 10
+  * 20
+  * 50
+==> passed
+
+Test 7: check length() and ancestor() on complete binary trees
+  * 5
+  * 10
+  * 20
+  * 50
+  * 100
+==> passed
+
+Test 8: check length() and ancestor() on random DAGs
+  * 5 vertices, 8 edges
+  * 10 vertices, 40 edges
+  * 20 vertices, 100 edges
+==> passed
+
+Test 9: check length() and ancestor() on random rooted-in DAGs
+  * 5 vertices, 8 edges
+  * 10 vertices, 40 edges
+  * 20 vertices, 100 edges
+==> passed
+
+Test 10: check length() and ancestor() on random rooted-out DAGs
+  * 5 vertices, 8 edges
+  * 10 vertices, 40 edges
+  * 20 vertices, 100 edges
+==> passed
+
+Test 11: check length() and ancestor() on random rooted-in trees
+  * 5 vertices
+  * 10 vertices
+  * 20 vertices
+==> passed
+
+Test 12: check length() and ancestor() on random rooted-out trees
+  * 5 vertices
+  * 10 vertices
+  * 20 vertices
+==> passed
+
+Test 13: check length() and ancestor() on random simple digraphs
+  * 5 vertices, 8 edges
+  * 10 vertices, 40 edges
+  * 20 vertices, 100 edges
+==> passed
+
+Test 14: check whether two SAP objects can be created at the same time
+  * digraph1.txt and digraph2.txt
+  * digraph3.txt and digraph4.txt
+  * digraph5.txt and digraph6.txt
+  * digraph2.txt and digraph1.txt
+==> passed
+
+Test 15: check whether SAP is immutable
+  * digraph1.txt
+  * digraph2.txt
+  * digraph3.txt
+  * digraph4.txt
+  * digraph5.txt
+  * digraph6.txt
+  * digraph-ambiguous-ancestor.txt
+==> passed
+
+Test 16: check invalid arguments to length() and ancestor() in digraph1.txt
+  * v = -1, w = 0
+  * v = 0, w = -1
+  * v = 13, w = 0
+  * v = 0, w = 13
+  * v = -1 2 7 , w = 1 4 6 10 11 
+  * v = 2 7 , w = -1 1 4 6 10 11 
+  * v = 13 2 7 , w = 1 4 6 10 11 
+  * v = 2 7 , w = 13 1 4 6 10 11 
+==> passed
+
+Test 17: check length() and ancestor() with Iterable arguments
+  * 100 random subsets of 1 and 1 vertices in digraph-wordnet.txt
+  * 100 random subsets of 1 and 2 vertices in digraph-wordnet.txt
+  * 100 random subsets of 2 and 1 vertices in digraph-wordnet.txt
+  * 100 random subsets of 2 and 2 vertices in digraph-wordnet.txt
+  * 100 random subsets of 3 and 11 vertices in digraph-wordnet.txt
+  * 100 random subsets of 11 and 3 vertices in digraph-wordnet.txt
+  * 100 random subsets of 0 and 5 vertices in digraph-wordnet.txt
+  * 100 random subsets of 5 and 0 vertices in digraph-wordnet.txt
+  * 100 random subsets of 0 and 0 vertices in digraph-wordnet.txt
+==> passed
+
+Test 18: Check Iterable version of length() and ancestor() with null arguments
+==> passed
+
+Test 19: random calls to both version of length() and ancestor(),
+         with probabilities p1 and p2, respectively
+  * random calls in a random rooted DAG (20 vertices, 100 edges)
+    (p1 = 0.5, p2 = 0.5)
+  * random calls in a random digraph (20 vertices, 100 edges)
+    (p1 = 0.5, p2 = 0.5)
+==> passed
+
+
+Total: 19/19 tests passed!
+
+
+================================================================
+********************************************************************************
+*  TESTING CORRECTNESS (substituting reference SAP)
+********************************************************************************
+
+Testing correctness of WordNet
+*-----------------------------------------------------------
+Running 14 total tests.
+
+Test 1: check distance() with random noun pairs
+  * 1000 pairs using synsets = synsets.txt; hypernyms = hypernyms.txt
+==> passed
+
+Test 2: check distance() with all noun pairs
+  * synsets = synsets15.txt; hypernyms = hypernyms15Path.txt
+  * synsets = synsets15.txt; hypernyms = hypernyms15Tree.txt
+  * synsets = synsets6.txt; hypernyms = hypernyms6TwoAncestors.txt
+  * synsets = synsets11.txt; hypernyms = hypernyms11AmbiguousAncestor.txt
+  * synsets = synsets8.txt; hypernyms = hypernyms8ModTree.txt
+  * synsets = synsets8.txt; hypernyms = hypernyms8WrongBFS.txt
+  * synsets = synsets11.txt; hypernyms = hypernyms11ManyPathsOneAncestor.txt
+  * synsets = synsets8.txt; hypernyms = hypernyms8ManyAncestors.txt
+==> passed
+
+Test 3: check distance() with random noun pairs
+  * 1000 pairs using synsets = synsets100-subgraph.txt; hypernyms = hypernyms100-subgraph.txt
+  * 1000 pairs using synsets = synsets500-subgraph.txt; hypernyms = hypernyms500-subgraph.txt
+  * 1000 pairs using synsets = synsets1000-subgraph.txt; hypernyms = hypernyms1000-subgraph.txt
+==> passed
+
+Test 4: check sap() with random noun pairs
+  * 1000 pairs using synsets = synsets.txt; hypernyms = hypernyms.txt
+==> passed
+
+Test 5: check sap() with all noun pairs
+  * synsets = synsets15.txt; hypernyms = hypernyms15Path.txt
+  * synsets = synsets15.txt; hypernyms = hypernyms15Tree.txt
+  * synsets = synsets6.txt; hypernyms = hypernyms6TwoAncestors.txt
+  * synsets = synsets11.txt; hypernyms = hypernyms11AmbiguousAncestor.txt
+  * synsets = synsets8.txt; hypernyms = hypernyms8ModTree.txt
+  * synsets = synsets8.txt; hypernyms = hypernyms8WrongBFS.txt
+  * synsets = synsets11.txt; hypernyms = hypernyms11ManyPathsOneAncestor.txt
+  * synsets = synsets8.txt; hypernyms = hypernyms8ManyAncestors.txt
+==> passed
+
+Test 6: check sap() with random noun pairs
+  * 1000 pairs using synsets = synsets100-subgraph.txt; hypernyms = hypernyms100-subgraph.txt
+  * 1000 pairs using synsets = synsets500-subgraph.txt; hypernyms = hypernyms500-subgraph.txt
+  * 1000 pairs using synsets = synsets1000-subgraph.txt; hypernyms = hypernyms1000-subgraph.txt
+==> passed
+
+Test 7: check whether WordNet is immutable
+  * synsets = synsets.txt; hypernyms = hypernyms.txt
+==> passed
+
+Test 8: check constructor when input is not a rooted DAG
+  * synsets3.txt, hypernyms3InvalidTwoRoots.txt
+  * synsets3.txt, hypernyms3InvalidCycle.txt
+  * synsets6.txt, hypernyms6InvalidTwoRoots.txt
+  * synsets6.txt, hypernyms6InvalidCycle.txt
+  * synsets6.txt, hypernyms6InvalidCycle+Path.txt
+==> passed
+
+Test 9: check isNoun()
+  * synsets = synsets.txt; hypernyms = hypernyms.txt
+  * synsets = synsets15.txt; hypernyms = hypernyms15Path.txt
+  * synsets = synsets8.txt; hypernyms = hypernyms8ModTree.txt
+==> passed
+
+Test 10: check nouns()
+  * synsets = synsets.txt; hypernyms = hypernyms.txt
+  * synsets = synsets15.txt; hypernyms = hypernyms15Path.txt
+  * synsets = synsets8.txt; hypernyms = hypernyms8ModTree.txt
+==> passed
+
+Test 11: check whether two WordNet objects can be created at the same time
+  * synsets1 = synsets15.txt; hypernyms1 = hypernyms15Tree.txt
+    synsets2 = synsets15.txt; hypernyms2 = hypernyms15Path.txt
+  * synsets1 = synsets.txt; hypernyms1 = hypernyms.txt
+    synsets2 = synsets15.txt; hypernyms2 = hypernyms15Path.txt
+==> passed
+
+Test 12: call distance() and sap() with invalid arguments
+  * synsets15.txt, hypernyms15Tree.txt, nounA = "x", nounB = "b"
+  * synsets15.txt, hypernyms15Tree.txt, nounA = "b", nounB = "x"
+  * synsets15.txt, hypernyms15Tree.txt, nounA = "x", nounB = "a"
+  * synsets15.txt, hypernyms15Tree.txt, nounA = "x", nounB = "x"
+  * synsets15.txt, hypernyms15Tree.txt, nounA = "a", nounB = null
+  * synsets15.txt, hypernyms15Tree.txt, nounA = null, nounB = "a"
+  * synsets15.txt, hypernyms15Tree.txt, nounA = null, nounB = null
+  * synsets15.txt, hypernyms15Tree.txt, nounA = "x", nounB = null
+  * synsets15.txt, hypernyms15Tree.txt, nounA = null, nounB = "x"
+==> passed
+
+Test 13: call isNoun() with a null argument
+  * synsets15.txt, hypernyms15Path.txt
+==> passed
+
+Test 14: random calls to isNoun(), distance(), and sap(), with
+         probabilities p1, p2, and p3, respectively
+  * 100 random calls (p1 = 0.5, p2 = 0.5, p3 = 0.0)
+  * 100 random calls (p1 = 0.5, p2 = 0.0, p3 = 0.5)
+  * 100 random calls (p1 = 0.0, p2 = 0.5, p3 = 0.5)
+  * 100 random calls (p1 = 0.2, p2 = 0.4, p3 = 0.4)
+==> passed
+
+
+Total: 14/14 tests passed!
+
+
+================================================================
+********************************************************************************
+*  TESTING CORRECTNESS (substituting reference SAP and WordNet)
+********************************************************************************
+
+Testing correctness of Outcast
+*-----------------------------------------------------------
+Running 2 total tests.
+
+Test 1: check outcast() on WordNet digraph
+        (synsets.txt and hypernyms.txt)
+  * outcast2.txt
+Distance Turing = 2
+Distance von_Neumann = 2
+  * outcast3.txt
+Distance Turing = 9
+Distance von_Neumann = 9
+Distance Mickey_Mouse = 14
+  * outcast4.txt
+Distance probability = 30
+Distance statistics = 18
+Distance mathematics = 14
+Distance physics = 18
+  * outcast5.txt
+Distance horse = 21
+Distance zebra = 31
+Distance cat = 24
+Distance bear = 25
+Distance table = 39
+  * outcast5a.txt
+Distance earth = 10
+Distance fire = 9
+Distance air = 11
+Distance water = 12
+Distance heart = 18
+  * outcast7.txt
+Distance Asia = 21
+Distance Australia = 13
+Distance North_America = 21
+Distance India = 58
+Distance Europe = 21
+Distance Antarctica = 21
+Distance South_America = 21
+  * outcast8.txt
+Distance water = 24
+Distance soda = 31
+Distance bed = 60
+Distance orange_juice = 29
+Distance milk = 25
+Distance apple_juice = 29
+Distance tea = 25
+Distance coffee = 25
+  * outcast8a.txt
+Distance Banti's_disease = 69
+Distance hyperadrenalism = 71
+Distance German_measles = 67
+Distance gargoylism = 63
+Distance Q_fever = 67
+Distance amebiosis = 63
+Distance anthrax = 51
+Distance playboy = 119
+  * outcast8b.txt
+Distance apple = 20
+Distance orange = 26
+Distance banana = 17
+Distance grape = 20
+Distance strawberry = 22
+Distance cabbage = 33
+Distance mango = 20
+Distance watermelon = 26
+  * outcast8c.txt
+Distance car = 27
+Distance auto = 37
+Distance truck = 33
+Distance plane = 43
+Distance tree = 67
+Distance train = 43
+Distance vehicle = 27
+Distance van = 31
+  * outcast9.txt
+Distance lumber = 44
+Distance wood = 50
+Distance tree = 73
+Distance leaf = 58
+Distance nail = 57
+Distance house = 40
+Distance building = 35
+Distance edifice = 36
+Distance structure = 27
+  * outcast9a.txt
+Distance hair = 33
+Distance eyes = 85
+Distance arm = 53
+Distance mouth = 45
+Distance nose = 38
+Distance ear = 41
+Distance cheek = 36
+Distance brow = 41
+Distance chin = 44
+  * outcast10.txt
+Distance cat = 53
+Distance cheetah = 62
+Distance dog = 55
+Distance wolf = 55
+Distance albatross = 95
+Distance horse = 66
+Distance zebra = 66
+Distance lemur = 52
+Distance orangutan = 70
+Distance chimpanzee = 70
+  * outcast10a.txt
+Distance blue = 30
+Distance green = 32
+Distance yellow = 34
+Distance brown = 34
+Distance black = 40
+Distance white = 42
+Distance orange = 32
+Distance violet = 42
+Distance red = 30
+Distance serendipity = 104
+  * outcast11.txt
+Distance apple = 28
+Distance pear = 28
+Distance peach = 28
+Distance banana = 26
+Distance lime = 34
+Distance lemon = 35
+Distance blueberry = 34
+Distance strawberry = 32
+Distance mango = 28
+Distance watermelon = 35
+Distance potato = 48
+  * outcast12.txt
+Distance Dylan = 103
+Distance folk = 93
+Distance Guthrie = 138
+Distance idol = 89
+Distance Minneapolis = 156
+Distance music = 83
+Distance musical = 101
+Distance playing = 91
+Distance public = 96
+Distance recognition = 88
+Distance review = 92
+Distance thunderbird = 114
+  * outcast12a.txt
+Distance competition = 63
+Distance cup = 84
+Distance event = 59
+Distance fielding = 96
+Distance football = 97
+Distance level = 69
+Distance practice = 69
+Distance prestige = 103
+Distance team = 97
+Distance tournament = 87
+Distance world = 63
+Distance mongoose = 169
+  * outcast17.txt
+Distance art = 81
+Distance canvas = 110
+Distance china = 162
+Distance culture = 114
+Distance kingdom = 112
+Distance particularism = 196
+Distance point = 90
+Distance portable = 190
+Distance ritual = 155
+Distance road = 108
+Distance script = 146
+Distance sculpture = 113
+Distance silk = 118
+Distance style = 95
+Distance transmission = 117
+Distance wall = 101
+Distance toluene = 160
+  * outcast20.txt
+Distance art = 108
+Distance Buddha = 202
+Distance Buddhism = 198
+Distance canvas = 142
+Distance china = 204
+Distance culture = 139
+Distance India = 233
+Distance kingdom = 130
+Distance particularism = 239
+Distance point = 111
+Distance portable = 238
+Distance ritual = 194
+Distance road = 138
+Distance script = 181
+Distance sculpture = 145
+Distance silk = 151
+Distance style = 124
+Distance transmission = 152
+Distance wall = 126
+Distance toluene = 195
+  * outcast29.txt
+Distance acorn = 322
+Distance application = 164
+Distance assembly = 141
+Distance award = 221
+Distance basic = 225
+Distance cad = 254
+Distance code = 201
+Distance computer = 199
+Distance custom = 196
+Distance depth = 190
+Distance development = 144
+Distance finish = 198
+Distance hardware = 197
+Distance instruction = 155
+Distance language = 173
+Distance machine = 157
+Distance model = 150
+Distance operation = 137
+Distance processor = 197
+Distance project = 223
+Distance silicon = 239
+Distance simulation = 183
+Distance software = 276
+Distance speed = 205
+Distance support = 138
+Distance team = 240
+Distance technology = 167
+Distance test = 169
+Distance mosque = 277
+==> passed
+
+Test 2: check outcast() on WordNet subgraph
+        (synsets50000-subgraph.txt and hypernyms50000-subgraph.txt)
+  * outcast2.txt
+Distance Turing = 2
+Distance von_Neumann = 2
+  * outcast3.txt
+Distance Turing = 9
+Distance von_Neumann = 9
+Distance Mickey_Mouse = 14
+  * outcast5.txt
+Distance horse = 22
+Distance zebra = 31
+Distance cat = 24
+Distance bear = 25
+Distance table = 40
+  * outcast5a.txt
+Distance earth = 10
+Distance fire = 13
+Distance air = 11
+Distance water = 12
+Distance heart = 22
+  * outcast7.txt
+Distance Asia = 21
+Distance Australia = 13
+Distance North_America = 21
+Distance India = 58
+Distance Europe = 21
+Distance Antarctica = 21
+Distance South_America = 21
+  * outcast8.txt
+Distance water = 24
+Distance soda = 31
+Distance bed = 60
+Distance orange_juice = 29
+Distance milk = 25
+Distance apple_juice = 29
+Distance tea = 25
+Distance coffee = 25
+  * outcast8b.txt
+Distance apple = 20
+Distance orange = 26
+Distance banana = 17
+Distance grape = 20
+Distance strawberry = 22
+Distance cabbage = 33
+Distance mango = 20
+Distance watermelon = 26
+  * outcast8c.txt
+Distance car = 27
+Distance auto = 37
+Distance truck = 33
+Distance plane = 51
+Distance tree = 78
+Distance train = 44
+Distance vehicle = 27
+Distance van = 33
+  * outcast9.txt
+Distance lumber = 44
+Distance wood = 56
+Distance tree = 79
+Distance leaf = 58
+Distance nail = 59
+Distance house = 41
+Distance building = 36
+Distance edifice = 36
+Distance structure = 29
+  * outcast10.txt
+Distance cat = 53
+Distance cheetah = 62
+Distance dog = 55
+Distance wolf = 55
+Distance albatross = 95
+Distance horse = 66
+Distance zebra = 66
+Distance lemur = 52
+Distance orangutan = 70
+Distance chimpanzee = 70
+  * outcast11.txt
+Distance apple = 28
+Distance pear = 28
+Distance peach = 28
+Distance banana = 26
+Distance lime = 34
+Distance lemon = 35
+Distance blueberry = 34
+Distance strawberry = 32
+Distance mango = 28
+Distance watermelon = 35
+Distance potato = 48
+==> passed
+
+
+Total: 2/2 tests passed!
+
+
+================================================================
+********************************************************************************
+*  MEMORY
+********************************************************************************
+
+Analyzing memory of SAP
+*-----------------------------------------------------------
+Running 1 total tests.
+
+digraph G             = digraph-wordnet.txt
+vertices in G         = 82192
+edges    in G         = 84505
+student     memory    = 8347880 bytes
+reference   memory    = 10320552 bytes
+ratio                 = 0.81
+maximum allowed ratio = 2.50
+
+Total: 1/1 tests passed!
+
+================================================================
+
+
+
+Analyzing memory of WordNet
+*-----------------------------------------------------------
+Running 3 total tests.
+
+Test 1a: check memory of WordNet object
+  * synsets = synsets1000-subgraph.txt; hypernyms = hypernyms1000-subgraph.txt
+    - number of vertices in digraph = 1000
+    - number of edges    in digraph = 1008
+    - student   memory              = 604200 bytes
+    - reference memory              = 1494080 bytes
+    - student / reference ratio     = 0.4
+    - maximum allowed rato          = 2.0
+
+==> passed
+
+Test 1b: check memory of WordNet object
+  * synsets = synsets5000-subgraph.txt; hypernyms = hypernyms5000-subgraph.txt
+    - number of vertices in digraph = 5000
+    - number of edges    in digraph = 5059
+    - student   memory              = 2976480 bytes
+    - reference memory              = 7296936 bytes
+    - student / reference ratio     = 0.4
+    - maximum allowed rato          = 2.0
+
+==> passed
+
+Test 1c: check memory of WordNet object
+  * synsets = synsets10000-subgraph.txt; hypernyms = hypernyms10000-subgraph.txt
+    - number of vertices in digraph = 10000
+    - number of edges    in digraph = 10087
+    - student   memory              = 7114616 bytes
+    - reference memory              = 16931472 bytes
+    - student / reference ratio     = 0.4
+    - maximum allowed rato          = 2.0
+
+==> passed
+
+Total: 3/3 tests passed!
+
+================================================================
+
+
+
+********************************************************************************
+*  TIMING
+********************************************************************************
+
+Timing SAP
+*-----------------------------------------------------------
+Running 14 total tests.
+
+Test 1: time SAP constructor
+   *  digraph-wordnet.txt
+      -  student solution time =  0.02 seconds
+      -  maximum allowed  time =  1.00 seconds
+==> passed
+
+Test 2a-c: time length() and ancestor() with random pairs of vertices
+  *  digraph-wordnet.txt
+     -  reference solution calls per second:  663852.00
+     -  student   solution calls per second:    4173.00
+     -  reference / student ratio:               159.08
+
+=> passed      student <= 50000x reference
+=> passed      student <= 10000x reference
+=> passed      student <=  5000x reference
+=> passed      student <=  1000x reference
+
+Test 3a-c: time length() and ancestor() with random subsets of 5 vertices
+  *  digraph-wordnet.txt
+     -  reference solution calls per second:  196453.00
+     -  student   solution calls per second:    4123.00
+     -  reference / student ratio:                47.65
+
+=> passed      student <= 10000x reference
+=> passed      student <=  5000x reference
+=> passed      student <=  1000x reference
+=> passed      student <=   500x reference
+
+Test 4a-c: time length() and ancestor() with random subsets of 100 vertices
+  *  digraph-wordnet.txt
+     -  reference solution calls per second:   14186.00
+     -  student   solution calls per second:    3033.00
+     -  reference / student ratio:                 4.68
+
+=> passed      student <= 10000x reference
+=> passed      student <=  5000x reference
+=> passed      student <=  1000x reference
+=> passed      student <=   500x reference
+
+Test 5: Time 10 calls to length() and ancestor() on random path graphs
+        (must handle V = 65536 in under 2 seconds)
+
+             V  seconds
+        ---------------
+         32768     0.06
+         65536     0.11
+==> passed
+
+
+Total: 14/14 tests passed!
+
+
+================================================================
+
+
+
+********************************************************************************
+*  TIMING (substituting reference SAP)
+********************************************************************************
+
+Timing WordNet
+*-----------------------------------------------------------
+Running 11 total tests.
+
+Test 1: check that exactly two In object created
+        (one for synsets file and one for hypernyms file)
+==> passed
+
+Test 2: count number of SAP operations when constructing a WordNet object
+        and calling distance() and sap() three times each
+  * calls to constructor = 1
+  * calls to length()    = 3
+  * calls to ancestor()  = 6
+
+==> passed
+
+Test 3: count Digraph operations during WordNet constructor
+  * synsets = synsets.txt; hypernyms = hypernyms.txt
+  * number of synsets    = 82192
+  * number of hypernyms  = 84505
+  * calls to constructor = 2
+  * calls to addEdge()   = 84505
+  * calls to adj()       = 0
+  * calls to outdegree() = 82192
+  * calls to indegree()  = 1
+  * calls to reverse()   = 0
+  * calls to toString()  = 0
+
+==> passed
+
+Test 4: count Digraph operations during 1000 calls each
+        to distance() and sap()
+  * synsets = synsets.txt; hypernyms = hypernyms.txt
+  * calls to constructor = 0
+  * calls to addEdge()   = 0
+  * calls to adj()       = 46756
+  * calls to reverse()   = 0
+  * calls to toString()  = 0
+
+==> passed
+
+Test 5: time WordNet constructor
+  * synsets = synsets.txt; hypernyms = hypernyms.txt
+    - student constructor time =  0.43 seconds
+    - maximum allowed     time = 10.00 seconds
+
+==> passed
+
+Test 6a-e: time sap() and distance() with random nouns
+  * synsets = synsets.txt; hypernyms = hypernyms.txt
+    - reference solution calls per second:  217087.50
+    - student   solution calls per second:  158553.25
+    - reference / student ratio:                 1.37
+
+=> passed    student <= 10000x reference
+=> passed    student <=  1000x reference
+=> passed    student <=   100x reference
+=> passed    student <=    10x reference
+=> passed    student <=     5x reference
+
+Test 7: time isNoun() with random nouns
+  * synsets = synsets.txt; hypernyms = hypernyms.txt
+    - reference solution calls per second:  642024.00
+    - student   solution calls per second:  485988.00
+    - reference / student ratio:                 1.32
+    - allowed ratio:                             4.00
+==> passed
+
+Total: 11/11 tests passed!
+
+
+================================================================
+
+
+
+********************************************************************************
+*  TIMING (substituting reference SAP and WordNet)
+********************************************************************************
+
+Timing Outcast
+*-----------------------------------------------------------
+Running 2 total tests.
+
+Test 1: count calls to methods in WordNet
+ * outcast4.txt
+Distance probability = 30
+Distance statistics = 18
+Distance mathematics = 14
+Distance physics = 18
+ * outcast10.txt
+Distance cat = 53
+Distance cheetah = 62
+Distance dog = 55
+Distance wolf = 55
+Distance albatross = 95
+Distance horse = 66
+Distance zebra = 66
+Distance lemur = 52
+Distance orangutan = 70
+Distance chimpanzee = 70
+ * outcast29.txt
+Distance acorn = 322
+Distance application = 164
+Distance assembly = 141
+Distance award = 221
+Distance basic = 225
+Distance cad = 254
+Distance code = 201
+Distance computer = 199
+Distance custom = 196
+Distance depth = 190
+Distance development = 144
+Distance finish = 198
+Distance hardware = 197
+Distance instruction = 155
+Distance language = 173
+Distance machine = 157
+Distance model = 150
+Distance operation = 137
+Distance processor = 197
+Distance project = 223
+Distance silicon = 239
+Distance simulation = 183
+Distance software = 276
+Distance speed = 205
+Distance support = 138
+Distance team = 240
+Distance technology = 167
+Distance test = 169
+Distance mosque = 277
+==> passed
+
+Test 2: timing calls to outcast() for various outcast files
+
+Total time must not exceed 1.0 seconds.
+
+    filename       n     time
+-----------------------------
+Distance probability = 30
+Distance statistics = 18
+Distance mathematics = 14
+Distance physics = 18
+   outcast4.txt    4     0.00
+Distance horse = 21
+Distance zebra = 31
+Distance cat = 24
+Distance bear = 25
+Distance table = 39
+   outcast5.txt    5     0.00
+Distance earth = 10
+Distance fire = 9
+Distance air = 11
+Distance water = 12
+Distance heart = 18
+  outcast5a.txt    5     0.00
+Distance horse = 21
+Distance zebra = 31
+Distance cat = 24
+Distance bear = 25
+Distance table = 39
+   outcast5.txt    5     0.00
+Distance Asia = 21
+Distance Australia = 13
+Distance North_America = 21
+Distance India = 58
+Distance Europe = 21
+Distance Antarctica = 21
+Distance South_America = 21
+   outcast7.txt    7     0.00
+Distance water = 24
+Distance soda = 31
+Distance bed = 60
+Distance orange_juice = 29
+Distance milk = 25
+Distance apple_juice = 29
+Distance tea = 25
+Distance coffee = 25
+   outcast8.txt    8     0.00
+Distance Banti's_disease = 69
+Distance hyperadrenalism = 71
+Distance German_measles = 67
+Distance gargoylism = 63
+Distance Q_fever = 67
+Distance amebiosis = 63
+Distance anthrax = 51
+Distance playboy = 119
+  outcast8a.txt    8     0.00
+Distance apple = 20
+Distance orange = 26
+Distance banana = 17
+Distance grape = 20
+Distance strawberry = 22
+Distance cabbage = 33
+Distance mango = 20
+Distance watermelon = 26
+  outcast8b.txt    8     0.00
+Distance car = 27
+Distance auto = 37
+Distance truck = 33
+Distance plane = 43
+Distance tree = 67
+Distance train = 43
+Distance vehicle = 27
+Distance van = 31
+  outcast8c.txt    8     0.00
+Distance lumber = 44
+Distance wood = 50
+Distance tree = 73
+Distance leaf = 58
+Distance nail = 57
+Distance house = 40
+Distance building = 35
+Distance edifice = 36
+Distance structure = 27
+   outcast9.txt    9     0.00
+Distance hair = 33
+Distance eyes = 85
+Distance arm = 53
+Distance mouth = 45
+Distance nose = 38
+Distance ear = 41
+Distance cheek = 36
+Distance brow = 41
+Distance chin = 44
+  outcast9a.txt    9     0.00
+Distance cat = 53
+Distance cheetah = 62
+Distance dog = 55
+Distance wolf = 55
+Distance albatross = 95
+Distance horse = 66
+Distance zebra = 66
+Distance lemur = 52
+Distance orangutan = 70
+Distance chimpanzee = 70
+  outcast10.txt   10     0.00
+Distance blue = 30
+Distance green = 32
+Distance yellow = 34
+Distance brown = 34
+Distance black = 40
+Distance white = 42
+Distance orange = 32
+Distance violet = 42
+Distance red = 30
+Distance serendipity = 104
+ outcast10a.txt   10     0.00
+Distance apple = 28
+Distance pear = 28
+Distance peach = 28
+Distance banana = 26
+Distance lime = 34
+Distance lemon = 35
+Distance blueberry = 34
+Distance strawberry = 32
+Distance mango = 28
+Distance watermelon = 35
+Distance potato = 48
+  outcast11.txt   11     0.00
+Distance Dylan = 103
+Distance folk = 93
+Distance Guthrie = 138
+Distance idol = 89
+Distance Minneapolis = 156
+Distance music = 83
+Distance musical = 101
+Distance playing = 91
+Distance public = 96
+Distance recognition = 88
+Distance review = 92
+Distance thunderbird = 114
+  outcast12.txt   12     0.00
+Distance competition = 63
+Distance cup = 84
+Distance event = 59
+Distance fielding = 96
+Distance football = 97
+Distance level = 69
+Distance practice = 69
+Distance prestige = 103
+Distance team = 97
+Distance tournament = 87
+Distance world = 63
+Distance mongoose = 169
+ outcast12a.txt   12     0.00
+Distance art = 108
+Distance Buddha = 202
+Distance Buddhism = 198
+Distance canvas = 142
+Distance china = 204
+Distance culture = 139
+Distance India = 233
+Distance kingdom = 130
+Distance particularism = 239
+Distance point = 111
+Distance portable = 238
+Distance ritual = 194
+Distance road = 138
+Distance script = 181
+Distance sculpture = 145
+Distance silk = 151
+Distance style = 124
+Distance transmission = 152
+Distance wall = 126
+Distance toluene = 195
+  outcast20.txt   20     0.00
+Distance acorn = 322
+Distance application = 164
+Distance assembly = 141
+Distance award = 221
+Distance basic = 225
+Distance cad = 254
+Distance code = 201
+Distance computer = 199
+Distance custom = 196
+Distance depth = 190
+Distance development = 144
+Distance finish = 198
+Distance hardware = 197
+Distance instruction = 155
+Distance language = 173
+Distance machine = 157
+Distance model = 150
+Distance operation = 137
+Distance processor = 197
+Distance project = 223
+Distance silicon = 239
+Distance simulation = 183
+Distance software = 276
+Distance speed = 205
+Distance support = 138
+Distance team = 240
+Distance technology = 167
+Distance test = 169
+Distance mosque = 277
+  outcast29.txt   29     0.01
+
+Total elapsed time: 0.02 seconds
+
+==> passed
+
+
+Total: 2/2 tests passed!
+
+
+================================================================

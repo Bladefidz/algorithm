@@ -1,0 +1,454 @@
+<HTML>
+
+<HEAD>
+<TITLE>
+Programming Assignment 1 Checklist: Percolation
+</TITLE>
+</HEAD>
+
+<BODY>
+<H3>
+Programming Assignment 1 Checklist: Percolation
+</H3>
+
+<p>
+<br>
+
+<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
+<tr align = left>
+<td bgcolor = "000000">
+<font size = +0 face = "helvetica" color = "ffffff">
+<center><b>Frequently Asked Questions (General)</b></center>
+</table>
+
+<p><b>What's a checklist?</b>
+The assignment provides the programming assignment specification;
+the checklist provides clarifications, test data, and hints that might be
+helpful in completing the assignment.
+
+<p><b>Which Java programming environment should I use?</b>
+For novices, we recommend the lightweight IDE <a href = "http://www.drjava.org/">DrJava</a>
+along with the command line.
+If you use our Mac OS X or Windows installer, then everything should be
+configured and ready to go.
+If you prefer to use a different IDE (such as Eclipse), that's perfectly
+fine too&mdash;just be sure that you know how to do the following:
+<ul>
+<p><li>Add <tt>algs4.jar</tt> to your Java classpath.
+<p><li>Enter command-line arguments.
+<p><li>Use standard input and standard output (and, ideally, redirect them to or from a file).
+</ul>
+
+
+
+<p><b>Where can I find the Java code and Javadoc for the algorithms and data structures
+from lecture and the textbook?</b>
+They are in <tt>algs4.jar</tt>.
+Here are the <a href = "http://algs4.cs.princeton.edu/code/index.php">APIs<a>.
+
+<p><b>Where can I find the Javadoc for the input and output libraries
+from lecture and the textbook?</b>
+They are in <tt>algs4.jar</tt>.
+Here are the <a href = "http://algs4.cs.princeton.edu/code/index.php#stdlib">APIs<a>.
+
+<p><b>How can I classpath in the textbook libraries from the command line?</b>
+If you use our Mac OS X or Windows installer, then you can automatically classpath
+in the textbook libraries using the commands <tt>javac-algs4</tt> and <tt>java-algs4</tt>
+(instead of <tt>javac</tt> and <tt>java</tt>).
+
+<p><b>I haven't programmed in Java in a while. What material do 
+I need to remember?</b>
+For a review of our Java programming model (including our input and output libraries),
+read Sections 1.1 and 1.2 of  <em>Algorithms, 4th Edition</em>.
+
+<p><b>Can I use various Java libraries in this assignment, such as <tt>java.util.LinkedList</tt>,
+<tt>java.util.ArrayList</tt>, <tt>java.util.TreeMap</tt>, and
+<tt>java.util.HashMap</tt>?</b>
+No. You should not use any Java libraries until we have implemented equivalent
+versions in lecture.
+Once we have introduced them in lecture, you are free to use either the Java
+library version or our equivalent.
+You are welcome to use classes in the Java language such as <tt>Math.sqrt()</tt>
+and <tt>Integer.parseInt()</tt>.
+
+<p><b>How do I throw a java.lang.IndexOutOfBoundsException?</b>
+Use a <tt>throw</tt> statement like the following:
+
+<blockquote>
+<pre>if (i <= 0 || i > n) throw new IndexOutOfBoundsException("row index i out of bounds");</pre>
+</blockquote>
+
+Your code should not attempt to catch any exceptions&mdash;this will interfere
+with our grading scripts.
+
+
+<p><b>How should I format and comment my code?</b>
+Here are some recommended <a href = "http://introcs.cs.princeton.edu/11style/">style guidelines</a>.
+Below are some that are particularly important (though we will not deduct for style in this course).
+
+<ul>
+<p><li> Include a bold (or Javadoc)
+comment at the beginning of each file with your name,
+date, the purpose of the program, and how to execute it.
+
+<p><li> Include a bold (or Javadoc) comment describing every method.
+
+<p><li> Include a comment describing every instance variable.
+
+<p><li> Indent consistently, using 3 or 4 spaces for each indentation level.
+Do not use hard tabs.
+
+<p><li> Do not exceed 80 characters per line. This rule also applies to the
+<tt>readme.txt</tt> file.
+
+<p><li> Avoid unexplained magic numbers, especially ones that are used
+more than once.
+
+</ul>
+
+
+<p>
+<br>
+
+<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
+<tr align = left>
+<td bgcolor = "000000">
+<font size = +0 face = "helvetica" color = "ffffff">
+<center><b>Frequently Asked Questions (Percolation)</b></center>
+</table>
+
+
+<p><b>What are the goals of this assignment?</b>
+<ul>
+<p><li> Set up a Java programming environment.
+
+<p><li> Use our input and output libraries.
+
+<p><li> Learn about a scientific application of the union&ndash;find data structure.
+
+<p><li> Measure the running time of a program and use the doubling hypothesis
+to make predictions.
+
+<p><li> Measure the amount of memory used by a data structure.
+
+</ul>
+
+<p><b>Can I add (or remove) methods to (or from) Percolation?</b>
+No. You must implement the <tt>Percolation</tt> API exactly as specified, with the 
+identical set of public methods and signatures or your assignment will not be graded.
+However, you are
+encouraged to add private methods that enhance the readability, maintainability,
+and modularity of your program.
+The one exception is <tt>main()</tt>&mdash;you are always permitted to
+add this method to test your code, but we will not call it unless we specify
+it in our API.
+
+<p><b>Can my Percolation data type assume the row and column
+indices are between 0 and n&minus;1?</b>
+No. The API specifies that valid row and column indices are between 1 and <em>n</em>.
+
+<p><b>Why is it so important to implement the prescribed API?</b>
+Writing to an API is an important skill to master
+ because it is an essential component of modular programming,
+whether you are developing software by yourself or as part of a group. When 
+you develop a module that properly implements an API, anyone using that module (including 
+yourself, perhaps at some later time) does not need to revisit the details of the
+code for that module when using it.
+This approach greatly simplifies writing large programs, developing 
+software as part of a group, or developing software for use by others.
+<!--
+For example, the correctness of your program relies on
+<tt>WeightQuickUnionUF</tt> implementing its documented API.
+-->
+
+<p>
+Most important, when you properly implement an API, others can write
+software to use your module or to test it.
+We do this regularly when grading your programs. For example, your 
+<tt>PercolationStats</tt> client should work with our
+<tt>Percolation</tt> data type and vice versa. If you add an extra public
+method to <tt>Percolation</tt> and call them from <tt>PercolationStats</tt>,
+then your client won't work with our <tt>Percolation</tt> data type.
+Conversely, our <tt>PercolationStats</tt> client may not work with your 
+<tt>Percolation</tt> data type if you remove a public method.
+
+
+<p><b>How many lines of code should my program be?</b>
+You should strive for clarity and efficiency. Our reference solution for
+<tt>Percolation.java</tt> is about 70 lines, plus a test client.
+Our <tt>PercolationStats.java</tt> client is about 50 lines.
+If you are re-implementing the union-find data structure
+(instead of reusing the implementations provided), you are on the wrong track.
+
+
+<p><b>What assumptions can I make about the input to main() in PercolationStats?</b>
+It can be any valid input: an integer <em>n</em> &ge; 1
+and an integer <em>trials</em> &ge; 1.
+In general, in this course you can assume that the input is of the specified 
+format. But you do need to deal with pathological cases such as <em>n</em> = 1.
+
+
+<p><b>What should <tt>stddev()</tt> return if <em>trials</em> equals 1?</b>
+The sample standard deviation is undefined. We recommend returning <tt>Double.NaN</tt>.
+
+<p><b>After the system has percolated, my PercolationVisualizer colors in light blue
+all sites connected to open sites on the bottom (in addition to those connected to open sites
+on the top). Is this "backwash" acceptable?</b>
+No, this is likely a bug in <tt>Percolation</tt>. It is only a minor deduction
+(because it impacts only the visualizer and not the experiment to estimate
+the percolation threshold), so don't go crazy trying to get this detail.
+However, many students consider this to be the most challenging and creative
+part of the assignment (especially if you limit yourself to one union-find object).
+
+
+<p>
+<blockquote>
+<pre>&nbsp;&nbsp; % <b>java PercolationVisualizer input10.txt</b></pre>
+<img src = "percolation-backwash.png" alt = "Percolation backwash">
+</blockquote>
+
+<p><b>How do I generate a site uniformly at random among all blocked sites
+for use in PercolationStats?</b>
+Pick a site at random (by using <tt>StdRandom</tt> to generate two
+integers between 1 and <em>n</em>) and use this site if it is blocked; if not, repeat.
+
+<p><b>I don't get reliable timing information in PercolationStats when <em>n</em> = 200.
+What should I do?</b>
+Increase the size of <em>n</em> (say to 400, 800, and 1600), until
+the mean running time exceeds its standard deviation.
+
+<!--
+<p><b>How should I compute the mean and standard deviation?</b>
+Don't reinvent the wheel&mdash;use <tt>StdStats.mean()</tt>
+and <tt>StdStats.stddev()</tt>, respectively.
+-->
+
+<p><br>
+
+
+
+<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
+<tr align = left>
+<td bgcolor = "000000">
+<font size = +0 face = "helvetica" color = "ffffff">
+<center><b>Style and Bug Checkers</b></center>
+</table>
+
+<p>
+
+
+<p><b>Style checker.</b>
+We recommend using <a href = "http://checkstyle.sourceforge.net/">Checkstyle 8.2</a>
+and the configuration file
+<a href = "http://algs4.cs.princeton.edu/linux/checkstyle-coursera.xml">checkstyle-coursera.xml</a>
+to check the style of your Java programs.
+Here is a list of available 
+<a href = "http://checkstyle.sourceforge.net/availablechecks.html">Checkstyle checks</a>.
+
+<p><b>Bug checker.</b>
+We recommend using 
+<a href = "http://findbugs.sourceforge.net/">FindBugs 2.0.3</a> (with Java 6)
+or <a href = "http://findbugs.sourceforge.net/">FindBugs 3.0.1</a> (with Java 7 and 8)
+and the configuration file <a href = "http://algs4.cs.princeton.edu/linux/findbugs-coursera.xml">findbugs-coursera.xml</a>
+to identify common bug patterns in your code.
+Here is a summary of <a href = "http://findbugs.sourceforge.net/bugDescriptions.html">FindBugs
+Bug descriptions</a>.
+
+<p><b>Mac OS X and Windows installer.</b>
+If you used our Mac OS X or Windows installer, these programs are already installed
+as command-line utilities.
+You can check a single file or multiple files via the commands:
+
+<blockquote>
+<pre>
+% <b>checkstyle-algs4 HelloWorld.java</b>
+% <b>checkstyle-algs4 *.java</b>
+
+% <b>findbugs-algs4 HelloWorld.class</b>
+% <b>findbugs-algs4 *.class</b>
+</pre>
+</blockquote>
+
+Note that Checkstyle inspects the source code; Findbugs inspects the compiled code.
+
+<p><b>Eclipse.</b>
+For Eclipse users,
+there is a <a href = "http://eclipse-cs.sourceforge.net/">Checkstyle plugin
+for Eclipse</a>
+and a <a href = "http://findbugs.cs.umd.edu/eclipse">Findbugs plugin for Eclipse</a>.
+
+
+<p><b>Caveat.</b>
+The autograder runs Checkstyle, but since programming style is subjective,
+it does not count toward your score.
+The appearance of a Findubgs warning message often indicates an error
+or poor coding practice (but false positive are possible).
+
+
+
+<p><br>
+
+
+
+
+<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
+<tr align = left>
+<td bgcolor = "000000">
+<font size = +0 face = "helvetica" color = "ffffff">
+<center><b>Testing</b></center>
+</table>
+
+
+<p><b>Testing.</b>
+
+We provide two clients that serve as large-scale visual traces.
+We highly recommend using them for testing and debugging your 
+<tt>Percolation</tt> implementation.
+
+<p><b>Visualization client.</b>
+<a href = "../testing/percolation/PercolationVisualizer.java">PercolationVisualizer.java</a> animates the
+results of opening sites in a percolation system specified by a file by performing the following steps:
+
+<ul>
+
+<p><li>
+Read the grid size <em>n</em> from the file.
+
+<p><li>
+Create an <em>n</em>-by-<em>n</em> grid of sites (initially all blocked).
+
+<p><li>
+Read in a sequence of sites (row <em>i</em>, column <em>j</em>) to open from the file.
+After each site is opened, draw full sites in light blue, open sites (that aren't full) in white, and
+blocked sites in black using <em>standard draw</em>, with with site (1, 1) in the upper left-hand corner.
+
+</ul>
+
+The program should behave as in 
+<a href = "percolation20-by-20.mov">this movie</a> and the following snapshots
+when used with <a href = "../testing/percolation/input20.txt">input20.txt</a>.
+
+<blockquote><pre>
+% <b>java PercolationVisualizer input20.txt</b>
+</pre></blockquote>
+
+<TABLE BORDER = 0 CELLPADDING =2 CELLSPACING = 0>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<td><IMG SRC="percolation-50.png" alt = "Percolation 50 sites">
+<br><center><font size = -1><em>50 open sites</em></font></center>
+<td><IMG SRC="percolation-100.png" alt = "Percolation 100 sites">
+<br><center><font size = -1><em>100 open sites</em></font></center>
+<td><IMG SRC="percolation-150.png" alt = "Percolation 150 sites">
+<br><center><font size = -1><em>150 open sites</em></font></center>
+<td><IMG SRC="percolation-204.png" alt = "Percolation 204 sites">
+<br><center><font size = -1><em>204 open sites</em></font></center>
+<td><IMG SRC="percolation-250.png" alt = "Percolation 250 sites">
+<br><center><font size = -1><em>250 open sites</em></font></center>
+</tr>
+</table>
+
+
+<p><b>Sample data files.</b>
+The directory
+<a href = "http://coursera.cs.princeton.edu/algs4/testing/percolation/">percolation</a>
+contains some sample files for use with the visualization client.
+Associated with each input <tt>.txt</tt> file is an output <tt>.png</tt> file that contains the
+desired graphical output at the end of the animation.
+For convenience, <a href = "http://coursera.cs.princeton.edu/algs4/testing/percolation-testing.zip">percolation-testing.zip</a>
+contains all of these files bundled together.
+
+
+<p><b>InteractiveVisualization client.</b>
+<a href = "../testing/percolation/InteractivePercolationVisualizer.java">InteractivePercolationVisualizer.java</a> is similar
+to the first test client except that the input comes from a mouse (instead of from a file).
+It takes an integer command-line argument <em>n</em> that specifies the lattice size.
+As a bonus, it writes to standard output the sequence of sites opened in the same format used by
+<tt>PercolationVisualizer</tt>, so you can use it to prepare interesting files for testing.
+If you design an interesting data file, feel free to share it with us and your classmates by posting it
+in the discussion forums.
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
+<tr align = left>
+<td bgcolor = "000000">
+<font size = +0 face = "helvetica" color = "ffffff">
+<center><b>Possible Progress Steps</b></center>
+</table>
+<p>
+
+These are purely suggestions for how you might make progress.  You do
+not have to follow these steps.
+
+<ol>
+
+<p><li><b>Consider not worrying about backwash for your first attempt.</b>
+If you're feeling overwhelmed, don't worry about backwash when following the possible progress steps below. You 
+can revise your implementation once you have a better handle on the problem and have solved the problem without 
+handling backwash.
+
+<p><li><b>For each method in <tt>Percolation</tt> that you must implement
+(<tt>open()</tt>, <tt>percolates()</tt>, etc.), make a list of which <tt>WeightedQuickUnionUF</tt>
+methods might be useful for implementing that method.</b>
+This should help solidify what you're attempting to accomplish. 
+
+<p><li><b>Using the list of methods above as a guide, choose instance variables that
+you'll need to solve the problem.</b>
+Don't overthink this, you can always change them later. Instead, use your list of instance variables to guide 
+your thinking as you follow the steps below, and make changes to your instance variables as you go. Hint: At 
+minimum, you'll need to store the grid size, which sites are open, and which sites are connected to which other 
+sites. The last of these is exactly what the union-find data structure is designed for.
+
+<p><li>
+<b>Plan how you're going to map from a 2-dimensional (row, column) pair
+to a 1-dimensional union find object index.</b>
+You will need to come up with a scheme for uniquely 
+mapping 2D coordinates to 1D coordinates. We recommend writing a private method with a 
+signature along the lines of <tt>int xyTo1D(int, int)</tt> that performs this conversion. You 
+will need to utilize the percolation grid size when writing this method. Writing such a 
+private method (instead of copying and pasting a conversion formula multiple times throughout 
+your code) will greatly improve the readability and maintainability of your code. In general, 
+we encourage you to write such modules wherever possible. Directly test this method using the 
+main() function of Percolation.
+
+<p><li><b>Write a private method for validating indices.</b>
+Since each method is supposed to throw an exception for invalid indices, you should write a private method which 
+performs this validation process.
+
+<p><li><b>Write the <tt>open()</tt> method and the <tt>Percolation()</tt> constructor.</b> The open() method should do three things. First, it should validate the indices of the site that it receives. Second, it should somehow mark the site as open. Third, it should perform some sequence of <tt>WeightedQuickUnionUF</tt> operations that links the site in question to its open neighbors. The constructor and instance variables should facilitate the <tt>open()</tt> method's ability to do its job. 
+
+<p><li><b>Test the <tt>open()</tt> method and the <tt>Percolation()</tt> constructor.</b> These tests should be in <tt>main()</tt>. An example of a simple test is to call <tt>open(1, 1)</tt> and <tt>open(1, 2)</tt>, and then to ensure that the two corresponding entries are connected (using <tt>.connected()</tt> in <tt>WeightedQuickUnionUF</tt>).
+
+<p><li><b>Write the <tt>percolates()</tt>, <tt>isOpen()</tt>, and <tt>isFull()</tt> methods.</b> These should be very simple methods. 
+
+<p><li><b>Test your complete implementation using the visualization clients.</b> 
+
+<p><li><b>Write and test the PercolationStats class.</b> 
+
+</ol>
+
+<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
+<tr align = left>
+<td bgcolor = "000000">
+<font size = +0 face = "helvetica" color = "ffffff">
+<center><b>Programming Tricks and Common Pitfalls</b></center>
+</table>
+<p>
+
+<ol>
+	<p><li><b>Do not write your own union&ndash;find data structure. Use <tt>WeightedQuickUnionUF</tt> instead.</b> 
+	<p><li><b>Your <tt>Percolation</tt> class must use 
+                  <a href ="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/WeightedQuickUnionUF.html"><tt>WeightedQuickUnionUF</tt></a>.</b>
+                  Otherwise, it will fail the timing tests, as the autograder intercepts and counts calls to methods in <tt>WeightedQuickUnionUF</tt>.
+	<p><li><b>It's OK to use an extra row and/or column to deal with the 1-based indexing of the
+                  percolation grid.</b> Though it is slightly inefficient, it's fine to use arrays or union-find objects that are slightly larger than strictly necessary. Doing this results in cleaner code at the cost
+                  of slightly greater memory usage.
+	<p><li><b>Each of the methods (except the constructor) in <tt>Percolation</tt> must use a constant number of union-find operations.</b> If you have a <tt>for</tt> loop inside of one of your <tt>Percolation</tt> methods,
+you're probably doing it wrong. Don't forget about the virtual-top / virtual-bottom trick described in lecture.
+	
+</ol>
+
+
+</body>
+</html>

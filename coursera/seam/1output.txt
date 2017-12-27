@@ -1,0 +1,632 @@
+See the Assessment Guide for information on how to interpret this report.
+
+ASSESSMENT SUMMARY
+
+Compilation:  PASSED
+API:          PASSED
+
+Findbugs:     FAILED (3 warnings)
+PMD:          PASSED
+Checkstyle:   FAILED (0 errors, 13 warnings)
+
+Correctness:  28/31 tests passed
+Memory:       6/6 tests passed
+Timing:       18/17 tests passed
+
+Aggregate score: 95.37%
+[Compilation: 5%, API: 5%, Findbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
+
+ASSESSMENT DETAILS
+
+The following files were submitted:
+----------------------------------
+7.2K Dec 23 14:22 SeamCarver.java
+
+
+********************************************************************************
+*  COMPILING                                                                    
+********************************************************************************
+
+
+% javac SeamCarver.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+Checking the APIs of your programs.
+*-----------------------------------------------------------
+SeamCarver:
+
+================================================================
+
+
+********************************************************************************
+*  CHECKING STYLE AND COMMON BUG PATTERNS                                       
+********************************************************************************
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+L P UPM_UNCALLED_PRIVATE_METHOD UPM: The private method 'col()' is never called.  At SeamCarver.java:[line 84]
+L P UPM_UNCALLED_PRIVATE_METHOD UPM: The private method 'row()' is never called.  At SeamCarver.java:[line 89]
+M D DLS_DEAD_LOCAL_STORE DLS: Assigns a value to the local variable 'energiesT' but that value is never used.  At SeamCarver.java:[line 108]
+Warnings generated: 3
+
+
+================================================================
+
+
+% pmd .
+*-----------------------------------------------------------
+SeamCarver.java:82: Avoid unused private methods, such as 'col(int)'. [UnusedPrivateMethod]
+SeamCarver.java:87: Avoid unused private methods, such as 'row(int)'. [UnusedPrivateMethod]
+PMD ends with 2 warnings.
+
+
+================================================================
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[WARN] SeamCarver.java:2:1: Unnecessary import statement for 'java.lang.IllegalArgumentException' because it is from the package 'java.lang'. [RedundantImport]
+[WARN] SeamCarver.java:2:8: Unused import statement for 'java.lang.IllegalArgumentException'. [UnusedImports]
+[WARN] SeamCarver.java:3:1: Unnecessary import statement for 'java.lang.Math' because it is from the package 'java.lang'. [RedundantImport]
+[WARN] SeamCarver.java:3:8: Unused import statement for 'java.lang.Math'. [UnusedImports]
+[WARN] SeamCarver.java:4:8: Unused import statement for 'edu.princeton.cs.algs4.In'. [UnusedImports]
+[WARN] SeamCarver.java:5:8: Unused import statement for 'edu.princeton.cs.algs4.StdIn'. [UnusedImports]
+[WARN] SeamCarver.java:6:8: Unused import statement for 'edu.princeton.cs.algs4.StdOut'. [UnusedImports]
+[WARN] SeamCarver.java:8:8: Unused import statement for 'edu.princeton.cs.algs4.IndexMinPQ'. [UnusedImports]
+[WARN] SeamCarver.java:12:1: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[WARN] SeamCarver.java:134:30: Do not put multiple statements on the same line. [OneStatementPerLine]
+[WARN] SeamCarver.java:135:47: Do not put multiple statements on the same line. [OneStatementPerLine]
+[WARN] SeamCarver.java:136:57: Do not put multiple statements on the same line. [OneStatementPerLine]
+[WARN] SeamCarver.java:178:59: Do not put multiple statements on the same line. [OneStatementPerLine]
+Checkstyle ends with 0 errors and 13 warnings.
+
+% custom checkstyle checks for SeamCarver.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+********************************************************************************
+*  TESTING CORRECTNESS
+********************************************************************************
+
+Testing correctness of SeamCarver
+*-----------------------------------------------------------
+Running 31 total tests.
+
+Test 1a: check energy() with file inputs
+  * 6x5.png
+  * 4x6.png
+  * 10x12.png
+  * 3x7.png
+  * 5x6.png
+  * 7x3.png
+  * 7x10.png
+  * 12x10.png
+  * stripes.png
+  * diagonals.png
+  * chameleon.png
+  * HJoceanSmall.png
+  * 1x8.png
+  * 8x1.png
+  * 1x1.png
+==> passed
+
+Test 1b: check energy() with random pictures
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 1c: check energy() with random pictures in which the RGB components
+         of each pixel are in a small range
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 2a: check width() with file inputs
+  * 6x5.png
+  * 4x6.png
+==> passed
+
+Test 2b: check width() with random pictures
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+==> passed
+
+Test 3a: check height() with file inputs
+  * 6x5.png
+  * 4x6.png
+==> passed
+
+Test 3b: check height() with random pictures
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+==> passed
+
+Test 4a: check findVerticalSeam() with file inputs
+  * 6x5.png
+  * 4x6.png
+  * 10x12.png
+  * 3x7.png
+  * 5x6.png
+  * 7x3.png
+  * 7x10.png
+  * 12x10.png
+  * stripes.png
+  * diagonals.png
+  * chameleon.png
+  * HJoceanSmall.png
+  * 1x8.png
+  * 8x1.png
+  * 1x1.png
+==> passed
+
+Test 4b: check findVerticalSeam() with random pictures
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 4c: check findVerticalSeam() with random pictures in which
+         the RGB values of each pixel are in a small range
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 5a: check findHorizontalSeam() with file inputs
+  * 6x5.png
+  * 4x6.png
+  * 10x12.png
+  * 3x7.png
+  * 5x6.png
+  * 7x3.png
+  * 7x10.png
+  * 12x10.png
+  * stripes.png
+  * diagonals.png
+  * chameleon.png
+  * HJoceanSmall.png
+  * 1x8.png
+  * 8x1.png
+  * 1x1.png
+==> passed
+
+Test 5b: check findHorizontalSeam() with random pictures
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 5c: check findHorizontalSeam() with random pictures in which the RGB
+         components of each pixel are in a small range
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 6a: check removeVerticalSeam() with file inputs and optimal seams
+  * 6x5.png
+  * 10x12.png
+  * 3x7.png
+  * 5x6.png
+  * 7x3.png
+  * 7x10.png
+  * 12x10.png
+  * stripes.png
+  * diagonals.png
+  * chameleon.png
+  * HJoceanSmall.png
+  * 8x1.png
+==> passed
+
+Test 6b: check removeVerticalSeam() with random pictures and optimal seams
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 6c: check removeVerticalSeam() with file inputs and random seams
+  * 6x5.png
+  * 10x12.png
+  * 3x7.png
+  * 5x6.png
+  * 7x3.png
+  * 7x10.png
+  * 12x10.png
+  * stripes.png
+  * diagonals.png
+  * chameleon.png
+  * HJoceanSmall.png
+  * 8x1.png
+==> passed
+
+Test 6d: check removeVerticalSeam() with random pictures and random seams
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 7a: check removeHorizontalSeam() with file inputs and optimal seams
+  * 6x5.png
+  * 10x12.png
+  * 3x7.png
+  * 5x6.png
+  * 7x3.png
+  * 7x10.png
+  * 12x10.png
+  * stripes.png
+  * diagonals.png
+  * chameleon.png
+  * HJoceanSmall.png
+  * 1x8.png
+==> passed
+
+Test 7b: check removeHorizontalSeam() with random pictures and optimal seams
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 7c: check removeHorizontalSeam() with file inputs and random seams
+  * 6x5.png
+  * 10x12.png
+  * 3x7.png
+  * 5x6.png
+  * 7x3.png
+  * 7x10.png
+  * 12x10.png
+  * stripes.png
+  * diagonals.png
+  * chameleon.png
+  * HJoceanSmall.png
+  * 1x8.png
+==> passed
+
+Test 7d: check removeHorizontalSeam() with random pictures and random seams
+  * 4-by-6
+  * 5-by-5
+  * 6-by-4
+  * 7-by-10
+  * 250-by-250
+==> passed
+
+Test 8: check energy() with invalid arguments
+  * picture = 6x5.png, call energy(-1, 4)
+    - fails to throw an exception when calling energy(-1, 4)
+
+  * picture = 6x5.png, call energy(6, 4)
+    - fails to throw an exception when calling energy(6, 4)
+
+  * picture = 6x5.png, call energy(5, 5)
+    - fails to throw an exception when calling energy(5, 5)
+
+  * picture = 6x5.png, call energy(4, -1)
+    - throws wrong exception when calling energy(4, -1)
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+
+  * picture = 6x5.png, call energy(4, 5)
+    - throws wrong exception when calling energy(4, 5)
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+
+==> FAILED
+
+Test 9a: check removeVerticalSeam() with invalid seam
+  * picture = 10x10.png
+    - throws wrong exception when calling removeVerticalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 2 of 100
+    - entry 0 is not between 0 and 9
+    - invalid seam = { -1, 0, 1, 1, 2, 3, 4, 3, 2, 1 }
+
+  * picture = 3x7.png
+    - throws wrong exception when calling removeVerticalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 1 of 100
+    - entry 0 is not between 0 and 2
+    - invalid seam = { -1, 0, 0, 0, 0, 0, -1 }
+
+  * picture = 7x3.png
+    - throws wrong exception when calling removeVerticalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 1 of 100
+    - entry 2 is not between 0 and 6
+    - invalid seam = { 0, 0, -1 }
+
+  * picture = 10x12.png
+    - throws wrong exception when calling removeVerticalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 5 of 100
+    - entry 3 is not between 0 and 9
+    - invalid seam = { 0, 0, 0, -1, 0, 1, 2, 2, 1, 2, 2, 1 }
+
+  * picture = 12x10.png
+    - throws wrong exception when calling removeVerticalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 6 of 100
+    - entry 0 is not between 0 and 11
+    - invalid seam = { -1, 0, 0, 1, 1, 1, 1, 1, 1, 0 }
+
+  * picture = 1x8.png
+  * picture = 8x1.png
+    - throws wrong exception when calling removeVerticalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 1 of 100
+    - entry 0 is not between 0 and 7
+    - invalid seam = { -1 }
+
+  * picture = 1x1.png
+==> FAILED
+
+Test 9b: check removeHorizontalSeam() with invalid seam
+  * picture = 10x10.png
+    - throws wrong exception when calling removeHorizontalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 3 of 100
+    - entry 0 is not between 0 and 9
+    - invalid seam = { -1, 0, 0, 0, -1, 0, 1, 2, 2, 2 }
+
+  * picture = 3x7.png
+    - throws wrong exception when calling removeHorizontalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 1 of 100
+    - entry 0 is not between 0 and 6
+    - invalid seam = { -1, 0, 0 }
+
+  * picture = 7x3.png
+    - throws wrong exception when calling removeHorizontalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 2 of 100
+    - entry 0 is not between 0 and 2
+    - invalid seam = { -1, 0, 1, 0, 0, 1, 2 }
+
+  * picture = 10x12.png
+    - throws wrong exception when calling removeHorizontalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 1 of 100
+    - entry 0 is not between 0 and 11
+    - invalid seam = { -1, 0, 1, 1, 2, 3, 2, 1, 0, 0 }
+
+  * picture = 12x10.png
+    - throws wrong exception when calling removeHorizontalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 4 of 100
+    - entry 9 is not between 0 and 9
+    - invalid seam = { 8, 9, 9, 9, 8, 9, 8, 8, 9, 10, 9, 9 }
+
+  * picture = 1x8.png
+    - throws wrong exception when calling removeHorizontalSeam() with an invalid seam
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+    - failed on trial 1 of 100
+    - entry 0 is not between 0 and 7
+    - invalid seam = { -1 }
+
+  * picture = 8x1.png
+  * picture = 1x1.png
+==> FAILED
+
+Test 9c: check removeHorizontalSeam() and removeVerticalSeam() with null arguments
+  * picture = 6x5.png
+  * picture = 3x7.png
+==> passed
+
+Test 10a: check that client can mutate the Picture object that is passed to the constructor
+==> passed
+
+Test 10b: check that client can mutate the Picture object that is returned by picture()
+==> passed
+
+Test 11: check constructor with null argument
+==> passed
+
+Test 12a: check intermixed calls to findHorizontalSeam(), findVerticalSeam(),
+          removeHorizontalSeam(), and removeVerticalSeam(), width(), height(),
+          energy(), and picture() made with probabilities p1, p2, p3, p4, p5,
+          p6, p7, and p8, respectively with optimal seams
+  * random 5-by-6 image with p = (0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5)
+  * random 6-by-5 image with p = (0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5)
+  * random 6-by-6 image with p = (0.1, 0.1, 0.2, 0.2, 0.0, 0.0, 0.0, 0.4)
+  * random 6-by-6 image with p = (0.2, 0.2, 0.0, 0.0, 0.2, 0.2, 0.2, 0.0)
+  * random 6-by-6 image with p = (0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1)
+  * random 100-by-110 image with p = (0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5)
+  * random 110-by-100 image with p = (0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5)
+  * random 110-by-110 image with p = (0.1, 0.1, 0.2, 0.2, 0.0, 0.0, 0.0, 0.4)
+  * random 100-by-100 image with p = (0.2, 0.2, 0.0, 0.0, 0.1, 0.1, 0.2, 0.2)
+  * random 110-by-110 image with p = (0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.2)
+==> passed
+
+Test 12b: check intermixed calls to findHorizontalSeam(), findVerticalSeam(),
+          removeHorizontalSeam(), and removeVerticalSeam(), width(), height(),
+          energy(), and picture() made with probabilities p1, p2, p3, p4, p5,
+          p6, p7, and p8, respectively with random seams
+  * random 5-by-6 image with p = (0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5)
+  * random 6-by-5 image with p = (0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5)
+  * random 6-by-6 image with p = (0.1, 0.1, 0.2, 0.2, 0.0, 0.0, 0.0, 0.4)
+  * random 6-by-6 image with p = (0.2, 0.2, 0.0, 0.0, 0.2, 0.2, 0.2, 0.0)
+  * random 6-by-6 image with p = (0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1)
+  * random 100-by-110 image with p = (0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5)
+  * random 110-by-100 image with p = (0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5)
+  * random 110-by-110 image with p = (0.1, 0.1, 0.2, 0.2, 0.0, 0.0, 0.0, 0.4)
+  * random 100-by-100 image with p = (0.2, 0.2, 0.0, 0.0, 0.1, 0.1, 0.2, 0.2)
+  * random 110-by-110 image with p = (0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.2)
+==> passed
+
+Test 12c: check intermixed calls to findHorizontalSeam(), findVerticalSeam(),
+          removeHorizontalSeam(), and removeVerticalSeam(), width(), height(),
+          energy(), and picture() made with probabilities p1, p2, p3, p4, p5,
+          p6, p7, and p8, respectively with optimal seams
+          (tests corner cases when width = 1 and/or height = 1)
+  * random 1-by-8 image with p = (0.1, 0.1, 0.2, 0.0, 0.1, 0.1, 0.2, 0.2)
+  * random 8-by-1 image with p = (0.1, 0.1, 0.0, 0.2, 0.1, 0.1, 0.2, 0.2)
+  * random 1-by-1 image with p = (0.2, 0.2, 0.0, 0.0, 0.1, 0.1, 0.2, 0.2)
+==> passed
+
+
+Total: 28/31 tests passed!
+
+
+================================================================
+********************************************************************************
+*  MEMORY
+********************************************************************************
+
+Analyzing memory of SeamCarver
+*-----------------------------------------------------------
+Running 6 total tests.
+
+Memory usage of a SeamCarver after removing 2 horizontal
+and 2 vertical seams from an n-by-n image.
+
+Maximum allowed memory is ~ 12 n^2 bytes.
+
+                 n       student (bytes)
+-------------------------------------------
+=> passed       16         3336
+=> passed       32        12808
+=> passed       64        50184
+=> passed      128       198664
+=> passed      256       790536
+=> passed      512      3153928
+==> 6/6 tests passed
+
+Total: 6/6 tests passed!
+
+Estimated student memory (bytes) = 12.00 n^2 + 16.00 n + 8.00   (R^2 = 1.000)
+================================================================
+
+
+
+********************************************************************************
+*  TIMING
+********************************************************************************
+
+Timing SeamCarver
+*-----------------------------------------------------------
+Reference solution is unoptimized.
+
+Running 17 total tests.
+
+Test 1: create a SeamCarver object for a given 736-by-584 picture;
+        then call findHorizontalSeam(), removeHorizontalSeam(),
+        findVerticalSeam(), removeVerticalSeam(), and picture()
+        one each; count total number of calls to methods in Picture
+  * constructor calls        = 1
+  * get()    calls per pixel = 1.0
+  * set()    calls per pixel = 1.0
+  * getRGB() calls per pixel = 0.0
+  * setRGB() calls per pixel = 0.0
+==> passed
+
+Test 2: create a SeamCarver object for a given 736-by-584 picture;
+        then call findHorizontalSeam(), removeHorizontalSeam(),
+        findVerticalSeam(), and removeVerticalSeam(), and picture();
+        once each; count total number of calls to methods in Color
+  * constructor calls per pixel = 6.0
+  * getRed()    calls per pixel = 4.0
+  * getGreen()  calls per pixel = 4.0
+  * getBlue()   calls per pixel = 4.0
+  * getRGB()    calls per pixel = 1.0
+  * equal number of calls to getRed(), getGreen(), and getBlue()
+==> passed
+
+Tests 3a-3c: time removeVerticalSeam() for a given 736-by-584 picture
+  * student   solution calls per second:      41.34
+  * reference solution calls per second:      44.79
+  * reference / student ratio:                 1.08
+
+=> passed      student <= 150.0x reference
+=> passed      student <=  15.0x reference
+=> passed      student <=   4.5x reference
+
+Tests 4a-4c: time findVerticalSeam() and removeVerticalSeam()
+             for a given 736-by-584 picture
+  * student   solution calls per second:      18.71
+  * reference solution calls per second:       7.53
+  * reference / student ratio:                 0.40
+
+=> passed      student <= 150.0x reference
+=> passed      student <=  15.0x reference
+=> passed      student <=   2.3x reference
+
+Tests 5a-5c: time removeHorizontalSeam() for a given 736-by-584 picture
+  * student   solution calls per second:    1416.02
+  * reference solution calls per second:      14.69
+  * reference / student ratio:                 0.01
+
+=> passed      student <= 150.0x reference
+=> passed      student <=  15.0x reference
+=> passed      student <=   4.5x reference
+
+Tests 6a-6c: time findHorizontalSeam() and removeHorizontalSeam()
+             for a given 736-by-584 picture
+  * student   solution calls per second:      25.45
+  * reference solution calls per second:       4.35
+  * reference / student ratio:                 0.17
+
+=> passed      student <= 150.0x reference
+=> passed      student <=  15.0x reference
+=> passed      student <=   2.3x reference
+
+Tests 7a-7c: time findHorizontalSeam(), removeHorizontalSeam(), findVerticalSeam(),
+             and removeVerticalSeam() for a given 736-by-584 picture
+  * student   solution calls per second:      11.11
+  * reference solution calls per second:       3.05
+  * reference / student ratio:                 0.27
+
+=> passed      student <= 150.0x reference
+=> passed      student <=  15.0x reference
+=> passed      student <=   1.5x reference
+=> optimized   student <=   0.8x reference
+
+Total: 18/17 tests passed!
+
+
+================================================================
+
+
+
+

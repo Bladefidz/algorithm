@@ -1,0 +1,1064 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en">
+
+<head>
+
+<link rel="apple-touch-icon" href="https://algs4.cs.princeton.edu/apple-touch-icon.png"></link>
+<link rel="shortcut icon"    href="https://algs4.cs.princeton.edu/favicon.ico"></link>
+
+<link rel="stylesheet"       href="https://algs4.cs.princeton.edu/algs4.css" type="text/css" media="screen"></link>
+
+<meta name="google-site-verification" content="nYspbl5bNBQrNZKguiAAFTMVM7sq2P1WQYc8Oi6Okl0" />
+<meta name="msvalidate.01" content="D4B7F6DF793EFF34DE96F611C2A367A5" />
+
+<!-- IE HACKS -->
+<!--[if IE]>
+<style type="text/css" media="screen">
+ #menu ul li {float: left; width: 100%;}
+</style>
+<![endif]-->
+<!--[if lt IE 7]>
+<style type="text/css" media="screen">
+body {
+behavior: url(/csshover.htc);
+} 
+#menu ul li {float: left; width: 100%;}
+#menu ul li a {height: 1%;} 
+
+#menu a, #menu h2 {
+font: bold 0.9em/1.5em arial, helvetica, sans-serif;
+} 
+
+</style>
+<![endif]-->
+
+
+
+<title>
+Hello World in Java on Linux</title>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=iso-8859-1">
+<META NAME="AUTHOR" CONTENT="Robert Sedgewick and Kevin Wayne">
+<META NAME="KEYWORDS" CONTENT="Hello World in Java on Linux,Algorithms,4th edition,data structures,Java,intro,introduction,Sedgewick,Wayne">
+<META NAME="DESCRIPTION" CONTENT="The textbook Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne surveys the most important algorithms and data structures in use today. The broad perspective taken makes it an appropriate introduction to the field.">
+<META NAME="TITLE" CONTENT="Hello World in Java on Linux. Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne.">
+<META NAME="ROBOTS" CONTENT="INDEX,FOLLOW">
+
+<script type='text/javascript' src='/media/swfobject.js'></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-10811519-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+
+<body>
+
+<div id = "menu">
+<div align="center">
+<a class = picture href = "https://algs4.cs.princeton.edu">
+<img src="https://algs4.cs.princeton.edu/cover.png" width=189 height=236 border=0 alt = "Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne">
+</a>  
+</div>
+
+
+
+
+
+<ul>
+  <li><a class = title href = "https://algs4.cs.princeton.edu">Algorithms, 4th edition</a>
+
+<ul>
+
+
+      <li> <a href = "/10fundamentals">1.&nbsp;&nbsp;Fundamentals</a>
+        <ul>
+          <li> <a href = "/11model">1.1&nbsp;&nbsp;Programming Model</a>
+          <li> <a href = "/12oop">1.2&nbsp;&nbsp;Data Abstraction</a>
+          <li> <a href = "/13stacks">1.3&nbsp;&nbsp;Stacks and Queues</a>
+          <li> <a href = "/14analysis">1.4&nbsp;&nbsp;Analysis of Algorithms</a>
+          <li> <a href = "/15uf">1.5&nbsp;&nbsp;Case Study: Union-Find</a>
+        </ul>
+
+      <li> <a href = "/20sorting">2.&nbsp;&nbsp;Sorting</a>
+        <ul>
+          <li> <a href = "/21elementary">2.1&nbsp;&nbsp;Elementary Sorts</a>
+          <li> <a href = "/22mergesort">2.2&nbsp;&nbsp;Mergesort</a>
+          <li> <a href = "/23quicksort">2.3&nbsp;&nbsp;Quicksort</a>
+          <li> <a href = "/24pq">2.4&nbsp;&nbsp;Priority Queues</a>
+          <li> <a href = "/25applications">2.5&nbsp;&nbsp;Sorting Applications</a>
+        </ul>
+
+      <li> <a href = "/30searching">3.&nbsp;&nbsp;Searching</a>
+        <ul>
+          <li> <a href = "/31elementary">3.1&nbsp;&nbsp;Symbol Tables</a>
+          <li> <a href = "/32bst">3.2&nbsp;&nbsp;Binary Search Trees</a>
+          <li> <a href = "/33balanced">3.3&nbsp;&nbsp;Balanced Search Trees</a>
+          <li> <a href = "/34hash">3.4&nbsp;&nbsp;Hash Tables</a>
+          <li> <a href = "/35applications">3.5&nbsp;&nbsp;Searching Applications</a>
+        </ul>
+
+      <li> <a href = "/40graphs">4.&nbsp;&nbsp;Graphs</a>
+        <ul>
+          <li> <a href = "/41graph">4.1&nbsp;&nbsp;Undirected Graphs</a>
+          <li> <a href = "/42digraph">4.2&nbsp;&nbsp;Directed Graphs</a>
+          <li> <a href = "/43mst">4.3&nbsp;&nbsp;Minimum Spanning Trees</a>
+          <li> <a href = "/44sp">4.4&nbsp;&nbsp;Shortest Paths</a>
+        </ul>
+
+      <li> <a href = "/50strings">5.&nbsp;&nbsp;Strings</a>
+        <ul>
+          <li> <a href = "/51radix">5.1&nbsp;&nbsp;String Sorts</a>
+          <li> <a href = "/52trie">5.2&nbsp;&nbsp;Tries</a>
+          <li> <a href = "/53substring">5.3&nbsp;&nbsp;Substring Search</a>
+          <li> <a href = "/54regexp">5.4&nbsp;&nbsp;Regular Expressions</a>
+          <li> <a href = "/55compression">5.5&nbsp;&nbsp;Data Compression</a>
+        </ul>
+
+      <li> <a href = "/60context">6.&nbsp;&nbsp;Context</a>
+        <ul>
+          <li> <a href = "/61event">6.1&nbsp;&nbsp;Event-Driven Simulation</a>
+          <li> <a href = "/62btree">6.2&nbsp;&nbsp;B-trees</a>
+          <li> <a href = "/63suffix">6.3&nbsp;&nbsp;Suffix Arrays</a>
+          <li> <a href = "/64maxflow">6.4&nbsp;&nbsp;Maxflow</a>
+          <li> <a href = "/65reductions">6.5&nbsp;&nbsp;Reductions</a>
+          <li> <a href = "/66intractability">6.6&nbsp;&nbsp;Intractability</a>
+        </ul>
+    </ul>
+
+
+
+
+<li><a class = title> Related Booksites</a>
+<table width = 100% border = 0 cellspacing = 0 cellpadding = 0>
+<tr>
+<td align = center>
+<a class = booksite href = "https://introcs.cs.princeton.edu">
+   <img src = "https://introcs.cs.princeton.edu/java/cover.png"
+        width = 80 height = 108 border=0
+        alt = "Introduction to Programming in Java
+               by Robert Sedgewick and Kevin Wayne">
+</a>
+<td align = center>
+<a class = booksite href = "http://aofa.cs.princeton.edu">
+   <img src = "https://algs4.cs.princeton.edu/cover-analysis-of-algorithms.png"
+        width = 81 height = 108 border=0
+        alt = "An Introduction to the Analysis of Algorithms by Robert Sedgewick and Philippe Flajolet">
+</a>
+</tr>
+</table>
+
+<li><a class = title>Web Resources</a>
+
+
+      <li> <a href = "/faq">FAQ</a>
+      <li> <a href = "https://introcs.cs.princeton.edu/java/data">Data</a>
+      <li> <a href = "/code">Code</a>
+      <li> <a href = "/errata">Errata</a>
+      <li> <a href = "/cheatsheet">Cheatsheet</a>
+      <li> <a href = "/references">References</a>
+      <li> <a href = "https://www.coursera.org/course/algs4partI">Online Course</a>
+      <li> <a href = "/lectures">Lecture Slides</a>
+      <li> <a href = "https://introcs.cs.princeton.edu/java/assignments">Programming Assignments</a>
+   </ul>
+
+</ul>
+
+<p><br>
+
+<script>
+  (function() {
+    var cx = '005649317310637734940:s7fqljvxwfs';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+
+<p><br>
+
+
+
+
+</div>
+
+
+<div id = "content">
+
+<h1 class = center>Hello World in Java on Linux</h1>
+
+<p><br>
+
+<font color = green>Beta version of instructions (last updated 9/9/2017 to include PMD
+and the <code>-cos226</code> and <code>-coursera</code> wrapper scripts).</font>
+
+
+<p>
+This document instructs you on how to setup a Java programming environment 
+under Linux.
+It also provides a
+step-by-step guide for creating, compiling, and executing your first Java
+program using either DrJava or the command line. We assume some familiarity
+with the command line.
+All of the software is freely available on the web.
+
+<p>
+
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 6 CELLSPACING = 0 WIDTH = 100%>
+<tr align = "left">
+<td bgcolor = "#000000">
+<font size = +0 face = "helvetica" color = "#ffffff">
+<center>0. &nbsp; Install Java</center>
+</table>
+
+<p><br>
+
+You will use the Java Platform, Standard Edition Development Kit (JDK 8).
+
+
+<ul>
+<p><li>
+Log in to the user account in which you will be programming.
+Your account must have Administrator privileges and you must be connected to the Internet.
+
+<p><li>Launch your shell.
+We'll assume that the command prompt looks like the following (though yours will likely differ):
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/]
+</pre></td></tr>
+</table>
+</blockquote>
+
+The <code>~/</code> is shorthand for your home directory.
+
+
+<p><li>
+Install the
+Java Platform, Standard Edition Development Kit (JDK 8),
+either from
+<a href = "http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Oracle</a>
+or
+<a href = "http://openjdk.java.net/install/">OpenJDK</a>.  
+Most Linux distributions provide their own mechanism for
+installing software. For example, here are the commands on Ubuntu for Oracle JDK 8:
+
+<blockquote> 
+<table>
+<TR><TD><pre>
+[username:~/] <b>sudo add-apt-repository ppa:webupd8team/java</b>
+[username:~/] <b>sudo apt-get update</b>
+[username:~/] <b>sudo apt-get install oracle-java8-installer</b>
+[username:~/] <b>sudo apt-get install oracle-java8-set-default</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+
+If you use another Linux distribution, use that distribution's package manager
+(see the first Q+A under Troubleshooting).
+
+<P><li>
+To confirm that the Java compiler is installed,
+type the command in boldface below and check that the results match:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/] <b>javac -version</b>
+javac 1.8.0_144</pre></td></tr>
+</table>
+</blockquote>
+
+It's important that you see the number <code>1.8</code> (or later)
+for the Java version number, but the rest is not critical.
+
+<P><li>
+To confirm that the Java interpreter is installed, type
+the command in boldface below and check that the results match:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/] <b>java -version</b>
+java version "1.8.0_144"
+Java(TM) SE Runtime Environment (build 1.8.0_144-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)
+</pre></td></tr>
+</table>
+</blockquote>
+
+Again, it's important that you see the number <code>1.8</code> (or later)
+for the Java version number, but the rest is not critical.
+
+</ul>
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 6 CELLSPACING = 0 WIDTH = 100%>
+<tr align = "left">
+<td bgcolor = "#000000">
+<font size = +0 face = "helvetica" color = "#ffffff">
+<center>1. &nbsp; Install a Programming Environment</center>
+</table>
+
+<p><br>
+
+These steps install and configures our textbook libraries, DrJava, Findbugs, PMD, an Checkstyle.
+If you do not want DrJava, Findbugs, PMD, or Checkstyle, simply skip the corresponding step.
+
+<ul>
+
+<p><li> Create a directory <code>/usr/local/algs4</code>.
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/] <b>cd /usr/local</b>
+[username:/usr/local] <b>sudo mkdir algs4</b>
+[username:/usr/local] <b>sudo chmod 755 algs4</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+Navigate to the subdirectory <code>/usr/local/algs4</code>.
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:/usr/local] <b>cd algs4</b>
+[username:/usr/local/algs4] <b>pwd</b>
+/usr/local/algs4</pre></td></tr>
+</table>
+</blockquote>
+
+<p><li>Download the textbook libraries from
+<a href = "https://algs4.cs.princeton.edu/code/algs4.jar">algs4.jar</a>
+and the Java wrapper scripts from
+<a href = "javac-algs4">javac-algs4</a>,
+<a href = "javac-algs4">javac-cos226</a>,
+<a href = "javac-algs4">javac-coursera</a>,
+<a href = "java-algs4">java-algs4</a>,
+<a href = "java-algs4">java-cos226</a>, and
+<a href = "java-algs4">java-coursera</a>.
+
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:/usr/local/algs4] <b>sudo curl -O "https://algs4.cs.princeton.edu/code/algs4.jar"</b>
+[username:/usr/local/algs4] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/{javac,java}-{algs4,cos226,coursera}"</b>
+[username:/usr/local/algs4] <b>sudo chmod 755 {javac,java}-{algs4,cos226,coursera}</b>
+[username:/usr/local/algs4] <b>sudo mv {javac,java}-{algs4,cos226,coursera} /usr/local/bin</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+The command <code>curl</code> downloads files from the web; if your system doesn't have <code>curl</code>,
+try <code>wget</code> instead.
+
+
+<p><li>Download 
+<a href = "http://www.drjava.org">DrJava</a>
+from
+<a href = "drjava.jar">drjava.jar</a>,
+the wrapper script from
+<a href = "drjava">drjava</a>,
+and the configuration file from
+<a href = ".drjava">.drjava</a>.
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:/usr/local/algs4] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/{drjava.jar,drjava,.drjava}"</b>
+[username:/usr/local/algs4] <b>sudo chmod 755 drjava</b>
+[username:/usr/local/algs4] <b>sudo mv drjava /usr/local/bin</b>
+[username:/usr/local/algs4] <b>sudo mv .drjava ~</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+<p><li>
+Download 
+<a href = "http://findbugs.sourceforge.net/">Findbugs 3.0.1</a>
+from <a href = "findbugs.zip">findbugs.zip</a>;
+our Findbugs configuration file
+from <a href = "findbugs.xml">findbugs.xml</a>;
+and the Findbugs wrapper scripts from
+<a href = "findbugs-algs4">findbugs-algs4</a>,
+<a href = "findbugs-algs4">findbugs-cos226</a>, and
+<a href = "findbugs-algs4">findbugs-coursera</a>.
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:/usr/local/algs4/] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/findbugs.{zip,xml}"</b>
+[username:/usr/local/algs4/] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/findbugs-{algs4,cos226,coursera}"</b>
+[username:/usr/local/algs4/] <b>sudo unzip findbugs.zip</b>
+[username:/usr/local/algs4/] <b>sudo chmod 755 findbugs-{algs4,cos226,coursera}</b>
+[username:/usr/local/algs4/] <b>sudo mv findbugs-{algs4,cos226,coursera} /usr/local/bin</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+<p><li>
+Download
+<a href = "https://pmd.github.io/pmd-5.8.1/">PMD 5.8.1</a>
+from <a href = "pmd.zip">pmd.zip</a>;
+our PMD configuration file from <a href = "pmd.xml">pmd.xml</a>
+and the PMD wrapper scripts
+<a href = "pmd-algs4">pmd-algs4</a>,
+<a href = "pmd-algs4">pmd-cos226</a>, and
+<a href = "pmd-algs4">pmd-coursera</a>.
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:/usr/local/algs4/] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/pmd.{zip,xml}"</b>
+[username:/usr/local/algs4/] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/pmd-{algs4,cos226,coursera}"</b>
+[username:/usr/local/algs4/] <b>sudo unzip pmd.zip</b>
+[username:/usr/local/algs4/] <b>sudo chmod 755 pmd-{algs4,cos226,coursera}</b>
+[username:/usr/local/algs4/] <b>sudo mv pmd-{algs4,cos226,coursera} /usr/local/bin</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+
+
+<p><li>
+Download <a href = "http://checkstyle.sourceforge.net/">Checkstyle 8.2</a>
+from <a href = "checkstyle.zip">checkstyle.zip</a>;
+our Checkstyle configuration files from
+<a href = "checkstyle-algs4.xml">checkstyle-algs4.xml</a>,
+<a href = "checkstyle-algs4.xml">checkstyle-cos226.xml</a>, and
+<a href = "checkstyle-algs4.xml">checkstyle-coursera.xml</a>;
+and the Checkstyle wrapper scripts from
+<a href = "checkstyle-algs4">checkstyle-algs4</a>,
+<a href = "checkstyle-algs4">checkstyle-cos226</a>, and
+<a href = "checkstyle-algs4">checkstyle-coursera</a>.
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:/usr/local/algs4/] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/checkstyle.zip"</b>
+[username:/usr/local/algs4/] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/checkstyle-suppressions.xml"</b>
+[username:/usr/local/algs4/] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/checkstyle-{algs4,cos226,coursera}.xml"</b>
+[username:/usr/local/algs4/] <b>sudo curl -O "https://algs4.cs.princeton.edu/linux/checkstyle-{algs4,cos226,coursera}"</b>
+[username:/usr/local/algs4/] <b>sudo unzip checkstyle.zip</b>
+[username:/usr/local/algs4/] <b>sudo chmod 755 checkstyle-{algs4,cos226,coursera}</b>
+[username:/usr/local/algs4/] <b>sudo mv checkstyle-{algs4,cos226,coursera} /usr/local/bin</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+<p><li>
+For these wrapper scripts to work, it is important that <code>/usr/local/bin</code> is in your
+<code>PATH</code> environment variable. This is very likely the case.
+If not, see the Troubleshooting section below.
+
+
+</ul>
+
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 6 CELLSPACING = 0 WIDTH = 100%>
+<tr align = "left">
+<td bgcolor = "#000000">
+<font size = +0 face = "helvetica" color = "#ffffff">
+<center>2. &nbsp; Create a Program in DrJava</center>
+</table>
+
+<p><br>
+
+Now you are ready to write your first Java program.
+You will develop your Java programs in an application called <em>DrJava</em>.
+DrJava features many specialized programming tools including syntax highlighting,
+bracket matching, auto indenting, and line numbering.
+<ul>
+
+<p><li>
+If you use a file manager such as Konqueror or Nautilus, you 
+can launch DrJava by double-clicking the <code>drjava.jar</code> file.
+Otherwise, launch DrJava from the command line by typing:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/] <b>drjava</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+
+<p>
+<li>If you copied the <code>.drjava</code> file to your home directory, these
+customizations should already be included:
+<ul>
+
+<p><li>
+Display line numbers by selecting
+<em>Edit -> Preferences -> Display Options -> Show All Line Numbers</em>.
+
+<p><li>
+Set the indentation level to 4 by selecting
+<em>Edit -> Preferences -> Miscellaneous -> Indent Level -> 4</em>.
+
+<p><li>
+Set the Java classpath by selecting
+<em>Edit -> Preferences ->  Resources -> Extra Classpath -> Add</em>
+and add the following entry:
+
+<blockquote>
+<code>/usr/local/algs4/algs4.jar</code>
+</blockquote>
+
+</ul>
+
+<p><li>
+In the main DrJava window, type the Java program
+<a href="http://introcs.cs.princeton.edu/java/11hello/HelloWorld.java.html">
+HelloWorld.java</a> exactly as it appears below. If you omit even a semicolon, 
+the program won't work.
+
+
+<blockquote>
+<table>
+<TR><TD><pre>
+public class HelloWorld {
+    public static void main(String[] args) { 
+        System.out.println("Hello, World");
+    }
+}
+</pre></td></tr>
+</table>
+</blockquote>
+
+                    
+As you type, DrJava does the indenting for you.
+
+<p><li> 
+Finally, click the <em>Save</em> button to save the file in a directory of your choice.
+Name the file <code>HelloWorld.java</code>.
+The file name is case sensitive and must exactly match the name of the
+class in the Java program.
+</ul> 
+
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 6 CELLSPACING = 0 WIDTH = 100%>
+<tr align = "left">
+<td bgcolor = "#000000">
+<font size = +0 face = "helvetica" color = "#ffffff">
+<center>3. &nbsp; Compile a Program from DrJava</center>
+</table>
+
+<p><br>
+
+It is now time to convert your Java program into a form more amenable for 
+execution on a computer. To do this, click the <em>Compile</em> button.
+If all goes well, you should see the following message in the <em>Compiler Output</em>
+pane at the bottom:
+<blockquote>
+<table>
+<TR><TD><pre>
+Compilation completed.
+</pre></td></tr>
+</table>
+</blockquote>
+
+
+<p> 
+If DrJava complains in some way, you mistyped something.
+Check your program carefully, using the error messages in the Compiler Output pane
+as a guide.
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 6 CELLSPACING = 0 WIDTH = 100%>
+<tr align = "left">
+<td bgcolor = "#000000">
+<font size = +0 face = "helvetica" color = "#ffffff">
+<center>4. &nbsp; Execute a Program from DrJava</center>
+</table>
+
+<p><br>
+
+Now it is time to run your program. This is the fun part.
+<ul> 
+<p><li> 
+Type the following in the <em>Interactions</em> pane at the bottom.
+By convention, we highlight the text you type in bold.
+
+<blockquote>
+<table>
+<TR><TD><pre>
+> <b>java HelloWorld</b> 
+</pre></td></tr>
+</table>
+</blockquote>
+
+                     
+If all goes well, you should see the following message:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+Welcome to DrJava.  Working directory is /Users/username/algs4/hello
+> <b>java HelloWorld</b> 
+Hello, World
+</pre></td></tr>
+</table>
+</blockquote>
+
+<p><li> 
+You may need to repeat this <em>edit–compile–execute</em> cycle a few times 
+before it works.
+</ul>
+
+
+
+
+
+
+<!--
+The command-line provides capabilities beyond those available in DrJava,
+including redirection and piping.
+You will type commands in an application called the <em>shell</em>.
+<p>
+If you plan to take COS 217, you might want to buy the required book
+<em>Programming with GNU Software</em> by Loukides and Oram.
+It contains an overview of Unix from the
+user's point of view. It also describes shell fundamentals, with
+reference to the Bourne-Again shell (bash), Bourne shell (sh), and C shell (csh).
+-->
+
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 6 CELLSPACING = 0 WIDTH = 100%>
+<tr align = "left">
+<td bgcolor = "#000000">
+<font size = +0 face = "helvetica" color = "#ffffff">
+<center>5. &nbsp; Compile a Program from the Shell
+</center>
+</table>
+
+<p><br>
+
+<p>
+You will use the <code>javac</code> command to convert your Java program into a form more 
+amenable for execution on a computer.
+
+<ul>
+
+<p><li>
+From the shell, navigate to the directory containing <code>HelloWorld.java</code>,
+say <code>~/hello</code>,
+by typing the <code>cd</code> (<em>change directory</em>) commands below:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/] <b>cd hello</b>
+[username:~/hello/]
+</pre></td></tr>
+</table>
+</blockquote>
+
+
+<li>
+Compile <code>HelloWorld.java</code> by typing the <code>javac</code> command below:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/hello/] <b>javac HelloWorld.java</b>
+[username:~/hello/]
+</pre></td></tr>
+</table>
+</blockquote>
+
+
+Assuming the file <code>HelloWorld.java</code> is in the current working directory,
+you should see no error messages.
+
+<p><li>
+To make our textbook libraries accessible to Java,
+use the command
+<code>javac-algs4</code> instead.
+For example, to compile <a href = "TestAlgs4.java.html">TestAlgs4.java</a>,
+which uses our <em>standard drawing library</em>,
+the auto-installer issues the the following command:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+machine:~/Desktop &lt;username&gt;$ <b>javac-algs4 TestAlgs4.java</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+At this time, 
+<code>javac-cos226</code> and
+<code>javac-coursera</code>
+are equivalent to
+<code>javac-algs4</code>.
+
+</ul>
+
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 6 CELLSPACING = 0 WIDTH = 100%>
+<tr align = "left">
+<td bgcolor = "#000000">
+<font size = +0 face = "helvetica" color = "#ffffff">
+<center>6. &nbsp; Execute a Program from the Shell
+</center>
+</table>
+
+<p><br>
+
+You will use the <code>java</code> command to execute your program.
+
+<ul>
+<li>
+From the shell, type the <code>java</code> command below.
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/hello/] <b>java HelloWorld</b>
+Hello, World
+</pre></td></tr>
+</table>
+</blockquote>
+
+
+You should see the output of the program.
+
+<p><li>
+To make our textbook libraries accessible to Java,
+use the command
+<code>java-algs4</code>
+instead.
+For example, type the following two commands to test standard drawing and standard audio:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/hello] <b>java-algs4 edu.princeton.cs.algs4.StdDraw</b>
+[ displays a graphics window with some geometric shapes and text ]
+
+[username:~/hello] <b>java-algs4 edu.princeton.cs.algs4.StdAudio</b>
+[ plays an A major scale ]
+</pre></td></tr>
+</table>
+</blockquote>
+
+At this time, 
+<code>java-cos226</code> and
+<code>java-coursera</code>
+are equivalent to
+<code>java-algs4</code>.
+
+</ul>
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 6 CELLSPACING = 0 WIDTH = 100%>
+<tr align = "left">
+<td bgcolor = "#000000">
+<font size = +0 face = "helvetica" color = "#ffffff">
+<center>7. &nbsp; Static Code Analysis Tools</center>
+</table>
+
+<p><br>
+
+You can use
+<a href = "http://findbugs.sourceforge.net/">Findbugs</a>,
+<a href = "https://pmd.github.io/pmd-5.8.1/">PMD</a>,
+and
+<a href = "http://checkstyle.sourceforge.net/">Checkstyle</a>
+and
+to check the style of your programs and identify common bug patterns.
+
+
+<ul> 
+
+<p><li> 
+To run Findbugs, type the following command in the Terminal:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/hello] <b>findbugs-algs4 *.class</b>
+Running findbugs on HelloWorld.class:
+</pre></td></tr>
+</table>
+</blockquote>
+
+The argument must be a list of <code>.class</code> files.
+Here is a list of 
+<a href = "http://findbugs.sourceforge.net/bugDescriptions.html">bug descriptions</a>.
+
+<!--
+<p>
+At this time,
+<code>findbugs-cos226</code> and
+<code>findbugs-coursera</code>
+are equivalent to
+<code>findbugs-algs4</code>.
+-->
+
+
+<p><li>
+To run PMD 5.8.1, type the following command in the Terminal:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/hello] <b>pmd-algs4 .</b>
+</pre></td></tr>
+</table>
+</blockquote>
+The argument must be a directory containing <code>.java</code> files.
+Here is a list of
+<a href = "https://pmd.github.io/pmd-5.8.1/pmd-java/rules/index.html">bug patterns</a>.
+
+<!--
+<p>
+At this time,
+<code>pmd-cos226</code> and
+<code>pmd-coursera</code>
+are equivalent to
+<code>pmd-algs4</code>.
+-->
+
+<p><li> 
+To run Checkstyle, type the following command in the Terminal:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/hello] <b>checkstyle-algs4 *.java</b>
+Running checkstyle on HelloWorld.java:
+Starting audit...
+Audit done.
+</pre></td></tr>
+</table>
+</blockquote>
+
+The argument must be a list of <code>.java</code> files.
+Here is a list of
+<a href = "http://checkstyle.sourceforge.net/checks.html">available checks</a>.
+
+
+
+<p><li>COS 226 students should use the following versions of these commands, to match the corresponding
+versions in the autograder:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/hello] <b>findbugs-cos226 HelloWorld.class</b>
+Running findbugs on HelloWorld.class:
+
+[username:~/hello] <b>pmd-cos226 .</b>
+
+[username:~/hello] <b>checkstyle-cos226 HelloWorld.java</b>
+Running checkstyle on HelloWorld.java:
+Starting audit...
+Audit done.
+</pre></td></tr>
+</table>
+</blockquote>
+
+
+<p><li>Coursera students should use the following versions of these commands, to match the corresponding
+versions in the autograder:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/hello] <b>findbugs-coursera HelloWorld.class</b>
+Running findbugs on HelloWorld.class:
+
+[username:~/hello] <b>pmd-coursera .</b>
+
+[username:~/hello] <b>checkstyle-coursera HelloWorld.java</b>
+Running checkstyle on HelloWorld.java:
+Starting audit...
+Audit done.
+</pre></td></tr>
+</table>
+</blockquote>
+
+</ul>
+
+
+
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 6 CELLSPACING = 0 WIDTH = 100%>
+<tr align = "left">
+<td bgcolor = "#000000">
+<font size = +0 face = "helvetica" color = "#ffffff">
+<center>Troubleshooting</center>
+</table>
+
+<p><br>
+
+<p><b>My distribution of Linux is
+{ Gentoo, Debian, Ubuntu, Fedora, Red Hat, SuSE, Mandriva, or Slackware }.
+How should I modify the instructions?</b>
+We haven't tested out these instructions on all flavors of Linux, but
+the instructions should be identical except for installing Java.
+We recommend using your distribution's
+<a href = "http://distrowatch.com/dwres.php?resource=package-management">package manager</a>
+(such as portage, apt, emerge, or yum) to install Java.
+Here are some instructions for <a href = "http://openjdk.java.net/install/index.html">installing OpenJDK</a>.
+
+<p>
+<b>Can I use a different version of Java?</b> 
+Yes. Any version of Java 8 (either Oracle or OpenJDK) or later should work fine.
+
+<!--
+<p>
+<b>Can I update DrJava to use a newer version?</b> 
+Yes, but you do not need to do so.
+-->
+
+<p>
+<b>I had to manually enter the location of tools.jar in DrJava, but it doesn't
+seem to have any effect. Any suggestions?</b>
+This setting doesn't take effect until you restart DrJava.
+
+<p>
+<b>Can I use a different IDE?</b> 
+Yes, feel free to use another IDE (such as Eclipse) but
+you will have to configure the IDE properties yourself (such as the classpath).
+
+
+<p><b>How do I determine which shell I'm running?</b>
+Type the following command:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/] <b>echo $SHELL</b>
+bash
+</pre></td></tr>
+</table>
+</blockquote>
+
+You shell will likey be <code>bash</code>, <code>tcsh</code>, <code>sh</code>,
+<code>ksh</code> or <code>zsh</code>.
+
+<p><b>How can I check that /usr/local/bin is in my PATH?</b>
+
+From the shell, type the following command:
+
+<blockquote>
+<table>
+<TR><TD><pre>
+[username:~/] <b>echo $PATH</b>
+</pre></td></tr>
+</table>
+</blockquote>
+
+You should see an entry /usr/local/bin, with entries separated by colon (:) characters.
+
+<p><b>How can I add /usr/local/bin to my PATH?</b>
+It depends significantly on your Linux distribution, shell, and user configuration.
+In the bash shell, this generally means adding the following
+line to either your <code>.bash_profile</code>, <code>.profile</code>, or <code>.bashrc</code> file.
+For other common shells, this could mean updating your
+<code>.cshrc</code>, <code>.tcshrc</code>, or <code>.zcshrc</code> files.
+
+
+<blockquote>
+<table>
+<TR><TD><pre>
+# Add ~/algs4/bin to the PATH
+export PATH=$PATH:$HOME/algs4/bin
+</pre></td></tr>
+</table>
+</blockquote>
+
+You may need to logout and log back in for it to take effect.
+
+
+<p><b>When I compile or execute a program from the shell that uses one of the
+textbook libraries, I get an error. How can I fix this?</b>
+First, make sure that you are using the <code>javac-algs4</code> and <code>java-algs4</code>
+wrapper scripts.
+Next, verify that you have the file <code>/usr/local/algs4/algs4.jar</code>.
+
+
+<!--
+<p>
+<b>How do I break out of an infinite loop?</b> 
+From DrJava, click the <em>Reset</em> button in the menubar or select the menu option 
+<em>Tools -> Reset Interactions</em>;
+from the shell, type <code>Ctrl-c</code>.
+
+
+<p><b>When using standard input, how do I signify that there is no more data?</b>
+If you are entering input from the keyboard, type <code>Ctrl-d</code> for EOF (end of file)
+from either DrJava or the shell.
+-->
+
+</ul>
+
+
+
+
+<br><br>
+<p class = footer>
+<em>Last modified on October 20, 2017.</em><br><br>
+Copyright &copy; 2000&ndash;2016
+<a href = "https://www.cs.princeton.edu/~rs" class = footer>Robert Sedgewick</a>
+and
+<a href = "https://www.cs.princeton.edu/~wayne" class = footer>Kevin Wayne</a>.
+All rights reserved.
+</div>
+
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10811519-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+</html>
+
+ 

@@ -1,0 +1,79 @@
+# Egg Drop
+Suppose you have:
+* N eggs
+* F floors
+Find floor T where an egg will broke. The egg drop followed physical law defined below:
+* If an egg dropped an does not break, it can be used again for next tosses.
+* If an egg break throw from T floor, then it will also break if throw from {T+1, ..., F} floor.
+* If an egg does not break throw from T floor, then it will also not break if throw from {T-1, ..., 1} floor.
+
+Case 0: 1 egg, ≤T tosses.
+Case 1: ∼1*lg⁡(n) eggs and ∼1*lg(⁡n) tosses.
+Case 2: ∼lg⁡(T) eggs and ∼2*lg(⁡)T tosses.
+Case 3: 2 eggs and ∼2*sqrt(n) tosses.
+Case 4: 2 eggs and ≤c*sqrt(T) tosses for some fixed constant c.
+
+Case 0: sequential search.
+Case 1: binary search.
+Case 2: find an interval containing T of size ≤2sqrt(T), then do binary search.
+Case 3: find an interval of size n, then do sequential search. Note: can be improved to ∼2*sqrt(n) tosses.
+Case 4: 1+2+3+…+t∼12t2. Aim for c=22.
+
+# Case 0
+Use brute force algorithm.
+
+for (i = 0 to max(floors)) {
+    if (isBreak(i)) {
+        break;
+    }
+}
+
+# Case 1
+Use binary search to find which floor caused an egg breaks.
+
+l = 0;
+r = max(floors);
+firstBreak = false;
+while(l >= r) {
+    m = (l + r) / 2;
+    break = isBreak(m);
+    if (!firstBreak) {
+        firstBreak = break;
+    }
+    if (break) {
+        r = m + 1;
+    } else {
+        if (firstBreak) {  // this should value of T
+            T = m;
+            break;
+        } else {
+            l = m - 1;
+        }
+    }
+}
+
+# Case 2
+
+
+# Case 3
+sn = sqrt(N).
+Let R is floor where first egg breaks at floor between {sn, sn*2, ..., N}.
+S = R/sn;
+Let T is floor where second egg breaks at floor {S+1, S+2, ..., S-1}.
+
+sn = sqrt(N);
+i = 1;
+R = -1;
+while (!isBreak(F1)) {
+    R = sn * i;
+    i++;
+}
+i = 1;
+for (S = abs(R/sn); S < R; S++) {
+    if (isBreak(S)) {
+        break;
+    }
+    S++;
+}
+
+# Case 4
