@@ -1,0 +1,342 @@
+See the Assessment Guide for information on how to interpret this report.
+
+ASSESSMENT SUMMARY
+
+Compilation:  PASSED
+API:          PASSED
+
+Findbugs:     PASSED
+PMD:          PASSED
+Checkstyle:   FAILED (0 errors, 10 warnings)
+
+Correctness:  22/23 tests passed
+Memory:       4/4 tests passed
+Timing:       1/1 tests passed
+
+Aggregate score: 97.39%
+[Compilation: 5%, API: 5%, Findbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
+
+ASSESSMENT DETAILS
+
+The following files were submitted:
+----------------------------------
+7.6K Jan  1 03:55 BaseballElimination.java
+
+
+********************************************************************************
+*  COMPILING                                                                    
+********************************************************************************
+
+
+% javac BaseballElimination.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+Checking the APIs of your programs.
+*-----------------------------------------------------------
+BaseballElimination:
+
+================================================================
+
+
+********************************************************************************
+*  CHECKING STYLE AND COMMON BUG PATTERNS                                       
+********************************************************************************
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+% pmd .
+*-----------------------------------------------------------
+BaseballElimination.java:31: The private instance (or static) variable 'q' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:53: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+BaseballElimination.java:53: The private instance (or static) variable 'V' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:54: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+BaseballElimination.java:54: The private instance (or static) variable 'teamName' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:55: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+BaseballElimination.java:55: The private instance (or static) variable 'teams' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:56: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+BaseballElimination.java:56: The private instance (or static) variable 'scores' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:57: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+BaseballElimination.java:57: The private instance (or static) variable 'matchesNum' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:58: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+BaseballElimination.java:58: The private instance (or static) variable 'matches' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:59: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+PMD ends with 14 warnings.
+
+
+================================================================
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[WARN] BaseballElimination.java:2:8: Unused import statement for 'edu.princeton.cs.algs4.StdIn'. [UnusedImports]
+[WARN] BaseballElimination.java:5:8: Unused import statement for 'edu.princeton.cs.algs4.SET'. [UnusedImports]
+[WARN] BaseballElimination.java:6:8: Unused import statement for 'edu.princeton.cs.algs4.Edge'. [UnusedImports]
+[WARN] BaseballElimination.java:14:4: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[WARN] BaseballElimination.java:53:17: The instance variable 'V' must start with a lowercase letter and use camelCase. [MemberName]
+[WARN] BaseballElimination.java:59:26: The instance variable 'R' must start with a lowercase letter and use camelCase. [MemberName]
+[WARN] BaseballElimination.java:201:22: '>=' is not preceded with whitespace. [WhitespaceAround]
+[WARN] BaseballElimination.java:201:24: '>=' is not followed by whitespace. [WhitespaceAround]
+[WARN] BaseballElimination.java:274:15: '>' is not preceded with whitespace. [WhitespaceAround]
+[WARN] BaseballElimination.java:274:16: '>' is not followed by whitespace. [WhitespaceAround]
+Checkstyle ends with 0 errors and 10 warnings.
+
+% custom checkstyle checks for BaseballElimination.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+********************************************************************************
+*  TESTING CORRECTNESS
+********************************************************************************
+
+Testing correctness of BaseballElimination
+*-----------------------------------------------------------
+Running 23 total tests.
+
+Test 1: check numberOfTeams()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 2: check teams()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 3: check wins()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 4: check losses()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 5: check remaining()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 6: check against()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 7a: check isEliminated() when n = 4
+  * teams4.txt
+  * teams4a.txt
+  * teams4b.txt
+==> passed
+
+Test 7b: check isEliminated() when n = 5
+  * teams5.txt
+  * teams5a.txt
+  * teams5b.txt
+  * teams5c.txt
+==> passed
+
+Test 7c: check isEliminated() when n = 6 to 19
+  * teams7.txt
+  * teams8.txt
+  * teams10.txt
+  * teams12.txt
+  * teams12-allgames.txt
+==> passed
+
+Test 7d: check isEliminated() when n = 20 to 30
+  * teams24.txt
+  * teams29.txt
+  * teams30.txt
+==> passed
+
+Test 7e: check isEliminated() when n = 30 to 50
+  * teams32.txt
+  * teams36.txt
+  * teams42.txt
+  * teams48.txt
+==> passed
+
+Test 8: check that isEliminated() is consistent with certificateOfElimination()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 9a: check certificateOfElimination() when n = 4
+  * teams4.txt
+  * teams4a.txt
+  * teams4b.txt
+==> passed
+
+Test 9b: check certificateOfElimination() when n = 5
+  * teams5.txt
+  * teams5a.txt
+  * teams5b.txt
+  * teams5c.txt
+==> passed
+
+Test 9c: check certificateOfElimination() when n = 6 to 20
+  * teams7.txt
+  * teams8.txt
+  * teams10.txt
+  * teams12.txt
+  * teams12-allgames.txt
+==> passed
+
+Test 9d: check certificateOfElimination() when n = 20 to 30
+  * teams24.txt
+  * teams29.txt
+  * teams30.txt
+==> passed
+
+Test 9e: check certificateOfElimination() when n = 30 to 50
+  * teams32.txt
+  * teams36.txt
+  * teams42.txt
+  * teams48.txt
+==> passed
+
+Test 10: check methods when n = 1
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+==> passed
+
+Test 11: check immutability by calling certificateOfElimination() both before
+         and after calling isEliminated() and verifying that the results match
+  * teams4.txt
+  * teams5.txt
+  * teams29.txt
+==> passed
+
+Test 12: check that certificateOfElimination() returns null for eliminated teams
+  * teams4.txt
+    - fails when checking the elimination status of 'Atlanta'
+    - student   certificate of elimination = { }
+    - reference certificate of elimination = null
+
+  * teams5.txt
+    - fails when checking the elimination status of 'New_York'
+    - student   certificate of elimination = { }
+    - reference certificate of elimination = null
+
+==> FAILED
+
+Test 13: check for invalid arguments
+  * teams4.txt
+  * teams5.txt
+==> passed
+
+Test 14: check for dependence on reference equality of strings
+==> passed
+
+Test 15: check that two Baseball objects can be created at the same time
+  * teams4.txt and teams5.txt
+  * teams5.txt and teams7.txt
+==> passed
+
+
+Total: 22/23 tests passed!
+
+
+================================================================
+********************************************************************************
+*  TIMING
+********************************************************************************
+
+Timing BaseballElimination
+*-----------------------------------------------------------
+Running 1 total tests.
+
+    n   constructor isEliminated() + certificateOfElimination()
+----------------------------------------------------------------
+   30       0.60       0.00
+   36       0.76       0.00
+   42       1.31       0.00
+   48       2.59       0.00
+   54       4.55       0.00
+   60       7.72       0.00
+time = 1.03e-06 * n^3.83  (R^2 = 0.96)
+
+Total: 1/1 tests passed!
+
+
+================================================================
+
+
+
+********************************************************************************
+*  MEMORY
+********************************************************************************
+
+Analyzing memory of BaseballElimination
+*-----------------------------------------------------------
+Running 4 total tests.
+
+Student   vertices     = 0.50 n^2 - 0.50 n + 2.00   (R^2 = 1.000)
+Reference vertices     = 0.50 n^2 - 0.50 n + 3.00   (R^2 = 1.000)
+=> passed
+
+Student   edges        = 1.50 n^2 - 3.50 n + 2.00   (R^2 = 1.000)
+Reference edges        = 1.50 n^2 - 3.50 n + 2.00   (R^2 = 1.000)
+=> passed
+
+Student   memory of G  = 176.00 n^2 - 384.00 n + 344.00   (R^2 = 1.000)
+Reference memory of G  = 176.00 n^2 - 384.00 n + 384.00   (R^2 = 1.000)
+=> passed
+
+Student   memory       = 2.00 n^2 + 293.97 n + 266.86   (R^2 = 1.000)
+Reference memory       = 3.99 n^2 + 222.25 n + 396.00   (R^2 = 1.000)
+=> passed
+
+Total: 4/4 tests passed!
+
+================================================================
+
+
+
+
