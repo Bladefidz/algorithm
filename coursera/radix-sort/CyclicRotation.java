@@ -14,7 +14,7 @@
  * structures minimumcut suffixsort stackstack
  * binaryheap digraphdfs stringsort digraphbfs
  *
- * The order of growth of the running time should be nL2 (or better) in the
+ * The order of growth of the running time should be nL^2 (or better) in the
  * worst case. Assume that the alphabet size R is a small constant.
  *
  * Signing bonus. Do it in NnL time in the worst case.
