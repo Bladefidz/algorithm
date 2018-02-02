@@ -5,9 +5,11 @@ Implementation of useful algorithms into runnable and tested computer codes. Des
 Imperative knowledge needs practice and experience, so i code. Declarative knowledge needs strong understanding in mathematical abstraction and rigor, so i never satisfied if designed algorithm do not reach logarithmic time.
 
 ## Notes
-* [Graph](notes/Introduction%20to%20Algorithms%20Ch%206%20Graph%20Algorithm.pdf)
-* [String Matching](notes/Introduction%20to%20Algorithms%20Ch%2032%20String%20Matching.pdf)
-* [Union Find](notes/Algorithm%20Ch.%201.5%20Union-Find.pdf)
+* [Union Find](https://bladefidz.gitbooks.io/algorithm-chapter-1-5-union-find/content/)
+* [Graph](https://bladefidz.gitbooks.io/algorithm-ch-4-graph/content/)
+* [Network Flow](https://bladefidz.gitbooks.io/network-flow-algorithms/content/)
+* [String](https://bladefidz.gitbooks.io/algorithm-ch-5-string/content/)
+* [String Matching](https://bladefidz.gitbooks.io/introduction-to-algorithms-ch-32-string-matching/content/)
 
 ## Researches
 * [Sort Experiment](researches/sort_experiment.pdf)

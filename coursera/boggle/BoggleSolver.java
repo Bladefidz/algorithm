@@ -5,8 +5,8 @@ import edu.princeton.cs.algs4.SET;
 
 public class BoggleSolver
 {
-	private BoggleBoard board;
 	private SET<String> matched;
+	private BoggleBoard board;
 	private Node root;
 	private static final int R = 26;  // Uppercase / Lowercase ASCII
 	private int[][] IfRowColMore = {
@@ -24,19 +24,19 @@ public class BoggleSolver
 		{ 0, -1},          { 0, 1},
 		{ 1, -1}, { 1, 0}, { 1, 1}
 	};
-	boolean[][] marked;
+	private boolean[][] marked;
 	private int wordId;
+	private int maxDepth;
 
 	// Initializes the data structure using the given array of strings as the dictionary.
 	// (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
 	public BoggleSolver(String[] dictionary)
 	{
 		wordId = 0;
-		matched = new SET<>();
-		for (int i=0; i<dictionary.length; i++) {
-			if (dictionary[i].length() > 2) {
-				addWord(dictionary[i]);
-				// StdOut.println();
+		for (String word : dictionary) {
+			if (word.length() > 2) {
+				if (word.charAt(word.length()-1) != 'Q')
+					addWord(word);
 			}
 		}
 	}
@@ -44,26 +44,27 @@ public class BoggleSolver
 	// Returns the set of all valid words in the given Boggle board, as an Iterable.
 	public Iterable<String> getAllValidWords(BoggleBoard board)
 	{
-		if (matched.isEmpty()) {
-			this.board = board;
+		matched = new SET<>();
 
-			for (int r = 0; r < board.rows(); r++) {
-				for (int c = 0; c < board.cols(); c++) {
-					marked = new boolean[board.rows()][board.cols()];
-					char letter = board.getLetter(r, c);
-					Node node = root.next[toInt26(letter)];
-					StringBuilder word = new StringBuilder();
-					word.append(letter);
-					dfs(r, c, node, word);
-					// StdOut.println();
-				}
-			}
-			marked = null;
+		if (root == null) return matched;
 
-			if (matched.isEmpty()) {
-				matched.add("");
+		this.board = board;
+		maxDepth = board.rows() * board.cols();
+
+		for (int r = 0; r < board.rows(); r++) {
+			for (int c = 0; c < board.cols(); c++) {
+				marked = new boolean[board.rows()][board.cols()];
+				char letter = board.getLetter(r, c);
+				Node node = root.next[toInt26(letter)];
+				StringBuilder word = new StringBuilder();
+				word.append(letter);
+				dfs(r, c, node, word);
+				// StdOut.println();
 			}
 		}
+
+		marked = null;
+
 		return matched;
 	}
 
@@ -71,6 +72,7 @@ public class BoggleSolver
 	// (You can assume the word contains only the uppercase letters A through Z.)
 	public int scoreOf(String word)
 	{
+		if (!contains(word)) return 0;
 		if (word.length() < 3) return 0;
 		if (word.length() < 5) return 1;
 		if (word.length() < 6) return 2;
@@ -89,6 +91,28 @@ public class BoggleSolver
 		}
 	}
 
+	private Node get(Node x, String key, int d)
+	{
+		if (x == null) return null;
+		if (d == key.length()) return x;
+		char c = key.charAt(d);
+		if (c == 'Q') {
+			if (d < key.length()-1) {
+				return get(x.next[toInt26(c)], key, d+2);
+			}
+			return null;
+		}
+		return get(x.next[toInt26(c)], key, d+1);
+	}
+
+	private boolean contains(String key)
+	{
+		if (key == null) throw new IllegalArgumentException("argument to contains() is null");
+        Node x = get(root, key, 0);
+        if (x == null) return false;
+        return x.id != null;
+	}
+
 	private int toInt26(char c)
 	{
 		int i = (int) c;
@@ -99,57 +123,21 @@ public class BoggleSolver
 		throw new IllegalArgumentException("char " + c + "is not 26 alphabet char");
 	}
 
-	public void addWord(String key)
+	private void addWord(String key)
 	{
 		if (key == null)
 			throw new IllegalArgumentException("calls addWord() with null argument");
 		root = addWord(root, key, 0);
-
-		// if (root == null) root = new Node();
-		// Node x = root;
-		// Node y = x;
-		// int d = 0;
-		// for (d = 0; d < key.length(); d++) {
-		// 	int cur = toInt26(key.charAt(d));
-
-		// 	if (cur == -1)
-		// 		throw new IllegalArgumentException(
-		// 			"String contains non alphabet character");
-		// 	if (cur==20 && d>0) {
-		// 		int prev = toInt26(key.charAt(d-1));
-		// 		if (prev==16) {
-		// 			if (d<key.length()-1) {
-		// 				cur = toInt26(key.charAt(d+1));
-		// 				// StdOut.print(key.charAt(d+1));
-		// 				Node next = x.next[cur];
-		// 				if (next == null) next = new Node();
-		// 				x = next;
-		// 				d+=1;
-		// 			}
-		// 			continue;
-		// 		}
-		// 	}
-
-		// 	// StdOut.print(key.charAt(d));
-		// 	Node next = x.next[cur];
-		// 	if (next == null) next = new Node();
-		// 	x = next;
-		// }
-		// if (d >= key.length()) {
-		// 	if (x.id == null) {
-		// 		x.id = wordId++;
-		// 	}
-		// }
-		// root = y;
-		// checkRoot(key);
 	}
 
 	private Node addWord(Node x, String key, int d)
 	{
-		if (x == null) x = new Node();
+		if (x == null) {
+			x = new Node();
+		}
 		if (d >= key.length()) {
 			if (x.id == null) {
-				// StdOut.println(d);
+				// StdOut.println(key);
 				x.id = wordId++;
 			}
 			return x;
@@ -159,15 +147,14 @@ public class BoggleSolver
 		if (cur == -1)
 			throw new IllegalArgumentException(
 				"String contains non alphabet character");
-		if (cur==20 && d>0) {
-			int prev = toInt26(key.charAt(d-1));
-			if (prev==16) {
-				if (d<key.length()-1) {
-					cur = toInt26(key.charAt(d+1));
+		if (cur == 16) {
+			if (d < key.length()-1) {
+				int u = toInt26(key.charAt(d+1));
+				if (u == 20) {
 					x.next[cur] = addWord(x.next[cur], key, d+2);
 				}
-				return x;
 			}
+			return x;
 		}
 
 		// StdOut.print(key.charAt(d));
@@ -178,25 +165,37 @@ public class BoggleSolver
 	private void dfs(int r, int c, Node x, StringBuilder w)
 	{
 		if (x == null) return;
-		if (x.id != null) matched.add(w.toString());
+		if (x.id != null && w.length() > 2) {
+			if (w.charAt(w.length() - 1) == 'Q') {
+				w.append('U');
+				matched.add(w.toString());
+				w.deleteCharAt(w.length() - 1);
+			} else {
+				matched.add(w.toString());
+			}
+		}
 
 		marked[r][c] = true;
 
-		for (int i=0; i<moveRowCol.length; i++) {
+		for (int i = 0; i < moveRowCol.length; i++) {
 			int[] more = IfRowColMore[i];
-			if (r>more[0] && c>more[1]) {
+			if (r > more[0] && c > more[1]) {
 				int[] less = ifRowColLess[i];
-				if (r<board.rows()+less[0] && c<board.cols()+less[1]) {
+				if (r < board.rows()+less[0] && c < board.cols()+less[1]) {
 					int[] rw = moveRowCol[i];
 					int nr = r+rw[0];
 					int nc = c+rw[1];
 					if (!marked[nr][nc]) {
-						// StdOut.println(
-						// 	r + " " + c + " = " + nr + " " + nc);
-						char ch = board.getLetter(nr, nc);
-						w.append(ch);
-						dfs(nr, nc, x.next[toInt26(ch)], w);
+						char curChar = board.getLetter(r, c);
+						char nextChar = board.getLetter(nr, nc);
+						if (curChar == 'Q')
+							w.append('U');
+						w.append(nextChar);
+						dfs(nr, nc, x.next[toInt26(nextChar)], w);
 						w.deleteCharAt(w.length() - 1);
+						if (curChar == 'Q')
+							w.deleteCharAt(w.length() - 1);
+						// StdOut.println(w.toString());
 					}
 				}
 			}
@@ -205,22 +204,8 @@ public class BoggleSolver
 		marked[r][c] = false;
 	}
 
-	private void checkRoot(String key)
+	public static void main(String[] args)
 	{
-		if (root == null) StdOut.print("Root is empty.");
-		Node x = root;
-		int d = 0;
-		while(x!=null) {
-			Node next = x.next[toInt26(key.charAt(d))];
-			if (next != null) {
-				StdOut.print(key.charAt(d));
-			}
-			x = next;
-			d++;
-		}
-	}
-
-	public static void main(String[] args) {
 		In in = new In(args[0]);
 		String[] dictionary = in.readAllStrings();
 		BoggleSolver solver = new BoggleSolver(dictionary);
@@ -228,11 +213,25 @@ public class BoggleSolver
 		int score = 0;
 		// int cnt = 0;
 		for (String word : solver.getAllValidWords(board)) {
-		    StdOut.println(word);
-		    score += solver.scoreOf(word);
-		    // cnt++;
+			StdOut.println(word);
+			score += solver.scoreOf(word);
+			// cnt++;
 		}
 		StdOut.println("Score = " + score);
 		// StdOut.println("Matched = " + cnt);
+
+		// // Dictionary checking
+		// StdOut.println("Original words: " + dictionary.length);
+		// StdOut.println("Valid words: " + solver.wordId);
+		// int m = 0;
+		// for (String word : dictionary) {
+		// 	if (word.length() > 2) {
+		// 		if (solver.contains(word)) m += 1;
+		// 		// else StdOut.println(word);
+		// 		// StdOut.println(word);
+		// 	}
+		// }
+		// StdOut.print("Verified valid words: ");
+		// StdOut.println(m);
 	}
 }

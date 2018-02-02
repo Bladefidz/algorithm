@@ -3,7 +3,7 @@
 /**
  * Evaluate polynomial using horner rule
  * Running Time: %THETA(n)
- * @param  n Number of nomial or term
+ * @param  n Number of nominal or term
  * @param  a Array of constants
  * @param  x Value of x
  * @return   Evaluated result of polynomial
