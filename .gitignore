@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 # Java ignore
-.class
+*.class
 
 # Dolphin file browser
 .directory
