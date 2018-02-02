@@ -51,5 +51,8 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# Java ignore
+.class
+
 # Dolphin file browser
 .directory
