@@ -10,6 +10,7 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 * [Network Flow](https://bladefidz.gitbooks.io/network-flow-algorithms/content/)
 * [String](https://bladefidz.gitbooks.io/algorithm-ch-5-string/content/)
 * [String Matching](https://bladefidz.gitbooks.io/introduction-to-algorithms-ch-32-string-matching/content/)
+* [Regular Expression]()
 
 ## Researches
 * [Sort Experiment](researches/sort_experiment.pdf)
