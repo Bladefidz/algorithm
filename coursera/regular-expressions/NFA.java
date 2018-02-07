@@ -18,7 +18,15 @@ public class NFA
 				ops.push(i);
 			else if (re[i] == ')') {
 				int or = ops.pop();
+
 				if (re[or] == '|') {
+					// Check for multiway or
+					if (ops.peek() == '|') {
+						Bag<Integer> multior = new Bag<>();
+						while (ops.peek() == '|')
+							multior.add(ops.pop());
+					}
+
 					lp = ops.pop();
 					G.addEdge(lp, or+1);
 					G.addEdge(or, i);
@@ -29,6 +37,10 @@ public class NFA
 
 			if (i < M-1 && re[i+1] == '*') {
 				G.addEdge(lp, i+1);
+				G.addEdge(i+1, lp);
+			}
+
+			if (i < M-1 && re[i+1] == '+') {
 				G.addEdge(i+1, lp);
 			}
 
