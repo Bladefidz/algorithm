@@ -1,0 +1,4 @@
+Implement a redundancy detector.
+Design and implement an algorithm for finding the longest repeated
+sequence in a long string of characters. For example, abra
+is the longest repeated sequence in the string abracadabra.

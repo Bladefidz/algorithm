@@ -11,6 +11,7 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 * [String](https://bladefidz.gitbooks.io/algorithm-ch-5-string/content/)
 * [String Matching](https://bladefidz.gitbooks.io/introduction-to-algorithms-ch-32-string-matching/content/)
 * [Regular Expression](https://bladefidz.gitbooks.io/algorithm-ch-5-regular-expressions/content/regular_expressions.html)
+* [Data Compression](https://bladefidz.gitbooks.io/algorithm-ch-5-data-compression/content/data_compression/)
 
 ## Slides
 * [Intoduction](https://drive.google.com/open?id=1HK8o2GP9ljLGGSFq11_SR23kMYcpO6wA)
@@ -45,8 +46,10 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 * [Sort Experiment](researches/sort_experiment.pdf)
 * [String Matching Algorithms and Their Applicability in Various Applications](researches/String_Matching_Algorithms_and_Their_Applicability_in_Various_Applications.pdf)
 * [An O(ND) Difference Algorithm and Its Variations](researches/An_O_ND_Difference_Algorithm_and_Its_Variations.pdf)
+* [A Locally Adaptive Data Compression Scheme.pdf](researches/A_Locally_Adaptive_Data_Compression_Scheme.pdf)
 
 ## Books
 * [Algorithm](http://algs4.cs.princeton.edu/home/)
 * [Introduction To Algorithms](https://mitpress.mit.edu/books/introduction-algorithms)
 * [Introduction to The Design and Analysis of Algorithms](https://www.pearson.com/us/higher-education/program/Levitin-Introduction-to-the-Design-and-Analysis-of-Algorithms-3rd-Edition/PGM223052.html)
+* [Introduction to Data Compression](coursera/data-compression/Introduction-to-Data-Compression.pdf)

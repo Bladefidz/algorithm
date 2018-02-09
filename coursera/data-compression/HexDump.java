@@ -3,7 +3,7 @@
  *  Execution:    java HexDump < file
  *  Dependencies: BinaryStdIn.java StdOut.java
  *  Data file:    https://algs4.cs.princeton.edu/55compression/abra.txt
- *  
+ *
  *  Reads in a binary file and writes out the bytes in hex, 16 per line.
  *
  *  % more abra.txt
@@ -18,11 +18,14 @@
  *  --------------------------
  *   - Similar to the Unix utilities od (octal dump) or hexdump (hexadecimal dump).
  *
- *  % od -t x1 < abra.txt 
+ *  % od -t x1 < abra.txt
  *  0000000 41 42 52 41 43 41 44 41 42 52 41 21
  *  0000014
  *
  ******************************************************************************/
+
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.BinaryStdIn;
 
 /**
  *  The {@code HexDump} class provides a client for displaying the contents

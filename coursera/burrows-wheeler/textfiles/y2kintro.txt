@@ -1,0 +1,534 @@
+INVESTIGATING THE IMPACT OF THE YEAR 2000 PROBLEM
+
+The Year 2000 (Y2K) technology problem started as
+an innocuous short-term solution to the
+oppressively high cost of computer memory in the
+1950s and 1960s. Programmers expected that the
+problems created by the limited, two-digit method
+of date storage would solve themselves as
+companies, governments and other computer-owners
+updated their hardware and software. Fifty years
+after the introduction of the computer, the Y2K
+problem has the potential to develop into a
+worldwide crisis. Two common human failings
+contributed to the crisis -- tendency to follow a
+path of least resistance and the reluctance to
+champion difficult and complex issues. The Y2K
+problem does not have to be a story of failure,
+however. If addressed successfully, Y2K may
+encourage political and corporate leaders to
+better understand and protect the critical
+infrastructure.
+
+As memory costs fell dramatically, software
+writers and hardware manufacturers did not
+immediately expand date variables. Newer versions
+of hardware and software needed to interface with
+older versions. While some programs were modified
+so that a new system could accept four-digit years
+and still exchange information with two-digit
+based systems, the extra effort required slowed
+the changeover process. Additionally, the
+equipment that earlier computer experts predicted
+would fall into obsolescence long before 2000
+survived through layers of programming updates and
+modifications. Instead of solving itself, the Y2K
+problem self-propagated around the globe.
+
+Just as programmers found it easy to follow the
+tradition of using a two-digit date field,
+management and leadership have found it easy to
+defer addressing the Y2K problem. Y2K competes
+poorly against issues such as trade agreements,
+military operations, market share and product
+development. It lacks familiarity, and in a
+results-driven economy, Y2K remediation costs are
+difficult to justify to taxpayers or
+shareholders. Additionally, few wished to be
+associated with the potential repercussions of a
+failed Y2K remediation attempt.
+
+At the heart of the problem lies a serious
+disconnect between those who use technology and
+those who create it. On a worldwide scale, leaders
+of corporations and countries are struggling to
+understand the Y2K problem. In the process, they
+are receiving a crash course in the fragile
+mechanics of information technology.
+
+The Committee feels strongly that Y2K, as the
+first widespread challenge of the information age,
+must leave a legacy of increased awareness and
+appreciation of information technology's role in
+social and economic advancement.
+
+UNDERSTANDING THE PROBLEM
+
+The goal of this section is to provide background
+on the Y2K problem and answer common Y2K
+questions.  What is the Year 2000 computer
+technology problem?  The phrases the "Year 2000
+Computer Technology Problem," the "Millennium
+Bug," the "Century Date Change," or simply, "Y2K"
+all refer to the same problem -- defect that
+exists in millions of computer programs worldwide
+that causes erroneous handling of date (i.e., day,
+month and year) information if not corrected. The
+effect of the Y2K flaw on computer systems is not
+easily predictable. It may bring a computer to a
+crashing halt. It may cause the computer to
+generate obviously incorrect outputs. Or
+alternatively, it could allow the computer to
+produce invalid data that will not be detected
+until much later, forcing users to correct a range
+of accumulated errors while searching for the
+source of the problem.
+
+Why is two digit notation defective?
+
+To save memory in the early days of computing,
+programmers represented four-digit years with only
+two digits. For instance, 1968 or 1974 would be
+stored and processed as 68 and 74,
+respectively. The number 19, indicating years in
+the 1900s, was implied, much as personal checks
+once had the number 19 preprinted on the dateline.
+
+This worked smoothly until users started to input
+dates occurring after December 31, 1999. Computers
+ran into problems when required to calculate a
+number based on the difference in two dates, such
+as the interest due on a mortgage loan. Computers
+continued to assume that the prefix 19 was
+implied, so dates such as 00 or 01 were treated as
+1900 or 1901. Consequently, computers could not
+correctly calculate the difference between a year
+in the 20th century and a year in the 21st
+century.
+
+For example, we know that the time between July 1,
+1998, and July 1, 2005 is exactly 7
+years. However, a computer with a Y2K problem
+could calculate an answer of either 93 years or -7
+years, depending on the specific
+program. Calculations that used either of these
+results would be in error and may themselves cause
+subsequent problems.
+
+Another Y2K problem occurs in the storage of
+information. Many kinds of data are organized and
+processed by date, such as driver's license
+records and credit card accounts. Computers have
+had problems processing credit cards that have
+expiration dates after December 1999. Due to
+two-digit dating, computers have thought that
+cards expiring in 2000 or later had expired almost
+a century ago.
+
+What is the scope of Y2K problems?
+
+The Y2K problem affects two general classes of
+equipment. The first class comprises business
+systems or mainframe systems. These computers
+perform a variety of data-intensive calculations
+-- balancing accounts, making payments, tracking
+inventory, ordering goods, managing personnel,
+scheduling resources, etc. The second class of
+equipment has several common names, including
+embedded chips, embedded processors and embedded
+control systems. Many aspects of modern society
+rely on microchip-enhanced technology to control
+or augment operations. Examples are
+ubiquitous. Automatic teller machines, toll
+collection systems, security and fire detection
+systems, oil and gas pipelines, consumer
+electronics, transportation vehicles,
+manufacturing process controllers, military
+systems, medical devices and telecommunications
+equipment all depend on embedded chip-technology.
+
+Y2K related failures in business systems will
+generally cause an enterprise to lose partial or
+complete control of critical processes. In the
+private sector, loss of business systems means
+that a company may have difficulty managing its
+finances, making or receiving payments and
+tracking inventory, orders, production or
+deliveries. In the public sector, government
+organizations may be severely hindered in
+performing basic functions such as paying
+retirement and medical benefits, maintaining
+military readiness, responding to state and local
+emergencies, controlling air traffic, collecting
+taxes and customs and coordinating law enforcement
+efforts.
+
+Y2K problems in embedded systems have the
+potential to affect public health and
+safety. Problems that need to be fixed have
+already been detected in medical treatment
+devices, water and electricity distribution and
+control systems, airport runway lighting and
+building security systems. Other suspect areas are
+pipeline control systems and chemical and
+pharmaceutical manufacturing processes.  How was
+the Y2K mistake made?  Several factors explain the
+creation of the Y2K problem. In the early days of
+computers, computer memory was very expensive. In
+the IBM 7094 of the early 1960s, core memory cost
+around $1 per byte. Today's semiconductor memory
+costs around $1 per million bytes. Thus, there was
+a very strong economic incentive to minimize the
+amount of memory needed to store a program and its
+data in the computer's memory.
+
+Additionally, early computer programming was
+highly time-consuming. Programs and data were
+recorded and entered into computers via 80 column
+punch cards. Each of the 80 columns could contain
+exactly one byte of information, which
+corresponded to one of the four digits needed to
+represent a year. The cumbersome nature of punched
+cards encouraged using as few of them as possible.
+
+Although programmers and managers knew they had
+built software with latent defects in it, no one
+thought that software written in the 60s and 70s
+would survive to the Year 2000. Compounding the
+problem, newer software had to interface and share
+data with the older software. Although the new
+software could have handled dates internally in
+four digit formats and swapped data in two digit
+formats with the older software, to do so added
+complexity and hence added cost to new
+software. The net result was that the two-digit
+standard for representing years continued much
+longer than anyone would have guessed.
+
+When will Y2K problems start?
+
+Y2K problems have already surfaced in many
+places. Cap Gemini, a technology consulting firm,
+reported that as of December 1997, 7% of a group
+of 128 large U.S. companies had experienced Y2K
+related problems.  By March 1998, that number
+leaped to 37%. The Gartner Group, an information
+technology research company, has developed a model
+to predict the rate of occurrence of Y2K
+problems. This prediction is based on data
+collected quarterly from over 15,000 firms and
+government organizations in 87 countries. Gartner
+estimates a rapid increase in problems in 1999
+with a peak sometime after January 1,
+2000. Problem occurrences will drop off after
+2000, but will still occur for another 3 to 5
+years at a lower level. Finally, the Information
+Technology Association of America has reported
+that about half the major corporations in America
+have already experienced some form of Y2K
+disruption as of March 25, 1998.
+
+How can we fix Y2K and how long will it take?
+
+It is beyond the scope of this report to cover the
+technical nuances of these various
+solutions. However, various techniques are briefly
+described in Appendix III.
+
+How much are Y2K fixes going to cost?
+
+There is no generally agreed upon answer to this
+question. The Gartner Group's estimate of $600
+billion worldwide is a frequently cited
+number. Another number from a reputable source is
+that of Capers Jones, Software Productivity
+Research, Inc. of Burlington, MA. Jones' worldwide
+estimate is over $1.6 trillion.  Part of the
+difference is that Jones' estimate includes over
+$300 billion for litigation and damages but
+Gartner's does not. A sense of the scale of the
+cost can be gained from looking at the Y2K costs
+of six multinational financial services
+institutions; Citicorp, General Motors, Bank
+America, Credit Suisse Group, Chase Manhattan and
+J.P. Morgan. These six institutions have
+collectively estimated their Y2K costs to be over
+$2.4 billion. Additionally, the estimated cost of
+Y2K repairs is increasing, as shown in figure 2.
+
+Can't we develop an easy Y2K fix?
+
+Popular sentiment suggests that a technological
+quick fix will appear just in time to kill the
+millennium bug. So far, "quick fix" claims have
+proved to be claims for a particular product that
+may show promise in one particular application,
+for example, finding where the actual dates and
+date processing routines are hidden in a program.
+
+Software programs and computer hardware vary too
+greatly to be fixed by one solution. Currently,
+there are over 500 programming languages in use. A
+universal or broadly applicable Y2K solution would
+have to be compatible with many or most of these
+languages. Additionally, finding all the dates and
+date processing in an estimated 36,000,000
+programs is an enormous task difficult to
+automate.
+
+The embedded processors pose another
+problem. Although the percentage of embedded chips
+with a Y2K problem is estimated to be relatively
+small, potentially millions of chips exist that
+may have to be replaced. Unfortunately, most of
+them are not readily accessible or easily
+modified.
+
+Where can I learn more about the Y2K problem?
+
+Many solid references can be found in the endnotes
+of this section and elsewhere in this report. An
+enormous amount of Y2K information resides on the
+Internet. However, legitimate information is
+buried among overstated rumors and half-truths. As
+with most other information derived from Internet
+sources, Y2K information must be verified for
+accuracy.
+
+Additional information can be obtained through the
+Committee's website at www.senate.gov/~y2k and the
+President's Council on Year 2000 Conversion's
+website at www.y2k.gov.
+
+CRITICAL INFRASTRUCTURES
+
+Critical infrastructures can include both
+computerized services and physical services
+essential to minimum functioning of economy and
+government. More than abstract systems, critical
+infrastructures enable the average person to use
+an ATM, make a phone call and fly on an
+airline. In the past, many of these key
+infrastructures or sectors were separate. However,
+advances in information technology have caused
+many of these systems to be interconnected and
+linked through networks. The Committee has
+approached the critical infrastructures by
+examining the Y2K work occurring both vertically
+within specific sectors and horizontally across
+different interrelated sectors, such as banking
+and telecommunications.
+
+Recognizing that the Y2K problem could have
+serious implications on the smooth functioning of
+our defense and economy, Senator Moynihan wrote
+President Clinton in July of 1996 and suggested a
+special Y2K commission. While Senator Moynihan's
+suggestion was not taken, Executive Order 13010
+created the President's Commission on Critical
+Infrastructure Protection. The Commission was not
+tasked to study Y2K, but it recognized the
+potential for the Y2K problem to cause long-term
+problems in the infrastructures. Due to late
+starts, many organizations have contracted out
+work on sensitive systems. In some cases,
+organizations are sending code overseas to foreign
+firms. The correction of code overseas could lead
+to increased incidents of corporate espionage and
+intentional cyber disruptions. The broad scope of
+Y2K corrections could allow an adversary to build
+an exceptional understanding of sensitive systems
+thus enabling it to "design a subtle or
+comprehensive attack" against critical systems.
+
+It is absolutely vital that the owners, operators
+and regulators of the nation's critical systems
+continue to be aware that Y2K may provide an
+opportunity for those with malicious
+intent. Sandia National Laboratories warned the
+Committee that:
+
+"Thinking that we will be so preoccupied with Y2K
+that we would not notice deliberate malicious
+intent, terrorists, hackers and other criminals
+might see Y2K as a prime opportunity to attack
+pieces of our infrastructure. Or they might use
+Y2K-induced infrastructure failures as cover for
+theft, arson, bombings, etc. We must be watchful
+of such groups in the months leading up to Y2K and
+we must be especially careful when monitoring the
+crisis as it occurs to discern deliberate intent."
+
+Current national security and emergency
+preparedness policies are not designed for the
+challenges of the information age. The U.S. needs
+a system or process whereby the government can
+coordinate responses with the privately owned and
+operated critical infrastructures. We must build
+the broad based contingency plans necessary to
+ensure that the national security and emergency
+preparedness posture of the U.S. is not
+compromised by Y2K. The U.S. must remain ready to
+mitigate the (economic, emergency or security)
+effects that could be caused by Y2K.
+
+Y2K is an opportunity to educate ourselves first
+hand about the nature of 21st century
+threats. Technology has provided the U.S. with
+many advantages, but it also creates many new
+vulnerabilities. Recognizing shifts in the
+technological topography of the nation requires
+vision. Reverting to a world without microchips or
+technology-dependent systems is not only
+undesirable, but also impossible. Instead, we, as
+a nation and as individuals, need to consider
+carefully our reliance on information technology
+and the consequences of interconnectivity, and
+work to protect that which we have so long taken
+for granted.
+
+FORMATION OF THE SPECIAL COMMITTEE
+
+Senator Robert Bennett first identified the Year
+2000 as an issue for the legislative agenda in
+1996 as the Senate organized for the 105th
+Congress. He shared his concerns with Senator
+Alfonse D'Amato, Chairman of the Senate Banking
+Committee, who urged Senator Bennett to take up
+the issue in his new role as Chairman of the
+Subcommittee on Financial Services and Technology.
+
+The Subcommittee naturally focused its first
+efforts on the regulators' efforts to ensure Y2K
+compliance. In February 1997 and again in April
+1997, Senators D'Amato and Bennett requested
+information on Y2K preparations from the following
+financial regulatory agencies:
+
+ * The Federal Reserve Board (FRB)
+
+ * The Federal Deposit Insurance Corporation (FDIC)
+
+ * The Office of Thrift Supervision (OTS)
+
+ * The National Credit Union Administration (NCUA)
+
+ * The Office of the Comptroller of the Currency (OCC)
+
+ * The Securities and Exchange Commission (SEC)
+
+Shortly after the Committee inquiry, the Federal
+Financial Institutions Examination Council
+(FFIEC), an inter agency body made up of FRB,
+FDIC, OTS, NCUA and OCC, issued guidelines for the
+financial institutions and federal examiners to
+focus on issues they must address to avoid major
+service disruptions due to Y2K.
+
+Individual agency responses revealed varying
+degrees of readiness. The SEC's response detailed
+extensive plans for remediation and testing, while
+other agencies demonstrated little more than a
+general awareness and initial response to the
+problem. Many of the regulatory agencies deferred
+to statements published by FFIEC without providing
+any substantive information about their own
+progress. These results prompted Senator Bennett
+to conduct the first hearing on financial services
+and the Year 2000 on July 10, 1997.
+
+At the end of the first hearing, Senator
+Christopher Dodd quickly recognized the importance
+of the Y2K issue and voiced his support for
+additional hearings on Y2K. The Subcommittee held
+another eight hearings to investigate the scope
+and severity of the Y2K problem and to prompt
+action in the financial community.
+
+On November 10, 1997, Senator Bennett introduced
+the Computer Remediation and Shareholder
+Protection Act of 1997 (CRASH Protection Act),
+which required the Securities and Exchange
+Commission to increase its disclosure regulations
+relative to Y2K readiness. With the threat of the
+CRASH Protection Act looming, the SEC redoubled
+its efforts to raise awareness of Y2K
+implications.
+
+Also in November 1997, Senator Bennett wrote
+President Clinton to express concern over a lack
+of national leadership in the Y2K arena. The
+Senator suggested the appointment of a Y2K "czar"
+to oversee the Y2K compliance of the federal
+government and initiate a public-private Y2K
+action. Three months later, President Clinton
+issued Executive Order 13073, creating the
+President's Council on Year 2000
+Conversion. Subsequently, John Koskinen was tapped
+to chair the new council.
+
+During these events, the Subcommittee struggled to
+reach industries outside of banking. SEC
+disclosures provided a tool, albeit blunt, to
+raise Y2K awareness and planning within public
+companies. Despite staff bulletins emphasizing the
+application of disclosure law to the Y2K issue,
+the level of information disclosed in March 1998
+was disappointingly low. Indeed, some companies
+overlooked Y2K entirely under the premise that Y2K
+did not present a material threat to their
+businesses. Meanwhile, off-the-record discussions
+with Subcommittee staff suggested that many
+corporations preferred to incur SEC fines than a
+drop in their stock prices. The Subcommittee
+invited the SEC to a June 1998 hearing, which led
+to additional guidance in the form of an
+interpretive release on Y2K disclosure. However,
+the point was made that the Subcommittee on
+Financial Services and Technology simply did not
+provide the scope necessary to adequately address
+the breadth and depth of the Y2K problem.
+
+Voicing this concern, Senators Bennett and Dodd
+met with the Senate leadership. Senate Majority
+Leader Trent Lott recognized the importance of
+Senate leadership in the Y2K arena and with the
+assistance of Minority Leader Tom Daschle, cleared
+the way for the creation of the Special Committee
+on the Year 2000 Technology Problem.
+
+On April 2, 1998, the U.S. Senate unanimously
+voted to establish a new committee to address the
+Y2K technology problem. The Special Committee on
+the Year 2000 Technology Problem was authorized
+through February 29, 2000. The Majority Leader
+named Senator Bennett to serve as its
+Chairman. Committee membership included:
+
+ * Vice-Chairman Senator Christopher Dodd
+(D-Connecticut)
+
+ * Senator Jon Kyl (R-Arizona)
+
+ * Senator Susan Collins (R-Maine)
+
+ * Senator Gordon Smith (R-Oregon)
+
+ * Senator Daniel Patrick Moynihan (D-New York)
+
+ * Senator Jeff Bingaman (D-New Mexico)
+
+ * Senator Ted Stevens (R-Alaska) ex-officio
+
+ * Senator Robert Byrd (D-West Virginia) ex-officio
+
+Because the Committee does not have legislative
+authority, each of the members was carefully
+selected based on membership on other committees,
+such as Judiciary, Armed Services and Government
+Affairs.
+
+According to the legislation that created it, the
+Senate Special Committee on the Year 2000
+Technology Problem will exist until February 29,
+2000, after which it will permanently disband.

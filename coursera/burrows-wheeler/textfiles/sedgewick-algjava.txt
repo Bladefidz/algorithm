@@ -1,0 +1,4612 @@
+
+----------
+CHAPTER 1. Introduction
+-----
+public class QuickF 
+  { public static void main(String[] args) 
+    { int N = Integer.parseInt(args[0]);
+      int id[] = new int[N];
+      for (int i = 0; i < N ; i++) id[i] = i; 
+      for( In.init(); !In.empty(); )
+        { int p = In.getInt(), q = In.getInt();
+          int t = id[p];
+          if (t == id[q]) continue;
+          for (int i = 0; i < N; i++)
+            if (id[i] == t) id[i] = id[q];
+          Out.println(" " + p + " " + q);
+        }
+    }
+  }
+-----
+    int i, j, p = In.getInt(), q = In.getInt();
+    for (i = p; i != id[i]; i = id[i]);
+    for (j = q; j != id[j]; j = id[j]);
+    if (i == j) continue;
+    id[i] = j;
+    Out.println(" " + p + " " + q);
+-----
+public class QuickUW
+{ public static void main(String[] args) 
+  { int N = Integer.parseInt(args[0]);
+    int id[] = new int[N], sz[] = new int[N]; 
+    for (int i = 0; i < N ; i++)
+      { id[i] = i; sz[i] = 1; }
+    for(In.init(); !In.empty(); )
+      { int i, j, p = In.getInt(), q = In.getInt();
+        for (i = p; i != id[i]; i = id[i]);
+        for (j = q; j != id[j]; j = id[j]);
+        if (i == j) continue;
+        if (sz[i] < sz[j])
+             { id[i] = j; sz[j] += sz[i]; }
+        else { id[j] = i; sz[i] += sz[j]; }
+        Out.println(" " + p + " " + q);
+      }
+  }
+}	
+-----
+    for (i = p; i != id[i]; i = id[i])
+      id[i] = id[id[i]];
+    for (j = q; j != id[j]; j = id[j])
+      id[j] = id[id[j]];
+
+----------
+CHAPTER 2. Principles of Algorithm Analysis
+-----
+static int search(int a[], int v, int l, int r)
+  { int i;
+    for (i = l; i <= r; i++)
+      if (v == a[i]) return i;
+    return -1;
+  }
+-----
+static int search(int a[], int v, int l, int r)
+  { 
+    while (r >= l)
+      { int m = (l+r)/2;
+        if (v == a[m]) return m;
+        if (v < a[m]) r = m-1; else l = m+1;
+      }
+    return -1;
+  }
+
+----------
+CHAPTER 3. Elementary Data Structures
+-----
+class LogTable
+  { 
+    static int lg(int N)
+      { int i = 0;
+        while (N > 0) { i++; N/= 2; }
+        return i;
+      }
+    public static void main(String[] args)
+      { 
+        for (int N = 1000; N <= 1000000000; N *= 10)
+          Out.println(lg(N) + " " + N);
+      }
+  }
+-----
+class Point 
+  { double x, y; 
+    Point()
+      { x = Math.random(); y = Math.random(); }
+    Point(double x, double y)
+      { this.x = x; this.y = y; }
+    double r()
+      { return Math.sqrt(x*x + y*y); }
+    double theta() 
+      { return Math.atan2(y, x); }
+    double distance(Point p)
+      { double dx = x - p.x, dy = y - p.y;
+        return Math.sqrt(dx*dx + dy*dy);
+      }
+    public String toString()
+      { return "(" + x + ", " + y + ")"; } 
+  }
+-----
+class PrintStats
+  {
+    public static void main(String[] args)
+      { int N = Integer.parseInt(args[0]);
+        double m = 0.0, s = 0.0;
+        for (int i = 0; i < N; i++)
+          { int x = (int) (Math.random()*10000);
+            double d = (double) x;
+            m += d/N; s += (d*d)/ N;
+          }
+        s = Math.sqrt(s - m*m);
+        Out.println("     Avg.: " + m);
+        Out.println("Std. dev.: " + s);
+      }
+  }
+-----
+class Primes
+  { 
+    public static void main(String[] args)
+      { int N = Integer.parseInt(args[0]);
+        boolean[] a = new boolean[N];
+        for (int i = 2; i < N; i++) a[i] = true;
+        for (int i = 2; i < N; i++)
+          if (a[i] != false)
+            for (int j = i; j*i < N; j++) 
+              a[i*j] = false;
+        for (int i = 2; i < N; i++)
+          if (i > N - 100)
+            if (a[i]) Out.print(" " + i);
+        Out.println();
+      }
+  }
+-----
+boolean[] a;
+try
+  { a = new boolean[N]; }
+catch (OutOfMemoryError e)
+  { Out.println("Out of memory"); return; }
+-----
+class CoinFlip
+  { 
+    static boolean heads()
+      { return Math.random() < 0.5; }
+    public static void main(String[] args)
+      { int i, j, cnt;
+        int N = Integer.parseInt(args[0]);
+        int M = Integer.parseInt(args[1]);
+        int[] f = new int[N+1];
+        for (j = 0; j <= N; j++) f[j] = 0;
+        for (i = 0; i < M; i++, f[cnt]++)
+          for (cnt = 0, j = 0; j <= N; j++)
+            if (heads()) cnt++;
+        for (j = 0; j <= N; j++)
+          {
+            if (f[j] == 0) Out.print(".");
+            for (i = 0; i < f[j]; i+=10) 
+              Out.print("*");
+            Out.println();
+          }
+      }
+  }
+-----
+class ClosePoints
+  { public static void main(String[] args)
+      { int cnt = 0, N = Integer.parseInt(args[0]);
+        double d = Double.parseDouble(args[1]);
+        Point[] a = new Point[N];
+        for (int i = 0; i < N; i++) 
+          a[i] = new Point();
+        for (int i = 0; i < N; i++)
+          for (int j = i+1; j < N; j++)
+            if (a[i].distance(a[j]) < d) cnt++;
+        Out.print(cnt + " pairs ");
+        Out.println("closer than " + d);
+      }
+   }
+-----
+class Josephus
+  { 
+    static class Node
+      { int val; Node next;
+        Node(int v) { val = v; }
+      }
+    public static void main(String[] args)
+      { int N = Integer.parseInt(args[0]);
+        int M = Integer.parseInt(args[1]);
+        Node t = new Node(1);
+        Node x = t;
+        for (int i = 2; i <= N; i++)
+          x = (x.next = new Node(i));
+        x.next = t;
+        while (x != x.next)
+          {
+            for (int i = 1; i < M; i++) x = x.next;
+            x.next = x.next.next;
+          }
+        Out.println("Survivor is " + x.val);
+      }
+  }
+-----
+static Node reverse(Node x)
+  { Node t, y = x, r = null;
+    while (y != null)
+      { t = y.next; y.next = r; r = y; y = t; }
+    return r;
+  }
+-----
+class ListSortExample
+  { 
+    static class Node
+      { int val; Node next;
+        Node(int v, Node t) { val = v; next = t; } 
+      }
+    static Node create()
+      { Node a = new Node(0, null);
+        for (In.init(); !In.empty(); )
+          a.next = new Node(In.getInt(), a.next);
+        return a;
+      }
+    static Node sort(Node a)
+      { Node t, u, x, b = new Node(0, null);
+        while (a.next != null)
+          {
+            t = a.next; u = t.next; a.next = u;
+            for (x = b; x.next != null; x = x.next)
+              if (x.next.val > t.val) break;
+            t.next = x.next; x.next = t;
+          }
+        return b;
+      }
+    static void print(Node h)
+      { for (Node t = h.next; t != null; t = t.next)
+          Out.println(t.val + ""); }
+    public static void main(String[] args)
+      { print(sort(create())); }
+  }
+-----
+class CircularList
+  {
+    static class Node
+      { int val; Node next;
+        Node(int v) { val = v; }
+      }
+    Node next(Node x)
+      { return x.next; }
+    int val(Node x)
+      { return x.val; }
+    Node insert(Node x, int v) 
+      { Node t = new Node(v);
+        if (x == null) t.next = t;
+        else { t.next = x.next;  x.next = t; }
+        return t;
+       }
+    void remove(Node x) 
+      { x.next = x.next.next; }
+  }
+-----
+class JosephusY
+  { 
+    public static void main(String[] args)
+      { int N = Integer.parseInt(args[0]);
+        int M = Integer.parseInt(args[1]);
+        CircularList L = new CircularList();
+        CircularList.Node x = null;
+        for (int i = 1; i <= N; i++)
+          x = L.insert(x, i); 
+        while (x != L.next(x))
+          {
+            for (int i = 1; i < M; i++) 
+              x = L.next(x);
+            L.remove(x);
+          }
+        Out.println("Survivor is " + L.val(x));
+      }
+  }
+-----
+class CircularList
+  {
+    static class Node
+      { int val; int next; }
+    static Node M[]; 
+    static int free, max = 10000;
+    CircularList() 
+      { 
+        M = new Node[max+1]; 
+        for (int i = 0; i < max; i++)
+          { M[i] = new Node(); M[i].next = i+1; }
+        M[max] = new Node(); M[max].next = 0;
+        free = 0;
+      }
+    Node next(Node x)
+      { return M[x.next]; }
+    int val(Node x)
+      { return x.val; }
+    Node insert(Node x, int v) 
+      { 
+        int i = free; free = M[free].next;
+        M[i].val = v; 
+        if (x == null) M[i].next = i;
+        else { M[i].next = x.next;  x.next = i; }
+        return M[i];
+      }
+    void remove(Node x) 
+      { int i = x.next; x.next = M[i].next; 
+        M[i].next = free; free = i;
+      }
+  }
+-----
+static int countMatches(String p, String s)
+  { 
+    int cnt = 0, M = p.length(), N = s.length();
+    if (M > N) return 0;
+    for (int i = 0; i < N; i++)
+      { int j;
+        for (j = 0; j < M; j++)
+          if (s.charAt(i+j) != p.charAt(j)) break;
+        if (j == p.length()) cnt++;
+      }
+    return cnt;
+  }
+-----
+static String squeeze(String s)
+  { 
+    char[] a = s.toCharArray();
+    int N = 1;
+    for (int i = 1; i < a.length; i++)
+      { 
+        a[N] = a[i];
+        if (a[N] != ' ') N++;
+        else if (a[N-1] != ' ') N++;
+      }
+    return new String(a, 0, N);
+  }
+-----
+class AdjacencyMatrix
+  { 
+    public static void main(String[] args)
+      { int V = Integer.parseInt(args[0]);
+        int E = Integer.parseInt(args[1]);
+        boolean adj[][] = new boolean[V][V];
+        for (int i = 0; i < V; i++)
+          for (int j = 0; j < V; j++)
+            adj[i][j] = false;
+        for (int i = 0; i < V; i++) 
+          adj[i][i] = true;
+        for (In.init(); !In.empty() ;)
+          { 
+            int i = In.getInt(), j = In.getInt();
+            adj[i][j] = true; adj[j][i] = true; 
+          }
+
+      }
+  }
+-----
+class AdjacencyLists
+  { 
+    static class Node
+      { int v; Node next;
+        Node (int v, Node t)
+          { this.v = v; next = t; }
+      }
+    public static void main(String[] args)
+      { int V = Integer.parseInt(args[0]);
+        int E = Integer.parseInt(args[1]);
+        Node adj[] = new Node[V];
+        for (int i = 0; i < V; i++) adj[i] = null;
+        for (In.init(); !In.empty() ;)
+          {
+            int i = In.getInt(), j = In.getInt();
+            adj[j] = new Node(i, adj[j]);
+            adj[i] = new Node(j, adj[i]);
+          }
+      }
+  }
+-----
+class ClosePoints
+  { 
+    static class Node
+      { Point p; Node next;
+        Node(Point x, Node t) { p = x; next = t; } 
+      }
+    static int G, cnt = 0; 
+    static double d;
+    static Node[][] g;
+    static void gridInsert(Point p)
+      { int X = (int)(p.x*G)+1, Y = (int)(p.y*G)+1;
+        Node s, t = new Node(p, g[X][Y]);
+        for (int i = X-1; i <= X+1; i++)
+          for (int j = Y-1; j <= Y+1; j++)
+            for (s = g[i][j]; s != null; s = s.next)  	
+              if (s.p.distance(t.p) < d) cnt++;
+        g[X][Y] = t;
+      }
+    public static void main(String[] args)
+      { int i, N = Integer.parseInt(args[0]);
+        d = Double.parseDouble(args[1]);
+        G = (int) (1.0/d);
+        g = new Node[G+2][G+2];
+        for (i = 0; i < G+2; i++)
+          for (int j = 0; j < G+2; j++)
+            g[i][j] = null;
+        for (i = 0; i < N; i++)
+          gridInsert(new Point());
+        Out.print(cnt + " pairs ");
+        Out.println("closer than " + d);
+      }
+  }
+
+----------
+CHAPTER 4. Abstract Data Types
+-----
+class Point 
+  { 
+    private double x, y; 
+    Point()
+      { x = Math.random(); y = Math.random(); }
+    Point(double x, double y)
+      { this.x = x; this.y = y; }
+    double x() { return x; }
+    double y() { return y; }
+    double r() { return Math.sqrt(x*x + y*y); }
+    double theta() { return Math.atan2(y, x); }
+    double distance(Point p)
+      { double dx = this.x() - p.x();
+        double dy = this.y() - p.y();
+        return Math.sqrt(dx*dx + dy*dy);
+      }
+    public String toString()
+      { return "(" + x + ", " + y + ")"; } 
+  }
+-----
+class Point 
+  { 
+    private double r, theta; 
+    Point()
+      { double x = Math.random(), y = Math.random(); 
+        this = new Point(x, y); }
+    Point(double x, double y)
+      { r = Math.sqrt(x*x + y*y); 
+        theta = Math.atan2(y, x); }
+    double r() { return r; }
+    double theta() { return theta; }
+    double x() { return r*Math.cos(theta); }
+    double y() { return r*Math.sin(theta); }
+    double distance(Point p)
+      { double dx = x() - p.x();
+        double dy = y() - p.y();
+        return Math.sqrt(dx*dx + dy*dy);
+      }
+    public String toString()
+      { return "(" + x() + ", " + y() + ")"; } 
+  }
+-----
+class Point // ADT interface
+  { // implementations and private members hidden
+    Point()
+    Point(double, double)
+    double x() 
+    double y() 
+    double r()
+    double theta()
+    double distance(Point)
+    public String toString()
+  }
+-----
+class intStack // ADT interface
+  { // implementations and private members hidden
+    intStack(int)
+    int empty()
+    void push(int)
+    int pop()
+  }
+-----
+class Postfix
+  {
+    public static void main(String[] args)
+      { char[] a = args[0].toCharArray(); 
+        int N = a.length;
+        intStack s = new intStack(N);
+        for (int i = 0; i < N; i++)
+          {
+            if (a[i] == '+')
+              s.push(s.pop() + s.pop());
+            if (a[i] == '*')
+              s.push(s.pop() * s.pop());
+            if ((a[i] >= '0') && (a[i] <= '9'))
+              s.push(0);
+            while((a[i] >= '0') && (a[i] <= '9'))
+              s.push(10*s.pop() + (a[i++]-'0'));
+          }
+        Out.println(s.pop() + "");
+      }
+  }
+-----
+class InfixToPostfix
+  { 
+    public static void main(String[] args)
+      { char[] a = args[0].toCharArray(); 
+        int N = a.length;
+        charStack s = new charStack(N);
+        for (int i = 0; i < N; i++)
+          {
+            if (a[i] == ')')
+              Out.print(s.pop() + " ");
+            if ((a[i] == '+') || (a[i] == '*'))
+              s.push(a[i]);
+            if ((a[i] >= '0') && (a[i] <= '9'))
+              Out.print(a[i] + " ");
+          }
+        Out.println("");
+      }
+  }
+-----
+class intStack
+  {
+    private int[] s;
+    private int N;
+    intStack(int maxN)
+      { s = new int[maxN]; N = 0; }
+    boolean isEmpty()
+      { return (N == 0); }
+    void push(int item)
+      { s[N++] = item; }
+    int pop()
+      { return s[--N]; }
+  }
+-----
+class intStack
+  {
+    private Node head;
+    private class Node
+      {
+        int item; Node next;
+        Node(int item, Node next)
+          { this.item = item; this.next = next; }
+      }
+    intStack(int maxN)
+      { head = null; }
+    boolean isEmpty()
+      { return (head == null); }
+    void push(int item)
+      { head = new Node(item, head); }
+    int pop()
+      { int v = head.item; Node t = head.next;
+        head = t; return v; }
+  }
+-----
+class Stack
+  {
+    private Object[] s;
+    private int N;
+    Stack(int maxN)
+      { s = new Object[maxN]; N = 0; }
+    boolean isEmpty()
+      { return (N == 0); }
+    void push(Object item)
+      { s[N++] = item; }
+    Object pop()
+      { Object t = s[--N]; s[N] = null; return t; }
+  }
+-----
+class intStack
+  {
+    private Stack S;
+    intStack(int maxN)
+      { S = new Stack(maxN); }
+    boolean isEmpty()
+      { return S.isEmpty(); }
+    void push(int item)
+      { S.push(new Integer(item)); }
+    int pop()
+      { return ((Integer) S.pop()).intValue(); }
+  }
+-----
+class UF // ADT interface
+  { // implementations and private members hidden
+    UF(int)
+    boolean find(int, int)
+    void unite(int, int)
+  }
+-----
+class Equivalence
+  { 
+    public static void main(String[] args)
+      { int p, q, N = Integer.parseInt(args[0]);
+        UF info = new UF(N); 
+        for (In.init(); !In.empty(); )
+          { p = In.getInt(); q = In.getInt(); 
+            if (!info.find(p, q))
+              {
+                info.unite(p, q);
+                Out.println(p + "-" + q);
+              }
+          }
+      }  
+  }
+-----
+class UF
+  {
+    private int[] id, sz;
+    private int find(int x)
+      { while (x != id[x]) x = id[x]; return x; }
+    UF(int N)
+      { id = new int[N]; sz = new int[N];
+        for (int i = 0; i < N; i++)
+          { id[i] = i; sz[i] = 1; }
+      }
+    boolean find(int p, int q)
+      { return (find(p) == find(q)); }
+    void unite(int p, int q)
+      { int i = find(p), j = find(q);
+        if (i == j) return;
+        if (sz[i] < sz[j])
+             { id[i] = j; sz[j] += sz[i]; }
+        else { id[j] = i; sz[i] += sz[j]; }
+      }
+  }
+-----
+interface uf
+  { 
+    int find(int x);
+    boolean find(int p, int q);
+    void unite(int p, int q);
+  }
+-----
+class intQueue // ADT interface
+  { // implementations and private members hidden
+    intQueue(int)
+    int empty()
+    void put(int)
+    int get()
+  }
+-----
+class intQueue
+  {
+    private class Node
+      { int item; Node next;
+        Node(int item)
+          { this.item = item; next = null; }
+      }
+    private Node head, tail;
+    intQueue(int max)
+      { head = null; tail = null; }
+    boolean empty()
+      { return (head == null); }
+    void put(int item)
+      { Node t = tail; tail = new Node(item);
+        if (empty()) head = tail; else t.next = tail;
+      }
+    int get()
+      { int v = head.item; Node t = head.next;
+        head = t; return v; }
+  }
+-----
+class intQueue
+  {
+    private int[] q; private int N, head, tail;
+    intQueue(int maxN)
+      { q = new int[maxN + 1];
+        N = maxN + 1; head = N; tail = 0; }
+    boolean empty()
+      { return (head % N == tail); }
+    void put(int item)
+      { q[tail++] = item; tail = tail % N; }
+    int get()
+      { head = head % N; return q[head++]; }	
+  }
+-----
+class intStack
+  {
+    private int[] s;
+    private boolean[] t;
+    private int N;
+    intStack(int maxN)
+      { s = new int[maxN]; N = 0;
+        t = new boolean[maxN];
+        for (int i = 0; i < maxN; i++) t[i] = false; 
+      }
+    boolean empty()
+      { return N == 0; }
+    public void push(int item)
+      { if (t[item]) return;
+        s[N++] = item; 
+        t[item] = true; 
+      }
+    public int pop()
+      { t[s[--N]] = false; return s[N]; }
+  }
+-----
+public class RootsOfUnity 
+  {
+    public static void main(String[] args)
+      { int N = Integer.parseInt(args[0]);
+        Out.println(N + " roots of unity");
+        for (int k = 0; k < N; k++)
+          { double x = Math.cos(2.0*Math.PI*k/N), 
+                   y = Math.sin(2.0*Math.PI*k/N);
+            Complex t = new Complex(x, y);
+            Out.print(k + ": "+ t);
+            Complex z = (Complex) t.clone();
+            for (int j = 0; j < N-1; j++) z.mult(t);
+            Out.println(" " + z);
+          }
+      }
+  }
+-----
+class Complex implements Cloneable // ADT interface
+  { // implementations and private members hidden
+    Complex(double re, double im)
+    double re() 
+    double im()
+    Complex mult(Complex rhs)
+    public Object clone()
+    public String toString()
+  }
+-----
+class Complex implements Cloneable
+  {
+    private double re, im;
+    Complex(double re, double im)
+      { this.re = re; this.im = im; }
+    double re() 
+      { return re; }
+    double im()
+      { return im; }
+    void add(Complex rhs)
+      { 
+        re = re() + rhs.re(); 
+        im = im() + rhs.im(); 
+      }
+    void mult(Complex rhs)
+      { double t = re();
+        re = re() * rhs.re() - im() * rhs.im();
+        im = t * rhs.im() + im() * rhs.re();
+      }
+    public String toString()
+      { return re() + " " + im(); }
+  }
+-----
+public class SimulateQueues
+  { private static int M = 4;
+    public static void main(String[] args)
+      { int N = Integer.parseInt(args[0]);
+        intQueue[] Q = new intQueue[M];
+        for (int i = 0; i < M; i++) 
+          Q[i] = new intQueue(N);
+        for (int i = 0; i < N; i++)
+          { int in = (int) (Math.random() * M);
+            int out = (int) (Math.random() * M);
+            Q[in].put(i);
+            if (!Q[out].empty()) Q[out].get();
+            if (i < N - 5) continue;
+            Out.print(in + " in ");
+            Out.println(out + " out");
+            for (int k = 0; k < M; k++)
+              { intQueue t;
+                t = (intQueue) Q[k].clone();
+                Out.print(k + ": ");
+                while(!t.empty())
+                  Out.print(t.get() + " ");
+                Out.println("");
+              }
+          }
+      }
+  }
+-----
+class intQueue implements Cloneable // ADT interface
+  { //  private members and implementations hidden
+    intQueue(int)
+    public Object clone()
+    boolean empty()
+    void put(int)
+    int get()
+  }
+-----
+public Object clone()
+  {
+    intQueue Q = new intQueue(0);
+    for (Node t = head; t != null; t = t.next)
+      Q.put(t.item);
+    return Q;
+  }
+-----
+public class Binomial
+  {
+    public static void main(String[] args)
+      { int N = Integer.parseInt(args[0]);
+        double p = Double.parseDouble(args[1]);
+        Poly y = new Poly(1, 0);
+        Poly t = new Poly(1, 0); 
+        t.add(new Poly(1, 1));
+        for (int i = 0; i < N; i++)
+          { y.mult(t); Out.println(y + ""); }
+        Out.println("value: " + y.eval(p));
+      }
+  }
+-----
+class Poly // ADT interface
+  { // implementations and private members hidden
+    Poly(int, int)
+    double eval(double)
+    void add(Poly)
+    void mult(Poly)
+    public String toString()
+  }
+-----
+class Poly
+  { private int n; private int[] a;
+    Poly(int c, int N)
+      { a = new int[N+1]; n = N+1; a[N] = c;
+        for (int i = 0; i < N; i++) a[i] = 0;
+      }
+    double eval(double d)
+      { double t = 0.0;
+        for (int i = n-1; i >= 0; i--)
+          t = t*d + (double) a[i];
+        return t;
+      }
+    void add(Poly p)
+      { int[] t = new int[(p.n > n) ? p.n : n];
+        for (int i = 0; i < p.n; i++) 
+          t[i] = p.a[i];
+        for (int j = 0; j < n; j++)
+          t[j] += a[j];
+        a = t; n = t.length;
+      }
+    void mult(Poly p)
+      { int[] t = new int[p.n + n -1];
+        for (int i = 0; i < p.n; i++)
+          for (int j = 0; j < n; j++)
+            t[i+j] += p.a[i] * a[j];
+        a = t; n = t.length;
+      }
+    public String toString()
+      { String s = "";
+        for (int i = 0; i < n; i++)
+          s += a[i] + " "; 
+        return s;        
+      }
+}
+
+----------
+CHAPTER 5. Recursion and Trees
+-----
+static int factorial(int N)
+  {
+    if (N == 0) return 1;
+    return N*factorial(N-1);
+  }  
+-----
+static int puzzle(int N)
+  {
+    if (N == 1) return 1;
+    if (N % 2 == 0)
+         return puzzle(N/2);
+    else return puzzle(3*N+1);
+  }  
+-----
+static int gcd(int M, int N)
+  {
+    if (N == 0) return M;
+    return gcd(N, M % N);
+  }  
+-----
+static char[] a; 
+static int i;
+static int eval()
+  { int x = 0;
+    while (a[i] == ' ') i++;
+    if (a[i] == '+')
+      { i++; return eval() + eval(); }
+    if (a[i] == '*')
+      { i++; return eval() * eval(); }
+    while ((a[i] >= '0') && (a[i] <= '9')) 
+      x = 10*x + (a[i++]-'0'); 
+    return x;
+  }
+-----
+int count(Node h)
+  { 
+    if (h == null) return 0;
+    return 1 + count(h.next); 
+  }
+void traverse(Node h)
+  { 
+    if (h == null) return;
+    h.item.visit(); 
+    traverse(h.next);
+  }
+void traverseR(Node h)
+  { 
+    if (h == null) return;
+    traverseR(h.next);
+    h.item.visit(); 
+  }
+Node remove(Node h, Item v)
+  { 
+    if (h == null) return null;
+    if (eq(h.item, v)) return remove(h.next, v); 
+    h.next = remove(h.next, v); 
+    return h;
+  }
+-----
+static double max(double a[], int l, int r)
+  {
+    if (l == r) return a[l];
+    int m = (l+r)/2; 
+    double u = max(a, l, m);
+    double v = max(a, m+1, r);
+    if (u > v) return u; else return v;
+  }
+-----
+static void hanoi(int N, int d)
+  {
+    if (N == 0) return;
+    hanoi(N-1, -d);
+    shift(N, d);    
+    hanoi(N-1, -d);
+  }  
+-----
+static void rule(int l, int r, int h)
+  { int m = (l+r)/2;
+    if (h > 0)
+      { 
+        rule(l, m, h-1);
+        mark(m, h);
+        rule(m, r, h-1);
+      }
+  }
+-----
+static void rule(int l, int r, int h)
+  { 
+    for (int t = 1, j = 1; t <= h; j += j, t++)
+      for (int i = 0; l+j+i <= r; i += j+j)
+        mark(l+j+i, t);
+  }
+-----
+static int F(int i)
+  { 
+    if (i < 1) return 0;
+    if (i == 1) return 1;
+    return F(i-1) + F(i-2);
+  }
+-----
+static final int maxN = 47;
+static int knownF[] = new int [maxN];
+static int F(int i)
+{ 
+  if (knownF[i] != 0) return knownF[i];
+  int t = i;
+  if (i < 0) return 0;
+  if (i > 1) t = F(i-1) + F(i-2);
+  return knownF[i] = t;
+}
+-----
+static int knap(int cap)
+  { int i, space, max, t;
+    for (i = 0, max = 0; i < N; i++)
+      if ((space = cap-items[i].size) >= 0)
+        if ((t = knap(space) + items[i].val) > max) 
+          max = t;
+    return max;     
+  }
+-----
+static int knap(int M)
+  { int i, space, max, maxi = 0, t;
+    if (maxKnown[M] != unknown) return maxKnown[M];
+    for (i = 0, max = 0; i < N; i++)
+      if ((space = M-items[i].size) >= 0)
+        if ((t = knap(space) + items[i].val) > max)
+          { max = t; maxi = i; }
+    maxKnown[M] = max; itemKnown[M] = items[maxi];
+    return max;     
+  }
+-----
+private void traverseR(Node h)
+  { 
+    if (h == null) return;
+    h.item.visit(); 
+    traverseR(h.l);
+    traverseR(h.r);
+  }
+void traverse()
+  { traverseR(root); }
+-----
+private void traverseS(Node h)
+  { NodeStack s = new NodeStack(max);
+    s.push(h);
+    while (!s.empty())
+      {
+        h = s.pop();
+        h.item.visit(); 
+        if (h.r != null) s.push(h.r); 
+        if (h.l != null) s.push(h.l); 
+      }
+  }
+void traverseS()
+  { traverseS(root); }
+-----
+private void traverseQ(Node h)
+  { NodeQueue q = new NodeQueue(max);
+    q.put(h);
+    while (!q.empty())
+      {
+        h = q.get();
+        h.item.visit(); 
+        if (h.l != null) q.put(h.l); 
+        if (h.r != null) q.put(h.r); 
+      }
+  }
+void traverseQ()
+  { traverseQ(root); }
+-----
+private static int count(Node h)
+  { 
+    if (h == null) return 0;
+    return count(h.l) + count(h.r) + 1;
+  }
+int count()
+  { return count(root); }
+private static int height(Node h)
+  { 
+    if (h == null) return -1;
+    int u = height(h.l), v = height(h.r);
+    if (u > v) return u+1; else return v+1;
+  }
+int height()
+  { return height(root); }
+-----
+static void printnode(Item x, int h)
+  { 
+    for (int i = 0; i < h; i++) 
+      Out.print("    ");
+    Out.println("[" + x + "]");
+  }
+private static void showR(Node t, int h)
+  { 
+    if (t == null) { printnode(null, h); return; }
+    showR(t.r, h+1);    
+    printnode(t.item, h);
+    showR(t.l, h+1);    
+  }
+void show()
+  { showR(root, 0); }
+-----
+static class Node
+  { double val; Node l; Node r; 
+    Node(double v, Node l, Node r)
+      { this.val = v; this.l = l; this.r = r; }
+  }
+static Node max(double a[], int l, int r)
+  { int m = (l+r)/2;
+    Node x = new Node(a[m], null, null);
+    if (l == r) return x;
+    x.l = max(a, l, m);
+    x.r = max(a, m+1, r);
+    double u = x.l.val, v = x.r.val;
+    if (u > v) 
+      x.val = u; else x.val = v;
+    return x;
+  }
+-----
+static Node parse()
+  { char t = a[i++]; Node x = new Node(t);
+    if ((t == '+') || (t == '*'))
+      { x.l = parse(); x.r = parse(); }
+    return x;
+  }
+-----
+private void dfs(int k)
+  { 
+    visit(k); visited[k] = true;
+    for (Node t = adj[k]; t != null; t = t.next)
+      if (!visited[t.v]) dfs(t.v);
+  }
+-----
+void bfs(int k)
+  { intQUEUE q = new intQUEUE(V*V);
+    q.put(k);
+    while (!q.empty())
+      if (!visited[k = q.get()])
+        { Node t;
+          visit(k); visited[k] = true;
+          for (t = adj[k]; t != null; t = t.next)
+            if (!visited[t.v]) q.put(t.v);
+        }
+  }
+
+----------
+CHAPTER 6. Elementary Sorting Methods
+-----
+class ArraySortBasic
+  { static int cnt = 0;
+    static boolean less(double v, double w)
+      { cnt++; return v < w; }
+    static void exch(double[] a, int i, int j)
+      { double t = a[i]; a[i] = a[j]; a[j] = t; }
+    static void compExch(double[] a, int i, int j)
+      { if (less(a[j], a[i])) exch (a, i, j); }
+    static void sort(double[] a, int l, int r)
+      { for (int i = l+1; i <= r; i++)
+          for (int j = i; j > l; j--)
+            compExch(a, j-1, j);
+      } 
+    public static void main(String[] args)
+      { int N = Integer.parseInt(args[0]);
+        double a[] = new double[N];
+        for (int i = 0; i < N; i++)
+          a[i] = Math.random();
+        sort(a, 0, N-1);
+        if (N < 100)
+          for (int i = 0; i < N; i++) 
+            Out.println(a[i] + "");
+        Out.println("Compares used: " + cnt);
+      }
+  }
+-----
+interface ITEM
+  { boolean less(ITEM v); }
+-----
+class Sort
+  {	
+    static boolean less(ITEM v, ITEM w)
+      { return v.less(w); }
+    static void exch(ITEM[] a, int i, int j)
+      { ITEM t = a[i]; a[i] = a[j]; a[j] = t; }
+    static void compExch(ITEM[] a, int i, int j)
+      { if (less(a[j], a[i])) exch (a, i, j); }
+    static void sort(ITEM[] a, int l, int r)
+      { example(a, l, r); }
+    static void example(ITEM[] a, int l, int r)
+      { 
+        for (int i = l+1; i <= r; i++)
+          for (int j = i; j > l; j--)
+            compExch(a, j-1, j);
+      } 
+  }
+-----
+class myItem implements ITEM // ADT interface 
+  { // implementations and private members hidden
+    public boolean less(ITEM)
+    void read()
+    void rand()
+    public String toString()
+  }
+-----
+class myArray // ADT interface
+  { // implementations and private members hidden
+    myArray(int) 
+    void rand()
+    void read()
+    void show(int, int)
+    void sort(int, int)
+  }
+-----
+class ArraySort
+{ 
+  public static void main(String[] args)
+    { int N = Integer.parseInt(args[0]);
+      myArray A = new myArray(N);
+      if (args.length < 2) A.rand(); else A.read();
+      A.sort(0, N-1);
+      A.show(0, N-1);
+    }
+}
+-----
+class myArray
+  {
+    private myItem[] a;
+    private int N;
+    myArray(int N) 
+      { 
+        this.N = N;
+        a = new myItem[N];
+        for (int i = 0; i < N; i++) 
+          a[i] = new myItem();
+      }
+    void rand()
+      { for (int i = 0; i < N; i++) a[i].rand(); }
+    void read()
+      { for (int i = 0; i < N; i++)
+          if (!In.empty()) a[i].read(); }
+    void show(int l, int r)
+      { for (int i = l; i <= r; i++) 
+          Out.println(a[i] + ""); }
+    void sort(int l, int r)
+      { Sort.sort(a, l, r); }
+  }
+-----
+class myItem implements ITEM
+  { private int key; 
+    public boolean less(ITEM w)
+      { return key < ((myItem) w).key; }
+    void read()
+      { key = In.getInt(); }
+    void rand()
+      { key = (int) (1000 * Math.random()); }
+    public String toString() { return key + ""; }
+  }
+-----
+class Record
+  {
+    int id;
+    double balance;
+    String who; 
+    static int SortKeyField = 0;
+    public String toString()
+      { return id + " " + balance + " " + who; }
+  }
+-----
+class myItem extends Record implements ITEM
+  {
+    public boolean less(ITEM w)
+      { myItem r = (myItem) w;
+        switch (SortKeyField)
+          { 
+            case 2: return who.compareTo(r.who) < 0; 
+            case 1: return balance < r.balance; 
+           default: return id < r.id; 
+          }
+      }
+    void read() 
+      { 
+        id = In.getInt();
+        balance = In.getDouble();
+        who = In.getString();
+      }
+  }
+-----
+class myItem implements ITEM
+  { String key;
+    public boolean less(ITEM w)
+      { return key.compareTo(((myItem) w).key)<0; }
+    void read()
+      { key = In.getString(); }
+    void rand()
+      { int a = (int)('a'); key = "";
+        for (int i = 0; i < 1+9*Math.random(); i++)
+          key += (char) (a + 26*Math.random());
+      }
+    public String toString() { return key; }
+  }
+-----
+static void selection(ITEM[] a, int l, int r)
+  { 
+    for (int i = l; i < r; i++)
+      { int min = i;
+        for (int j = i+1; j <= r; j++)
+          if (less(a[j], a[min])) min = j;
+        exch(a, i, min);
+      }
+  } 
+-----
+static void insertion(ITEM[] a, int l, int r)
+  { int i;
+    for (i = r; i > l; i--) compExch(a, i-1, i);
+    for (i = l+2; i <= r; i++)
+      { int j = i; ITEM v = a[i];
+        while (less(v, a[j-1]))
+          { a[j] = a[j-1]; j--; }
+        a[j] = v;
+      }
+  }
+-----
+static void bubble(ITEM[] a, int l, int r)
+  { for (int i = l; i < r; i++)
+      for (int j = r; j > i; j--)
+        compExch(a, j-1, j);
+  }
+-----
+class Visualize
+{ private static final int cuts = 5, h = 72, w = 72;
+  static int N;
+  static void sort(double a[], int l, int r) 
+    { double t;
+      for (int i = l; i <= r; i++)
+        { for (int j = i; j > l; j--) 
+            if (a[j] < a[j-1]) exch(a, j-1, j);
+          if (i*cuts % N == 0) show(a, l, r);
+        }
+    }
+  static void show(double[] a, int l, int r)
+    { 
+      for (int i = l; i <= r; i++)
+        { float x = h*((float) i) / ((float) N);
+          float y = w*((float) a[i]);
+          Out.println(x + " " + y + " dot");
+        }
+      Out.println(1.1*w + " 0 translate");
+    }
+  public static void main(String[] args)
+    { N = Integer.parseInt(args[0]);
+      double a[] = new double[N];
+      for (int i = 0; i < N; i++) 
+        a[i] = Math.random();
+      Out.print("72 72 translate ");
+      Out.print("/dot {moveto currentpoint");
+      Out.println(" 2 0 360 arc fill} def");
+      sort(a, 0, N-1);
+    }
+}
+-----
+import java.applet.Applet;
+import java.awt.*;
+abstract public class Animate 
+  extends Applet implements Runnable 
+  { Graphics g;
+    Thread animatorThread;
+    int N; double[] a;
+    public void start() 
+      { g = getGraphics();
+        new Thread(this).start(); 
+      }
+    public void stop() { animatorThread = null; }
+    public void run() 
+      { N = Integer.parseInt(getParameter("N"));  
+        a = new double[N];
+        for (int i = 0; i < N; i++) 
+          { a[i] = Math.random();
+            dot(X(i), Y(a[i]), Color.black); }
+        sort(a, 0, N-1);
+      }
+    int X(int i) 
+      { return (i*getSize().width)/N; }
+    int Y(double v) 
+      { return (1.0 - v)*getSize().height; }
+    void dot(int x, int y, Color c) 
+      { g.setColor(c); g.fillOval(x, y, 5, 5); }
+    void exch(double [] a, int i, int j) 
+      { double t = a[i]; a[i] = a[j]; a[j] = t;
+        dot(X(i), Y(a[j]), Color.red);
+        dot(X(j), Y(a[i]), Color.red);
+        dot(X(i), Y(a[i]), Color.black);
+        dot(X(j), Y(a[j]), Color.black);
+      }
+    abstract void sort(double a[], int l, int r); 
+}
+-----
+import java.awt.*;
+public class SortAnimate extends Animate
+  {
+    void sort(double a[], int l, int r) 
+      { 
+        for (int i = l+1; i <= r; i++)
+          for (int j = i; j > l; j--) 
+            if (a[j] < a[j-1]) exch(a, j-1, j); 
+      }
+  }
+-----
+static void shell(ITEM[] a, int l, int r)
+  { int h;
+    for (h = 1; h <= (r-l)/9; h = 3*h+1);
+    for ( ; h > 0; h /= 3)
+      for (int i = l+h; i <= r; i++)
+        { int j = i; ITEM v = a[i];
+          while (j >= l+h && less(v, a[j-h]))
+            { a[j] = a[j-h]; j -= h; }
+        a[j] = v;
+      }
+  }
+-----
+    private static Node findMax(Node h)
+      { 
+        for (Node t = h; t.next != null; t = t.next)
+          if (h.next.item < t.next.item) h = t;
+        return h;
+      }
+    static Node sort(Node h)
+      { Node head = new Node(-1, h), out = null;
+        while (head.next != null)
+          { Node max = findMax(head);
+            Node t = max.next; max.next = t.next;
+            t.next = out; out = t;
+          }
+        return out;
+      }
+-----
+static void distCount(int a[], int l, int r)
+  { int i, j, cnt[] = new int[M];
+    int b[] = new int[a.length];
+    for (j = 0; j <  M; j++) cnt[j] = 0;
+    for (i = l; i <= r; i++) cnt[a[i]+1]++;
+    for (j = 1; j <  M; j++) cnt[j] += cnt[j-1];
+    for (i = l; i <= r; i++) b[cnt[a[i]]++] = a[i];
+    for (i = l; i <= r; i++) a[i] = b[i-l];
+  }
+
+----------
+CHAPTER 7. Quicksort
+-----
+static void quicksort(ITEM[] a, int l, int r)
+  { 
+    if (r <= l) return;
+    int i = partition(a, l, r);
+    quicksort(a, l, i-1);
+    quicksort(a, i+1, r);
+  }
+-----
+static int partition(ITEM a[], int l, int r)
+  { int i = l-1, j = r; ITEM v = a[r];
+    for (;;)
+      { 
+        while (less(a[++i], v)) ;
+        while (less(v, a[--j])) if (j == l) break;
+        if (i >= j) break;
+        exch(a, i, j);
+      }
+    exch(a, i, r);
+    return i;
+  }
+-----
+static void quicksort(ITEM[] a, int l, int r)
+  { intStack S = new intStack(50); 
+    S.push(l); S.push(r);
+    while (!S.empty())
+      {
+        r = S.pop(); l = S.pop(); 
+        if (r <= l) continue;
+        int i = partition(a, l, r);
+        if (i-l >  r-i) { S.push(l); S.push(i-1); }
+        S.push(i+1); S.push(r); 
+        if (r-i >= i-l) { S.push(l); S.push(i-1); }
+      }
+  }
+-----
+private final static int M = 10;
+static void quicksort(ITEM[] a, int l, int r)
+  { 
+    if (r-l <= M) return;
+    exch(a, (l+r)/2, r-1);
+    compExch(a, l, r-1); 
+      compExch(a, l, r); 
+        compExch(a, r-1, r);
+    int i = partition(a, l+1, r-1);
+    quicksort(a, l, i-1);
+    quicksort(a, i+1, r);
+  }
+static void hybridsort(ITEM a[], int l, int r)
+  { quicksort(a, l, r); insertion(a, l, r); }
+-----
+static void quicksort(ITEM a[], int l, int r)
+  { 
+    if (r <= l) return;
+    ITEM v = a[r];
+    int i = l-1, j = r, p = l-1, q = r, k;
+    for (;;)
+      { 
+        while (less(a[++i], v)) ;
+        while (less(v, a[--j])) if (j == l) break;
+        if (i >= j) break;
+        exch(a, i, j);
+        if (equal(a[i], v)) { p++; exch(a, p, i); }
+        if (equal(v, a[j])) { q--; exch(a, q, j); }
+      }
+    exch(a, i, r); j = i-1; i = i+1;
+    for (k = l  ; k <= p; k++,j--) exch(a, k, j);
+    for (k = r-1; k >= q; k--,i++) exch(a, k, i);
+    quicksort(a, l, j);
+    quicksort(a, i, r); 
+  }
+-----
+static void select(ITEM[] a, int l, int r, int k)
+  { 
+    if (r <= l) return;
+    int i = partition(a, l, r);
+    if (i > k) select(a, l, i-1, k);
+    if (i < k) select(a, i+1, r, k);
+  }
+-----
+static void select(ITEM[] a, int l, int r, int k)
+  { 
+    while (r > l)
+      { int i = partition(a, l, r);
+        if (i >= k) r = i-1;
+        if (i <= k) l = i+1;
+      } 
+  }
+
+----------
+CHAPTER 8. Mergesort
+-----
+static void mergeAB(ITEM[] c, int cl,
+                    ITEM[] a, int al, int ar, 
+                    ITEM[] b, int bl, int br )
+  { int i = al, j = bl;
+    for (int k = cl; k < cl+ar-al+br-bl+1; k++)
+      {
+        if (i > ar) { c[k] = b[j++]; continue; }
+        if (j > br) { c[k] = a[i++]; continue; }
+        c[k] = less(a[i], b[j]) ? a[i++] : b[j++];
+      }
+  }
+-----
+static void merge(ITEM[] a, int l, int m, int r)
+  { int i, j;
+    for (i = m+1; i > l; i--) aux[i-1] = a[i-1];
+    for (j = m; j < r; j++) aux[r+m-j] = a[j+1];
+    for (int k = l; k <= r; k++)
+      if (less(aux[j], aux[i]))
+          a[k] = aux[j--]; else a[k] = aux[i++];
+  }
+-----
+static void mergesort(ITEM[] a, int l, int r)
+  { if (r <= l) return;
+    int m = (r+l)/2;
+    mergesort(a, l, m);  
+    mergesort(a, m+1, r);
+    merge(a, l, m, r);
+  }
+-----
+static ITEM[] aux;
+static void mergesortABr
+              (ITEM[] a, ITEM[] b, int l, int r)
+  { if (r <= l) return;
+    int m = (r+l)/2;
+    mergesortABr(b, a, l, m);  
+    mergesortABr(b, a, m+1, r);
+    mergeAB(a, l, b, l, m, b, m+1, r);
+  }
+static void mergesortAB(ITEM[] a, int l, int r)
+  { 
+    aux = new ITEM[a.length];
+    for (int i = l; i <= r; i++) aux[i] = a[i];
+    mergesortABr(a, aux, l, r);  
+  }
+-----
+static int min(int A, int B) 
+  { return (A < B) ? A : B; }
+static void mergesort(ITEM[] a, int l, int r)
+  { if (r <= l) return;
+    aux = new ITEM[a.length];
+    for (int m = 1; m <= r-l; m = m+m)
+      for (int i = l; i <= r-m; i += m+m)
+        merge(a, i, i+m-1, min(i+m+m-1, r));
+  }
+-----
+static Node merge(Node a, Node b)
+  { Node dummy = new Node(); 
+    Node head = dummy, c = head;
+    while ((a != null) && (b != null))
+      if (less(a.item, b.item))
+        { c.next = a; c = a; a = a.next; }
+      else
+        { c.next = b; c = b; b = b.next; }
+    c.next = (a == null) ? b : a;
+    return head.next;
+  }
+-----
+static Node mergesort(Node c)
+  { 
+    if (c == null || c.next == null) return c;
+    Node a = c, b = c.next;
+    while ((b != null) && (b.next != null))
+      { c = c.next; b = (b.next).next; }
+    b = c.next; c.next = null;
+    return merge(mergesort(a), mergesort(b));
+  }
+-----
+static Node mergesort(Node t)
+  { 
+    NodeQueue Q = new NodeQueue();
+    if (t == null || t.next == null) return t;
+    for (Node u = null; t != null; t = u) 
+      { u = t.next; t.next = null; Q.put(t); }
+    t = Q.get();     
+    while (!Q.empty())
+      { Q.put(t); t = merge(Q.get(), Q.get()); }
+    return t;
+  }
+
+----------
+CHAPTER 9. Priority Queues and Heapsort
+-----
+class PQ // ADT interface
+  { // implementations and private members hidden
+    PQ(int)
+    boolean empty()
+    void insert(ITEM)
+    ITEM getmax()
+  };
+-----
+class PQ 
+  {
+    static boolean less(ITEM v, ITEM w)
+      { return v.less(w); }
+    static void exch(ITEM[] a, int i, int j)
+      { ITEM t = a[i]; a[i] = a[j]; a[j] = t; }
+    private ITEM[] pq; 
+    private int N;
+    PQ(int maxN)
+      { pq = new ITEM[maxN]; N = 0; }
+    boolean empty()
+      { return N == 0; }
+    void insert(ITEM item)
+      { pq[N++] = item; }
+    ITEM getmax()
+      { int max = 0;
+        for (int j = 1; j < N; j++)
+          if (less(pq[max], pq[j])) max = j;
+        exch(pq, max, N-1);  
+        return pq[--N];
+      }
+  };
+-----
+private void swim(int k)
+  {
+    while (k > 1 && less(k/2, k))
+      { exch(k, k/2); k = k/2; }
+  }
+-----
+private void sink(int k, int N)
+  {
+    while (2*k <= N)
+      { int j = 2*k;
+        if (j < N && less(j, j+1)) j++;
+        if (!less(k, j)) break;
+        exch(k, j); k = j;
+      }
+  }
+-----
+class PQ 
+  {
+    private boolean less(int i, int j)
+      { return pq[i].less(pq[j]); }
+    private void exch(int i, int j)
+      { ITEM t = pq[i]; pq[i] = pq[j]; pq[j] = t; }
+    private void swim(int k)
+      // Program 9.3
+    private void sink(int k, int N)
+      // Program 9.4
+    private ITEM[] pq; 
+    private int N;
+    PQ(int maxN)
+      { pq = new ITEM[maxN+1]; N = 0; }
+    boolean empty()
+      { return N == 0; }
+    void insert(ITEM v)
+      { pq[++N] = v; swim(N); }
+    ITEM getmax()
+      { exch(1, N); sink(1, N-1); return pq[N--]; }
+  };
+-----
+class Sort
+  {	
+    static void sort(ITEM[] a, int l, int r)
+      { PQsort(a, l, r); }
+    static void PQsort(ITEM[] a, int l, int r)
+      { int k;
+        PQ pq = new PQ(r-l+1);
+        for (k = l; k <= r; k++) 
+          pq.insert(a[k]);
+        for (k = r; k >= l; k--) 
+          a[k] = pq.getmax();
+      } 
+  }
+-----
+for (int k = N/2; k >= 1; k--) 
+  sink(k, N);
+while (N > 1) 
+  { exch(1, N); sink(1, --N); }
+-----
+class PQfull // ADT interface
+  { // implementations and private members hidden
+    boolean empty()
+    Object insert(ITEM)
+    ITEM getmax()
+    void change(Object, ITEM)
+    void remove(Object)
+    void join(PQfull)
+  };
+-----
+class PQfull
+  {
+    private static class Node
+      { ITEM key; Node prev, next; 
+        Node(ITEM v)
+          { key = v; prev = null; next = null; } 
+      } 
+    private Node head, tail;
+    PQfull()
+      { 
+        head = new Node(null); 
+        tail = new Node(null); 
+        head.prev = tail; head.next = tail;
+        tail.prev = head; tail.next = head; 
+      }
+    boolean empty()
+      { return head.next.next == head; }
+    Object insert(ITEM v)
+      { Node t = new Node(v);
+        t.next = head.next; t.next.prev = t;
+        t.prev = head; head.next = t;
+        return t;
+      }
+    ITEM getmax()
+      // See Program 9.10
+    void change(Object x, ITEM v)
+      // See Program 9.10
+    void remove(Object x)
+      // See Program 9.10
+    void join(PQfull p)
+      // See Program 9.10
+  }
+-----
+ITEM getmax()
+  { ITEM max; Node x = head.next;
+    for (Node t = x; t.next != head; t = t.next)
+      if (Sort.less(x.key, t.key)) x = t;
+    max = x.key; 
+    remove(x); 
+    return max;
+  }
+void change(Object x, ITEM v)
+  { ((Node) x).key = v; }  
+void remove(Object x)
+  { Node t = (Node) x;
+    t.next.prev = t.prev;
+    t.prev.next = t.next;
+  }  
+void join(PQfull p)
+  {
+    tail.prev.next = p.head.next;
+    p.head.next.prev = tail.prev;
+    head.prev = p.tail; 
+    p.tail.next = head;
+    tail = p.tail;
+  }-----
+class PQi // ADT interface
+  { // implementations and private members hidden
+    PQi(Array)
+    boolean empty()
+    void insert(int)
+    int getmax()
+    void change(int)
+    void remove(int)
+  };
+-----
+class PQi 
+  {
+    private boolean less(int i, int j)
+      { return a[pq[i]].less(pq[j]); }
+    private void exch(int i, int j)
+      { int t = pq[i]; pq[i] = pq[j]; pq[j] = t;
+        qp[pq[i]] = i; qp[pq[j]] = j; 
+      }
+    private void swim(int k)
+      // Program 9.3
+    private void sink(int k, int N)
+      // Program 9.4
+    private ITEM[] a;
+    private int[] pq, qp; 
+    private int N;
+    PQi(ITEM[] items)
+      { a = items; N = 0; 
+        pq = new int[a.length+1]; 
+        qp = new int[a.length+1]; 
+      }
+    boolean empty()
+      { return N == 0; }
+    void insert(int v)
+      { pq[++N] = v; qp[v] = N; swim(N); }
+    int getmax()
+      { exch(1, N); sink(1, N-1); return pq[N--]; }
+    void change(int k)
+      { swim(qp[k]); sink(qp[k], N); }
+  };
+-----
+static Node pair(Node p, Node q)
+  {
+    if (p.item.less(q.item)) 
+      { p.r = q.l; q.l = p; return q; }
+    else { q.r = p.l; p.l = q; return p; }
+  }
+-----
+Object insert(ITEM v)
+  { Node t = new Node(v), c = t;
+    for (int i = 0; i < bq.length+1; i++)
+      {
+        if (c == null) break;
+        if (i == bq.length-1) bq = grow(bq);
+        if (bq[i] == null) { bq[i] = c; break; }
+        c = pair(c, bq[i]); bq[i] = null;
+      }
+    return t;
+  }
+-----
+ITEM getmax()
+  { int i, max; ITEM v = null; 
+    for (i = 0, max = -1; i < bq.length; i++)
+      if (bq[i] != null) 
+        if ((max == -1) || v.less(bq[i].item))
+          { max = i; v = bq[max].item; }
+    Node[] temp = new Node[max+1]; temp[max] = null;
+    Node x = bq[max].l; bq[max] = null;
+    for (i = max-1; i >= 0; i--)
+      { temp[i] = x; x = x.r; temp[i].r = null; }
+    bq = BQjoin(bq, temp);  
+    return v;
+  }      
+-----
+static int bit(Node x) 
+  { return x == null ? 0 : 1; }
+static int bits(Node C, Node B, Node A)
+  { return 4*bit(C) + 2*bit(B) + 1*bit(A); }
+static Node[] BQjoin(Node[] a, Node[] b)
+  { Node c = null; 
+    if (a.length < b.length) 
+      { Node[] t = a; a = b; b = t; }
+    for (int i = 0; i < b.length; i++)
+      switch(bits(c, b[i], a[i]))
+        {
+          case 2: a[i] = b[i]; break;
+          case 3: c = pair(a[i], b[i]); 
+                  a[i] = null; break;
+          case 4: if (i == a.length-1) a = grow(a);
+                  a[i] = c; c = null; break;
+          case 5: c = pair(c, a[i]); 
+                  a[i] = null; break;
+          case 6: 
+          case 7: c = pair(c, b[i]); break;
+        }
+    if (a[a.length-1] == null) a = shrink(a);
+    return a;
+  }
+
+----------
+CHAPTER 10. Radix Sorting
+-----
+static void 
+quicksortB(bitsItem[] a, int l, int r, int d)
+  { int i = l, j = r;
+    if (r <= l || d > bitsItem.bitsword) return;
+    while (j != i)
+      { 
+        while (bit(a[i], d) == 0 && (i < j)) i++;
+        while (bit(a[j], d) == 1 && (j > i)) j--;
+        exch(a, i, j);
+      }
+    if (bit(a[r], d) == 0) j++;
+    quicksortB(a, l, j-1, d+1);
+    quicksortB(a, j, r, d+1);
+  }
+-----
+private final static int M = 10;
+static void 
+radixMSD(wordItem[] a, int l, int r, int d)
+  { int i, j, cnt[] = new int[wordItem.R+1];
+    if (d > wordItem.bytesword) return;
+    if (r-l <= M) { insertion(a, l, r); return; }
+    for (j = 0; j < wordItem.R; j++) cnt[j] = 0;
+    for (i = l; i <= r; i++) 
+      cnt[digit(a[i], d) + 1]++;
+    for (j = 1; j < wordItem.R; j++) 
+      cnt[j] += cnt[j-1];
+    for (i = l; i <= r; i++) 
+      aux[cnt[digit(a[i], d)]++] = a[i];
+    for (i = l; i <= r; i++) a[i] = aux[i-l];
+    radixMSD(a, l, l+cnt[0]-1, d+1);
+    for (j = 0; j < wordItem.R-1; j++)
+      radixMSD(a, l+cnt[j], l+cnt[j+1]-1, d+1);
+  }
+-----
+static void StrSort(String a[], int l, int r, int d)
+{ 
+  if (r <= l) return;
+  String v = a[r];
+  int i = l-1, j = r, p = l-1, q = r, k;
+  while (i < j)
+    { 
+      while (less(a[++i], v, d)) ;
+      while (less(v, a[--j], d)) if (j == l) break;
+      if (i > j) break;
+      exch(a, i, j);
+      if (equal(a[i], v, d)) exch(a, ++p, i); 
+      if (equal(v, a[j], d)) exch(a, --q, j);
+    }
+  if (p == q)  // first d+1 chars of all keys equal 
+    if (v.length() > d) StrSort(a, l, r, d+1); 
+  if (p == q) return;
+  if (less(a[i], v, d)) i++;
+  for (k = l; k <= p; k++, j--) exch(a, k, j);
+  for (k = r; k >= q; k--, i++) exch(a, k, i);
+  StrSort(a, l, j, d);
+  if ((i == r) && (equal(a[i], v, d))) i++;
+  if (v.length() >= d) StrSort(a, j+1, i-1, d+1); 
+  StrSort(a, i, r, d); 
+}
+-----
+static void radixLSD(wordItem[] a, int l, int r)
+  { 
+    for (int d = wordItem.bytesword-1; d >=0; d--)
+      { int i, j, cnt[] = new int[wordItem.R+1];
+        for (j = 0; j < wordItem.R; j++) cnt[j] = 0;
+        for (i = l; i <= r; i++) 
+          cnt[digit(a[i], d) + 1]++;
+        for (j = 1; j < wordItem.R; j++) 
+          cnt[j] += cnt[j-1];
+        for (i = l; i <= r; i++) 
+          aux[cnt[digit(a[i], d)]++] = a[i];
+        for (i = l; i <= r; i++) a[i] = aux[i-l];
+      }
+  }
+
+----------
+CHAPTER 11. Special-Purpose Sorts
+-----
+static ITEM[] aux;
+static void shuffle(ITEM a[], int l, int r)
+  { int i, j, m = (l+r)/2;
+    for (i = l, j = 0; i <= r; i+=2, j++)
+      { aux[i] = a[l+j]; aux[i+1] = a[m+1+j]; }
+    for (i = l; i <= r; i++) a[i] = aux[i];
+  }
+static void unshuffle(ITEM a[], int l, int r)
+  { int i, j, m = (l+r)/2;
+    for (i = l, j = 0; i <= r; i+=2, j++)
+      { aux[l+j] = a[i]; aux[m+1+j] = a[i+1]; }
+    for (i = l; i <= r; i++) a[i] = aux[i];
+  }
+-----
+static void merge(ITEM[] a, int l, int m, int r)
+  { 
+    if (r == l+1) compExch(a, l, r);
+    if (r < l+2) return;
+    unshuffle(a, l, r);
+    merge(a, l, (l+m)/2, m); 
+    merge(a, m+1, (m+1+r)/2, r);
+    shuffle(a, l, r);
+    for (int i = l+1; i < r; i+=2) 
+      compExch(a, i, i+1);
+ }
+-----
+static void merge(ITEM[] a, int l, int m, int r)
+  { int N = r-l+1;  // assuming N/2 is m-l+1
+    for (int k = N/2; k > 0; k /= 2)
+      for (int j = k % (N/2); j+k < N; j += k+k) 
+        for (int i = 0; i < k; i++) 
+          compExch(a, l+j+i, l+j+i+k);
+  }
+-----
+static void batchersortNR(ITEM a[], int l, int r)
+  { int N = r-l+1;
+    for (int p = 1; p < N; p += p)
+      for (int k = p; k > 0; k /= 2)
+        for (int j = k%p; j+k < N; j += (k+k)) 
+          for (int i = 0; i < N-j-k; i++) 
+            if ((j+i)/(p+p) == (j+i+k)/(p+p)) 
+              compExch(a, l+j+i, l+j+i+k);
+  }
+-----
+public static void insitu(Disk D, int[] p, int N)
+  { for (int i = 0; i < N; i++)
+      { Block B = D.read(i);
+        int j, k;
+        for (k = i; p[k] != i; k = p[j], p[j] = j)
+          { j = k; D.write(k, D.read(p[k])); }
+        D.write(k, B); p[k] = k;
+      }
+  }
+
+----------
+CHAPTER 12. Symbol Tables and BSTs
+-----
+class myItem implements ITEM // ADT interface 
+  { // implementations and private members hidden
+    public KEY key()
+    void read()
+    void rand()
+    public String toString()
+  }
+class myKey implements KEY  // ADT interface 
+  { // implementations and private members hidden
+    public boolean less(myKey)
+    public boolean equals(myKey)
+    void read()
+    void rand()
+    public String toString()
+  }
+-----
+class myKey implements KEY
+  {
+    private int val;
+    public boolean less(KEY w)
+      { return val < ((myKey) w).val; }
+    public boolean equals(KEY w)
+      { return val == ((myKey) w).val; }
+    public void read()
+      { val = In.getInt(); }
+    public void rand()
+      { val = (int) (M * Math.random()); }
+    public String toString()
+      { return val + ""; }
+  }
+-----
+class myItem implements ITEM
+  { 
+    private myKey val;
+    private float info;
+    myItem()
+      { val = new myKey(); }
+    public KEY key() { return val; }
+    void read()
+      { val.read(); info = In.getFloat(); }
+    void rand()
+      { val.rand(); info = (float) Math.random(); }
+    public String toString() 
+      { return "(" + key() + " " + info + ")"; }
+  }
+-----
+class intkeyItem 
+  { 
+    private int val;
+    private float info;
+    public int key() { return val; }
+    void read()
+      { val = In.getInt(); info = In.getFloat(); }
+    void rand()
+      { val = (int) (M * Math.random()); 
+        info = (float) Math.random(); }
+    public String toString() 
+      { return "(" + key() + " " + info + ")"; }
+  }
+-----
+class ST // ADT interface
+  { // implementations and private members hidden
+    ST(int)
+    int count()
+    void insert(ITEM)
+    ITEM search(KEY)
+    void remove(KEY)
+    ITEM select(int)
+    public String toString()
+  }
+-----
+class DeDup
+  {
+    public static void main(String[] args)
+      { int i, N = Integer.parseInt(args[0]),
+              sw = Integer.parseInt(args[1]);
+        ST st = new ST(N);
+        for (i = 0; i < N; i++) 
+          { myItem v = new myItem();
+            if (sw == 1) v.rand(); else v.read();
+            if (st.search(v.key()) == null)
+              { st.insert(v); Out.println(v + ""); }
+          }
+        Out.print(N + " keys, ");
+        Out.println(N-st.count() + " dups");
+      }
+  }
+-----
+class ST
+  {
+    private intkeyItem[] st;
+    ST(int M)
+      { st = new intkeyItem[M]; }
+    int count()
+      { int N = 0;
+        for (int i = 0; i < st.length; i++)
+          if (st[i] != null) N++;
+        return N; 
+      }
+    void insert(intkeyItem x)
+      { st[x.key()] = x; }
+    void remove(int key) 
+      { st[key] = null; }
+    intkeyItem search(int key)
+      { return st[key]; }
+    intkeyItem select(int k)
+      { 
+        for (int i = 0; i < st.length; i++)
+          if (st[i] != null && k-- == 0) 
+            return st[i];
+        return null; 
+      }
+    public String toString()
+      { String s = "";
+        for (int i = 0; i < st.length; i++)
+          if (st[i] != null) s += st[i] + "\n";
+        return s;
+      }
+  }
+-----
+class ST
+  {
+    private boolean less(KEY v, KEY w)
+      { return v.less(w); }
+    private boolean equals(KEY v, KEY w)
+      { return v.equals(w); }
+    private ITEM[] st;
+    private int N = 0;
+    ST(int maxN)
+      { st = new ITEM[maxN]; }
+    int count()
+      { return N; }
+    void insert(ITEM x)
+      { int i = N++; KEY v = x.key();
+        while (i > 0 && less(v, st[i-1].key()))
+          { st[i] = st[i-1]; i--; }
+        st[i] = x;
+      }
+    ITEM search(KEY key)
+      { int i = 0;
+        for ( ; i < N; i++)
+          if (!less(st[i].key(), key)) break;
+        if (i == N) return null;
+        if (equals(key, st[i].key())) return st[i];
+        return null;
+      }
+    ITEM select(int k)
+      { return st[k]; }
+  }
+-----
+class ST
+  {
+    private class Node
+      { ITEM item; Node next;
+        Node(ITEM x, Node t) { item = x; next = t; }
+      }
+    private Node head;
+    private int N;
+    ST(int maxN) { head = null; N = 0; }
+    int count() { return N; }
+    void insert(ITEM x)
+      { head = new Node(x, head); N++; }
+    private ITEM searchR(Node t, KEY key)
+      { 
+        if (t == null) return null;
+        if (equals(t.item.key(), key)) 
+          return t.item;
+        return searchR(t.next, key);
+      }
+    ITEM search(KEY key)
+      { return searchR(head, key); }
+    public String toString()
+      { Node h = head; String s = "";
+        while (h != null) 
+          { s += h.item + "\n"; h = h.next; }
+        return s;
+      }
+  }
+-----
+    private ITEM searchR(int l, int r, KEY v)
+      { 
+        if (l > r) return null;
+        int m = (l+r)/2;
+        if (equals(v, st[m].key())) return st[m];
+        if (less(v, st[m].key()))
+             return searchR(l, m-1, v);
+        else return searchR(m+1, r, v);
+      }
+    ITEM search(KEY v)
+      { return searchR(0, N-1, v); }
+-----
+class TI // ADT interface
+  { // implementations and private members hidden
+    TI(String)
+    int search(String)
+  }
+-----
+import java.io.*;
+class TextSearch 
+  {
+    public static void main(String[] args) 
+      throws IOException 
+      { FileReader f = new FileReader(args[0]);
+        BufferedReader b = new BufferedReader(f);
+        String text = "", line = "";
+        while ((line = b.readLine()) != null) 
+          text += line + " ";
+        TI ti = new TI(text);
+        In.init(); String q; int i;
+        while ((q = In.getString()) != null)
+          if ((i = ti.search(q)) < 0)
+               Out.println(q + " not found");
+          else Out.println(q + " " + i );
+      }
+  }
+-----
+class TI
+  {
+    private String text;
+    private int[] index;
+    private int N;
+    TI(String s)
+      { text = s; N = text.length();
+        index = new int[N+1]; index[N] = -1;
+        for (int i = 0; i < N; i++)
+          index[i] = i;
+        quicksort(index, 0, N-1);
+      }
+    private char s(int i)
+      { return text.charAt(i); }
+    private boolean less(int v, int w)
+      { 
+        if (v == w) return false;
+        for (int i = 0; ; i++)
+          if (w+i >= N) return false;
+          else if (v+i >= N) return true;
+          else if (s(v+i) < s(w+i)) return true;
+          else if (s(v+i) > s(w+i)) return false;
+      }
+    private void exch(int[] a, int i, int j)
+      { int t = a[i]; a[i] = a[j]; a[j] = t; }
+    private void quicksort(int[] a, int l, int r)
+      // Program 7.1 with int for ITEM
+    int search(String v)
+      // Program 12.14
+  }
+-----
+private int compare(String s, int v)
+  { char[] key = s.toCharArray(); 
+    int t = index[v];
+    for (int i = 0; i < key.length; i++)
+      if (t+i >= N) return 1;
+      else if (key[i] > text(t+i)) return 1;
+      else if (key[i] < text(t+i)) return -1;
+    return 0;
+  }
+private int searchR(int l, int r, String v)
+  { int m = (l+r)/2;
+    if (l > r) return N;
+    switch (compare(v, m))
+      {
+        case -1: return searchR(l, m-1, v);
+        case  1: return searchR(m+1, r, v);
+      }
+    return m; // case 0
+  }
+int search(String v)
+  { return index[searchR(0, N-1, v)]; }
+-----
+class ST
+  {
+    private class Node
+      { ITEM item; Node l, r;
+        Node(ITEM x) { item = x; }
+      }
+    private Node head;
+    ST(int maxN)
+      { head = null; }
+    private Node insertR(Node h, ITEM x)
+      {
+        if (h == null) 
+            return new Node(x);
+        if (less(x.key(), h.item.key())) 
+             h.l = insertR(h.l, x);                
+        else h.r = insertR(h.r, x);
+        return h;
+      }
+    void insert(ITEM x)
+      { head = insertR(head, x); }
+    private ITEM searchR(Node h, KEY v)
+      { 
+        if (h == null) return null;
+        if (equals(v, h.item.key())) return h.item;
+        if (less(v, h.item.key())) 
+             return searchR(h.l, v);                
+        else return searchR(h.r, v);
+      }
+    ITEM search(KEY key)
+      { return searchR(head, key); }
+-----
+private int countR(Node h) 
+  { if (h == null) return 0;
+    return 1 + countR(h.l) + countR(h.r); 
+  }
+int count() { return countR(head); }
+private String toStringR(Node h)
+  { if (h == null) return "";
+    String s = toStringR(h.l);
+    s += h.item.toString() + "\n";
+    s += toStringR(h.r);
+    return s;
+  }
+public String toString()
+  { return toStringR(head); }
+-----
+    public void insert(ITEM x)
+      { KEY key = x.key();
+        if (head == null)
+          { head = new Node(x); return; }
+        Node p = head, q = p;
+        while (q != null)
+          if (less(key, q.item.key())) 
+               { p = q; q = q.l; }
+          else { p = q; q = q.r; }
+        if (less(key, p.item.key())) 
+             p.l = new Node(x);
+        else p.r = new Node(x);
+      }
+-----
+private Node rotR(Node h)
+  { Node x = h.l; h.l = x.r; x.r = h; return x; }
+private Node rotL(Node h)
+  { Node x = h.r; h.r = x.l; x.l = h; return x; }
+-----
+private Node insertT(Node h, ITEM x)
+  { if (h == null) return new Node(x);
+    if (less(x.key(), h.item.key()))
+         { h.l = insertT(h.l, x); h = rotR(h); }
+    else { h.r = insertT(h.r, x); h = rotL(h); }
+    return h;
+  }
+public void insert(ITEM x)
+  { head = insertT(head, x); }
+-----
+private ITEM selectR(Node h, int k)
+  { if (h == null) return null;
+    int t = (h.l == null) ? 0 : h.l.N;
+    if (t > k) return selectR(h.l, k);
+    if (t < k) return selectR(h.r, k-t-1);
+    return h.item;
+  }
+ITEM select(int k)
+  { return selectR(head, k); }
+-----
+Node partR(Node h, int k)
+  { int t = (h.l == null) ? 0 : h.l.N;
+    if (t > k)
+      { partR(h.l, k); h = rotR(h); }
+    if (t < k)
+      { partR(h.r, k-t-1); h = rotL(h); }
+    return h;
+  }
+-----
+private Node joinLR(Node a, Node b)
+  { if (b == null) return a;
+    b = partR(b, 0); b.l = a;
+    return b;
+  }
+private Node removeR(Node h, KEY v)
+  { if (h == null) return null;
+    KEY w = h.item.key();
+    if (less(v, w)) removeR(h.l, v);
+    if (less(w, v)) removeR(h.r, v);
+    if (equals(v, w)) h = joinLR(h.l, h.r);
+    return h;
+  }
+void remove(KEY v)
+  { removeR(head, v); }
+-----
+private Node joinR(Node a, Node b)
+  { if (b == null) return a;
+    if (a == null) return b;
+    insertT(b, a.item);
+    b.l = joinR(a.l, b.l);
+    b.r = joinR(a.r, b.r);
+    return b;
+  }
+public void join(ST b)
+  { head = joinR(head, b.head); }
+
+----------
+CHAPTER 13. Balanced Trees
+-----
+private Node balanceR(Node h)
+  {
+    if ((h == null) || (h.N == 1)) return h;
+    h = partR(h, h.N/2);
+    h.l = balanceR(h.l);
+    h.r = balanceR(h.r);
+    fixN(h.l); fixN(h.r); fixN(h); 
+    return h;
+  }
+-----
+private Node insertR(Node h, ITEM x)
+  { if (h == null) return new Node(x);
+    if (Math.random()*h.N < 1.0)
+      return insertT(h, x);
+    if (less(x.key(), h.item.key())) 
+         h.l = insertR(h.l, x);                
+    else h.r = insertR(h.r, x);
+    h.N++; 
+    return h;
+  }
+void insert(ITEM x)
+  { head = insertR(head, x); }
+-----
+private Node joinR(Node a, Node b)
+  { if (b == null) return a;
+    if (a == null) return b;
+    insertT(b, a.item);
+    b.l = joinR(a.l, b.l);
+    b.r = joinR(a.r, b.r);
+    return b;
+  }
+public void join(ST b)
+  { int N = head.N;
+    if (Math.random()*(N+b.count()) < 1.0*N)
+         head = joinR(head, b.head);
+    else head = joinR(b.head, head);
+  }
+-----
+private Node joinLR(Node a, Node b)
+  { int N = a.N + b.N;
+    if (a == null) return b;
+    if (b == null) return a;
+    if (Math.random()*N < 1.0*a.N)
+         { a.r = joinLR(a.r, b); return a; }
+    else { b.l = joinLR(a, b.l); return b; }
+  }
+-----
+private Node splay(Node h, ITEM x)
+  { 
+    if (h == null) return new Node(x);
+    if (less(x.key(), h.item.key()))
+    { 
+      if (h.l == null)
+        { h.l = new Node(x); return rotR(h); }
+      if (less(x.key(), h.l.item.key()))
+        { h.l.l = splay(h.l.l, x); h = rotR(h); }
+      else  
+        { h.l.r = splay(h.l.r, x); h.l = rotL(h.l);}
+      return rotR(h);
+    }
+    else 
+    { 
+      if (h.r == null)
+        { h.r = new Node(x); return rotL(h); }
+      if (less(h.r.item.key(), x.key()))
+        { h.r.r = splay(h.r.r, x); h = rotL(h); }
+      else  
+        { h.r.l = splay(h.r.l, x); h.r = rotR(h.r);}
+      return rotL(h);
+    }
+  }
+void insert(ITEM x)
+  { head = splay(head, x); }
+-----
+private static final boolean R = true;
+private static final boolean B = false;
+private boolean red(Node x)
+  { if (x == null) return false; return x.cbit; }
+private Node insertR(Node h, ITEM x, boolean sw)
+  { 
+    if (h == null) { return new Node(x, R); }
+    if (red(h.l) && red(h.r)) 
+      { h.cbit = R; h.l.cbit = B; h.r.cbit = B; }
+    if (less(x.key(), h.item.key()))
+      { 
+        h.l = insertR(h.l, x, false); 
+        if (red(h) && red(h.l) && sw) h = rotR(h); 
+        if (red(h.l) && red(h.l.l)) 
+         { h = rotR(h); h.cbit = B; h.r.cbit = R; }
+      }
+    else
+      { 
+        h.r = insertR(h.r, x, true); 
+        if (red(h) && red(h.r) && !sw) h = rotL(h); 
+        if (red(h.r) && red(h.r.r)) 
+         { h = rotL(h); h.cbit = B; h.l.cbit = R; }
+      }
+    return h;
+  }
+void insert(ITEM x)
+  { head = insertR(head, x, B); head.cbit = B; }
+-----
+private ITEM searchR(Node t, KEY v, int k)
+  { 
+    if (t == null) return null;
+    if (t != head)
+      if (equals(t.item.key(), v)) return t.item;
+    if (k >= t.sz) k = t.sz-1;
+    if (t.next[k] != null)
+      if (!less(v, t.next[k].item.key()))
+        return searchR(t.next[k], v, k);
+    return (k == 0) ? null : searchR(t, v, k-1);
+  }
+ITEM search(KEY v)
+  { return searchR(head, v, lgN - 1); }
+-----
+    private class Node
+      { ITEM item; Node[] next; int sz;
+        Node(ITEM x, int k) 
+          { item = x; sz = k; next = new Node[sz]; }
+      }
+    private static final int L = 50;
+    private Node head;
+    private int N, lgN;
+    ST(int maxN)
+      { N = 0; lgN = 0; head = new Node(null, L); }
+-----
+private int randX()
+  { int i, j; double t = Math.random();
+    for (i = 1, j = 2; i < L; i++, j += j)
+      if (t*j > 1.0) break;
+    if (i > lgN) lgN = i;
+    return i;
+  }
+private void insertR(Node t, Node x, int k)
+  { KEY v = x.item.key(); 
+    Node tk = t.next[k];
+    if ((tk == null) || less(v, tk.item.key()))
+      { 
+        if (k < x.sz)
+          { x.next[k] = tk; t.next[k] = x; }
+        if (k == 0) return;
+        insertR(t, x, k-1); return;
+      }
+    insertR(tk, x, k);
+  }
+void insert(ITEM v)
+  { insertR(head, new Node(v, randX()), lgN); N++; }
+-----
+private void removeR(Node t, KEY v, int k)
+  { Node x = t.next[k];
+    if (!less(x.item.key(), v)) 
+      { 
+	  if (equals(v, x.item.key()))
+          { t.next[k] = x.next[k]; }
+        if (k == 0) return; 
+        removeR(t, v, k-1); return;
+      }
+    removeR(t.next[k], v, k);
+  }
+void remove(ITEM x)
+  { removeR(head, x.key(), lgN); N--; }
+
+----------
+CHAPTER 14. Hashing
+-----
+static int hash(String s, int M)
+  {
+    int h = 0, a = 127;
+    for (int i = 0; i < s.length(); i++) 
+      h = (a*h + s.charAt(i)) % M;
+    return h;
+  }
+-----
+static int hashU(String s, int M)
+  {
+    int h = 0, a = 31415, b = 27183;
+    for (int i = 0; i < s.length(); i++) 
+      {
+        h = (a*h + s.charAt(i)) % M;
+        a = a*b % (M-1); 
+      }
+    return h;
+  }
+-----
+private Node[] heads;
+private int N, M;
+ST(int maxN) 
+  { N = 0; M = maxN/5; heads = new Node[M]; }
+ITEM search(KEY key)
+  { return searchR(heads[hash(key, M)], key); }
+void insert(ITEM x)
+  { int i = hash(x.key(), M);
+    heads[i] = new Node(x, heads[i]); N++; }
+-----
+private ITEM[] st;
+private int N, M;
+ST(int maxN)
+  { N = 0; M = 2*maxN; st = new ITEM[M]; }
+void insert(ITEM x)
+  { int i = hash(x.key(), M);
+    while (st[i] != null) i = (i+1) % M;
+    st[i] = x; N++;
+  }
+ITEM search(KEY key)
+  { int i = hash(key, M);
+    while (st[i] != null)
+      if (equals(key, st[i].key())) return st[i];
+      else i = (i+1) % M;
+    return null;
+  }
+-----
+public void remove(ITEM x) 
+  { int i = hash(x.key(), M);
+    while (st[i] != null)
+      if (equals(x.key(), st[i].key())) break;
+      else i = (i+1) % M;
+    if (st[i] == null) return;
+    st[i] = null; N--;
+    for (int j = i+1; st[j] != null; j = (j+1) % M)
+      { x = st[j]; st[j] = null; insert(x); N--; }
+  }
+-----
+void insert(ITEM x)
+  { KEY key = x.key();
+    int i = hash(key, M); int k = hashtwo(key);
+    while (st[i] != null) i = (i+k) % M;
+    st[i] = x; N++;
+  }
+ITEM search(KEY key)
+  { int i = hash(key, M); int k = hashtwo(key);
+    while (st[i] != null)
+      if (equals(key, st[i].key())) return st[i];
+      else i = (i+k) % M;
+    return null;
+  }
+-----
+private ITEM[] st;
+private int N, M;
+ST(int maxN)
+  { N = 0; M = 4; st = new ITEM[M]; }
+private void expand()
+  { 
+    ITEM[] t = st;
+    N = 0; M = M+M; st = new ITEM[M]; 
+    for (int i = 0; i < M/2; i++)
+      if (t[i] != null) insert(t[i]);
+  }
+void insert(ITEM x)
+  { int i = hash(x.key(), M);
+    while (st[i] != null) i = (i+1) % M;
+    st[i] = x;
+    if (N++ >= M/2) expand();
+  }
+
+----------
+CHAPTER 15. Radix Search
+-----
+class bitsKey extends myKey
+  { 
+    public final static int bitsword = 31;
+    public final static int R = 2;
+    public int bit(int B)
+      { return (val >> (bitsword-B-1)) & 1; }
+    public String toString() 
+      { String s = "";
+        for (int i = 0; i < bitsword; i++)
+          s = s + bit(i);
+        return s; 
+      }
+  }
+-----
+private ITEM searchR(Node h, KEY v, int i)
+  { 
+    if (h == null) return null;
+    if (equals(v, h.item.key())) return h.item;
+    if (bit(v, i) == 0) 
+         return searchR(h.l, v, i+1);                
+    else return searchR(h.r, v, i+1);
+  }
+ITEM search(KEY key)
+  { return searchR(head, key, 0); }
+-----
+private ITEM searchR(Node h, KEY v, int d)
+  { 
+    if (h == null) return null;
+    if (h.l == null && h.r == null)
+      { if (equals(v, h.item.key())) 
+          return h.item; else return null; }
+    if (bit(v, d) == 0) 
+         return searchR(h.l, v, d+1);                
+    else return searchR(h.r, v, d+1);
+  }
+ITEM search(KEY key)
+  { return searchR(head, key, 0); }
+-----
+Node split(Node p, Node q, int d)
+  { Node t = new Node(null); 
+    KEY v = p.item.key(), w = q.item.key();
+    switch(bit(v, d)*2 + bit(w, d))
+      { case 0: t.l = split(p, q, d+1); break;
+        case 1: t.l = p; t.r = q; break;
+        case 2: t.r = p; t.l = q; break;
+        case 3: t.r = split(p, q, d+1); break;
+      }
+    return t;
+  }
+private Node insertR(Node h, ITEM x, int d)
+  { 
+    if (h == null)
+      return new Node(x);
+    if (h.l == null && h.r == null)
+      return split(new Node(x), h, d);
+    if (bit(x.key(), d) == 0) 
+         h.l = insertR(h.l, x, d+1);                
+    else h.r = insertR(h.r, x, d+1);
+    return h;
+  }
+void insert(ITEM x)
+  { head = insertR(head, x, 0); }
+-----
+class ST
+  {
+    private class Node
+      { ITEM item; Node l, r; int bit;
+        Node(ITEM x, int i) { item = x; bit = i; }
+      }
+    private Node head;
+    ST(int maxN)
+      { head = new Node(null, -1); head.l = head; }
+    ITEM search(KEY key)
+      // See Program 15.6
+    void insert(ITEM x)
+      // See Program 15.7
+    public String toString()
+      // See Program 15.8
+   }
+-----
+private ITEM searchR(Node h, KEY v, int i)
+  { 
+    if (h.bit <= i) return h.item;
+    if (bit(v, h.bit) == 0) 
+         return searchR(h.l, v, h.bit);                
+    else return searchR(h.r, v, h.bit);
+  }
+ITEM search(KEY key)
+  { ITEM t = searchR(head.l, key, -1);
+    if (t == null) return null;
+    if (equals(t.key(), key)) return t; 
+    return null;
+  }
+-----
+private Node insertR(Node h, ITEM x, int i, Node p)
+  { KEY v = x.key();
+    if ((h.bit >= i) || (h.bit <= p.bit))
+      { 
+        Node t = new Node(x, i);
+        t.l = bit(v, t.bit) == 0 ? t : h;
+        t.r = bit(v, t.bit) == 0 ? h : t;
+        return t; 
+      }
+    if (bit(v, h.bit) == 0) 
+         h.l = insertR(h.l, x, i, h);                
+    else h.r = insertR(h.r, x, i, h);
+    return h;
+  }
+void insert(ITEM x)
+  { int i = 0;
+    KEY v = x.key(); 
+    ITEM t = searchR(head.l, v, -1);
+    KEY w = (t == null) ? null : t.key();
+    if (v == w) return;
+    while (bit(v, i) == bit(w, i)) i++;
+    head.l = insertR(head.l, x, i, head);
+  }
+-----
+private String toStringR(Node h, int i)
+  { 
+    if (h == head) return "";
+    if (h.bit <= i) return h.item + "\n";
+    return toStringR(h.l, h.bit) +
+           toStringR(h.r, h.bit);
+  }
+public String toString()
+  { return toStringR(head.l, -1); }
+-----
+class radixKey extends myKey
+  { 
+    public final static int R = 10;
+    public final static int END = -1;
+    private int[] p = 
+      {1000000000, 100000000, 10000000,
+       1000000, 100000, 10000, 1000, 100, 10, 1 };
+    public int digit(int B)
+      { int v = val;
+        if (B > 9) return END;
+        return (v/p[B]) % 10;
+      }
+  }
+-----
+class ET // ADT interface
+  { // implementations and private members hidden
+    ET()
+    boolean search(KEY)
+    void insert(KEY)
+  }
+-----
+private boolean searchR(Node h, KEY v, int d)
+  { int i = digit(v, d);
+    if (h == null) return false;
+    if (i < 0) return true;
+    return searchR(h.next[i], v, d+1);
+  }
+boolean search(KEY key)
+  { return searchR(head, key, 0); }
+private Node insertR(Node h, KEY v, int d)
+  { int i = digit(v, d);
+    if (h == null) h = new Node();
+    if (i < 0) return h;
+    h.next[i] = insertR(h.next[i], v, d+1);
+    return h;
+  }
+void insert(KEY v)
+  { head = insertR(head, v, 0); }
+-----
+class StringET
+  {
+    private final static int END = 0;
+    private class Node
+      { char c; Node l, m, r; }
+    private Node head;
+    StringET()
+      { head = null; }
+    private Node insertR(Node h, char[] s, int i)
+      { char ch = (i < s.length) ? s[i] : END;
+        if (h == null) { h = new Node(); h.c = ch; }
+        if (ch == END && h.c == END) return h;
+        if (s[i] < h.c) h.l = insertR(h.l, s, i);
+        if (s[i] == h.c) h.m = insertR(h.m, s, i+1);
+        if (s[i] > h.c) h.r = insertR(h.r, s, i);
+        return h;
+      }
+    void insert(String s)
+      { head = insertR(head, s.toCharArray(), 0); }
+    private boolean searchR(Node h, char[] s, int i)
+      { 
+        if (h == null) return false;
+        if (i == s.length) return h.c == END;
+        if (s[i] < h.c) return searchR(h.l, s, i);
+        if (s[i] > h.c) return searchR(h.r, s, i);
+        return searchR(h.m, s, i+1); // s[i] == h.c
+      }
+    boolean search(String s)
+      { return searchR(head, s.toCharArray(), 0); }
+  }
+-----
+private char[] w;
+private void matchR(Node h, char[] s, int i)
+  { 
+    if (h == null) return;
+    if (i == s.length && h.c == END) 
+      Out.println(w + ""); 
+    if (i == s.length) return; 
+    if ((s[i] == '*') || (s[i] == h.c))
+      { w[i] = h.c; matchR(h.m, s, i+1); }
+    if ((s[i] == '*') || (s[i] < h.c))
+      matchR(h.l, s, i);
+    if ((s[i] == '*') || (s[i] > h.c))
+      matchR(h.r, s, i);
+  }
+void match(String s) 
+  { w = new char[s.length()]; 
+    matchR(head, s.toCharArray(), 0); }
+-----
+class ST
+  {
+    private class Node
+      { int d; ITEM item; Node l, m, r; 
+        Node(ITEM x) { item = x; d = END; }
+        Node(int k) { d = k; }
+        Node(Node h, int k) { d = k; m = h; }
+        boolean internal() 
+          { return l!=null || m!=null || r!=null; }
+      }
+    private Node[] heads;
+    ST(int maxN)
+      { heads = new Node[R]; }
+    void insert(ITEM x)
+      // See Program 15.15
+    ITEM search(KEY v)
+      // See Program 15.16
+-----
+private Node split(Node p, Node q, int d)
+  { int pd = digit(p.item.key(), d), 
+        qd = digit(q.item.key(), d);
+    Node t = new Node(qd);
+    if (pd < qd) { t.m = q; t.l = new Node(p, pd); }
+    if (pd == qd) { t.m = split(p, q, d+1); }
+    if (pd > qd) { t.m = q; t.r = new Node(p, pd); }
+    return t;
+  }
+private Node insertR(Node h, ITEM x, int d)
+  { int i = digit(x.key(), d);
+    if (h == null) 
+      return new Node(new Node(x), i);
+    if ((h.d == END) && (i == END)) return h;
+    if (!h.internal()) 
+      return split(new Node(x), h, d);
+    if (i < h.d) h.l = insertR(h.l, x, d);
+    if (i == h.d) h.m = insertR(h.m, x, d+1);
+    if (i > h.d) h.r = insertR(h.r, x, d);
+    return h;
+  }
+void insert(ITEM x)
+  { int i = digit(x.key(), 0);
+    heads[i] = insertR(heads[i], x, 1); }
+-----
+private ITEM searchR(Node h, KEY v, int d)
+  { 
+    if (h == null) return null;
+    if (h.internal())
+      { int i = digit(v, d);
+        if (i < h.d) return searchR(h.l, v, d);
+        if (i == h.d) return searchR(h.m, v, d+1);
+        if (i > h.d) return searchR(h.r, v, d);
+      }
+    if (equals(v, h.item.key())) return h.item;
+    return null;
+  }
+ITEM search(KEY v)
+  { return searchR(heads[digit(v, 0)], v, 1); }
+
+----------
+CHAPTER 16. External Searching
+-----
+class ST
+  {
+    private class entry
+      { KEY key; ITEM item; Node next; 
+        entry(KEY v, ITEM x) { key = v; item = x; }
+        entry(KEY v, Node u) { key = v; next = u; }
+      }
+    private class Node
+      { int m; entry[] b;
+        Node(int k) { b = new entry[M]; m = k; }
+      }
+    private Node head;
+    private int HT;
+    ST(int maxN)
+      { HT = 0; head = new Node(0); }
+    ITEM search(KEY key)
+      // See Program 16.2
+    void insert(ITEM x)
+      // See Program 16.3
+  }
+-----
+private ITEM searchR(Node h, KEY v, int ht)
+  { 
+    if (ht == 0) 
+      for (int j = 0; j < h.m; j++)
+        { entry e = h.b[j];
+          if (equals(v, e.key)) return e.item; }
+    else
+      for (int j = 0; j < h.m; j++)
+        if ((j+1 == h.m) || less(v, h.b[j+1].key))
+          return searchR(h.b[j].next, v, ht-1);
+    return null;
+  }
+ITEM search(KEY key)
+  { return searchR(head, key, HT); }
+-----
+private Node insertR(Node h, ITEM x, int ht)
+  { int i, j; KEY v = x.key(); Node u; 
+    entry t = new entry(v, x);
+    if (ht == 0)
+      for (j = 0; j < h.m; j++)
+        { if (less(v, (h.b[j]).key)) break; }
+    else
+      for (j = 0; j < h.m; j++)
+        if ((j+1 == h.m) || less(v, (h.b[j+1]).key))
+          { u = insertR(h.b[j++].next, x, ht-1);
+            if (u == null) return null;
+            t.key = (u.b[0]).key; t.next = u; break;
+          }
+    for (i = h.m; i > j; i--) h.b[i] = h.b[i-1];
+    h.b[j] = t; h.m++;
+    if (h.m < M) return null; else return split(h);
+  }
+void insert(ITEM x)
+  { Node u = insertR(head, x, HT); 
+    if (u == null) return;
+    Node t = new Node(2);
+    t.b[0] = new entry((head.b[0]).key, head);
+    t.b[1] = new entry((u.b[0]).key, u);
+    head = t; HT++;
+  }
+-----
+private Node split(Node h)
+  { Node t = new Node(M/2); h.m = M/2;  
+    for (int j = 0; j < M/2; j++) 
+      t.b[j] = h.b[M/2+j]; 
+    return t;    
+  }
+-----
+class ST
+  {
+    private class Node
+      { int m; ITEM[] b; int k;
+        Node() { b = new ITEM[M]; m = 0; k = 0; }
+      }
+    private Node[] dir;
+    private int d, D;
+    ST(int maxN)
+      { 
+        d = 0; D = 1;
+        dir = new Node[D];
+        dir[0] = new Node(); 
+      }
+    ITEM search(KEY v)
+      // See Program 16.6
+    void insert(ITEM x)
+      // See Program 16.7
+  }
+-----
+private ITEM search(Node h, KEY v)
+  { 
+    for (int j = 0; j < h.m; j++)
+      if (equals(v, h.b[j].key())) return h.b[j];
+    return null;
+  }
+ITEM search(KEY v)
+  { return search(dir[bits(v, 0, d)], v); }
+-----
+private void insertDIR(Node t, int k)
+  // See Program 16.8
+private void split(Node h)
+  { Node t = new Node();
+    while (h.m == 0 || h.m == M)
+      {
+        h.m = t.m = 0;
+        for (int j = 0; j < M; j++)
+          if (bits(h.b[j].key(), h.k, 1) == 0)
+               h.b[h.m++] = h.b[j];
+          else t.b[t.m++] = h.b[j];
+        h.k += 1; t.k = h.k;
+      }
+    insertDIR(t, t.k);
+  }
+private void insert(Node h, ITEM x)
+  { int j; KEY v = x.key(); 
+    for (j = 0; j < h.m; j++)
+      if (less(v, h.b[j].key())) break;
+    for (int i = h.m; i > j; i--) 
+      h.b[i] = h.b[i-1];
+    h.b[j] = x; h.m += 1;
+    if (h.m == M) split(h);
+  }
+void insert(ITEM x)
+  { insert(dir[bits(x.key(), 0, d)], x); }
+-----
+private void insertDIR(Node t, int k)
+  { int i, m;
+    KEY v = t.b[0].key(); int x = bits(v, 0, k);
+    while (d < k) 
+      { Node[] old = dir;
+        d += 1; D += D;
+        dir = new Node[D];
+        for (i = 0; i < D; i++) dir[i] = old[i/2];        
+        for (i = 0; i < D/2; i++) old[i] = null;        
+        if (d < k) dir[bits(v, 0, d)^1] = new Node();
+      }
+    for (m = 1; k < d; k++) m *= 2; 
+    for (i = 0; i < m; i++) dir[x*m+i] = t;        
+  }
+
+        This file contains the code from "Algorithms in Java, Third Edition,
+        Part 5," by Robert Sedgewick, and is covered under the copyright
+        and warranty notices in that book. Permission is granted for this
+        code to be used for educational purposes in association with the text,
+        and for other uses not covered by copyright laws, provided that
+        the following notice is included with the code:
+
+                "This code is from "Algorithms in Java, Third Edition,"
+                by Robert Sedgewick, Addison-Wesley, 2003."
+
+        Commercial uses of this code require the explicit written
+        permission of the publisher. Send your request for permission,
+        stating clearly what code you would like to use, and in what
+        specific way, to: aw.cse@aw.com
+
+
+
+----------
+CHAPTER 17. Graph Properties and Types
+-----
+class Graph // ADT interface
+  { // implementations and private members hidden
+    Graph(int, boolean)
+    int V()
+    int E()
+    boolean directed()
+    int insert(Edge)
+    void remove(Edge)
+    boolean edge(int, int)
+    AdjList getAdjList(int)
+  }
+-----
+static Edge[] edges(Graph G)
+  { int E = 0;
+    Edge[] a = new Edge[G.E()];
+    for (int v = 0; v < G.V(); v++) 
+      {
+        AdjList A = G.getAdjList(v);
+        for (int w = A.beg(); !A.end(); w = A.nxt()) 
+          if (G.directed() || v < w)
+            a[E++] = new Edge(v, w);
+      }
+    return a;
+  }  
+-----
+static void show(Graph G)
+  { 
+    for (int s = 0; s < G.V(); s++) 
+      {
+        Out.print(s + ": ");
+        AdjList A = G.getAdjList(s);
+        for (int t = A.beg(); !A.end(); t = A.nxt()) 
+          { Out.print(t + " "); }
+        Out.println("");
+      }
+  }
+-----
+class GraphIO
+  {
+    static void scanEZ(Graph)
+    static void scan(Graph)
+    static void show(Graph)
+  }
+-----
+class GraphCC
+  { 
+    GraphCC(Graph G)
+    int count()
+    boolean connect(int, int)
+  }
+-----
+class DriverExample
+  {
+    public static void main(String[] args)
+      { int V = Integer.parseInt(args[0]);
+        Graph G = new Graph(V, false);
+        GraphIO.scanEZ(G);
+        if (V < 20) GraphIO.show(G);
+        Out.print(G.E() + " edges ");
+        GraphCC Gcc = new GraphCC(G);
+        Out.println(Gcc.count() + " components"); 
+      }
+  }
+-----
+class Graph
+  { 
+    private int Vcnt, Ecnt;
+    private boolean digraph;
+    private boolean adj[][];
+    Graph(int V, boolean flag)
+      {
+        Vcnt = V; Ecnt = 0; digraph = flag;
+        adj = new boolean[V][V];
+      }
+    int V() { return Vcnt; }
+    int E() { return Ecnt; }
+    boolean directed() { return digraph; }
+    void insert(Edge e)
+      { int v = e.v, w = e.w;
+        if (adj[v][w] == false) Ecnt++;
+        adj[v][w] = true;
+        if (!digraph) adj[w][v] = true; 
+      } 
+    void remove(Edge e)
+      { int v = e.v, w = e.w;
+        if (adj[v][w] == true) Ecnt--;
+        adj[v][w] = false;
+        if (!digraph) adj[w][v] = false; 
+      } 
+    boolean edge(int v, int w)
+      { return adj[v][w]; }
+    AdjList getAdjList(int v)
+      // Program 17.8
+  }
+-----
+AdjList getAdjList(int v)
+  { return new AdjArray(v); }
+private class AdjArray implements AdjList
+  { 
+    private int i, v;
+    AdjArray(int v)
+      { this.v = v; i = -1; }
+    public int beg()
+      { i = -1; return nxt(); }
+    public int nxt()
+      {
+        for (i++; i < V(); i++)
+          if (edge(v, i) == true) return i;
+        return -1;
+      }
+    public boolean end()
+      { return i >= V(); }
+  }
+-----
+class Graph // sparse multigraph implementation
+  { 
+    private int Vcnt, Ecnt;
+    private boolean digraph;
+    private class Node
+      { int v; Node next;
+	Node(int x, Node t) { v = x; next = t; }
+      }
+    private Node adj[];
+    Graph(int V, boolean flag)
+      {
+        Vcnt = V; Ecnt = 0; digraph = flag;
+        adj = new Node[V];
+      }
+    int V() { return Vcnt; }
+    int E() { return Ecnt; }
+    boolean directed() { return digraph; }
+    void insert(Edge e)
+      { int v = e.v, w = e.w;
+        adj[v] = new Node(w, adj[v]);
+        if (!digraph) adj[w] = new Node(v, adj[w]); 
+        Ecnt++;
+      } 
+    AdjList getAdjList(int v)
+      // Program 17.10
+  }
+-----
+AdjList getAdjList(int v)
+  { return new AdjLinkedList(v); }
+private class AdjLinkedList implements AdjList
+  { 
+    private int v;
+    private Node t;
+    AdjLinkedList(int v)
+      { this.v = v; t = null; }
+    public int beg()
+      { t = adj[v]; 
+        return t == null ? -1 : t.v; }
+    public int nxt()
+      { if (t != null) t = t.next; 
+        return t == null ? -1 : t.v; }
+    public boolean end()
+      { return t == null; }
+  }
+-----
+class GraphDegree
+{
+  private Graph G;
+  private int[] deg; 
+  GraphDegree(Graph G)
+    { this.G = G; 
+      deg = new int[G.V()];
+      for (int v = 0; v < G.V(); v++)
+       { 
+        deg[v] = 0;
+        AdjList A = G.getAdjList(v);
+        for (int w = A.beg(); !A.end(); w = A.nxt()) 
+          deg[v]++;
+       }
+    }
+  int degree(int v)
+    { return deg[v]; }
+}
+-----
+static void randE(Graph G, int E)
+  { 
+    for (int i = 0; i < E; i++)
+      {
+        int v = (int) (G.V()*Math.random());
+        int w = (int) (G.V()*Math.random());
+        G.insert(new Edge(v, w));
+      }
+  }
+-----
+static void randG(Graph G, int E)
+  { double p = 2.0*E/G.V()/(G.V()-1);
+    for (int i = 0; i < G.V(); i++)
+      for (int j = 0; j < i; j++)
+        if (Math.random() < p)
+          G.insert(new Edge(i, j));
+  }
+-----
+static void scan(Graph G)
+  { int v, w;
+    ST st = new ST();
+    for (In.init(); !In.empty(); )
+      { 
+        v = st.index(In.getString());
+        w = st.index(In.getString());
+        G.insert(new Edge(v, w)); 
+      }
+  }
+-----
+class ST
+  {
+    private final static int END = 0;
+    private int N, val;
+    private class Node
+      { char c; int v; Node l, m, r; }
+    private Node head;
+    private Node indexR(Node h, char[] s, int i)
+      { char ch = (i < s.length) ? s[i] : END;
+        if (h == null) 
+          { h = new Node(); h.c = ch; h.v = -1; }
+        if (ch == END) 
+          {
+            if (h.v == -1) h.v = N++;
+            val = h.v;
+            return h;
+          }
+        if (s[i] < h.c) h.l = indexR(h.l, s, i);
+        if (s[i] == h.c) h.m = indexR(h.m, s, i+1);
+        if (s[i] > h.c) h.r = indexR(h.r, s, i);
+        return h;
+      }
+    ST()
+      { head = null; N = 0; }
+    int index(String key)
+      { char[] s = key.toCharArray();
+        head = indexR(head, s, 0); return val; }
+  }
+-----
+class GraphPath
+{ 
+  private Graph G;
+  private boolean found;
+  private boolean[] visited; 
+  private boolean searchR(int v, int w)
+    { 
+      if (v == w) return true;
+      visited[v] = true;
+      AdjList A = G.getAdjList(v);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (!visited[t])
+          if (searchR(t, w)) return true;
+      return false;
+    }
+  GraphPath(Graph G, int v, int w)  
+    { this.G = G; found = false;
+      visited = new boolean[G.V()];
+      found = searchR(v, w); 
+    }
+  boolean exists()
+    { return found; }
+}
+-----
+  private boolean searchR(int v, int w, int d)
+    { 
+      if (v == w) return (d == 0);
+      visited[v] = true;
+      AdjList A = G.getAdjList(v);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (!visited[t])
+          if (searchR(t, w, d-1)) return true;
+      visited[v] = false;
+      return false;
+    }
+-----
+class GraphPathE
+{ 
+  private Graph G;
+  private int v, w;
+  private boolean nopath;
+  void show()
+    // See Program 17.19
+  GraphPathE(Graph G, int v, int w) 
+    { this.G = G; 
+      GraphDegree Gdeg = new GraphDegree(G);
+      int t = Gdeg.degree(v) + Gdeg.degree(w);
+      if ((t % 2) != 0) { nopath = true; return; }
+      for (t = 0; t < G.V(); t++)
+        if ((t != v) && (t != w))
+          if ((Gdeg.degree(t) % 2) != 0) 
+            { nopath = true; return; }
+      nopath = false;
+    }
+  boolean exists()
+    { return !nopath; }
+}
+-----
+private intStack S;
+private int tour(int v)
+  { 
+    while (true) 
+      { AdjList A = G.AdjList(v);
+        int w = A.beg(); if (A.end()) break;
+        S.push(v);
+        G.remove(new Edge(v, w));
+        v = w;
+      }
+    return v;
+  }
+void show()
+  { 
+    S = new intStack(G.E());
+    if (nopath) return;
+    while (tour(v) == v && !S.empty())
+      { v = S.pop(); Out.print("-" + v); }
+    Out.println("");
+  }
+
+----------
+CHAPTER 18. Graph Search
+-----
+class GraphDFSc
+{ private Graph G;
+  private int cnt;
+  private int[] ord; 
+  private void searchC(int v)
+    { 
+      ord[v] = cnt++;
+      AdjList A = G.getAdjList(v);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (ord[t] == -1) searchC(t);
+    }
+  GraphDFSc(Graph G, int v)  
+    { this.G = G; cnt = 0;
+      ord = new int[G.V()];
+      for (int t = 0; t < G.V(); t++)
+        ord[t] = -1;
+      searchC(v);
+    }
+  int count() { return cnt; }
+  int order(int v) { return ord[v]; }
+}
+-----
+class GraphDFS
+{ private Graph G;
+  private int cnt;
+  private int[] ord, st; 
+  private void searchC(Edge e)
+    { int w = e.w; 
+      ord[w] = cnt++; st[e.w] = e.v;
+      AdjList A = G.getAdjList(w);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (ord[t] == -1) searchC(new Edge(w, t));
+    }
+  GraphDFS(Graph G, int v)  
+    { this.G = G; cnt = 0;
+      ord = new int[G.V()]; st = new int[G.V()];
+      for (int t = 0; t < G.V(); t++)
+        { ord[t] = -1; st[t] = -1; }
+      for (int t = 0; t < G.V(); t++)
+        if (ord[t] == -1) searchC(new Edge(t, t)); 
+    }
+  int order(int v) { return ord[v]; }
+  int ST(int v) { return st[v]; }
+}
+-----
+class GraphCC
+  { private Graph G;
+    private int ccnt;
+    private int[] id; 
+    private void ccR(int w)
+      { 
+        id[w] = ccnt;
+        AdjList A = G.getAdjList(w);
+        for (int v = A.beg(); !A.end(); v = A.nxt()) 
+          if (id[v] == -1) ccR(v);
+      }
+    GraphCC(Graph G)
+      { this.G = G; ccnt = 0;
+        id = new int[G.V()];
+        for (int v = 0; v < G.V(); v++) id[v] = -1;
+        for (int v = 0; v < G.V(); v++)
+          if (id[v] == -1) { ccR(v); ccnt++; }
+      }
+    int count() { return ccnt; }
+    boolean connect(int s, int t) 
+      { return id[s] == id[t]; }
+  }
+-----
+  private void searchC(Edge e)
+    { int v = e.v, w = e.w;
+      ord[w] = cnt++;
+      Out.print("-" + w);
+      AdjList A = G.getAdjList(w);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (ord[t] == -1) searchC(new Edge(w, t));
+        else if (ord[t] < ord[v])
+          Out.print("-" + t + "-" + w);
+      if (v == w) Out.println("");
+             else Out.print("-" + v); 
+    }
+-----
+class GraphBiCC
+{ private Graph G;
+  private boolean OK;
+  private int[] vc; 
+  private boolean dfsR(int v, int c)
+    { 
+      vc[v] = (c+1) % 2;
+      AdjList A = G.getAdjList(v);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (vc[t] == -1) 
+          { if (!dfsR(t, vc[v])) return false; } 
+        else if (vc[t] != c) return false;
+      return true;
+    }
+  GraphBiCC(Graph G)  
+    { this.G = G; OK = true;
+      vc = new int[G.V()];
+      for (int t = 0; t < G.V(); t++) vc[t] = -1;
+      for (int v = 0; v < G.V(); v++)
+        if (vc[v] == -1) 
+          if (!dfsR(v, 0)) { OK = false; return; }
+    }
+  boolean bipartite() { return OK; }
+  int color(int v) { return vc[v]; }
+}
+-----
+class GraphECC
+  { private Graph G;
+    private int cnt, bcnt;
+    private int[] low, ord; 
+    private void searchC(Edge e)
+      { int w = e.w;
+        ord[w] = cnt++; low[w] = ord[w];
+        AdjList A = G.getAdjList(w);
+        for (int t = A.beg(); !A.end(); t = A.nxt()) 
+          if (ord[t] == -1) 
+            {
+              searchC(new Edge(w, t));
+              if (low[w] > low[t]) low[w] = low[t];
+              if (low[t] == ord[t]) 
+                bcnt++; // w-t is a bridge
+            }
+      else if (t != e.v)
+        if (low[w] > ord[t]) low[w] = ord[t];
+      }
+    GraphECC(Graph G)
+      { this.G = G; bcnt = 0; cnt = 0;
+        ord = new int[G.V()]; low = new int[G.V()]; 
+        for (int v = 0; v < G.V(); v++)
+          { ord[v] = -1; low[v] = -1; }
+        for (int v = 0; v < G.V(); v++)
+          if (ord[v] == -1) searchC(new Edge(v, v)); 
+      }
+    int count() { return bcnt+1; }
+  }
+-----
+class GraphBFSedge
+{ 
+  private Graph G;
+  private int cnt;
+  private int[] ord, st; 
+  private void searchC(Edge e)
+  { EdgeQueue Q = new EdgeQueue(G.V());
+    Q.put(e);
+    while (!Q.empty())
+      if (ord[(e = Q.get()).w] == -1) 
+      { int v = e.v, w = e.w;
+        ord[w] = cnt++; st[w] = v;        
+        AdjList A = G.getAdjList(w);
+        for (int t = A.beg(); !A.end(); t = A.nxt()) 
+          if (ord[t] == -1) Q.put(new Edge(w, t));
+      }
+  }
+  GraphBFSedge(Graph G, int v)  
+    { this.G = G; cnt = 0;
+      ord = new int[G.V()]; st = new int[G.V()];
+      for (int t = 0; t < G.V(); t++)
+        { ord[t] = -1; st[t] = -1; }
+      for (int t = 0; t < G.V(); t++)
+        if (ord[t] == -1) searchC(new Edge(t, t)); 
+    }
+  int order(int v) { return ord[v]; }
+  int ST(int v) { return st[v]; }
+}
+-----
+private void searchC(Edge e)
+  { EdgeQueue Q = new EdgeQueue(G.V());
+    Q.put(e); ord[e.w] = cnt++; 
+    while (!Q.empty())
+      { e = Q.get(); int v = e.v, w = e.w;
+        st[w] = v;        
+        AdjList A = G.getAdjList(w);
+        for (int t = A.beg(); !A.end(); t = A.nxt()) 
+          if (ord[t] == -1) 
+          { Q.put(new Edge(w, t)); ord[t] = cnt++; }
+      }
+  }
+-----
+private void searchC(Edge e)
+{ EdgeGQ Q = new EdgeGQ(G.V());
+  Q.put(e); ord[e.w] = cnt++; 
+  while (!Q.empty())
+    { e = Q.get(); int v = e.v, w = e.w;
+      st[w] = v;        
+      AdjList A = G.getAdjList(w);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (ord[t] == -1) 
+          { Q.put(new Edge(w, t)); ord[t] = cnt++; }
+        else 
+          if (st[t] == -1) Q.update(new Edge(w, t));
+    }
+}
+-----
+class EdgeGQ
+  {
+    private Edge[] s; private int N;
+    EdgeGQ(int maxN)
+      { s = new Edge[maxN + 1]; N = 0; }
+    boolean empty()
+      { return (N == 0); }
+    void put(Edge item)
+      { s[N++] = item; }
+    void update(Edge x) { }
+    Edge get()
+      { int i = (int) (N*Math.random());
+        Edge t = s[i]; s[i] = s[N-1]; s[N-1] = t;
+        return s[--N]; 
+      }
+  }
+
+----------
+CHAPTER 19. Digraphs and DAGs
+-----
+static Graph reverse(Graph G)
+  { Graph R = new Graph(G.V(), true);
+    for (int v = 0; v < G.V(); v++) 
+      {
+        AdjList A = G.getAdjList(v);
+        for (int w = A.beg(); !A.end(); w = A.nxt()) 
+          R.insert(new Edge(w, v));
+      }
+    return R;
+  }
+-----
+class GraphDFS
+{ private Graph G;
+  private int depth, cnt, cntP;
+  private int[] pre, post; 
+  private void show(String s, Edge e)
+    { 
+      for (int k = 0; k < depth; k++) 
+        Out.print("  ");
+      Out.println(e.v + "-" + e.w + " " + s); 
+    }
+  private void dfsR(Edge e)
+    { int w = e.w; show("tree", e); 
+      pre[w] = cnt++; depth++;
+      AdjList A = G.getAdjList(w);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        { Edge x = new Edge(w, t);
+          if (pre[t] == -1) dfsR(x);
+          else if (post[t] == -1) show("back", x);
+          else if (pre[t] > pre[w]) show("down", x);
+          else show("cross", x);
+        }
+      post[w] = cntP++; depth--;
+    }
+  GraphDFS(Graph G, int v)  
+    { this.G = G; depth = 0; cnt = 0; cntP = 0;
+      pre = new int[G.V()]; post = new int[G.V()];
+      for (int t = 0; t < G.V(); t++)
+        { pre[t] = -1; post[t] = -1; }
+      for (int t = 0; t < G.V(); t++)
+        if (pre[t] == -1) dfsR(new Edge(t, t)); 
+    }
+}
+-----
+class GraphTC
+{ private DenseGraph T;
+  GraphTC(Graph G)  
+    { 
+      T = GraphUtilities.densecopy(G);
+      for (int s = 0; s < T.V(); s++) 
+        T.insert(new Edge(s, s));
+      for (int i = 0; i < T.V(); i++)
+        for (int s = 0; s < T.V(); s++)
+          if (T.edge(s, i))
+            for (int t = 0; t < T.V(); t++)
+              if (T.edge(i, t))
+                T.insert(new Edge(s, t));
+    }
+  boolean reachable(int s, int t)
+    { return T.edge(s, t); }
+}
+-----
+class GraphTC
+{ private Graph G;
+  private DenseGraph T;
+  void tcR(int v, int w)  
+    { 
+      T.insert(new Edge(v, w));
+      AdjList A = G.getAdjList(w);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (!T.edge(v, t)) tcR(v, t);
+    }
+  GraphTC(Graph G)  
+    { this.G = G; T = new DenseGraph(G.V(), true);
+      for (int v = 0; v < T.V(); v++) tcR(v, v); }
+  boolean reachable(int v, int w)
+    { return T.edge(v, w); }
+}
+-----
+int compressR(Node h)
+  { 
+    if (h == null) return 0;
+    l = compressR(h.l); 
+    r = compressR(h.r);
+    t = st.index(l + "", r + "");
+    adj[t].l = l; adj[t].r = r;
+    return t;
+  }
+-----
+class DagTS
+{ private Graph G;
+  private int cnt, tcnt;
+  private int[] pre, post, postI;
+  private void tsR(int v)  
+    { 
+      pre[v] = cnt++;
+      AdjList A = G.getAdjList(v);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (pre[t] == -1) tsR(t);
+      post[v] = tcnt; postI[tcnt++] = v;
+    }
+  DagTS(Graph G)  
+    { this.G = G; cnt = 0; tcnt = 0; 
+      pre = new int[G.V()]; 
+      post = new int[G.V()]; postI = new int[G.V()];
+      for (int t = 0; t < G.V(); t++)
+        { pre[t] = -1; post[t] = -1; postI[t] = -1;}
+      for (int t = 0; t < G.V(); t++)
+        if (pre[t] == -1) tsR(t); 
+    }
+  int order(int v) { return postI[v]; }
+  int relabel(int v) { return post[v]; }
+}
+-----
+  void tsR(int v)  
+    { 
+      pre[v] = cnt++;
+      for (int w = 0; w < D.V(); w++)
+        if (D.edge(w, v))
+          if (pre[w] == -1) tsR(w);
+      post[v] = tcnt; postI[tcnt++] = v;
+    }
+-----
+class DagTS
+{ private Graph D;
+  private int[] in, ts, tsI;
+  DagTS(Graph D)  
+  { this.D = D; 
+    intQueue Q = new intQueue(D.V());
+    in = new int[D.V()]; 
+    ts = new int[D.V()]; tsI = new int[D.V()];
+    for (int t = 0; t < D.V(); t++)
+      { in[t] = 0; ts[t] = -1; tsI[t] = -1; }
+    for (int v = 0; v < D.V(); v++) 
+      {
+        AdjList A = D.getAdjList(v);
+        for (int t = A.beg(); !A.end(); t = A.nxt()) 
+          in[t]++;
+      }
+    for (int v = 0; v < D.V(); v++)
+      if (in[v] == 0) Q.put(v);
+    for (int j = 0; !Q.empty(); j++) 
+      {
+        int k = Q.get(); ts[j] = k; tsI[ts[j]] = j;
+        AdjList A = D.getAdjList(k);
+        for (int t = A.beg(); !A.end(); t = A.nxt()) 
+          if (--in[t] == 0) Q.put(t);
+      }
+  }
+  int order(int v) { return ts[v]; }
+  int relabel(int v) { return tsI[v]; }
+}
+-----
+class GraphTC
+{ private Graph G; private DenseGraph D;
+  private int cnt;
+  private int[] pre;
+  void tcR(int w)  
+    { 
+      pre[w] = cnt++;
+      AdjList A = D.getAdjList(w);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+      { 
+        D.insert(new Edge(w, t));
+        if (pre[t] > pre[w]) continue;
+        if (pre[t] == -1) tcR(t);
+        for (int i = 0; i < D.V(); i++)
+         if (D.edge(t, i)) D.insert(new Edge(w, i));
+      }
+    }
+  GraphTC(Graph G)  
+    { this.G = G; cnt = 0;
+      D = GraphUtilities.densecopy(G);
+      pre = new int[G.V()];
+      for (int v = 0; v < D.V(); v++) pre[v] = -1;
+      for (int v = 0; v < D.V(); v++) 
+        if (pre[v] == -1) tcR(v); 
+    }
+  boolean reachable(int v, int w)
+    { return D.edge(v, w); }
+}
+-----
+class GraphSC
+{ private int cnt, scnt;
+  private int[] id, postI, postR;
+  private void dfsR(Graph G, int w)  
+    { 
+      id[w] = scnt;
+      AdjList A = G.getAdjList(w);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (id[t] == -1) dfsR(G, t);
+      postI[cnt++] = w;
+    }
+  GraphSC(Graph G)  
+    { Graph R = GraphUtilities.reverse(G); 
+      id = new int[G.V()]; postI = new int[G.V()];
+      cnt = 0; scnt = 0; 
+      for (int t = 0; t < R.V(); t++) id[t] = -1;
+      for (int t = 0; t < R.V(); t++)
+        if (id[t] == -1) dfsR(R, t); 
+      postR = new int[G.V()];
+      for (int t = 0; t < R.V(); t++)
+        { postR[t] = postI[t]; }
+      cnt = 0; scnt = 0; 
+      for (int t = 0; t < R.V(); t++) id[t] = -1;
+      for (int v = G.V()-1; v >= 0; v--)
+        if (id[postR[v]] == -1)
+          { dfsR(G, postR[v]); scnt++; }
+    }
+  int count() { return scnt; }
+  boolean stronglyreachable(int v, int w)
+    { return id[v] == id[w]; }
+}
+-----
+class GraphSC
+{ private Graph G;
+  private int cnt, scnt;
+  private int[] id, pre, low;
+  private intStack S;
+  private void scR(int w)  
+    { int t, min = low[w] = pre[w] = cnt++;
+      S.push(w);
+      AdjList A = G.getAdjList(w);
+      for (t = A.beg(); !A.end(); t = A.nxt()) 
+        { if (pre[t] == -1) scR(t);
+          if (low[t] < min) min = low[t]; }
+      if (min < low[w]) { low[w] = min; return; }
+      do 
+        { id[t = S.pop()] = scnt; low[t] = G.V(); }
+      while (t != w);
+      scnt++;
+    }
+  GraphSC(Graph G)  
+    { this.G = G; 
+      S = new intStack(G.V());
+      id = new int[G.V()]; 
+      pre = new int[G.V()]; low = new int[G.V()];
+      for (int t = 0; t < G.V(); t++)
+        { id[t] = -1; pre[t] = -1; low[t] = -1; }
+      for (int v = G.V()-1; v >= 0; v--)
+        if (pre[v] == -1) scR(v); 
+    }
+  int count() { return scnt; }
+  boolean stronglyreachable(int v, int w)
+    { return id[v] == id[w]; }
+}
+-----
+  private void scR(int w)  
+    { int v; 
+      pre[w] = cnt++;
+      S.push(w); P.push(w);
+      AdjList A = G.getAdjList(w);
+      for (int t = A.beg(); !A.end(); t = A.nxt()) 
+        if (pre[t] == -1) scR(t);
+        else if (id[t] == -1) 
+          while (pre[P.top()] > pre[t]) P.pop();
+      if (P.top() == w) P.pop(); else return;
+      do { id[v = S.pop()] = scnt; } while (v != w);
+      scnt++;
+    }
+-----
+class GraphTC
+{ private GraphSC Gsc;
+  private DagTC Ktc;
+  GraphTC(Graph G)  
+    { DenseGraph K;
+      Gsc = new GraphSC(G);
+      K = new DenseGraph(Gsc.count(), true);
+      for (int v = 0; v < G.V(); v++) 
+       { 
+        AdjList A = G.getAdjList(v);
+        for (int t = A.beg(); !A.end(); t = A.nxt()) 
+          K.insert(new Edge(Gsc.ID(v), Gsc.ID(t))); 
+       }
+      Ktc = new DagTC(K);
+    }
+  boolean reachable(int v, int w)
+    { return Ktc.reachable(Gsc.ID(v), Gsc.ID(w));}
+}
+
+----------
+CHAPTER 20. Minimum Spanning Trees
+-----
+class Edge implements Item // ADT interface
+  { // implementations and private members hidden
+    Edge(int, int, double)
+    int v()
+    int w()
+    double wt()
+    boolean from(int)
+    int other(int)
+    public boolean less(Item)
+    public String toString() 
+  }
+class Graph // ADT interface
+  { // implementations and private members hidden
+    Graph(int, boolean)
+    int V()
+    int E()
+    boolean directed()
+    int insert(Edge)
+    void remove(Edge)
+    Edge edge(int, int)
+    AdjList getAdjList(int)
+  }
+-----
+class Graph
+  { private int Vcnt, Ecnt;
+    private boolean digraph;
+    private Edge adj[][];
+    Graph(int V, boolean flag)
+      {
+        Vcnt = V; Ecnt = 0; digraph = flag;
+        adj = new Edge[V][V];
+      }
+    int V() { return Vcnt; }
+    int E() { return Ecnt; }
+    boolean directed() { return digraph; }
+    void insert(Edge e)
+      { int v = e.v(), w = e.w();
+        if (adj[v][w] == null) Ecnt++;
+        adj[v][w] = e;
+        if (!digraph) adj[w][v] = e; 
+      } 
+    void remove(Edge e)
+      { int v = e.v(), w = e.w();
+        if (adj[v][w] == null) Ecnt--;
+        adj[v][w] = null;
+        if (!digraph) adj[w][v] = null; 
+      } 
+    Edge edge(int v, int w) 
+      { return adj[v][w]; }
+    AdjList getAdjList(int v)
+      // Program 20.4
+  }
+-----
+AdjList getAdjList(int v)
+  { return new AdjArray(v); }
+private class AdjArray implements AdjList
+  { 
+    private int i, v;
+    adjArray(int v)
+      { this.v = v; i = -1; }
+    public Edge beg()
+      { i = -1; return nxt(); }
+    public Edge nxt()
+      {
+        for (i++; i < V(); i++)
+          if (edge(v, i) != null) 
+            return edge(v, i);
+        return null;
+      }
+    public boolean end()
+      { return i >= V(); }
+  }
+-----
+class Graph // sparse multigraph implementation
+  { private int Vcnt, Ecnt;
+    private boolean digraph;
+    private class Node
+      { Edge e; Node next;
+        Node(Edge x, Node t) { e = x; next = t; } }
+    private Node adj[];
+    Graph(int V, boolean flag)
+      {
+        Vcnt = V; Ecnt = 0; digraph = flag;
+        adj = new Node[V];
+      }
+    int V() { return Vcnt; }
+    int E() { return Ecnt; }
+    boolean directed() { return digraph; }
+    void insert(Edge e)
+      { int v = e.v(), w = e.w();
+        adj[v] = new Node(e, adj[v]);
+        if (!digraph) adj[w] = new Node(e, adj[w]); 
+        Ecnt++;
+      } 
+    AdjList getAdjList(int v)
+      // See Program 17.10 and Exercise 20.13
+  }
+-----
+static Edge[] edges(Graph G)
+{ Edge[] a = new Edge[G.E()];
+  int E = 0; 
+  for (int v = 0; v < G.V(); v++) 
+    {
+      AdjList A = G.getAdjList(v);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt()) 
+        if (e.from(v)) a[E++] = e;
+    }
+  return a;
+}
+-----
+class GraphMST
+{ 
+  private double[] wt;
+  private Edge[] fr, mst;
+  GraphMST(Graph G)
+    { 
+      wt = new double[G.V()];
+      mst = new Edge[G.V()]; fr = new Edge[G.V()];
+      for (int v = 0; v < G.V(); v++) wt[v] = maxWT; 
+      int min = -1; 
+      for (int v = 0; min != 0; v = min) 
+        { Edge e;
+          min = 0;
+          for (int w = 1; w < G.V(); w++) 
+            if (mst[w] == null)
+              { double P = 0.0; e = G.edge(v, w);
+                if (e != null)
+                  if ((P = e.wt()) < wt[w])
+                    { wt[w] = P; fr[w] = e; }
+                if (wt[w] < wt[min]) min = w;
+              }
+          if (min != 0) mst[min] = fr[min];
+        }
+    }
+}
+-----
+class GraphMST
+{ private double[] wt; private Edge[] fr, mst;
+  private void pfs(Graph G, int s)
+  { doublePQi pQ = new doublePQi(G.V(), wt);
+    pQ.insert(s);
+    while (!pQ.empty())
+    { int v = pQ.getmin();
+      mst[v] = fr[v];        
+      AdjList A = G.getAdjList(v);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt()) 
+        { double P = e.wt(); int w = e.other(v); 
+          if (fr[w] == null)
+            { wt[w] = P; pQ.insert(w); fr[w] = e; }
+          else if (mst[w] == null && P < wt[w])
+            { wt[w] = P; pQ.lower(w); fr[w] = e; }
+        }
+    }
+  }
+  GraphMST(Graph G)  
+    { wt = new double[G.V()];
+      mst = new Edge[G.V()]; fr = new Edge[G.V()];
+      for (int v = 0; v < G.V(); v++) wt[v] = -1.0; 
+      for (int v = 0; v < G.V(); v++)
+        if (mst[v] == null) pfs(G, v);
+    }
+}
+-----
+class GraphMST
+{ private int V;
+  private UF uf;
+  private Edge[] a, mst;
+  GraphMST(Graph G)
+    { int v, w, E;
+      E = G.E(); V = G.V();
+      mst = new Edge[V]; 
+      uf = new UF(V);
+      a = GraphUtilities.edges(G);
+      Sort.sort(a, 0, E-1);
+      for (int i = 0, k = 1; i < E && k < V; i++)
+        if (!uf.find(v = a[i].v(), w = a[i].w()))
+          { uf.unite(v, w); mst[k++] = a[i]; }
+    }
+}
+-----
+class GraphMST
+{ private UF uf;
+  private Edge[] a, b, mst;
+  GraphMST(Graph G)
+  { Edge z = new Edge(0, 0, maxWT);
+    uf = new UF(G.V());
+    a = GraphUtilities.edges(G); 
+    b = new Edge[G.V()]; mst = new Edge[G.V()+1]; 
+    int N, k = 1;
+    for (int E = G.E(); E != 0; E = N) 
+      { int h, i, j;
+        for (int t = 0; t < G.V(); t++) b[t] = z;
+        for (h = 0, N = 0; h < E; h++) 
+          { Edge e = a[h];
+            i = uf.find(e.v()); j = uf.find(e.w());
+            if (i == j) continue;
+            if (e.wt() < b[i].wt()) b[i] = e;
+            if (e.wt() < b[j].wt()) b[j] = e;
+            a[N++] = e;
+          }
+        for (h = 0; h < G.V(); h++) 
+         if (b[h] != z)
+          if (!uf.find(i = b[h].v(), j = b[h].w()))
+            { uf.unite(i, j); mst[k++] = b[h]; }
+      }
+  }
+}
+-----
+class doublePQi 
+{ private int N, d = 3; 
+  private double[] a; private int[] pq, qp; 
+  private boolean less(int i, int j)
+    { return a[pq[i]] < a[pq[j]]; }
+  private void exch(int i, int j)
+    { int t = pq[i]; pq[i] = pq[j]; pq[j] = t;
+      qp[pq[i]] = i; qp[pq[j]] = j; }
+  private void swim(int k)
+    { while (k > 1 && less(k, (k+d-2)/d))
+        { exch(k, (k+d-2)/d); k = (k+d-2)/d; } }
+  private void sink(int k, int N)
+    { int j;
+      while ((j = d*(k-1)+2) <= N)
+        { 
+          for (int i = j+1; i < j+d && i <= N; i++)
+            if (less(i, j)) j = i;
+          if (!(less(j, k))) break;
+          exch(k, j); k = j;
+        }
+    }
+  doublePQi(int maxN, double[] a)
+    { this.a = a; this.N = 0;
+      pq = new int[maxN+1]; qp = new int[maxN+1];
+      for (int i = 0; i <= maxN; i++) 
+        { pq[i] = 0; qp[i] = 0; }
+    }
+  boolean empty() { return N == 0; }
+  void insert(int v) 
+    { pq[++N] = v; qp[v] = N; swim(N); }
+  int getmin()
+    { exch(1, N); sink(1, N-1); return pq[N--]; }
+  void lower(int k)
+    { swim(qp[k]); }
+}
+
+----------
+CHAPTER 21. Shortest Paths
+-----
+class GraphSPT
+{ private double[] wt;
+  private Edge[] spt;
+  GraphSPT(Graph G, int s)  
+  { int V = G.V();
+    wt = new double[V]; spt = new Edge[V]; 
+    for (int v = 0; v < V; v++) wt[v] = maxWT; 
+    doublePQi pQ = new doublePQi(V, wt);
+    for (int v = 0; v < V; v++) pQ.insert(v);
+    wt[s] = 0.0; pQ.lower(s);  
+    while (!pQ.empty()) 
+    { int v = pQ.getmin(); // wt[v] = 0.0;
+      if (v != s && spt[v] == null) return; 
+      AdjList A = G.getAdjList(v);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt()) 
+        { int w = e.other(v); 
+          double P = wt[v] + e.wt();
+          if (P < wt[w]) 
+            { wt[w] = P; pQ.lower(w); spt[w] = e; }
+        }
+    }
+  }
+  Edge pathR(int v) { return spt[v]; }
+  double dist(int v) { return wt[v]; }
+}
+-----
+class GraphSPall // ADT interface
+  { // implementations and private members hidden
+    GraphSPall(GRAPH G)
+    Edge path(int, int)
+    Edge pathR(int, int)
+    double dist(int, int)
+  }
+-----
+static double diameter(Graph G)
+{ int vmax = 0, wmax = 0;
+  GraphSPall all = new GraphSPall(G);
+  for (int v = 0; v < G.V(); v++)
+    for (int w = 0; w < G.V(); w++)
+      if (all.path(v, w) != null)
+        if (all.dist(v, w) > all.dist(vmax, wmax))
+          { vmax = v; wmax = w; }
+  int v = vmax; Out.print(v + "");
+  while (v != wmax) 
+  { v = all.path(v, wmax).w(); Out.print("-" + v); }
+  return all.dist(vmax, wmax);
+}
+-----
+class GraphSPall
+{ private GraphSPT[] A;
+  GraphSPall(Graph G)  
+    { 
+      A = new GraphSPT[G.V()];
+      for (int v = 0; v < G.V(); v++) 
+        A[v] = new GraphSPT(G, v); 
+    }
+  Edge pathR(int s, int t) 
+    { return A[s].pathR(t); }
+  double dist(int s, int t) 
+    { return A[s].dist(t); }
+}
+-----
+class GraphSPall
+{ private Edge[][] p;
+  private double[][] d;
+  GraphSPall(Graph G)  
+    { int V = G.V();
+      p = new Edge[V][V]; d = new double[V][V];
+      for (int s = 0; s < V; s++) 
+        for (int t = 0; t < V; t++) 
+          d[s][t] = maxWT; 
+      for (int s = 0; s < V; s++)
+        for (int t = 0; t < V; t++) 
+          if (G.edge(s, t) != null)
+            { p[s][t] = G.edge(s, t); 
+              d[s][t] = G.edge(s, t).wt(); } 
+      for (int s = 0; s < V; s++) d[s][s] = 0.0;
+      for (int i = 0; i < V; i++)
+        for (int s = 0; s < V; s++)
+          if (p[s][i] != null)
+            for (int t = 0; t < V; t++)
+              if (s != t) 
+                if (d[s][t] > d[s][i] + d[i][t])
+                  { p[s][t] = p[s][i];
+                    d[s][t] = d[s][i] + d[i][t]; }
+    }
+  Edge path(int s, int t) 
+    { return p[s][t]; }
+  double dist(int s, int t) 
+    { return d[s][t]; }
+}
+-----
+class DagLPT
+{ private double[] wt;
+  private Edge[] lpt;
+  DagLPT(Graph G)  
+  { 
+    wt = new double[G.V()]; lpt = new Edge[G.V()]; 
+    DagTS ts = new DagTS(G);
+    for (int j = 0; j < G.V(); j++) 
+     { int v = ts.order(j);
+       AdjList A = G.getAdjList(v);
+       for (Edge e = A.beg(); !A.end(); e = A.nxt()) 
+         { int w = e.w();
+           if (wt[w] < wt[v] + e.wt())
+             { wt[w] = wt[v] + e.wt(); lpt[w] = e; }       
+         }
+     }
+  }
+  Edge pathR(int v) { return lpt[v]; }
+  double dist(int v) { return wt[v]; }
+}
+-----
+class DagSPall
+{ 
+  private Edge[][] p;
+  private double[][] d;
+  void dfsR(Graph G, int s)  
+    { AdjList A = G.getAdjList(s);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt()) 
+      { int t = e.w(); double w = e.wt();
+        if (d[s][t] > w)
+          { d[s][t] = w; p[s][t] = e; }
+        if (p[t][t] == null) dfsR(G, t);
+        for (int i = 0; i < G.V(); i++)
+          if (p[t][i] != null)
+            if (d[s][i] > w + d[t][i])
+            { d[s][i] = w + d[t][i]; p[s][i] = e; }
+      }
+    }
+  DagSPall(Graph G)  
+    { int V = G.V();
+      p = new Edge[V][V]; d = new double[V][V];
+      for (int s = 0; s < V; s++) 
+        for (int t = 0; t < V; t++) 
+          d[s][t] = maxWT; 
+      for (int s = 0; s < V; s++)
+        if (p[s][s] == null) dfsR(G, s);
+    }
+  Edge path(int s, int t) 
+    { return p[s][t]; }
+  double dist(int s, int t) 
+    { return d[s][t]; }
+}
+-----
+class Schedule
+  {
+    public static void main(String[] args)
+      { int N = Integer.parseInt(args[0]);
+        double[] duration = new double[N];
+        Graph G = new Graph(N, true);
+        In.init();
+        for (int i = 0; i < N; i++) 
+          duration[i] = In.getDouble();
+        while (!In.empty())
+          { int s = In.getInt(), t = In.getInt();
+            G.insert(new Edge(s, t, duration[s])); }
+        if (!GraphUtilities.acyclic(G)) 
+          { Out.println("not feasible"); return; }
+        DagLPT lpt = new DagLPT(G);
+        for (int i = 0; i < N; i++)
+          Out.println(i + "  " + lpt.dist(i));
+      }
+  }  
+-----
+  GraphSPT(Graph G, int s)  
+  { int V = G.V(), N = 0;
+    wt = new double[V]; spt = new Edge[V]; 
+    for (int v = 0; v < V; v++) wt[v] = maxWT; 
+    intQueue Q = new intQueue(G.E());
+    wt[s] = 0.0; Q.put(s);  Q.put(V);
+    while (!Q.empty()) 
+    { int v;
+      while ((v = Q.get()) == V) 
+        { if (N++ > V) return; Q.put(V); }
+      AdjList A = G.getAdjList(v);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt()) 
+        { int w = e.other(v); 
+          double P = wt[v] + e.wt();
+          if (P < wt[w]) 
+            { wt[w] = P; Q.put(w); spt[w] = e; }
+        }
+    }
+  }
+
+----------
+CHAPTER 22. Network Flow
+-----
+static int flow(Network G, int v) 
+  { int x = 0;
+    AdjList A = G.getAdjList(v);
+    for (Edge e = A.beg(); !A.end(); e = A.nxt())
+      x += e.from(v) ? e.flow() : -e.flow();
+    return x; 
+  }
+static boolean flowcheck(Network G, int s, int t) 
+  { 
+    for (int v = 0; v < G.V(); v++)
+      if ((v != s) && (v != t))
+        if (flow(G, v) != 0) return false;
+    int sflow = flow(G, s);
+    if (sflow < 0) return false;
+    if (sflow + flow(G, t) != 0) return false;
+    return true; 
+  }    
+-----
+class Edge
+  { private int pv, pw, pcap, pflow;
+    Edge(int v, int w, int cap)
+      { pv = v; pw = w; pcap = cap; pflow = 0; }
+    int v() { return pv; }  
+    int w() { return pw; }
+    int cap() { return pcap; }
+    int flow() { return pflow; }
+    boolean from (int v)
+      { return pv == v; } 
+    int other(int v)
+      { return from(v) ? pw : pv; } 
+    int capRto(int v)
+      { return from(v) ? pflow : pcap - pflow; }
+    void addflowRto(int v, int d) 
+      { pflow += from(v) ? -d : d; }
+  }
+-----
+class NetworkMaxFlow
+{ private Network G; private int s, t;
+  private int[] wt;
+  private Edge[] st;
+  private int ST(int v) { return st[v].other(v); }
+  private void augment(int s, int t)
+    { int d = st[t].capRto(t);
+      for (int v = ST(t); v != s; v = ST(v))
+        if (st[v].capRto(v) < d) 
+          d = st[v].capRto(v);
+      st[t].addflowRto(t, d); 
+      for (int v = ST(t); v != s; v = ST(v))
+        st[v].addflowRto(v, d); 
+    }
+  private boolean pfs()
+    // Program 22.4
+  NetworkMaxFlow(Network G, int s, int t)  
+    { this.G = G; this.s = s; this.t = t;
+      wt = new int[G.V()]; st = new Edge[G.V()];
+      while (pfs()) augment(s, t);
+    }
+}
+-----
+private boolean pfs()
+{ intPQi pQ = new intPQi(G.V(), wt);
+  for (int v = 0; v < G.V(); v++) 
+    { wt[v] = 0; st[v] = null; pQ.insert(v); }
+  wt[s] = -Edge.M; pQ.lower(s);  
+  while (!pQ.empty()) 
+    { int v = pQ.getmin(); wt[v] = -Edge.M; 
+      if (v == t) break;  
+      if (v != s && st[v] == null) break;  
+      AdjList A = G.getAdjList(v);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt()) 
+        { int w = e.other(v);
+          int cap = e.capRto(w);
+          int P = cap < -wt[v] ? cap : -wt[v];
+          if (cap > 0 && -P < wt[w]) 
+            { wt[w] = -P; pQ.lower(w); st[w] = e; }
+        }
+    }
+  return st[t] != null;
+}
+-----
+class NetworkMaxFlow
+{ private Network G; private int s, t;
+  private int[] h, wt;
+  private void initheights()
+    // See Exercise 22.52
+  NetworkMaxFlow(Network G, int s, int t)  
+  { this.G = G; this.s = s; this.t = t;
+    wt = new int[G.V()]; h = new int[G.V()];
+    initheights();
+    intGQ gQ = new intGQ(G.V());
+    gQ.put(s); wt[t] = -(wt[s] = Edge.M*G.V());
+    while (!gQ.empty()) 
+    { int v = gQ.get();
+      AdjList A = G.getAdjList(v);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt()) 
+        { int w = e.other(v), cap = e.capRto(w);
+          int P = cap < wt[v] ? cap : wt[v];
+          if (P > 0 && v == s || h[v] == h[w]+1) 
+            { e.addflowRto(w, P); 
+              wt[v] -= P; wt[w] += P;
+              if ((w != s) && (w != t)) gQ.put(w); 
+            }
+        }
+      if (v != s && v != t && wt[v] > 0)
+        { h[v]++; gQ.put(v); }
+    }
+  }
+}
+-----
+class NetworkFeasibleFlow
+{ 
+  NetworkFeasibleFlow(Network G, int[] sd)  
+  { 
+    Network F = new Network(G.V()+2);
+    for (int v = 0; v < G.V(); v++) 
+     { AdjList A = G.getAdjList(v);
+       for (Edge e = A.beg(); !A.end(); e = A.nxt())  
+         F.insert(e);
+     }    
+    int s = G.V(), t = G.V()+1;
+    for (int i = 0; i < G.V(); i++)
+      if (sd[i] >= 0) 
+           F.insert(new Edge(s, i, sd[i]));
+      else F.insert(new Edge(i, t, -sd[i]));
+    NetworkMaxFlow M = new NetworkMaxFlow(F, s, t);
+  }
+}
+-----
+class BipartiteMatch
+{
+  public static void main(String[] args)
+  { int N = Integer.parseInt(args[0]);
+    int s = 2*N, t = 2*N+1;
+    Network G = new Network(2*N + 2);
+    for (int i = 0; i < N; i++)
+      G.insert(new Edge(s, i, 1));
+    for (int i = N; i < 2*N; i++)
+      G.insert(new Edge(i, t, 1));
+    for (In.init(); !In.empty(); )
+      G.insert(new Edge(In.getInt(),In.getInt(),1));
+    NetworkMaxFlow M = new NetworkMaxFlow(G, s, t);
+    for (int i = 0; i < N; i++) 
+    {
+      AdjList A = G.getAdjList(i);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt())
+        if (e.flow() == 1 &&  e.from(i))
+          Out.println(e.v() + "-" + e.w());
+    }
+  }
+}  
+-----
+static int cost(Network G)
+{ int x = 0;
+  for (int v = 0; v < G.V(); v++) 
+    { 
+      AdjList A = G.getAdjList(v);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt())
+        if (e.from(v) && e.costRto(e.w()) < Edge.C)
+          x += e.flow()*e.costRto(e.w()); 
+    }
+  return x; 
+}
+-----
+class NetworkMinCost
+{ private Network G; private int s, t;
+  private Edge[] st;
+  private int ST(int v) { return st[v].other(v); }
+  private void augment(int s, int t)
+    // See Program 22.3 
+  private int negcyc()
+    // See Exercise 22.108
+  NetworkMinCost(Network G, int s, int t)  
+   { this.G = G; this.s = s; this.t = t;
+     st = new Edge[G.V()];
+     NetworkMaxFlow M = new NetworkMaxFlow(G, s, t);
+     for (int x = negcyc(); x != -1; x = negcyc())
+       { augment(x, x); }
+   }
+}
+-----
+private int phiR(int v) 
+  { 
+    if (mark[v] == valid) return phi[v];
+    phi[v] = phiR(ST(v)) - st[v].costRto(v);
+    mark[v] = valid;
+    return phi[v]; 
+  }
+-----
+private int lca(int v, int w) 
+  { mark[v] = ++valid; mark[w] = valid;
+    while (v != w)
+      { 
+        if (v != t) v = ST(v);
+        if (v != t && mark[v] == valid) return v;
+        mark[v] = valid;
+        if (w != t) w = ST(w); 
+        if (w != t && mark[w] == valid) return w;
+        mark[w] = valid; 
+      }
+    return v; 
+  }
+private Edge augment(Edge x)
+  { int v = x.v(), w = x.w(); int r = lca(v, w);
+    int d = x.capRto(w);
+    for (int u = w; u != r; u = ST(u))
+      if (st[u].capRto(ST(u)) < d) 
+        d = st[u].capRto(ST(u));
+    for (int u = v; u != r; u = ST(u))
+      if (st[u].capRto(u) < d) 
+        d = st[u].capRto(u);
+    x.addflowRto(w, d); Edge e = x;
+    for (int u = w; u != r; u = ST(u))
+      { st[u].addflowRto(ST(u), d); 
+        if (st[u].capRto(ST(u)) == 0) e = st[u]; }
+    for (int u = v; u != r; u = ST(u))
+      { st[u].addflowRto(u, d); 
+        if (st[u].capRto(u) == 0) e = st[u]; }
+    return e;
+  }
+-----
+private boolean onpath(int a, int b, int c)
+  { 
+    for (int i = a; i != c; i = ST(i))
+      if (i == b) return true;
+    return false; 
+  }
+private void reverse(int u, int x)
+  { Edge e = st[u];
+    for (int i = ST(u); i != x; i = ST(i))
+      { Edge y = st[i]; st[i] = e; e = y; } 
+  }
+private void subs(Edge w, Edge y) 
+  { int u = y.w(), v = y.v(), x = w.w();
+    if (st[x] != w) x = w.v(); 
+    int r = lca(u, v);
+    if (onpath(u, x, r))
+      { reverse(u, x); st[u] = y; return; }
+    if (onpath(v, x, r))
+      { reverse(v, x); st[v] = y; return; } 
+  }
+-----
+private int costR(Edge e, int v)
+  { int R = e.cost() + phi[e.w()] - phi[e.v()];
+    return  e.from(v) ? R : -R; }
+private Edge besteligible()
+  { Edge x = null; int V = G.V();
+    for (int v = 0, min = Edge.C*V; v < V; v++) 
+    {
+      AdjList A = G.getAdjList(v);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt())
+        if (e.capRto(e.other(v)) > 0) 
+          if (e.capRto(v) == 0)
+            if (costR(e, v) < min) 
+              { x = e; min = costR(e, v); } 
+    }
+    return x;
+  }
+-----
+class NetworkMinCost
+{ private Network G; private int s, t, valid;
+  private Edge[] st;
+  private int[] mark, phi;
+  private int ST(int v) { return st[v].other(v); }
+  private void dfsR(Edge x, int v) 
+    // See Exercise 22.117   
+  private int phiR(int v)           // Program 22.10   
+  private Edge augment(Edge x)      // Program 22.11 
+  private void subs(Edge w, Edge y) // Program 22.12
+  private int costR(Edge e, int v)  // Program 22.13
+  private Edge besteligible()       // Program 22.13
+  NetworkMinCost(Network G, int s, int t)  
+    { int V = G.V(); 
+      this.G = G; this.s = s; this.t = t; 
+      st = new Edge[V];
+      mark = new int[V]; phi = new int[V];
+      for (int i = 0; i < V; i++) mark[i] = -1;
+      Edge z = new Edge(s, t, Edge.M*V, Edge.C*V);
+      G.insert(z); z.addflowRto(t, z.cap()); 
+      dfsR(z, t);
+      for (valid = 1; ; valid++ ) 
+        { 
+          phi[t] = z.costRto(s); mark[t] = valid; 
+          for (int v = 0; v < V; v++) 
+            if (v != t) phi[v] = phiR(v);
+          Edge x = besteligible();
+          if (costR(x, x.v()) == 0) break;
+          subs(augment(x), x);
+        }
+      G.remove(z);
+    }
+}
+-----
+int old = 0;
+for (valid = 1; valid != old; ) 
+  {
+    old = valid;
+    for (int v = 0; v < G.V(); v++) 
+    {
+      AdjList A = G.getAdjList(v);
+      for (Edge e = A.beg(); !A.end(); e = A.nxt())
+        if (e.capRto(e.other(v)) > 0)
+          if (e.capRto(v) == 0)
+            { subs(augment(e), e); valid++; }
+    }
+  }

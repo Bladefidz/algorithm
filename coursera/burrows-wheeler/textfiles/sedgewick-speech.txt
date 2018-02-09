@@ -1,0 +1,727 @@
+Welcome to Princeton.  This may be your first Princeton lecture, but
+it's not a typical one.  For one thing it's the only time you'll be in
+a class of size more than 1000!  Also, lectures usually involve slides
+or vugraphs, or at least a blackboard.  When Hal told me this lecture
+would be in this room and that no audio-visual aids would be possible,
+I realized the challenge: we've all been on vacation all summer, and
+now we have to deal in ideas, face-to-face. No slides. No movies. No
+organist.  Not even any Internet access.  Well, at least the
+experience ties in with the topic of this lecture, as you'll see.
+
+Many of you have probably not done much academic work since you opened
+that thick envelope from Fred Hargadon.  Right?  The purpose of this
+lecture is to set your minds in motion, because you'll need them in
+gear at full speed when classes start on Thursday.
+
+The topic that I've chosen for this purpose is the prospect of having
+all knowledge online, and its implications.
+
+To start, I need to test some basic assumptions
+that I've made in preparing this talk.
+
+how many of you have never used a computer?
+how many of you use electronic mail?
+how many of you have ever used the Internet?
+how many use it regularly?
+how many run companies that produce Web pages?
+
+OK. Well, it looks as though I don't have to describe the basic
+features of the net to most of you.  I'm not going to assume much,
+anyway.
+
+You can find a link to a web page for this lecture on my home page.
+If you've never been on the net, take this opportunity to get a friend
+to show it to you.  Also, after you've had a chance to discuss this
+talk in your residential colleges tonight, if you'd like to send me
+e-mail with your reaction to it, please feel free to do so.  I'll
+collect the mail that I get and put it on the web page.
+
+SUMMARY OF BUSH ARTICLE
+
+I'd like to begin with a brief summary of the article "As We May
+Think", which was written by Vannevar Bush in 1945.  The article was
+written at the end of World War II. Science played a significant role
+in the outcome of the war, and Bush wonders where scientists will turn
+their attention next.
+
+He begins by noting that there is a growing mountain of research, but
+that a single researcher cannot hope to keep up with it all.  He sees
+reason for optimism, because cheap and fast machines that might help
+are on the horizon.
+
+He describes basic technologies that were available at the time, such
+as photography, fax technology, and microfilm, and he comes to the
+conclusion that it is reasonable to assume that the sum total of
+knowledge can fit in a space the size of a moving van.
+
+That same estimate is not far off today, even though our knowledge is
+increasing at an exponential rate: it seems that each time the sum
+total of knowledge doubles, we find ways to halve the space required
+to store information.
+
+Bush then goes on to describe mechanical devices that could help us
+manipulate information.  He talks about fast calculators and digresses
+to note that that fast machines for arithmetic will free creative
+mathematicians from the drudgery of computation and enable them to
+help solve scientific problems.
+
+It's not surprising that Bush was unable to see all the applications
+of computers that are so familiar today. At the time, only 1 or 2
+computers existed in research labs, and they were viewed as "automatic
+calculators."  The general-purpose computer was still being invented,
+actually by John von Neumann, right here in Princeton.
+
+But Bush does see that we could use these fast calculators to quickly
+select any desired piece of information from that huge store of
+information packed in the moving van.  He puts the two pieces together
+(the ability to store all accumulated knowledge and the ability to
+retrieve any piece of it quickly) to envision a device called the
+"Memex", which a person could use to store all manner of information
+and later access it by typing in a short code.
+
+More important, Bush describes something called "associative
+indexing," where pieces of information can be linked together, perhaps
+in a manner analogous to the way the human brain works. Each person
+would link information together in different ways.  Even for a small
+amount of information, the number of possible connections is huge, so
+the connections individualize the mass of information, and give it a
+different organization and structure for each individual.  Bush
+characterizes the connections as a way that people can remember
+information that they've accessed.
+
+With a Memex, a lawyer could link together cases related to one of
+interest, a doctor could link together relevant case histories, a
+chemist could draw on past knowledge when searching for a new
+compound, or a historian could draw new connections that enhance our
+understanding of the historical record.  As the editor of the article
+aptly states, a Memex would build a new relationship between humans
+and our accumulated knowledge.  It's quite a lofty goal.
+
+The most remarkable thing about this article is that it was written
+over 50 years ago!  Before there were computers, or even TVs. Not even
+all that many telephones.  Still, Bush was able to envision many of
+the conveniences that we enjoy today with personal computers and the
+Internet.  And a Memex-like machine sometimes referred to as the
+"personal information appliance" continues to be the wave of the
+future in Silicon Valley.
+
+On a less positive note, I have to digress to apologize while noting
+the brutal gender bias in this article.  In Bush's world, scientists
+and scholars are men and clerks and typists are women.  Thankfully,
+that world is long gone.  Bush was unable to foresee that half of the
+beneficiaries of his projected technology would be female; indeed he
+doesn't even acknowledge that many scientists of his own day, and
+especially many of the first computer programmers, were women.  One
+wonders how a scientist of Bush's stature, for whom freedom of inquiry
+is of vital importance, could rationalize such an obvious bias.  By
+the way, if any of you should encounter any bias at all here, be sure
+to question it, immediately.  Any bias in a university is hypocrisy
+itself.
+
+Back to the Memex, where Bush did hit the nail on the head.  He admits
+that "technical difficulties of all sorts" would need to be resolved
+in order to actually build the Memex machine, and he mentions other
+early machine designs that didn't pan out.  There's no way he could
+have foreseen the invention of
+
+the transistor
+the integrated circuit
+the digital computer itself
+the microprocessor. 
+
+All of these things have provided the basis for the modern realization
+of his vision.
+
+For a time, Bush's article was mostly forgotten in the light of all of
+these amazing breakthroughs, but the article saw new light when
+computer scientists in the 70s found Bush's vision inspirational as
+they took on the construction of a Memex-like machine.  Their research
+was completely revolutionary, and led to the development of the basic
+computer system architecture that we use today.
+
+DESCRIPTION OF XEROX PARC
+
+I've been fortunate enough to work for a short time with some of the
+people that brought this particular revolution about, and I'd like to
+describe the research atmosphere where it started, at Xerox PARC, in
+the late 1970s, just before you were born.
+
+I've got a personal frame of reference on a lot of this historical
+material---I've got two sons in the class, out in the audience
+somewhere!  I was at Xerox PARC just before they were born, so I know
+this happened just before you were born!
+
+PARC is an abbreviation for "Palo Alto Research Center". It was
+located up in the hills, west of Palo Alto.  This institution was laid
+back and very Californian: People wandered around in T-shirts and
+sandals, drinking herbal tea or fresh ground coffee.  They kept
+erratic hours, except for regular meetings that were held in a large
+room filled with bean-bag chairs.  People would settle in and toss
+around ideas.  Much of this is commonplace today, but at the time it
+was near heresy and the antithesis of the nine-to-five,
+starched-white-shirt mentality found at IBM, where all "serious"
+computer work was being done.
+
+There were plenty of computers around at the time, but they were big,
+blue IBM machines, which cost millions of dollars and were accessible
+by relatively few people in big, rich institutions.
+
+At Xerox PARC, as in a university, the most important activity was the
+critical evaluation of new ideas.  The collective general goal was to
+find ways to make computers more effective personal tools (the same
+goal espoused by Bush).  The researchers there were very productive:
+within a period of about 5 years, a small group of them came up with
+the following new inventions:
+
+the Alto (a personal computer with much 
+    of the functionality of today's machines).
+a WYSIWYG editor (which has evolved to be 
+    Microsoft Word)
+a Local area network for connecting the 
+    Altos (the Ethernet, still widely used today:
+    one of the inventors was a recent Princeton grad.)
+the laser printer (which has transformed the
+    printing industry)
+a method for transferring large files between 
+    computers (FTP, which is still used today)
+object-oriented programming 
+    (the basic idea behind Java) 
+
+All of these things were invented over 20 years ago at Xerox PARC.  I
+visited there as a university professor and lived with this computing
+environment in 1978 and again in 1979.  The environment was so
+different from that commonly envisioned that I had a great deal of
+difficulty even describing it to my students and colleagues back in
+the East.  How wasteful it seemed to devote a whole computer to
+presenting information to just one person, at a time when many
+universities were devoting a significant fraction of their resources
+to buy one computer to be shared by everyone!
+
+But the Memex had come to life.
+
+As a research effort adding to our basic knowledge, Xerox PARC was a
+complete success: the basic features of the Alto environment are now
+found in millions of computers.  Not many of those computers are made
+by Xerox, but that's another story, told in an entertaining book
+called "Fumbling the Future: How Xerox Invented, then Ignored, the
+First Personal Computer" You can check the lecture web page for a
+reference.
+
+By the way, I should note another thing that Bush certainly never
+envisioned. That's one of the most widespread uses of personal
+computers today.  What do you think it is?  Right. Computer games.  By
+the way, they had some great games at Xerox PARC.
+
+Before the Alto, computers were horrendously expensive and decidedly
+impersonal.  Visionaries worried about all-powerful, all-controlling
+computers robbing us of our humanity. But, by 1984, we had the
+friendly Macintosh and we had cute commercials on TV that used Charlie
+Chaplin to sell IBM PCs.  This change was truly a revolution.
+
+Since it happened when you were in diapers, it's fair to say that your
+generation hasn't experienced anything but personal computing,
+but you need to be aware that computing was vastly different when the
+old fogeys in your lives (like parents and professors) were in
+college, and that computing was inaccessible to most of them. And it
+still is.
+
+We like to say that the most important thing that we do in a
+university is to teach people how to learn, but learning in the face
+of a major paradigm shift such as the use of computing tests that idea
+in the extreme.
+
+I'm taking for granted here the other ongoing research and development
+in Silicon Valley and elsewhere that has given us faster and more
+powerful computers each year.  Apply the progress that's been made to
+any other industry, and you can appreciate its impact: How would you
+like to have a car that goes 1 million times faster than the one your
+grandfather had in 1950?  Or perhaps we should imagine a plane that is
+not only 1 million times faster than the one Lindbergh flew, but also
+can hold 1 million passengers!  And which, by the way, only costs
+$1000. The startling advances in computer performance of course played
+a big role in the personal computer revolution (and will continue to
+be important in future revolutions) but the great ideas at PARC were
+important, too.
+
+So, you missed the personal computer revolution and can go ahead and
+take Bush's Memex for granted.  What's next?  Well, if you're been
+paying attention, you're witnessing the next big revolution, the
+advent of the World Wide Web and the online global village.  This
+revolution was anticipated as early as the 1960s by another visionary,
+Ted Nelson, and has brought us past what was imagined by Vannevar
+Bush.
+
+We now have extensive access to an enormous amount of information,
+without even having to load it in to our own Memex, and we can
+communicate it to others instantly.  Knowledge is being put online at
+a dizzying rate, and we are fast approaching the day (if it's not
+already here) where you can be certain to find what you need on the
+web.
+
+For example, I'll bet that it'll take you only a few seconds to find
+your way to Nelson's original work, even without a link.  Try it.
+
+Future prospects are bright, indeed.
+
+This revolution will soon culminate in an ability to freely access
+anything that we know, from anywhere.  Your 10-year old brother or
+sister won't be able to relate to life before the Web, any more than
+you can relate to life before the PC.
+
+Now, what will the next revolution be like?
+
+SUMMARY OF NOAM ARTICLE
+
+To set the stage for answering this question, I'd like to consider the
+second article that I asked you to look at: "Electronics and the Dim
+Future of the University" by Eli Noam.  Again, let me begin by
+summarizing.  Noam's thesis is that universities have traditionally
+served three functions:
+
+to create and evaluate knowledge
+to preserve and protect information
+to transmit information to others
+
+No argument with that.  He goes on to say that free global access to
+online knowledge will lead to changes that weaken the institution of
+the university as we know it today.  He says that, in ancient times,
+scholars gathered around information, that institutions like
+universities have been collecting information for the purpose of
+attracting the best scholars, and that even though this system has
+been stable for over 2500 years, it's now on the verge of breaking
+down.  Why?
+
+First, he says, if scholars can access 
+    information and communicate over the net, 
+    they don't have to congregate at universities.
+Second, he says, there is no longer any 
+    need to store information in a university library.
+Third, he says, modern high-tech tools will 
+    enable alternatives to traditional teaching.
+
+Therefore, Noam says, it will be cost-effective for commercial
+companies to take over "mainstream undergraduate and professional
+education" so that universities in the future will be stuck with the
+leftovers: small fields of study that are not lucrative for commercial
+providers.
+
+He wonders if the impact of electronics on the university will be like
+that of printing on the medieval cathedral, ending its central role in
+information transfer.
+
+As you can tell from the title of this talk, I quite disagree with
+Noam.  One of the things that you might discuss when you meet this
+evening is the extent to which you agree with him.  It's an
+appropriate time for you to be thinking about the issues he raises,
+because it leads you to think about the value of the enterprise upon
+which you are about to embark.
+
+ODLYZKO RESPONSE
+
+One response to Noam's point of view has been presented by Andrew
+Odlyzko at AT&T Research, in an article entitled "Electronics and the
+Future of Education" (I got this article off the net: Odlyzko is a
+firm believer in electronic publishing, and circulates his writing on
+the net.  You can find a link to it on the lecture home page.)
+Odlyzko predicts that universities will flourish, not decline, and
+points out that, basically, the process of teaching is independent of
+technology.  I'll read a quote from his article:
+
+"My prediction of growth in education is not based on denying the
+value of modern technology.  PCs and the Internet are much more useful
+than earlier technological innovations such as radio or movies (which
+some enthusiasts had expected to revolutionize education, just as
+today computers are predicted to do).  Personally I am skeptical of
+the extreme claims for modern technology.  I suspect that Sumerian
+scribes of 5,000 years ago might feel at home in today's classrooms,
+because education is primarily a process of getting students to absorb
+new ideas and ways of thinking, and it requires extensive social
+interaction.  Replacing clay tablets first by paper notebooks and now
+by PCs can help, but not much.  However, that opinion is not a crucial
+part of my argument.  Let us accept all the claims of advocates of
+modern technology.  Suppose that future 3-dimensional holographic
+projections and high bandwidth networks could make distance learning
+so effective that live lectures could be phased out.  Even then, I
+expect teachers would still be employed to provide interactive
+instruction.  Their ranks would grow, not shrink, even though they
+would not be presenting lectures, and even though computers would be
+used more extensively and effectively than now for interactive
+instruction.
+
+Technology can replace some teachers in their present roles.  Hence if
+all we cared about was to produce what the current system does, we
+could indeed operate with fewer people.  However, we are unlikely to
+do that.  New demands will arise to take up the slack.  There has
+always been desire for more personal attention from teachers than
+could be met.  Further, as the need for training increases, those
+demands will be rising.  Education is not a matter of getting to where
+the Joneses were 10 years ago.  It is more a matter of trying to get
+to where the Joneses are likely to be 10 years from now."
+
+Odlyzko goes on to point out that pinning down precisely what we want
+to achieve in education is an elusive goal.  Again, I'll quote
+Odlyzko:
+
+"If education were a simple matter of teaching the three Rs, the
+future might be different.  However, we do not even have a clear idea
+of what education is supposed to accomplish.  As an example, what are
+parents who send their child to Harvard paying for?  Is it the
+excellence of the Harvard faculty?
+
+My kids and I are at Princeton, not Harvard, so I'm not quite sure
+what he's talking about here!
+
+Are parents paying for the stimulating atmosphere of living and
+studying with other students with top credentials?  A chance to mature
+away from home?  Access to the libraries and museums at Harvard?  The
+Boston social scene?  The chance for their child to network with
+future movers and shakers?  The opportunity to boast to their
+coworkers and neighbors of their prowess in raising children?
+Probably a combination of all.  Education is supposed to prepare an
+individual for life, but we do not have a clear model of how it does
+that.  With rapid change, we do not even know what life to prepare
+for.  Therefore replacing some elements of the current educational
+experience by technology is unlikely to diminish the human element
+provided by teachers."
+
+Odylzko is right.  Professors don't think much about the process of
+transmitting knowledge: the methods that they use evolve over the
+years.  We don't know much about how people learn; it just seems to
+happen when we all try our best.  Professors don't give the same
+lectures year after year: they have to react to new developments in
+the field and update their material each time they present it.  Most
+professors do this, as a matter of course.  Most professors also
+frequently build new courses, synthesizing new material to be taught,
+with no other goal than to transfer as much knowledge as possible to
+students.  And, most important, students and professors seek
+interaction with each other, during lectures and otherwise.
+
+When I teach, I want you to learn. If Noam's "alternative providers"
+come up with better new ideas for teaching the material I'm teaching,
+I'm more than happy to use them.  If someone else comes up with a
+great new book, I'm more than happy to have you read it.  I'm afraid
+that the need to turn a profit doesn't allow the "alternative
+providers" these luxuries (and never has). As Odlyzko points out
+(again I quote):
+
+"We have historical experience with one effective example of distance
+learning, namely that of textbooks, which are available to all schools
+equally.  Their spread has coincided with the great growth in teacher
+ranks in the last century, and also with increasing differentiation
+among institutions.  Will the effects be different even if live
+lectures are replaced by recorded ones?"
+
+Those commercial providers haven't taken over textbook production.
+Professors at universities write textbooks, and professors at
+universities will be the people creating content for any future
+technologies that prove to be more effective than textbooks.  The only
+hope for commercial success lies in cooperating with professors, not
+competing with them. I think that, as ever, students will go to
+teachers who want them to learn, not to companies who want to make a
+buck,
+
+The bottom line is that society finds the traditional functions of
+universities (to advance knowledge, and to pass what we know on to
+future generations) to be of great value, and the people in the
+universities (students and faculty) account for virtually all of that
+value, because of their commitment to learning.
+
+Increases in the amount of knowledge make the need for universities
+more critical: there's more information to deal with.  It is
+interesting to note in the articles I've mentioned that both Bush and
+Noam (though spaced by 50 years) talk of exponential growth, our
+inability to absorb all knowledge, and the inevitability of
+specialization. This situation doesn't change as time marches on.
+
+At a university, we try to absorb the facts that we need to stimulate
+our creativity and have an impact on the future.  Should we be
+pessimistic because we can absorb only a small slice of what's known
+or optimistic because we have so much to choose from?
+
+I think that one of the primary reasons that we're at the university
+is to interact with each other! We have shared ideals, intellectual
+curiosity, mutual respect, and high expectations.  We're here to
+learn---more precisely, to prepare for a lifetime of learning. To do
+this, we need to think about knowledge being online, because one thing
+is clear: online is where we'll need to go to learn in the
+future, no matter what field of study we're interested in.  But this
+situation doesn't change the idea that universities are the concrete
+realization of the idea of a community of scholars.
+
+At a microscopic level, the role of the university certainly will
+change.  Noam is probably right that a physical library will become
+less important and may even vanish entirely. Oblyzko has written about
+that, too.  Check his web page (not the library) for his latest paper
+on that topic.
+
+The idea of a decreased library budget is certainly controversial at
+institutions with big libraries, like Princeton: maybe you'd like to
+discuss it when you meet in the colleges tonight.
+
+I think that the disappearance of the library would just mean that
+more resources can be devoted to other things.  And, as President
+Shapiro can tell you, there is definitely no shortage of ideas in a
+university on how to use resources.  As ever, ideas on allocating
+resources will be tested, developed, and the best of them will be used
+to improve the university.
+
+It's not just the cost of the physical library that's going to drop,
+the cost of computing itself is also likely to drop. Twenty-five years
+ago, a university would spend millions on a single computer that was
+accessible to relatively few students and faculty (most students used
+slide rules and typewriters). Twenty-five years from now, students
+will buy new information appliances as back-to-school supplies.
+
+The idea of a decreased computing budget is also controversial at
+institutions with big investments in computing, like Princeton: you
+can discuss that, as well, tonight.
+
+I think that the cost of the computer and the cost of the library are
+not likely to be as important in the future as they are now.  I also
+think that we need more problems like this, because, remember, I'm
+just talking about the cost.  People will have more access to
+information and people will be using computers more than ever---we
+just won't be spending so much on these things.  And a university is a
+huge and complex institution, we'll be spending future dollars on
+things that seem as important as today's libraries and computers.
+This situation doesn't represent and change in our basic mission.
+
+ONLINE KNOWLEDGE: WHAT'S NEXT
+
+Let's go ahead and assume that all human knowledge is online, and that
+anyone can access any of it with a few keywords and a few
+doubleclicks.  That's what Vannevar Bush imagined, and, really, we're
+not at all far from that goal.  Now, let's go back to the question of
+what happens next.
+
+Many people assume that what happens next is completely determined by
+Microsoft, Intel, and the other giant companies of the day.  We read
+the headlines every day: Bill Gates has billions, Apple is dead,
+Wintel machines will dominate the world, and so on and so forth.  But
+this is precisely what we felt about IBM in the 1970s.  Few could
+imagine a world different than the one that they built, but now we do
+have a different world.
+
+And now we're back in the same situation.  Again, few can imagine a
+radically different world, but there are plenty of researchers out
+there with little stake on the present who are working on their
+visions of the future. One of them will catch fire.  The big companies
+make progress and will be quick to jump in and try to capitalize on
+new ideas (like IBM with the PC), but the next revolution will come
+from some completely unexpected corner of the world.
+
+This view is perhaps naive and simplistic, but it's hard to deny.  For
+one thing, with universal access to computing, there are many more
+people out there with the power to create revolutionary new ideas than
+ever before.
+
+The next revolution may not have much to do with online knowledge.
+However, we're talking about managing the sum total of humankind's
+knowledge and passing it on to future generations, so, it's probably
+safe to assume that there's value in working on the problem.
+Certainly, at a university, it cannot be avoided, no matter what your
+field of interest.
+
+Even with immediate access to all knowledge online, we are still left
+with a number of problems.  As all Web users know, there's an enormous
+amount of information out there: we need to be able to evaluate and
+filter a lot of it to get at some particular information of interest.
+Every Web user has had the experience of having millions of hits on a
+simple keyword search. I'll return to this problem soon:
+
+For the moment, let's concentrate on big chunks of knowledge, like
+books.  Even if we have immediate access to a book that we know that
+we want, we still have to "read" it, and presumably "understand" it.
+The time required to do that is a fundmental bottleneck. Another
+fundamental bottleneck comes up, when we create something new, and
+have to add it to the online record.  I would like to claim that both
+of these tasks are intrinsic to the traditional function of a
+university and are not much affected by technology.  Let me elaborate.
+
+GETTING INFORMATION INTO THE BRAIN
+
+I didn't mention one of the ideas described by Bush at the end of his
+article, one that I think lies at the crux of the matter.  As an
+example of one of the "technical details" that might enable
+construction of the Memex, Bush wonders if someday we might be able to
+transfer information from the Memex directly to the brain with
+electrical signals.  After all, the connection between the eye and the
+brain is like a huge cable: couldn't we someday connect a computer to
+that cable?
+
+Even nowadays, not many people would consider this possibility to be
+realistic, but let's consider it for a moment anyway.  Suppose that we
+could absorb the information in a book by plugging in to a terminal
+instead of reading it.  Would the transfer happen instantly, or would
+you have to be hooked up for about as long as it takes to read the
+book?  After all, when we read, we are establishing all those
+connections in the brain that comprise thought.  That cable is not
+likely to get inside the brain, and it's not at all clear how much
+faster things could happen.
+
+Even if we were to postulate that double-clicking on a link to a book
+results in the contents of that book instantly being transferred to
+the user's brain, there are certainly a finite number of books that
+can fit in anyone's brain this way--would we have any control over
+which ones we "forget"?  Not likely. More important, we still haven't
+gotten to "understanding" what we read.  There are not many books
+worth reading that any of us fully understand.
+
+And understand something depends on interacting with everything we
+know.  We may even need to communicate with others that we know (or
+even a professor) to understand the book.  The process of "absorbing
+material from the record" is interaction between our brains and the
+environment that has developed over generations.  It involves learning
+to read and learning to understand what we read, and it involves
+THINKING.
+
+"Learning to understand what we read": isn't that what education is,
+after all?
+
+It is amusing to think of this process of transferring knowledge from
+the online record to a person's brain in technical terms, as a
+bottleneck, but I don't think that the bottleneck is going to be
+eliminated by technical means, but rather by experienced people
+continually synthesizing and evaluating the information and finding
+ways to transmit it to others.  That's called "teaching"!  It's what
+we do at a university.  It's not going to be done by a machine.
+
+GETTING INFORMATION OUT OF THE BRAIN
+
+How about the process of adding new information to the online record?
+
+We not only acquire and sift through old information, we also develop
+new ideas.  Once a person develops a new idea, how do we get that into
+the online record?  This, also, is a serious bottleneck.  Bush talks
+about attaching a camera to every scientist, having the person mumble
+while doing research, and recording every word.
+
+I'm afraid that I'm not much interested in this approach, any more
+than I am interested in contemporary proposals to capture every
+keystroke typed in the world, or to save every file created on the
+web.  I'd rather have that scientist (or a colleague) spend a
+significant fraction of time thinking about effectively communicating
+the important ideas to others, and then doing so.
+
+And that's what people do, nowadays, primarily in journal articles and
+books.  We now have "electronic journals", and some ideas never find
+the printed page at all. The evolution from paper to electronic
+journals is also a fascinating issue to consider (see Odlyzko's home
+page for information on that issue, too) but is largely irrelevant to
+the present discussion, since we can print out a web page or scan in a
+paper or a book. Let's assume that part to be "free".
+
+I've published several books in recent years, and have made extensive
+use of technology, but there's no question in my mind that the most
+time-consuming part of the process is the creative process, ending
+with the process of forming those words, sentences, and paragraphs in
+my mind.  Bush didn't propose having a wire OUT of people's brains,
+but I actually think we've done a pretty good job with this side of
+the equation.  All by myself, I was able to create hundreds of pages
+of technical material earlier this year.  I typed in that last word in
+mid-August, and many of you (and others all around the country) will
+be reading the final product in mid-September.  The process is almost
+too efficient.
+
+Still, it took years to write the whole book, just as it took years to
+write a good book before the advent of technology.  Again, the
+bottleneck is all in the human creativity.  Technology can make some
+inroads, and maybe can help us make a better product, but the process
+of setting down a piece of knowledge in a way that people can
+understand is a time-consuming one, and is unlikely to ever be
+"automated".
+
+In research, the ratio of the time taken for creative effort to the
+time taken to write it up is much higher.  For a researcher, that's
+one definition of a "breakthrough": to work on a problem for a very
+long time and eventually develop an elegant solution that can be
+explained to others in a very short time is a rare experience to which
+we all aspire.
+
+To be sure, we don't need technology to have good ideas.  However,
+technology increases the potential impact of anyone's ideas and puts
+others' ideas within reach. Thus, it will be impossible to resist
+access to online knowledge in the future.  To the contrary, most
+scholars are now embracing the new technology.
+    
+And then there is the issue of all those connections.  As people learn
+to communicate through the web, the information exchanged is quickly
+becoming much more complex than what we have on the printed page.  A
+link to a web page opens up a whole structure of interconnected
+knowledge. Maybe we are beginning to develop a new and more efficient
+way of exchanging information, after all.
+
+SKILL IN INTERACTING WITH COMPUTERS IS REQUIRED
+
+There's so much information available, how can we cope with it?  I'd
+be far out on a limb if I said that the ability to interact with a
+machine is as important for a thinking person as the ability to, say,
+read, but each time I make that statement, I feel less far out on that
+limb.
+
+With knowledge online, we can access information, but the
+exponential increase of the amount of knowledge makes the function of
+evaluating information as important than accessing it.  Not only does
+some information become obsolete, but scholars constantly struggle to
+differentiate what is new from what is known.  For this task,
+technology really can help.
+
+But I've just argued that machines can't speed up our ability to
+understand books.  We can't expect machines by themselves to
+understand the information out there, and we can't expect scholars by
+themselves to cope with exponential growth.  But scholars can
+use the new technology to extend our knowledge in ways not yet
+imagined, in the same way that reading and writing allowed people to
+extend knowledge far beyond what was allowed by oral transmission.
+
+So, what's the next revolution?  I think that it might involve
+high-level interaction the information on the web.  Scholars with
+experience and sophisticated skills using powerful open-ended
+tools. In web search engines and the like, we have some indication of
+what tools for doing this might be like, but I think that what we see
+today may be just primitive hints of what we might expect in the
+future.
+
+I think the trend towards computing applications that do everything
+for you is misguided.  Some people expect to have tools that will
+"automatically" garner information, build connections and do other
+tasks---I prefer to believe the opposite, that new tools will emerge
+that will depend upon our resourcefulness and creativity and
+that will enable us to build upon our accumulated knowledge (and to
+pass it on) in completely new ways.
+
+The development of computing applications to interact with information
+on the web can coincide with increased development of human skills,
+computation-based, learned over a lifetime, like reading and writing.
+Maybe those computer games are actually serving a pretty good purpose,
+after all!
+
+Your children will use computers and interact with the web to a far
+greater extent than you ever did: And, don't forget, knowledge will be
+online by the time that they need it. Your kids will be working with
+that knowledge in much more sophisticated ways than we can now.
+
+In a generation or less, the new revolution will come, as we graduate
+teachers conversant with interacting with online knowledge and your
+children grow up with a world where such access in the norm, enabling
+them to get the most out of their creativity.
+
+I prefer to think about the development of the personal computer and
+the Internet (along with the product of some PARC-like research, in
+the near future) as being the spark that can inspire each individual
+to learn to harness the intrinsic power of computation, in the same
+way that the printing press was the spark that inspired each
+individual to learn to read and write.
+
+And those individuals with intellectual curiosity and a commitment to
+a lifetime of learning will still wind up in universities, where
+future prospects are therefore, indeed, incandescent.
+
+Most certainly, to paraphrase that Atlantic magazine editor's
+statement of over 50 years ago, we are developing "a new
+relationship between thinking humans and the sum of our knowledge".
+You have opportunities no one has ever had before.  Providing such
+opportunities is what we strive to do at great universities like
+Princeton.  Make the most of them.  I wish you all well. Thank you.
+
+Copyright (c) 1997, Robert Sedgewick

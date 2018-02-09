@@ -64,7 +64,7 @@ public class AmericanFlagSort
 		for (int i = lo; i <= hi; i++)
 			a[i] = aux[i - lo];
 
-		// No moer bits
+		// No more bits
 		if (d == 4) return;
 
 		// Recursively sort for each bytes
