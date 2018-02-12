@@ -41,6 +41,9 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 * [Substring Search](https://drive.google.com/open?id=1JXBgmxfuRR_dnklTcRej26353TOYZTMC)
 * [Regular Expression](https://drive.google.com/open?id=1H-xn6FBGzpmuRtRkB9kMSlZFVU2IpvoA)
 * [Data Compression](https://drive.google.com/open?id=1FUcTZ_aQnz0PTGhVRX6PFxf7QFJpNRxL)
+* [Reduction](https://drive.google.com/open?id=1uzRl1PIw-D7IGkgNkKQPKTpz-a3y9K62)
+* [Linear Programming](https://drive.google.com/open?id=1dtXFPmhWOC4udGdOeQAOkgPibcF6vY-Z)
+* [Intractability](https://drive.google.com/open?id=13FxWrgXED1RJitvfQZRvyJXH-CSVysVC)
 
 ## Researches
 * [Sort Experiment](researches/sort_experiment.pdf)
@@ -53,3 +56,14 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 * [Introduction To Algorithms](https://mitpress.mit.edu/books/introduction-algorithms)
 * [Introduction to The Design and Analysis of Algorithms](https://www.pearson.com/us/higher-education/program/Levitin-Introduction-to-the-Design-and-Analysis-of-Algorithms-3rd-Edition/PGM223052.html)
 * [Introduction to Data Compression](coursera/data-compression/Introduction-to-Data-Compression.pdf)
+
+## Notes
+* [A SHORT PROOF OF THE BIRKHOFF-VON NEUMANN THEOREM](notes/A_SHORT_PROOF_OF_THE_BIRKHOFF-VON_NEUMANN_THEOREM.pdf)
+* [Game Theory](notes/Game-Theory.pdf)
+* [Linear Programming MIT 6.046J](notes/MIT6_046_Linear_Programming.pdf)
+* [Linear Algebra MIT 18.310](notes/MIT18_310_linear-algebra-notes.pdf)
+* [Max Flow Min Cut](https://drive.google.com/open?id=156ps8oRoBWdk-p6nP-IkVfGc5THxc4hK)
+* [Confidence Interval and Hypotheses Test](https://drive.google.com/open?id=0Bz7BT6smTIRZUXVLSzU4LVo4RWs)
+
+## Slides
+* [Max Closure MIT Sloan](https://drive.google.com/open?id=1BDWT7VyrNUilWvdnsgqoq8ytkvwmu2Yp)
