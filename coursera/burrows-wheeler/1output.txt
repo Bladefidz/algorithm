@@ -1,0 +1,1170 @@
+See the Assessment Guide for information on how to interpret this report.
+
+ASSESSMENT SUMMARY
+
+Compilation:  PASSED
+API:          PASSED
+
+Findbugs:     FAILED (3 warnings)
+PMD:          PASSED
+Checkstyle:   FAILED (0 errors, 22 warnings)
+
+Correctness:  55/64 tests passed
+Memory:       10/10 tests passed
+Timing:       64/159 tests passed
+
+Aggregate score: 79.61%
+[Compilation: 5%, API: 5%, Findbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
+
+ASSESSMENT DETAILS
+
+The following files were submitted:
+----------------------------------
+7.5K Feb  9 03:21 BurrowsWheeler.java
+1.3K Feb  9 03:21 CircularSuffixArray.java
+2.7K Feb  9 03:21 MoveToFront.java
+
+il1
+********************************************************************************
+*  COMPILING                                                                    
+********************************************************************************
+
+
+% javac CircularSuffixArray.java
+*-----------------------------------------------------------
+
+% javac BurrowsWheeler.java
+*-----------------------------------------------------------
+
+% javac MoveToFront.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+Checking the APIs of your programs.
+*-----------------------------------------------------------
+CircularSuffixArray:
+
+BurrowsWheeler:
+
+MoveToFront:
+
+================================================================
+
+
+********************************************************************************
+*  CHECKING STYLE AND COMMON BUG PATTERNS                                       
+********************************************************************************
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+L D DLS_DEAD_LOCAL_STORE_OF_NULL DLS: Assigns the value null to the local variable 'old' but never reads the variable.  At BurrowsWheeler.java:[line 139]
+L D DLS_DEAD_LOCAL_STORE_OF_NULL DLS: Assigns the value null to the local variable 'old' but never reads the variable.  At BurrowsWheeler.java:[line 158]
+M C SLS_SUSPICIOUS_LOOP_SEARCH SLS: This method BurrowsWheeler.inverseTransform() continues a loop after finding an equality condition  At BurrowsWheeler.java:[line 260]
+Warnings generated: 3
+
+
+================================================================
+
+
+% pmd .
+*-----------------------------------------------------------
+BurrowsWheeler.java:137: Avoid unused local variables, such as 'old'. [UnusedLocalVariable]
+BurrowsWheeler.java:156: Avoid unused local variables, such as 'old'. [UnusedLocalVariable]
+CircularSuffixArray.java:16: The private instance (or static) variable 'N' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+CircularSuffixArray.java:17: The private instance (or static) variable 'suffixIndex' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+PMD ends with 4 warnings.
+
+
+================================================================
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[WARN] BurrowsWheeler.java:1:1: Unnecessary import statement for 'java.lang.IllegalArgumentException' because it is from the package 'java.lang'. [RedundantImport]
+[WARN] BurrowsWheeler.java:1:8: Unused import statement for 'java.lang.IllegalArgumentException'. [UnusedImports]
+[WARN] BurrowsWheeler.java:2:1: Unnecessary import statement for 'java.lang.Math' because it is from the package 'java.lang'. [RedundantImport]
+[WARN] BurrowsWheeler.java:2:8: Unused import statement for 'java.lang.Math'. [UnusedImports]
+[WARN] BurrowsWheeler.java:11:15: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[WARN] BurrowsWheeler.java:73:23: '{' is not followed by whitespace. [WhitespaceAround]
+[WARN] BurrowsWheeler.java:73:23: '}' is not preceded with whitespace. [WhitespaceAround]
+[WARN] BurrowsWheeler.java:164:30: '{' is not followed by whitespace. [WhitespaceAround]
+[WARN] BurrowsWheeler.java:164:30: '}' is not preceded with whitespace. [WhitespaceAround]
+[WARN] BurrowsWheeler.java:175:13: Do not use the letter 'l' as a local variable name. It is hard to distinguish from the number '1'. [LocalVariableName]
+[WARN] BurrowsWheeler.java:209:13: The local variable 'N' must start with a lowercase letter and use camelCase. [LocalVariableName]
+[WARN] BurrowsWheeler.java:258:17: Do not use the letter 'l' as a local variable name. It is hard to distinguish from the number '1'. [LocalVariableName]
+[WARN] BurrowsWheeler.java:259:18: 'while' is not followed by whitespace. [WhitespaceAfter]
+[WARN] CircularSuffixArray.java:9:17: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[WARN] CircularSuffixArray.java:16:17: The instance variable 'N' must start with a lowercase letter and use camelCase. [MemberName]
+[WARN] MoveToFront.java:11:15: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[WARN] MoveToFront.java:34:27: '{' is not followed by whitespace. [WhitespaceAround]
+[WARN] MoveToFront.java:34:27: '}' is not preceded with whitespace. [WhitespaceAround]
+Checkstyle ends with 0 errors and 18 warnings.
+
+% custom checkstyle checks for CircularSuffixArray.java
+*-----------------------------------------------------------
+
+% custom checkstyle checks for BurrowsWheeler.java
+*-----------------------------------------------------------
+[WARN] BurrowsWheeler.java:17:1: There is no need to define nested classes in this program. [Design]
+[WARN] BurrowsWheeler.java:60:9: There is no need to define nested classes in this program. [Design]
+Checkstyle ends with 0 errors and 2 warnings.
+
+% custom checkstyle checks for MoveToFront.java
+*-----------------------------------------------------------
+[WARN] MoveToFront.java:42: Creating more than one object per call to 'encode()' can degrade performance. [Performance]
+[WARN] MoveToFront.java:91: Creating more than one object per call to 'decode()' can degrade performance. [Performance]
+Checkstyle ends with 0 errors and 2 warnings.
+
+
+================================================================
+
+
+********************************************************************************
+*  TESTING CORRECTNESS
+********************************************************************************
+
+Testing correctness of CircularSuffixArray
+*-----------------------------------------------------------
+Running 15 total tests.
+
+Test 1: check index() and length() with random binary strings
+  * length = 10
+    - string = "BABBBBAAAA"
+    - mismatch in indices
+    - student   index(0) = 9
+    - reference index(0) = 6
+
+    - failed on trial 1 of 1000
+
+  * length = 100
+    - string = "AABABABBBBAAABBAAABBABBBABBBAAAAAAABBBBBABABBABBBBBBBABBAABA..."
+    - mismatch in indices
+    - student   index(12) = 96
+    - reference index(12) = 81
+
+    - failed on trial 1 of 1000
+
+  * length = 1000
+    - string = "AAAAABAAABABBBBBBAAABBBAAABBBBBBBAAABBBBBAABBAAABBABABBBABAA..."
+    - mismatch in indices
+    - student   index(34) = 995
+    - reference index(34) = 831
+
+    - failed on trial 1 of 1000
+
+==> FAILED
+
+Test 2: check index() and length() with random uppercase strings
+  * length = 10
+    - string = "MBJKJNYGKG"
+    - mismatch in indices
+    - student   index(1) = 9
+    - reference index(1) = 7
+
+    - failed on trial 17 of 1000
+
+  * length = 100
+    - string = "HVQGHJUMVOXQJMCMEHWTCACSUDVOAIAZDZDFKICBDLRMFEYHTNDFUXYCCJRV..."
+    - mismatch in indices
+    - student   index(52) = 99
+    - reference index(52) = 13
+
+    - failed on trial 1 of 1000
+
+  * length = 1000
+    - string = "DUKNYCKWQTTVKOVYNZRLWTAZHARDWRRRSUZSVOXBLWVBLWIJAJMTFCVMZJES..."
+    - mismatch in indices
+    - student   index(793) = 999
+    - reference index(793) = 250
+
+    - failed on trial 1 of 1000
+
+==> FAILED
+
+Test 3: check index() and length() with random ASCII strings
+  * length = 10
+    - string = hex representation: 4f 5f 46 66 72 20 09 07 1e 07 
+    - mismatch in indices
+    - student   index(0) = 9
+    - reference index(0) = 7
+
+    - failed on trial 10 of 1000
+
+  * length = 100
+    - string = hex representation: 71 43 58 4c 77 29 03 7e 7b 29 71 78 1b 6f 05 02 1a 63 7d 2e ...
+    - mismatch in indices
+    - student   index(9) = 99
+    - reference index(9) = 49
+
+    - failed on trial 3 of 1000
+
+  * length = 1000
+    - string = hex representation: 20 33 56 40 0b 44 63 1b 1a 29 20 31 52 30 63 3b 43 5c 35 0b ...
+    - mismatch in indices
+    - student   index(0) = 357
+    - reference index(0) = 515
+
+    - failed on trial 1 of 1000
+
+==> FAILED
+
+Test 4: check index() and length() with random extended ASCII strings
+  * length = 10
+    - string = hex representation: 69 54 9c 11 de 67 00 c4 31 de 
+    - mismatch in indices
+    - student   index(8) = 9
+    - reference index(8) = 4
+
+    - failed on trial 161 of 1000
+
+  * length = 100
+    - string = hex representation: 95 67 f7 82 48 27 77 99 0e 25 9d d7 c9 34 c7 70 cb 12 98 7d ...
+    - mismatch in indices
+    - student   index(72) = 99
+    - reference index(72) = 43
+
+    - failed on trial 1 of 1000
+
+  * length = 1000
+    - string = hex representation: e2 ee 52 39 9e 27 18 8b 96 56 25 15 14 bb 07 18 b2 e4 33 dd ...
+    - mismatch in indices
+    - student   index(500) = 999
+    - reference index(500) = 739
+
+    - failed on trial 1 of 1000
+
+==> FAILED
+
+Test 5: check index() and length() with strings from text files
+  * cadabra.txt
+    - string = "CADABRA!ABRA"
+    - mismatch in indices
+    - student   index(1) = 11
+    - reference index(1) = 6
+
+  * amendments.txt
+    - string = "Article I. Congress shall make no law respecting an establis..."
+    - mismatch in indices
+    - student   index(0) = 18368
+    - reference index(0) = 14383
+
+  * moby1.txt
+    - string = "Call me Ishmael. Some years ago- never mind how long precise..."
+    - mismatch in indices
+    - student   index(0) = 12217
+    - reference index(0) = 10396
+
+  * dickens1000.txt
+    - string = "It was the best of times, it was the worst of times, it was ..."
+    - mismatch in indices
+    - student   index(759) = 999
+    - reference index(759) = 969
+
+==> FAILED
+
+Test 6: check index() and length() with strings from binary files
+  * us.gif
+    - string = hex representation: 47 49 46 38 39 61 8e 01 01 01 d5 00 00 94 18 29 06 02 03 84 ...
+    - mismatch in indices
+    - student   index(0) = 12398
+    - reference index(0) = 206
+
+  * CS_bricks.jpg
+    - string = hex representation: ff d8 ff e1 00 16 45 78 69 66 00 00 4d 4d 00 2a 00 00 00 08 ...
+    - mismatch in indices
+    - student   index(0) = 4
+    - reference index(0) = 403
+
+  * rand1K.bin
+    - string = hex representation: 91 a6 be ff 17 30 3b c2 90 4c dc 6f 14 73 64 27 04 6b 87 8a ...
+    - mismatch in indices
+    - student   index(683) = 999
+    - reference index(683) = 574
+
+==> FAILED
+
+Test 7: check index() and length() with random strings of length 0, 1, and 2
+  * length = 0
+  * length = 1
+  * length = 2
+==> passed
+
+Test 8: check that index() throws an exception when argument is out of bounds
+  * string of length 10
+    - throws wrong exception when calling index(-2)
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+
+  * string of length 100
+    - throws wrong exception when calling index(-2)
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+
+  * string of length 2
+    - throws wrong exception when calling index(-2)
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+
+  * string of length 1
+    - throws wrong exception when calling index(-2)
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+
+  * string of length 0
+    - throws wrong exception when calling index(-2)
+    - throws a java.lang.ArrayIndexOutOfBoundsException
+    - should throw a java.lang.IllegalArgumentException
+
+==> FAILED
+
+Test 9: check that constructor throws an exception when argument is null
+==> passed
+
+Test 10: check that two CircularSuffixArray objects can be created at the same time
+  * cadabra.txt and amendments.txt
+    - string = "CADABRA!ABRA"
+    - mismatch in indices
+    - student   index(1) = 11
+    - reference index(1) = 6
+
+    - string = "Article I. Congress shall make no law respecting an establis..."
+    - mismatch in indices
+    - student   index(0) = 18368
+    - reference index(0) = 14383
+
+  * amendments.txt and cadabra.txt
+    - string = "Article I. Congress shall make no law respecting an establis..."
+    - mismatch in indices
+    - student   index(0) = 18368
+    - reference index(0) = 14383
+
+    - string = "CADABRA!ABRA"
+    - mismatch in indices
+    - student   index(1) = 11
+    - reference index(1) = 6
+
+  * dickens1000.txt and cadabra.txt
+    - string = "It was the best of times, it was the worst of times, it was ..."
+    - mismatch in indices
+    - student   index(759) = 999
+    - reference index(759) = 969
+
+    - string = "CADABRA!ABRA"
+    - mismatch in indices
+    - student   index(1) = 11
+    - reference index(1) = 6
+
+==> FAILED
+
+Test 11: check that CircularSuffixArray is immutable
+  * string = "RCZXGZRFSMLMOETKHWMGZRFJBDTOIN"
+  * string = "BAAABBABAAAABBAAAABABBAABAABBA"
+  * string = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+  * string = hex representation: c7 24 52 3c 79 af bb ff 3e 50 79 75 f4 dc 6c 
+==> passed
+
+Test 12: check index() and length() with corner-case strings
+  * a.txt
+  * nomatch.txt
+  * zebra.txt
+  * alphanum.txt
+==> passed
+
+Test 13: check index() and length() with strings that are nontrivial circular
+         that are nontrivial circular suffixes of themselves
+  * stars.txt
+  * couscous.txt
+==> passed
+
+Test 14: check index() and length() with unary strings
+  * length 10 string over unary alphabet
+  * length 100 string over unary alphabet
+  * length 1000 string over unary alphabet
+==> passed
+
+Test 15: check index() and length() with random strings
+         that are nontrivial circular suffixes of themselves
+  * length 2 string over binary alphabet, repeated 2 times
+  * length 2 string over binary alphabet, repeated 10 times
+  * length 5 string over binary alphabet, repeated 2 times
+    - string = "BBABABBABA"
+    - mismatch in indices
+    - student   index(0) = 9
+    - reference index(0) = 2
+
+    - failed on trial 1 of 5
+
+  * length 5 string over binary alphabet, repeated 3 times
+    - string = "BAAABBAAABBAAAB"
+    - mismatch in indices
+    - student   index(9) = 14
+    - reference index(9) = 0
+
+    - failed on trial 1 of 5
+
+  * length 5 string over binary alphabet, repeated 5 times
+    - string = "BBAABBBAABBBAABBBAABBBAAB"
+    - mismatch in indices
+    - student   index(10) = 24
+    - reference index(10) = 1
+
+    - failed on trial 2 of 5
+
+  * length 7 string over uppercase alphabet, repeated 2 times
+    - string = "XVQZOOOXVQZOOO"
+    - mismatch in indices
+    - student   index(0) = 13
+    - reference index(0) = 4
+
+    - failed on trial 2 of 5
+
+  * length 7 string over uppercase alphabet, repeated 3 times
+  * length 7 string over uppercase alphabet, repeated 5 times
+==> FAILED
+
+Total: 6/15 tests passed!
+
+
+================================================================
+Testing correctness of MoveToFront
+*-----------------------------------------------------------
+Running 23 total tests.
+
+Test 1a: check main() on text files
+  * java MoveToFront - < abra.txt
+  * java MoveToFront - < zebra.txt
+  * java MoveToFront - < amendments.txt
+  * java MoveToFront - < aesop.txt
+==> passed
+
+Test 1b: check main() on text files
+  * java MoveToFront + < abra.txt.mtf
+  * java MoveToFront + < zebra.txt.mtf
+  * java MoveToFront + < amendments.txt.mtf
+  * java MoveToFront + < aesop.txt.mtf
+==> passed
+
+Test 2a: check that main() is consistent with encode() on text files
+  * abra.txt
+  * zebra.txt
+  * amendments.txt
+  * aesop.txt
+==> passed
+
+Test 2b: check that main() is consistent with decode() on text files
+  * abra.txt.mtf
+  * zebra.txt.mtf
+  * amendments.txt.mtf
+  * aesop.txt.mtf
+==> passed
+
+Test 3a: check encode() on text files
+  * abra.txt
+  * zebra.txt
+  * amendments.txt
+  * aesop.txt
+  * stars.txt
+  * alphanum.txt
+  * a.txt
+==> passed
+
+Test 3b: check encode() on binary files
+  * us.gif
+  * CS_bricks.jpg
+  * rand10K.bin
+==> passed
+
+Test 3c: check encode() on random inputs
+  * 10 random characters from { A } alphabet
+  * 10 random characters from { A, B } alphabet
+  * 10 random characters from { A, T, C, G } alphabet
+  * 10 random characters from uppercase letter alphabet
+  * 1000 random characters from { A } alphabet
+  * 1000 random characters from { A, B } alphabet
+  * 1000 random characters from { A, T, C, G } alphabet
+  * 1000 random characters from uppercase letter alphabet
+==> passed
+
+Test 3d: check encode() on more random inputs
+  * 1000 random characters from ASCII alphabet 
+  * 1000 random characters from extended ASCII alphabet
+  * 1000 random characters from extended ASCII alphabet (excluding 0x00)
+  * 1000 random characters from extended ASCII alphabet (excluding 0xFF)
+==> passed
+
+Test 4a: check decode() on move-to-front-encoded text files
+  * abra.txt.mtf
+  * zebra.txt.mtf
+  * amendments.txt.mtf
+  * aesop.txt.mtf
+  * stars.txt.mtf
+  * alphanum.txt.mtf
+  * a.txt.mtf
+==> passed
+
+Test 4b: check decode() on move-to-front encoded binary files
+  * us.gif.mtf
+  * CS_bricks.jpg.mtf
+  * rand10K.bin.mtf
+==> passed
+
+Test 4c: check decode() on random inputs
+  * 10 random characters from { A } alphabet
+  * 10 random characters from { A, B } alphabet
+  * 10 random characters from { A, T, C, G } alphabet
+  * 10 random characters from uppercase letter alphabet
+  * 1000 random characters from { A } alphabet
+  * 1000 random characters from { A, B } alphabet
+  * 1000 random characters from { A, T, C, G } alphabet
+  * 1000 random characters from uppercase letter alphabet
+==> passed
+
+Test 4d: check decode() on more random inputs
+  * 1000 random characters from ASCII alphabet 
+  * 1000 random characters from extended ASCII alphabet
+  * 1000 random characters from extended ASCII alphabet (excluding 0x00)
+  * 1000 random characters from extended ASCII alphabet (excluding 0xFF)
+==> passed
+
+Test 4e: check decode() on random inputs
+         that were encoded with move-to-front
+  * 10 random characters from { A } alphabet
+  * 10 random characters from { A, B } alphabet
+  * 10 random characters from { A, T, C, G } alphabet
+  * 10 random characters from uppercase letter alphabet
+  * 1000 random characters from { A } alphabet
+  * 1000 random characters from { A, B } alphabet
+  * 1000 random characters from { A, T, C, G } alphabet
+  * 1000 random characters from uppercase letter alphabet
+==> passed
+
+Test 4f: check decode() on more random inputs
+         that were encoded with move-to-front
+  * 1000 random characters from ASCII alphabet 
+  * 1000 random characters from extended ASCII alphabet
+  * 1000 random characters from extended ASCII alphabet (excluding 0x00)
+  * 1000 random characters from extended ASCII alphabet (excluding 0xFF)
+==> passed
+
+Test 5a: check whether decode(encode()) = original on text files
+  * abra.txt
+  * zebra.txt
+  * amendments.txt
+  * aesop.txt
+  * stars.txt
+  * alphanum.txt
+  * a.txt
+==> passed
+
+Test 5b: check whether decode(encode()) = original on binary files
+  * us.gif
+  * CS_bricks.jpg
+  * rand10K.bin
+==> passed
+
+Test 5c: check that decode(encode()) = original on random inputs
+  * 10 random characters from { A } alphabet
+  * 10 random characters from { A, B } alphabet
+  * 10 random characters from { A, T, C, G } alphabet
+  * 10 random characters from uppercase letter alphabet
+  * 100 random characters from { A } alphabet
+  * 1000 random characters from { A, B } alphabet
+  * 1000 random characters from { A, T, C, G } alphabet
+  * 1000 random characters from uppercase letter alphabet
+==> passed
+
+Test 5d: check that decode(encode()) = original on random inputs
+  * 1000 random characters from ASCII alphabet 
+  * 1000 random characters from extended ASCII alphabet
+  * 1000 random characters from extended ASCII alphabet (excluding 0x00)
+  * 1000 random characters from extended ASCII alphabet (excluding 0xFF)
+==> passed
+
+Test 6a: check that encode() calls either close() or flush()
+  * amendments.txt
+  * aesop.txt
+==> passed
+
+Test 6b: check that decode() calls either close() or flush()
+  * amendments.txt.mtf
+  * aesop.txt.mtf
+==> passed
+
+Test 7a: check encode() on large files
+  * rand100K.bin
+  * world192.txt
+==> passed
+
+Test 7b: check decode() on large files
+  * rand100K.bin.mtf
+  * world192.txt.mtf
+==> passed
+
+Test 7c: check whether decode(encode()) = original on large files
+  * rand100K.bin
+  * world192.txt
+==> passed
+
+
+Total: 23/23 tests passed!
+
+
+================================================================
+********************************************************************************
+*  TESTING CORRECTNESS (substituting reference CircularSuffixArray)
+********************************************************************************
+
+Testing correctness of BurrowsWheeler
+*-----------------------------------------------------------
+Running 26 total tests.
+
+Test 1a: check main() on text files
+  * java BurrowsWheeler - < abra.txt
+  * java BurrowsWheeler - < zebra.txt
+  * java BurrowsWheeler - < cadabra.txt
+  * java BurrowsWheeler - < amendments.txt
+==> passed
+
+Test 1b: check main() on text files
+  * java BurrowsWheeler + < abra.txt.bwt
+  * java BurrowsWheeler + < zebra.txt.bwt
+  * java BurrowsWheeler + < cadabra.txt.bwt
+  * java BurrowsWheeler + < amendments.txt.bwt
+==> passed
+
+Test 2a: check that main() is consistent with transform() on text files
+  * abra.txt
+  * zebra.txt
+  * cadabra.txt
+  * amendments.txt
+==> passed
+
+Test 2b: check that main() is consistent with inverseTransform() on text files
+  * abra.txt.bwt
+  * zebra.txt.bwt
+  * cadabra.txt.bwt
+  * amendments.txt.bwt
+==> passed
+
+Test 3a: check transform() on text files
+  * abra.txt
+  * zebra.txt
+  * cadabra.txt
+  * amendments.txt
+==> passed
+
+Test 3b: check transform() on corner-case text files
+  * alphanum.txt
+  * a.txt
+==> passed
+
+Test 3c: check transform() on binary files
+  * us.gif
+  * CS_bricks.jpg
+  * rand10K.bin
+==> passed
+
+Test 3d: check transform() on random inputs
+  * 10 random characters from binary alphabet
+  * 10 random characters from DNA alphabet
+  * 10 random characters from uppercase alphabet
+  * 1000 random characters from binary alphabet
+  * 1000 random characters from DNA alphabet
+  * 1000 random characters from uppercase alphabet
+==> passed
+
+Test 3e: check transform() on more random inputs
+  * 1000 random characters from ASCII alphabet 
+  * 1000 random characters from extended ASCII alphabet
+  * 1000 random characters from extended ASCII alphabet (excluding 0x00)
+  * 1000 random characters from extended ASCII alphabet (excluding 0xFF)
+==> passed
+
+Test 3f: check tranform() on random inputs that are circular
+         shifts of themselves
+  * 5 random strings from unary alphabet
+  * 5 random strings from binary alphabet
+  * 5 random strings from DNA alphabet
+  * 5 random strings from uppercase alphabet
+==> passed
+
+Test 4a: check inverseTransform() on text files
+  * abra.txt.bwt
+  * zebra.txt.bwt
+  * cadabra.txt.bwt
+  * amendments.txt.bwt
+==> passed
+
+Test 4b: check inverseTransform() on corner-case text files
+  * alphanum.txt.bwt
+  * a.txt.bwt
+  * stars.txt.bwt
+  * couscous.txt.bwt
+==> passed
+
+Test 4c: check inverseTransform() on binary files
+  * us.gif.bwt
+  * CS_bricks.jpg.bwt
+  * rand10K.bin.bwt
+==> passed
+
+Test 4d: check inverseTransform() of transform() on random inputs
+  * 10 random characters from unary alphabet
+  * 10 random characters from binary alphabet
+  * 10 random characters from DNA alphabet
+  * 10 random characters from uppercase alphabet
+  * 100 random characters from unary alphabet
+  * 1000 random characters from binary alphabet
+  * 1000 random characters from DNA alphabet
+  * 1000 random characters from uppercase alphabet
+==> passed
+
+Test 4e: check inverseTransform() of transform() on more random inputs
+  * 1000 random characters from ASCII alphabet 
+  * 1000 random characters from extended ASCII alphabet
+  * 1000 random characters from extended ASCII alphabet (excluding 0x00)
+  * 1000 random characters from extended ASCII alphabet (excluding 0xFF)
+==> passed
+
+Test 5a: check that inverseTransform(transform()) = original on text files
+  * abra.txt
+  * zebra.txt
+  * cadabra.txt
+  * amendments.txt
+==> passed
+
+Test 5b: check that inverseTransform(transform()) = original on corner-case text files
+  * alphanum.txt
+  * a.txt
+  * stars.txt
+  * couscous.txt
+==> passed
+
+Test 5c: check that inverseTransform(transform()) = original on binary files
+  * us.gif
+  * CS_bricks.jpg
+  * rand10K.bin
+==> passed
+
+Test 5d: check that inverseTransform(tranform()) = original on random inputs
+  * 10 random characters from binary alphabet
+  * 10 random characters from DNA alphabet
+  * 10 random characters from uppercase alphabet
+  * 1000 random characters from binary alphabet
+  * 1000 random characters from DNA alphabet
+  * 1000 random characters from uppercase alphabet
+==> passed
+
+Test 5e: check that inverseTransform(tranform()) = original on random inputs
+  * 1000 random characters from ASCII alphabet 
+  * 1000 random characters from extended ASCII alphabet
+  * 1000 random characters from extended ASCII alphabet (excluding 0x00)
+  * 1000 random characters from extended ASCII alphabet (excluding 0xFF)
+==> passed
+
+Test 5f: check that inverseTransform(tranform()) = original
+         on random inputs that are circular shifts of themselves
+  * random strings from unary alphabet
+  * random strings from binary alphabet
+  * random strings from DNA alphabet
+  * random strings from uppercase alphabet
+==> passed
+
+Test 6a: check that transform() calls either close() or flush()
+  * amendments.txt
+  * aesop.txt
+==> passed
+
+Test 6b: check that inverseTransform() calls either close() or flush()
+  * amendments.txt.bwt
+  * aesop.txt.bwt
+==> passed
+
+Test 7a: check transform() on large files
+  * rand100K.bin
+  * world192.txt
+==> passed
+
+Test 7b: check inverseTransform() on large files
+  * rand100K.bin.bwt
+  * world192.txt.bwt
+==> passed
+
+Test 7c: check that inverseTransform(transform()) = original on large files
+  * rand100K.bin
+  * world192.txt
+==> passed
+
+
+Total: 26/26 tests passed!
+
+
+================================================================
+********************************************************************************
+*  MEMORY
+********************************************************************************
+
+Analyzing memory of CircularSuffixArray
+*-----------------------------------------------------------
+Running 10 total tests.
+
+Memory usage of a CircularSuffixArray for a random string of length n.
+Maximum allowed memory is 64n + 128.
+
+                 n        bytes
+-------------------------------
+=> passed       16          120
+=> passed       32          184
+=> passed       64          312
+=> passed      128          568
+=> passed      256         1080
+=> passed      512         2104
+=> passed     1024         4152
+=> passed     2048         8248
+=> passed     4096        16440
+=> passed     8192        32824
+==> 10/10 tests passed
+
+Total: 10/10 tests passed!
+
+Estimated student memory (bytes) = 4.00 n + 56.00   (R^2 = 1.000)
+================================================================
+
+
+
+********************************************************************************
+*  TIMING
+********************************************************************************
+
+Timing CircularSuffixArray
+*-----------------------------------------------------------
+Running 26 total tests.
+
+Tests  1-13: time to create a circular suffix array for the first
+             n character of dickens.txt and call index(i) for each i
+
+            [ max allowed time = 10 seconds and <= 12x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.01       0.00      10.31
+=> passed     2000       0.00       0.00       0.90
+=> passed     4000       0.00       0.00       0.88
+=> passed     8000       0.00       0.00       1.07
+=> passed    16000       0.01       0.01       1.10
+=> passed    32000       0.01       0.01       1.56
+=> passed    64000       0.02       0.01       2.45
+=> passed   128000       0.03       0.02       1.88
+=> passed   256000       0.05       0.03       1.53
+=> passed   512000       0.09       0.05       1.61
+=> passed  1024000       0.19       0.11       1.71
+=> passed  2048000       0.40       0.28       1.45
+=> passed  4096000       0.94       0.76       1.23
+
+Estimated running time (using last 6 measurements)
+    = 1.75e-07 * n^1.01  (R^2 = 0.99)
+
+
+Tests 14-26: time to create circular suffix array for n random ASCII characters
+            and call index(i) for each i
+
+            [ max allowed time = 10 seconds and <= 20x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.00       2.96
+=> passed     2000       0.00       0.00       1.49
+=> passed     4000       0.00       0.00       1.25
+=> passed     8000       0.00       0.00       2.00
+=> passed    16000       0.00       0.00       2.65
+=> passed    32000       0.00       0.00       3.38
+=> passed    64000       0.01       0.00       3.48
+=> passed   128000       0.02       0.01       2.13
+=> passed   256000       0.04       0.03       1.36
+=> passed   512000       0.08       0.07       1.23
+=> passed  1024000       0.17       0.10       1.72
+=> passed  2048000       0.40       0.14       2.90
+=> passed  4096000       0.87       0.32       2.75
+
+Estimated running time (using last 6 measurements)
+    = 2.82e-08 * n^1.13  (R^2 = 1.00)
+
+
+Total: 26/26 tests passed!
+
+
+================================================================
+
+
+
+********************************************************************************
+*  TIMING
+********************************************************************************
+
+Timing MoveToFront
+*-----------------------------------------------------------
+Running 38 total tests.
+
+Test 1: count calls to methods in BinaryStdOut from encode()
+  * abra.txt
+  * amendments.txt
+==> passed
+
+Test 2: count calls to methods in BinaryStdOut from decode()
+  * abra.txt.mtf
+  * amendments.txt.mtf
+==> passed
+
+Tests  3-12: Timing encode() with first n character of dickens.txt
+             [ max allowed time = 2 seconds and <= 4x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.00       0.90
+=> passed     2000       0.00       0.00       1.36
+=> passed     4000       0.01       0.00       1.35
+=> passed     8000       0.01       0.01       1.31
+=> passed    16000       0.02       0.02       1.33
+=> passed    32000       0.05       0.04       1.33
+=> passed    64000       0.10       0.07       1.33
+=> passed   128000       0.19       0.14       1.33
+=> passed   256000       0.37       0.28       1.30
+
+Estimated running time (using last 6 measurements)
+     = 1.94e-06 * n^0.98  (R^2 = 1.00)
+
+
+Tests  13-20: Timing encode() with first n character of abab.txt
+             [ max allowed time = 2 seconds and <= 4x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.00       1.30
+=> passed     2000       0.00       0.00       1.28
+=> passed     4000       0.01       0.00       1.26
+=> passed     8000       0.01       0.01       1.22
+=> passed    16000       0.02       0.02       1.25
+=> passed    32000       0.04       0.03       1.25
+=> passed    64000       0.10       0.07       1.50
+=> passed   128000       0.15       0.12       1.27
+=> passed   256000       0.31       0.24       1.26
+
+Estimated running time (using last 6 measurements)
+     = 1.46e-06 * n^0.99  (R^2 = 0.99)
+
+
+Tests 21-29: Timing decode() with first n character of dickens.txt
+             [ max allowed time = 2 seconds and <= 4x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.00       2.91
+=> passed     2000       0.01       0.00       3.13
+=> passed     4000       0.02       0.01       2.75
+=> passed     8000       0.03       0.01       3.22
+=> passed    16000       0.05       0.02       3.16
+=> passed    32000       0.10       0.03       3.13
+=> passed    64000       0.20       0.06       3.16
+=> passed   128000       0.41       0.13       3.24
+=> passed   256000       0.81       0.27       2.96
+
+Estimated running time (using last 6 measurements)
+     = 3.70e-06 * n^0.99  (R^2 = 1.00)
+
+
+Tests 30-38: Timing decode() with first n character of abab.txt
+             [ max allowed time = 2 seconds and <= 4x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.00       3.11
+=> passed     2000       0.01       0.00       3.07
+=> passed     4000       0.01       0.00       3.08
+=> passed     8000       0.02       0.01       3.07
+=> passed    16000       0.06       0.02       3.29
+=> passed    32000       0.11       0.04       2.90
+=> passed    64000       0.21       0.06       3.29
+=> passed   128000       0.43       0.14       3.01
+=> passed   256000       0.86       0.27       3.20
+
+Estimated running time (using last 6 measurements)
+     = 2.59e-06 * n^1.02  (R^2 = 1.00)
+
+
+Total: 38/38 tests passed!
+
+
+================================================================
+
+
+
+********************************************************************************
+*  TIMING (substituting reference CircularSuffixArray)
+********************************************************************************
+
+Timing BurrowsWheeler
+*-----------------------------------------------------------
+Running 95 total tests.
+
+Test 1: count calls to methods in CircularSuffixArray from transform()
+  * abra.txt
+  * amendments.txt
+==> passed
+
+Test 2: count calls to methods in CircularSuffixArray from inverseTransform()
+  * abra.txt.bwt
+  * amendments.txt.bwt
+==> passed
+
+Test 3: count calls to methods in BinaryStdOut from transform()
+  * abra.txt
+  * amendments.txt
+==> passed
+
+Test 4: count calls to methods in BinaryStdOut from inverseTransform()
+  * abra.txt.bwt
+  * amendments.txt.bwt
+==> passed
+
+Tests  5-17: timing transform() with first n character of dickens.txt
+             [ max allowed time = 2 seconds and <= 8x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.01       0.10
+=> passed     2000       0.00       0.00       0.44
+=> passed     4000       0.00       0.00       0.38
+=> passed     8000       0.00       0.00       0.44
+=> passed    16000       0.00       0.01       0.46
+=> passed    32000       0.01       0.01       0.52
+=> passed    64000       0.01       0.02       0.57
+=> passed   128000       0.02       0.04       0.53
+=> passed   256000       0.04       0.04       1.01
+=> passed   512000       0.12       0.09       1.35
+=> passed  1024000       0.23       0.19       1.17
+=> passed  2048000       0.59       0.53       1.11
+=> passed  4096000       1.04       1.09       0.95
+
+Estimated running time as a function of n (using last 6 measurements)
+    = 2.91e-08 * n^1.15  (R^2 = 1.00)
+
+
+Tests 18-30: timing transform() with first n character of random.bin
+             [ max allowed time = 2 seconds and <= 8x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.00       1.03
+=> passed     2000       0.00       0.00       0.98
+=> passed     4000       0.00       0.00       0.87
+=> passed     8000       0.00       0.00       0.98
+=> passed    16000       0.00       0.00       1.05
+=> passed    32000       0.01       0.01       1.20
+=> passed    64000       0.02       0.02       1.05
+=> passed   128000       0.03       0.04       0.81
+=> passed   256000       0.05       0.05       0.94
+=> passed   512000       0.12       0.11       1.03
+=> passed  1024000       0.20       0.30       0.69
+=> passed  2048000       0.57       0.52       1.10
+=> passed  4096000       1.37       1.33       1.03
+
+Estimated running time as a function of n (using last 6 measurements)
+    = 6.47e-08 * n^1.10  (R^2 = 0.99)
+
+
+Tests 31-43: timing transform() with first n character of abab.txt
+             [ max allowed time = 2 seconds and <= 8x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.00       0.87
+=> passed     2000       0.00       0.00       0.79
+=> passed     4000       0.00       0.00       0.90
+=> passed     8000       0.00       0.00       1.02
+=> passed    16000       0.00       0.00       1.40
+=> passed    32000       0.00       0.00       0.95
+=> passed    64000       0.00       0.00       0.87
+=> passed   128000       0.01       0.01       1.13
+=> passed   256000       0.01       0.01       0.70
+=> passed   512000       0.01       0.02       0.94
+=> passed  1024000       0.03       0.03       0.92
+=> passed  2048000       0.06       0.06       0.93
+=> passed  4096000       0.12       0.14       0.88
+
+Estimated running time as a function of n (using last 6 measurements)
+    = 2.24e-07 * n^0.86  (R^2 = 0.96)
+
+
+Tests 44-56: timing inverseTransform() with first n character of dickens.txt
+             [ max allowed time = 2 seconds and <= 8x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.00       1.11
+=> passed     2000       0.00       0.00       0.76
+=> passed     4000       0.00       0.00       0.74
+=> passed     8000       0.00       0.00       0.62
+=> passed    16000       0.00       0.00       0.51
+=> passed    32000       0.00       0.00       1.78
+=> passed    64000       0.01       0.00       2.02
+=> passed   128000       0.01       0.01       2.14
+=> passed   256000       0.02       0.01       3.06
+=> passed   512000       0.10       0.02       5.00
+=> passed  1024000       0.27       0.06       4.43
+=> passed  2048000       0.45       0.13       3.39
+=> passed  4096000       0.60       0.29       2.08
+
+==> FAILED.   inverseTransform() is possibly n*R or n log n. The ratio is consistently too high.
+Estimated running time as a function of n (using last 6 measurements)
+    = 1.53e-08 * n^1.17  (R^2 = 0.96)
+
+
+Tests 57-69: timing inverseTransform() with first n character of random.bin
+             [ max allowed time = 2 seconds and <= 8x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1024       0.00       0.00       2.00
+=> passed     2048       0.00       0.00       2.32
+=> passed     4096       0.00       0.00       2.60
+=> passed     8192       0.00       0.00       2.43
+=> passed    16384       0.00       0.00       2.51
+=> passed    32768       0.00       0.00       2.45
+=> passed    65536       0.00       0.00       2.27
+=> passed   131072       0.01       0.00       2.09
+=> passed   262144       0.02       0.01       2.51
+=> passed   524288       0.05       0.02       2.60
+=> passed  1048576       0.11       0.05       2.32
+=> passed  2097152       0.25       0.11       2.28
+=> passed  4194304       0.62       0.38       1.66
+
+==> FAILED.   inverseTransform() is possibly n*R or n log n. The ratio is consistently too high.
+Estimated running time as a function of n (using last 6 measurements)
+    = 5.36e-09 * n^1.22  (R^2 = 1.00)
+
+
+Tests 70-82: timing inverseTransform() with first n character of abab.txt
+             [ max allowed time = 2 seconds and <= 8x reference ]
+
+                 n    student  reference      ratio
+---------------------------------------------------
+=> passed     1000       0.00       0.00       3.83
+=> passed     2000       0.00       0.00       4.48
+=> passed     4000       0.00       0.00       2.37
+=> passed     8000       0.00       0.00       4.17
+=> passed    16000       0.00       0.00       5.27
+=> passed    32000       0.01       0.00       4.66
+=> passed    64000       0.01       0.00       4.78
+=> passed   128000       0.02       0.00       4.86
+=> passed   256000       0.05       0.01       5.18
+=> passed   512000       0.09       0.02       5.14
+=> passed  1024000       0.18       0.04       5.15
+=> passed  2048000       0.39       0.07       5.41
+
+
+Total: 0/95 tests passed: Could not complete tests, which results in a reported score of 0.
+================================================================
