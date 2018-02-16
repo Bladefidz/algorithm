@@ -83,12 +83,13 @@ int main(int argc, char const *argv[])
         z[i] = i;
     }
 
-    p = &x;  // p is now 4
-    y = *p;  // y is now 4
-    *p = 0;  // x is now 0
+    p = &x;     // p is now 4
+    y = *p;     // y is now 4
+    *p = 0;     // x is now 0
     p = &z[0];  // p is now point to z[0]
-    p = z;  // equivalent to p = &z[0]
-    p++;  // Access next address
+    p = z;      // equivalent to p = &z[0]
+    (*p)++;     // Increment x by 1
+    p++;        // Access next address
 
     y = *(z+2);  // Evaluating each address in array
     y = z[2];  // equivalent to y = *(z+2)

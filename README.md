@@ -50,6 +50,7 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 * [String Matching Algorithms and Their Applicability in Various Applications](researches/String_Matching_Algorithms_and_Their_Applicability_in_Various_Applications.pdf)
 * [An O(ND) Difference Algorithm and Its Variations](researches/An_O_ND_Difference_Algorithm_and_Its_Variations.pdf)
 * [A Locally Adaptive Data Compression Scheme.pdf](researches/A_Locally_Adaptive_Data_Compression_Scheme.pdf)
+* [3SUM](notes/3sum.pdf)
 
 ## Books
 * [Algorithm](http://algs4.cs.princeton.edu/home/)

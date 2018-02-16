@@ -22,6 +22,15 @@ void endTimers(time_t *wallClock, clock_t *cpuClock);
  *     http://www.gnu.org/software/libc/manual/html_node/CPU-Time.html
  *     http://beige.ucs.indiana.edu/B673/node104.html
  *
+ * # Compile
+ * gcc -Wall benchmark_sort.c -o benchmark_sort
+ *
+ * # Run
+ * Show help
+ *     ./benchmark_sort -h
+ * Benchmark ascending order
+ *     ./benchmark_sort time 
+ *
  * @param  argc Argument count
  * @param  argv Argument variable
  * @return      integer
