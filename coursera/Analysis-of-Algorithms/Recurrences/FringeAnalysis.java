@@ -13,46 +13,44 @@ import edu.princeton.cs.algs4.StdOut;
  */
 public class FringeAnalysis implements Sequence
 {
-	private final double[] c;
-	private final double avg;
+	public FringeAnalysis() { }
 
-	public FringeAnalysis(int N)
+	public double brute(int N)
 	{
-		if (N < 1) throw new java.lang.IllegalArgumentException();;
+		if (N < 0) throw new java.lang.IllegalArgumentException();;
 
-		c = new double[N+1];
-		c[0] = 0;
-		c[1] = 1;
-		double sum = 1;
-		for (int i = 2; i < N; i++) {
-			c[i] = c[i-1] - 2*c[i-1]/i + 2*i - 4*c[i-1]/i;
-			sum += c[i];
+		double prev = 0;
+		double curr = 0;
+		for (int i = 1; i <= N; i++) {
+			curr = prev - (2*prev/i) + 2 - (4*prev/i);
+			prev = curr;
 		}
-		avg = sum / N;
+		return curr;
 	}
 
-	public double check(int N)
+	// Find An using recurrence relation
+	public double eval(int N)
 	{
-		if (N < 1) return 1;
-
-		double[] c1 = new double[N+1];
-		return (N-6)*c1[N-1]/N+2;
+		if (N < 6)
+			return brute(N);
+		return 2.0*(N+1.0)/7.0;
 	}
 
-	public double eval(int i)
+	public double avg(int N)
 	{
-		return c[i];
+		double sum = 0;
+		for (int i = 1; i <= N; i++)
+			sum += eval(i);
+		return sum/N;
 	}
 
 	public static void main(String[] args)
 	{
 		int N = Integer.parseInt(args[0]);
-		FringeAnalysis F = new FringeAnalysis(N);
-		// for (int i = 0; i < N; i++)
-		// 	StdOut.println(F.eval(i));
-		StdOut.println("Average : " + F.avg);
-		double c = (N-6)*F.c[N-1]/N+2;
-		StdOut.println("check : " + c);
-		Values.show(F, N);
+		FringeAnalysis F = new FringeAnalysis();
+		for (int i = 0; i <= N; i++)
+			StdOut.println(F.eval(i));
+		StdOut.println("Average : " + F.avg(N));
+		// Values.show(F, N);
 	}
 }

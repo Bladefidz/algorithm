@@ -14,6 +14,8 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 * [Data Compression](https://bladefidz.gitbooks.io/algorithm-ch-5-data-compression/content/data_compression/)
 
 ## Slides
+
+### Algorithms (Pricenton University)
 * [Intoduction](https://drive.google.com/open?id=1HK8o2GP9ljLGGSFq11_SR23kMYcpO6wA)
 * [Union Find](https://drive.google.com/open?id=0Bz7BT6smTIRZc09uNEVyWHV6eDg)
 * [Analysis of Algorithm](https://drive.google.com/open?id=0Bz7BT6smTIRZem1PNThKNlBxc0U)
@@ -45,6 +47,17 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 * [Linear Programming](https://drive.google.com/open?id=1dtXFPmhWOC4udGdOeQAOkgPibcF6vY-Z)
 * [Intractability](https://drive.google.com/open?id=13FxWrgXED1RJitvfQZRvyJXH-CSVysVC)
 
+### MIT Sloan School
+* [Max Closure MIT Sloan](https://drive.google.com/open?id=1BDWT7VyrNUilWvdnsgqoq8ytkvwmu2Yp)
+
+### Analysis of Algorithms (Pricenton University)
+* [Analysis of Algorithms](https://drive.google.com/open?id=1Rn2ewQtkxYFOxINhc9u4JpRWJeQKEVc5)
+* [Recurrences](https://drive.google.com/open?id=1mHDB19QSzCxyUdtJYri8B6YC8WTRIx_z)
+* [Generating Functions](https://drive.google.com/open?id=1Yk2EuxJ0MhdrI2sk17_XkrzlkUpPSck_)
+
+### Analytic Combinatorics
+* [An Introduction to Analytic Combinatorics](https://drive.google.com/open?id=18ijPchJrdQO2YcWlRsUPjnxz8enYpi95)
+
 ## Researches
 * [Sort Experiment](researches/sort_experiment.pdf)
 * [String Matching Algorithms and Their Applicability in Various Applications](researches/String_Matching_Algorithms_and_Their_Applicability_in_Various_Applications.pdf)
@@ -54,6 +67,8 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 
 ## Books
 * [Algorithm](http://algs4.cs.princeton.edu/home/)
+* [An Introduction to Analysis of Algorithms](http://aofa.cs.princeton.edu/)
+* [Analytic of Combinatoric](http://ac.cs.princeton.edu/home/)
 * [Introduction To Algorithms](https://mitpress.mit.edu/books/introduction-algorithms)
 * [Introduction to The Design and Analysis of Algorithms](https://www.pearson.com/us/higher-education/program/Levitin-Introduction-to-the-Design-and-Analysis-of-Algorithms-3rd-Edition/PGM223052.html)
 * [Introduction to Data Compression](coursera/data-compression/Introduction-to-Data-Compression.pdf)
@@ -65,6 +80,3 @@ Imperative knowledge needs practice and experience, so i code. Declarative knowl
 * [Linear Algebra MIT 18.310](notes/MIT18_310_linear-algebra-notes.pdf)
 * [Max Flow Min Cut](https://drive.google.com/open?id=156ps8oRoBWdk-p6nP-IkVfGc5THxc4hK)
 * [Confidence Interval and Hypotheses Test](https://drive.google.com/open?id=0Bz7BT6smTIRZUXVLSzU4LVo4RWs)
-
-## Slides
-* [Max Closure MIT Sloan](https://drive.google.com/open?id=1BDWT7VyrNUilWvdnsgqoq8ytkvwmu2Yp)
