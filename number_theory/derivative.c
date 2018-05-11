@@ -1,11 +1,11 @@
 #include "derivative.h"
-#include "matrix.h"
-// #include <stdio.h>
+#include "tensor.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * Calculate derivative of matrix a
- * @param  a Matrix
+ * Calculate derivative of vector a
+ * @param  a Vector
  * @return   Derivative of a
  */
 double* derivative(double* a, int len)
@@ -32,11 +32,11 @@ double* derivative(double* a, int len)
 
 /**
  * Product derivative
- * @param  a 	Matrix a
- * @param  b 	Matrix b
- * @param  lena Length of matrix a
- * @param  lenb Length of matrix b
- * @return   	Product matrix
+ * @param  a 	Vector a
+ * @param  b 	Vector b
+ * @param  lena Length of vector a
+ * @param  lenb Length of vector b
+ * @return   	Product vector
  */
 double* product(double* a, double* b, int lena, int lenb)
 {
@@ -87,12 +87,12 @@ double* product(double* a, double* b, int lena, int lenb)
 }
 
 /**
- * Calculate quotient of matrix a and b
- * @param  a 	Matrix a
- * @param  b 	Matrix b
- * @param  lena Length of matrix a
- * @param  lenb Length of matrix b
- * @return   	Quotient matrix
+ * Calculate quotient of vector a and b
+ * @param  a 	Vector a
+ * @param  b 	Vector b
+ * @param  lena Length of vector a
+ * @param  lenb Length of vector b
+ * @return   	Quotient vector
  */
 double** quotient(double *a, double *b, int lena, int lenb)
 {
@@ -132,7 +132,7 @@ double** quotient(double *a, double *b, int lena, int lenb)
 
 	double **q = (double **) malloc(2 * sizeof(double));
 	q[0] = h;
-	q[1] = squaredDouble(g, leng);
+	q[1] = vecSqrt(b, lenb);
 
 	return q;
 }
